@@ -3,6 +3,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import { Home, Login } from "./components";
 import { app } from "./config/firebase.config";
 import { getAuth } from "firebase/auth";
+import { AnimatePresence } from "framer-motion";
 
 const App = () => {
   const [auth, setAuth] = useState(
@@ -29,12 +30,14 @@ const App = () => {
   }, [navigate, fireBaseAuth]);
 
   return (
-    <div className="w-screen h-screen bg-primary flex justify-center items-center">
-      <Routes>
-        <Route path="/login" element={<Login setAuth={setAuth} />} />
-        <Route path="/*" element={<Home />} />
-      </Routes>
-    </div>
+    <AnimatePresence exitBeforeEnter>
+      <div className="h-auto min-w-{680px} bg-primary flex justify-center items-center">
+        <Routes>
+          <Route path="/login" element={<Login setAuth={setAuth} />} />
+          <Route path="/*" element={<Home />} />
+        </Routes>
+      </div>
+    </AnimatePresence>
   );
 };
 
