@@ -3,11 +3,17 @@ import { app } from "../config/firebase.config";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
+import { useStateValue } from "../context/StateProvider";
+import { actionType } from "../context/reducer";
+import { validateUser } from "../api";
+import { LoginBg } from "../assets/video";
 
 function Login({ setAuth }) {
   // Get app information to authen
   const fireBaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
+  // eslint-disable-next-line no-unused-vars
+  const [state, dispatch] = useStateValue();
 
   const navigate = useNavigate();
   const loginWithGoogle = async () => {
@@ -19,10 +25,17 @@ function Login({ setAuth }) {
         // Add an observer for sign in state
         fireBaseAuth.onAuthStateChanged((userCred) => {
           if (userCred) {
-            userCred.getIdToken().then((token) => console.log(token));
+            userCred
+              .getIdToken()
+              .then((token) =>
+                validateUser(token).then((data) =>
+                  dispatch({ type: actionType.SET_USER, user: data })
+                )
+              );
             navigate("/", { replace: true });
           } else {
             setAuth(false);
+            dispatch({ type: actionType.SET_USER, user: null });
             navigate("/login");
           }
         });
@@ -39,6 +52,14 @@ function Login({ setAuth }) {
 
   return (
     <div className="relative h-screen w-screen">
+      <video
+        src={LoginBg}
+        type="video/mp4"
+        autoPlay
+        muted
+        loop
+        className="w-full h-full object-cover"
+      />
       <div className="absolute inset-0 bg-darkOverlay flex items-center justify-center p-4">
         <div
           className="w-full md:w-375 p-4 bg-lightOverlay shadow-2xl rounded-md backdrop-blur-md 
