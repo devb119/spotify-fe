@@ -12,12 +12,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 4. In the root directory create a `.env` file and give it the following value
 
-   REACT_APP_FIREBASE_API_KEY =
-   REACT_APP_FIREBASE_AUTH_DOMAIN =
-   REACT_APP_FIREBASE_PROJECT_ID =
-   REACT_APP_FIREBASE_STORAGE_BUCKET =
-   REACT_APP_FIREBASE_MESSAGING_ID =
-   REACT_APP_FIREBASE_APP_ID =
+   REACT_APP_FIREBASE_API_KEY =  
+   REACT_APP_FIREBASE_AUTH_DOMAIN =  
+   REACT_APP_FIREBASE_PROJECT_ID =  
+   REACT_APP_FIREBASE_STORAGE_BUCKET =  
+   REACT_APP_FIREBASE_MESSAGING_ID =  
+   REACT_APP_FIREBASE_APP_ID =  
    REACT_APP_FIREBASE_MEASUREMENT_ID =
 
 5. Run the server code then `npm start`
