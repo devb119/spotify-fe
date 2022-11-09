@@ -1,6 +1,25 @@
-# Getting Started with Create React App
+# A Spotify clone for Web Programming Project
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## How to run this project
+
+1. `git clone https://github.com/devb119/spotify-fe.git`
+
+2. `cd spotify-fe`
+
+3. `npm install` to install necessary packages
+
+4. In the root directory create a `.env` file and give it the following value
+   REACT_APP_FIREBASE_API_KEY =
+   REACT_APP_FIREBASE_AUTH_DOMAIN =
+   REACT_APP_FIREBASE_PROJECT_ID =
+   REACT_APP_FIREBASE_STORAGE_BUCKET =
+   REACT_APP_FIREBASE_MESSAGING_ID =
+   REACT_APP_FIREBASE_APP_ID =
+   REACT_APP_FIREBASE_MEASUREMENT_ID =
+
+5. Run the server code then `npm start`
 
 ## Available Scripts
 
@@ -38,33 +57,3 @@ If you aren't satisfied with the build tool and configuration choices, you can `
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
