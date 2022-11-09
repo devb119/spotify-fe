@@ -11,6 +11,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 3. `npm install` to install necessary packages
 
 4. In the root directory create a `.env` file and give it the following value
+
    REACT_APP_FIREBASE_API_KEY =
    REACT_APP_FIREBASE_AUTH_DOMAIN =
    REACT_APP_FIREBASE_PROJECT_ID =
