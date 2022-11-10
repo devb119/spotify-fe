@@ -9,6 +9,7 @@ import { getAuth } from "firebase/auth";
 import { motion } from "framer-motion";
 
 function Header() {
+  // eslint-disable-next-line no-unused-vars
   const [{ user }, dispatch] = useStateValue();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -107,19 +108,30 @@ function Header() {
         shadow-lg rounded-lg backdrop-blur-sm flex flex-col p-1"
             >
               <NavLink to="/userProfile">
-                <p className="text-base text-textColor hover:font-semibold hover:bg-slate-600 p-2 hover:text-headingColor rounded-lg duration-150 transition-all ease-in-out">
+                <p className="text-base text-textColor hover:bg-slate-600 p-2 hover:text-headingColor rounded-lg duration-150 transition-all ease-in-out">
                   Profile
                 </p>
               </NavLink>
               <NavLink to="/userProfile">
-                <p className="text-base text-textColor hover:font-semibold hover:bg-slate-600 p-2 hover:text-headingColor rounded-lg duration-150 transition-all ease-in-out">
+                <p className="text-base text-textColor hover:bg-slate-600 p-2 hover:text-headingColor rounded-lg duration-150 transition-all ease-in-out">
                   My Favourites
                 </p>
               </NavLink>
+              {user?.user.role === "admin" && (
+                <>
+                  <hr />
+                  <NavLink to="/dashboard/home">
+                    <p className="text-base text-textColor hover:bg-slate-600 p-2 hover:text-headingColor rounded-lg duration-150 transition-all ease-in-out">
+                      Dashboard
+                    </p>
+                  </NavLink>
+                </>
+              )}
+
               <hr />
               <NavLink to="/userProfile">
                 <p
-                  className="text-base text-textColor hover:font-semibold hover:bg-slate-600 p-2 hover:text-headingColor rounded-lg duration-150 transition-all ease-in-out"
+                  className="text-base text-textColor hover:bg-slate-600 p-2 hover:text-headingColor rounded-lg duration-150 transition-all ease-in-out"
                   onClick={logOut}
                 >
                   Sign Out
