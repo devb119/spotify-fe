@@ -82,14 +82,14 @@ function Header() {
         onMouseLeave={() => setIsMenuOpen(false)}
       >
         <img
-          src={user?.user.imageURL}
+          src={user?.data.imageURL}
           referrerPolicy="no-referrer"
           className="w-12 min-w-{44px} object-cover rounded-full shadow-lg"
           alt="user avatar"
         />
         <div className="flex flex-col">
           <p className="text-textColor text-lg hover:text-headingColor">
-            {user?.user.name}
+            {user?.data.name}
           </p>
           <p className="flex items-center gap-2 text-xs text-gray-500 font-normal">
             Premium member.{" "}
@@ -117,7 +117,7 @@ function Header() {
                   My Favourites
                 </p>
               </NavLink>
-              {user?.user.role === "admin" && (
+              {user?.data.role === "admin" && (
                 <>
                   <hr />
                   <NavLink to="/dashboard/home">
