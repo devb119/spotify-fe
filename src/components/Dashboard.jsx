@@ -16,8 +16,13 @@ function Dashboard() {
     <div className="w-full h-auto flex flex-col items-center justify-center bg-primary">
       <Header />
       <div className="w-[60%] my-2 p-4 flex items-center justify-evenly">
-        <NavLink to="/dashboard/home/">
-          <IoHome className="text2xl text-textColor" />
+        <NavLink
+          to="/dashboard/home/"
+          className={({ isActive }) =>
+            isActive ? "text-white" : "text-textColor"
+          }
+        >
+          <IoHome className="text-2xl" />
         </NavLink>
         <NavLink
           to="/dashboard/users/"
