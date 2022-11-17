@@ -10,5 +10,17 @@ export const validateUser = async (token) => {
       },
     });
     return res.data;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAllUsers = async () => {
+  try {
+    const res = await axios.get(`${BASE_URL}/users`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
 };
