@@ -24,3 +24,33 @@ export const getAllUsers = async () => {
     return null;
   }
 };
+
+export const getAllArtists = async () => {
+  try {
+    const res = await axios.get(`${BASE_URL}/artists`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const getAllAlbums = async () => {
+  try {
+    const res = await axios.get(`${BASE_URL}/albums`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const getAllSongs = async () => {
+  try {
+    const res = await axios.get(`${BASE_URL}/songs`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
