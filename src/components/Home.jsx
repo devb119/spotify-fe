@@ -8,11 +8,11 @@ import {
 import { isActiveStyles, isNotActiveStyles } from "../utils/styles";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Logo } from "../assets/img";
-import { MdFeaturedPlayList } from "react-icons/md";
+import { VscLibrary } from "react-icons/vsc";
 import { GrHomeRounded } from "react-icons/gr";
 import { FiSearch } from "react-icons/fi";
-import { CiSquarePlus } from "react-icons/ci";
-import { FaHeart } from "react-icons/fa";
+import { BsPlusSquareFill } from "react-icons/bs";
+import { BiHeartSquare } from "react-icons/bi";
 import Header from "./Header";
 import DashboardHome from "./DashboardHome";
 
@@ -20,34 +20,40 @@ const drawerWidth = 245;
 const listItems = [
   {
     title: "Home",
-    icon: <GrHomeRounded className="text-xl fill-white" />,
+    icon: <GrHomeRounded className="text-2xl fill-white" />,
     route: "",
   },
   {
     title: "Search",
-    icon: <FiSearch className="text-xl" />,
+    icon: <FiSearch className="text-2xl" />,
     route: "search",
   },
   {
-    title: "Library",
-    icon: <MdFeaturedPlayList className="text-xl" />,
+    title: "Your Library",
+    icon: <VscLibrary className="text-2xl" />,
     route: "collection/playlists",
   },
   {},
 
   {
     title: "Create playlist",
-    icon: <CiSquarePlus className="text-xl" />,
+    icon: <BsPlusSquareFill className="text-2xl" />,
+    route: "createPlaylist",
   },
   {
     title: "Liked Songs",
-    icon: <FaHeart className="text-xl" />,
+    icon: <BiHeartSquare className="text-2xl" />,
+    route: "collection/tracks",
   },
 ];
 const playlists = [
   {
-    title: "Danh sach phat cua toi",
-    route: "",
+    title: "My Playlist #1",
+    route: "playlists/1",
+  },
+  {
+    title: "My Playlist #2",
+    route: "playlists/2",
   },
 ];
 
@@ -55,68 +61,55 @@ export default function Home() {
   return (
     <div className="flex flex-horizontal h-full w-full ">
       <div className="font-bold text-xs bg-black h-full">
-        <div className="bg-black h-20">
-          <NavLink to="/" className="bg-black h-20 w-full">
-            <img src={Logo} alt="Logo" className="w-32 p-30 mt-6 ml-6" />
+        <div className="bg-black h-16">
+          <NavLink to="/" className="bg-black  w-full">
+            <img src={Logo} alt="Logo" className="w-32 p-30 mt-6 ml-7" />
           </NavLink>
         </div>
         <div className="bg-black ">
           {listItems.map((item, index) => {
-            if (index === 0)
-              return (
-                <NavLink
-                  to={item.route}
-                  key={index}
-                  className={({ isActive }) =>
-                    isActive
-                      ? `ml-2 p-2 flex flex-horizontal ${isActiveStyles}`
-                      : `ml-2 p-2 flex flex-horizontal ${isNotActiveStyles}`
-                  }
-                >
-                  {item.icon}
-                  <p className="ml-4 font-extrabold text-xs">{item.title}</p>
-                </NavLink>
-              );
-            else if (index === 3) return <div className=" mt-4 " />;
-            else
-              return (
-                <NavLink
-                  to={item.route}
-                  key={index}
-                  className={({ isActive }) =>
-                    isActive
-                      ? `ml-2 p-2 flex flex-horizontal ${isActiveStyles}`
-                      : `ml-2 p-2 flex flex-horizontal ${isNotActiveStyles}`
-                  }
-                >
-                  {item.icon}
-                  <p className="ml-4 font-extrabold text-xs">{item.title}</p>
-                </NavLink>
-              );
+            return (
+              <NavLink
+                to={item.route}
+                key={index}
+                className={({ isActive }) =>
+                  isActive
+                    ? `p-2 flex flex-horizontal items-center ${isActiveStyles}`
+                    : `p-2 flex flex-horizontal items-center ${isNotActiveStyles}`
+                }
+              >
+                {item.icon}
+                <p className="ml-4 mt-1 font-extrabold text-xs">{item.title}</p>
+              </NavLink>
+            );
           })}
         </div>
         <div className="">
-          <hr className="border-t-1 border-gray-700 w-48 ml-6"></hr>
+          <hr className="border-t-1 border-gray-700 w-48 ml-8 my-2"></hr>
         </div>
         <div className="bg-black">
           {playlists.map((item, index) => {
-            if (index === 3) return <div className=" mt-4 " />;
-            else
-              return (
-                <NavLink
-                  to={item.route}
-                  key={index}
-                  className={({ isActive }) =>
-                    isActive
-                      ? `ml-2 p-2 flex flex-horizontal ${isActiveStyles}`
-                      : `ml-2 p-2 flex flex-horizontal ${isNotActiveStyles}`
-                  }
-                >
-                  {item.icon}
-                  <p className="ml-4 font-extrabold text-xs">{item.title}</p>
-                </NavLink>
-              );
+            return (
+              <NavLink
+                to={item.route}
+                key={index}
+                className={({ isActive }) =>
+                  isActive
+                    ? `ml-2 p-2 flex flex-horizontal ${isActiveStyles}`
+                    : `ml-2 p-2 flex flex-horizontal ${isNotActiveStyles}`
+                }
+              >
+                <p className="ml-4 text-xs">{item.title}</p>
+              </NavLink>
+            );
           })}
+        </div>
+        <div className="bg-black">
+          <div>
+            <NavLink>
+              <p>Install App</p>
+            </NavLink>
+          </div>
         </div>
       </div>
       <div className="w-full">
