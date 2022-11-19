@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Logo } from "../assets/img";
-import { isActiveStyles, isNotActiveStyles } from "../utils/styles";
 import { FaCrown } from "react-icons/fa";
 import { useStateValue } from "../context/StateProvider";
 import { app } from "../config/firebase.config";
