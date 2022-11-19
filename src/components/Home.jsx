@@ -1,14 +1,15 @@
 import * as React from "react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { isActiveStyles, isNotActiveStyles } from "../utils/styles";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Logo } from "../assets/img";
 import { VscLibrary } from "react-icons/vsc";
 import { GrHomeRounded } from "react-icons/gr";
 import { FiSearch } from "react-icons/fi";
-import { BsPlusSquareFill } from "react-icons/bs";
+import { BsPlusSquareFill, BsArrowDownCircle } from "react-icons/bs";
 import { BiHeartSquare } from "react-icons/bi";
 import Header from "./Header";
+import MusicCard from "./MusicCard";
 
 const listItems = [
   {
@@ -49,6 +50,13 @@ const playlists = [
     route: "playlists/2",
   },
 ];
+
+const song = {
+  name: "I don't wanna live forever",
+  imageURL:
+    "https://upload.wikimedia.org/wikipedia/en/8/82/Zayn_%26_Taylor_Swift_-_I_Don%27t_Wanna_Live_Forever_%28Official_Single_Cover%29.png",
+  artists: "Zayn, Taylor Swift",
+};
 
 export default function Home() {
   return (
@@ -96,18 +104,26 @@ export default function Home() {
               </NavLink>
             );
           })}
-        </div>
-        <div className="bg-black">
-          <div>
-            <NavLink>
-              <p>Install App</p>
-            </NavLink>
-          </div>
+          <Link
+            to="#"
+            className="text-textColor hover:text-white flex items-center gap-2 
+              duration-100 transition-all ease-in-out p-2 mx-5"
+          >
+            <BsArrowDownCircle className="text-xl" />
+            <p>Install App</p>
+          </Link>
         </div>
       </div>
       <div className="w-full">
         <div className="h-20">
           <Header />
+        </div>
+        <div>
+          <MusicCard
+            name={song.name}
+            imageURL={song.imageURL}
+            artists={song.artists}
+          />
         </div>
         <Outlet></Outlet>
       </div>
