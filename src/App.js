@@ -47,7 +47,7 @@ const App = () => {
           <Route path="/login" element={<Login setAuth={setAuth} />} />
           <Route path="/*" element={<Home />}>
             <Route
-              path="/search"
+              path="search"
               element={
                 <React.Suspense
                   fallback={
@@ -59,7 +59,7 @@ const App = () => {
               }
             />
             <Route
-              path="/collection/playlists"
+              path="collection/playlists"
               element={
                 <React.Suspense
                   fallback={
