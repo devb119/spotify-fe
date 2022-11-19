@@ -1,10 +1,5 @@
 import * as React from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Outlet,
-} from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { isActiveStyles, isNotActiveStyles } from "../utils/styles";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Logo } from "../assets/img";
@@ -14,9 +9,7 @@ import { FiSearch } from "react-icons/fi";
 import { BsPlusSquareFill } from "react-icons/bs";
 import { BiHeartSquare } from "react-icons/bi";
 import Header from "./Header";
-import DashboardHome from "./DashboardHome";
 
-const drawerWidth = 245;
 const listItems = [
   {
     title: "Home",
