@@ -9,6 +9,7 @@ import { useStateValue } from "./context/StateProvider";
 import { actionType } from "./context/reducer";
 const LazySearch = React.lazy(() => import("./components/Search"));
 const LazyLibrary = React.lazy(() => import("./components/DashboardAlbums"));
+const LazyHome = React.lazy(() => import("./components/DashboardHome"));
 
 const App = () => {
   // eslint-disable-next-line no-unused-vars
@@ -55,6 +56,18 @@ const App = () => {
                   }
                 >
                   <LazySearch></LazySearch>
+                </React.Suspense>
+              }
+            />
+            <Route
+              path=""
+              element={
+                <React.Suspense
+                  fallback={
+                    <div className="items-center m-auto">Loading...</div>
+                  }
+                >
+                  {/* <LazyHome></LazyHome> */}
                 </React.Suspense>
               }
             />

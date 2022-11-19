@@ -4,17 +4,19 @@ import { isActiveStyles, isNotActiveStyles } from "../utils/styles";
 import { NavLink } from "react-router-dom";
 import { Logo } from "../assets/img";
 import { VscLibrary } from "react-icons/vsc";
-import { GrHomeRounded } from "react-icons/gr";
+import { MdHomeFilled } from "react-icons/md";
 import { FiSearch } from "react-icons/fi";
 import { BsPlusSquareFill, BsArrowDownCircle } from "react-icons/bs";
-import { BiHeartSquare } from "react-icons/bi";
 import Header from "./Header";
 import MusicCard from "./MusicCard";
+import { FaHeart } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 
+var location;
 const listItems = [
   {
     title: "Home",
-    icon: <GrHomeRounded className="text-2xl fill-white" />,
+    icon: <MdHomeFilled className="text-2xl scale-125 " />,
     route: "",
   },
   {
@@ -36,7 +38,7 @@ const listItems = [
   },
   {
     title: "Liked Songs",
-    icon: <BiHeartSquare className="text-2xl" />,
+    icon: <FaHeart className="text-2xl" />,
     route: "collection/tracks",
   },
 ];
@@ -59,6 +61,8 @@ const song = {
 };
 
 export default function Home() {
+  location = useLocation();
+  console.log(location.pathname);
   return (
     <div className="flex flex-horizontal h-full w-full ">
       <div className="font-bold text-xs bg-black h-full">
@@ -75,12 +79,14 @@ export default function Home() {
                 key={index}
                 className={({ isActive }) =>
                   isActive
-                    ? `p-2 flex flex-horizontal items-center ${isActiveStyles}`
+                    ? `p-2 flex flex-horizontal items-center${isActiveStyles}`
                     : `p-2 flex flex-horizontal items-center ${isNotActiveStyles}`
                 }
               >
                 {item.icon}
-                <p className="ml-4 mt-1 font-extrabold text-xs">{item.title}</p>
+                <p className="ml-4 mt-1 font-extrabold text-xs scale-105">
+                  {item.title}
+                </p>
               </NavLink>
             );
           })}
