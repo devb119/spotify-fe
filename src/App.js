@@ -45,27 +45,32 @@ const App = () => {
       <div className="h-auto min-w-{680px} bg-primary flex justify-center items-center">
         <Routes>
           <Route path="/login" element={<Login setAuth={setAuth} />} />
-          <Route path="/*" element={<Home />} />
-          <Route
-            path="/search"
-            element={
-              <React.Suspense
-                fallback={<div className="items-center m-auto">Loading...</div>}
-              >
-                <LazySearch></LazySearch>
-              </React.Suspense>
-            }
-          />
-          <Route
-            path="/collection/playlists"
-            element={
-              <React.Suspense
-                fallback={<div className="items-center m-auto">Loading...</div>}
-              >
-                <LazyLibrary></LazyLibrary>
-              </React.Suspense>
-            }
-          />
+          <Route path="/*" element={<Home />}>
+            <Route
+              path="/search"
+              element={
+                <React.Suspense
+                  fallback={
+                    <div className="items-center m-auto">Loading...</div>
+                  }
+                >
+                  <LazySearch></LazySearch>
+                </React.Suspense>
+              }
+            />
+            <Route
+              path="/collection/playlists"
+              element={
+                <React.Suspense
+                  fallback={
+                    <div className="items-center m-auto">Loading...</div>
+                  }
+                >
+                  <LazyLibrary></LazyLibrary>
+                </React.Suspense>
+              }
+            />
+          </Route>
 
           <Route path="/dashboard/*" element={<Dashboard />} />
         </Routes>
