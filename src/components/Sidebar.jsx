@@ -51,7 +51,7 @@ const playlists = [
 
 function Sidebar() {
   return (
-    <div className="font-bold text-xs bg-black">
+    <div className="font-bold text-xs bg-black w-72">
       <div className="bg-black h-16">
         <NavLink to="/" className="bg-black  w-full">
           <img src={Logo} alt="Logo" className="w-32 p-30 mt-6 ml-7" />
@@ -77,9 +77,7 @@ function Sidebar() {
           );
         })}
       </div>
-      <div className="">
-        <hr className="border-t-1 border-gray-700 w-48 ml-8 my-2"></hr>
-      </div>
+      <hr className="border-t-1 border-gray-700 m-2"></hr>
       <div className="bg-black">
         {playlists.map((item, index) => {
           return (
