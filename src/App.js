@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { Home, Login, Dashboard } from "./components";
+import { Home, Login, Dashboard, HomeMusic } from "./components";
 import { app } from "./config/firebase.config";
 import { getAuth } from "firebase/auth";
 import { AnimatePresence } from "framer-motion";
@@ -9,7 +9,7 @@ import { useStateValue } from "./context/StateProvider";
 import { actionType } from "./context/reducer";
 const LazySearch = React.lazy(() => import("./components/Search"));
 const LazyLibrary = React.lazy(() => import("./components/DashboardAlbums"));
-const LazyHome = React.lazy(() => import("./components/DashboardHome"));
+// const LazyHome = React.lazy(() => import("./components/DashboardHome"));
 
 const App = () => {
   // eslint-disable-next-line no-unused-vars
@@ -46,7 +46,8 @@ const App = () => {
       <div className="h-auto min-w-{680px} bg-primary flex justify-center items-center">
         <Routes>
           <Route path="/login" element={<Login setAuth={setAuth} />} />
-          <Route path="/*" element={<Home />}>
+          <Route path="/" element={<Home />}>
+            <Route path="home" element={<HomeMusic />} />
             <Route
               path="search"
               element={
