@@ -67,7 +67,7 @@ const App = () => {
                     <div className="items-center m-auto">Loading...</div>
                   }
                 >
-                  <LazyHome></LazyHome>
+                  {/* <LazyHome></LazyHome> */}
                 </React.Suspense>
               }
             />
