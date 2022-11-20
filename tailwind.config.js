@@ -2,8 +2,13 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      rotate: {
+        24: '24deg',
+      },
+
       width: {
         150: "150px",
+        187: "187px",
         190: "190px",
         225: "225px",
         275: "275px",
@@ -19,6 +24,7 @@ module.exports = {
       height: {
         80: "80px",
         150: "150px",
+        187: "187px",
         225: "225px",
         300: "300px",
         340: "340px",
@@ -57,6 +63,9 @@ module.exports = {
         cartItem: "#2e3033",
         cartTotal: "#343739",
         loaderOverlay: "rgba(256,256,256,0.1)",
+        cardColor1: "rgb(39, 133, 106)",
+        cardColor2: "rgb(30, 50, 100)",
+        cardColor3: "rgb(141, 103, 171)"
       },
     },
   },
