@@ -6,11 +6,13 @@ function MusicCard({ name, imageURL, artists }) {
 
   const showIcon = () => setShowPlay(true);
   const hideIcon = () => setShowPlay(false);
+  const addToContext = () => {};
   return (
     <div
       className="p-4 w-48 h-auto rounded-lg shadow-md bg-cardBg hover:bg-cardBgLight transition-all duration-200 cursor-pointer relative"
       onMouseEnter={showIcon}
       onMouseLeave={hideIcon}
+      onClick={addToContext}
     >
       <img src={imageURL} alt="song cover" className="rounded-lg w-full mb-3" />
       <div
