@@ -50,12 +50,12 @@ function Header() {
 
         {isMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: -20 }}
-            exit={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 50, zIndex: 10 }}
+            animate={{ opacity: 1, y: -20, zIndex: 10 }}
+            exit={{ opacity: 0, y: 50, zIndex: 10 }}
           >
             <div
-              className="absolute z-10 top-11 right-0 w-275 gap-1 bg-card 
+              className="absolute top-11 right-0 w-275 gap-1 bg-card 
         shadow-lg rounded-lg backdrop-blur-sm flex flex-col p-1"
             >
               <NavLink to="/userProfile">
