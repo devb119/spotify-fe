@@ -54,10 +54,10 @@ function Search() {
       <div className="text-white text-xl font-bold">
         Browse all
       </div>
-      <div className="grid grid-cols-6 gap-6 mt-4">
+      <div className="grid grid-cols-3 gap-6 mt-4 lg:grid-cols-6 md:grid-cols-4">
        {listCard.map((item, index) => {
             return (
-              <div key={index} className={`${item.color} h-187 w-187 rounded-md overflow-hidden cursor-pointer`}>
+              <div key={index} className={`${item.color} h-32 w-auto lg:h-187 lg:w-187 rounded-md overflow-hidden cursor-pointer`}>
                <div className="text-white text-xl font-bold mt-5 ml-3 mb-5">
                  {item.title}
                </div>
