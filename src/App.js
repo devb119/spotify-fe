@@ -19,8 +19,7 @@ const App = () => {
 
   const fireBaseAuth = getAuth(app);
   const navigate = useNavigate();
-  // eslint-disable-next-line no-unused-vars
-  const [{ isSongPlaying }, dispatch] = useStateValue();
+  const [{ isSongPlaying, miniPlayer }, dispatch] = useStateValue();
 
   useEffect(() => {
     // Observe log in state
@@ -92,8 +91,10 @@ const App = () => {
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            className={`fixed min-w-[700px] h-20 inset-x-0 bottom-0 bg-cardOverlay drop-shadow-2xl backdrop-blur-md
-            flex items-center justify-center`}
+            exit={{ opacity: 0, y: 50 }}
+            className={`fixed min-w-[700px] h-20 inset-x-0 bottom-0 ${
+              miniPlayer ? "bg-transparent" : "bg-cardOverlay backdrop-blur-md"
+            } drop-shadow-2xl flex items-center justify-center`}
           >
             <MusicPlayer />
           </motion.div>

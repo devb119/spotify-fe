@@ -3,6 +3,7 @@ export const actionType = {
   SET_ALL_SONGS: "SET_ALL_SONGS",
   SET_IS_SONG_PLAYING: "SET_IS_SONG_PLAYING",
   SET_CURRENT_SONG: "SET_CURRENT_SONG",
+  SET_MINI_PLAYER: "SET_MINI_PLAYER",
 };
 
 const reducer = (state, action) => {
@@ -15,6 +16,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         allSongs: action.allSongs,
+      };
+    case actionType.SET_MINI_PLAYER:
+      return {
+        ...state,
+        miniPlayer: action.miniPlayer,
       };
     case actionType.SET_CURRENT_SONG:
       return { ...state, currentSong: action.currentSong };

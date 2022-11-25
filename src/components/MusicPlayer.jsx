@@ -6,11 +6,11 @@ import { getAllSongs } from "../api";
 import { actionType } from "../context/reducer";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
-import { IoMusicalNote } from "react-icons/io5";
+import { IoMusicalNote, IoArrowRedo } from "react-icons/io5";
 
 function MusicPlayer() {
   // eslint-disable-next-line no-unused-vars
-  const [{ currentSong }, dispatch] = useStateValue();
+  const [{ currentSong, miniPlayer }, dispatch] = useStateValue();
   const [isPlaylist, setIsPlaylist] = useState(false);
 
   // TODO
@@ -20,9 +20,16 @@ function MusicPlayer() {
 
   const togglePlaylist = () => setIsPlaylist(!isPlaylist);
 
+  const togglePlayer = () =>
+    dispatch({ type: actionType.SET_MINI_PLAYER, miniPlayer: !miniPlayer });
+
   return (
     <div className="w-full flex items-center gap-3">
-      <div className={`w-full items-center gap-3 p-4 flex relative`}>
+      <div
+        className={`w-full full items-center gap-3 p-4 ${
+          miniPlayer ? "absolute top-40" : "flex relative"
+        }`}
+      >
         <img
           src={currentSong?.imageURL}
           alt=""
@@ -57,7 +64,34 @@ function MusicPlayer() {
           />
         </div>
 
+        <div className="h-full flex items-center justify-center flex-col gap-3">
+          {/* <motion.i whileTap={{ scale: 0.8 }} onClick={closeMusicPlayer}>
+            <IoMdClose className="text-textColor hover:text-headingColor text-2xl cursor-pointer" />
+          </motion.i> */}
+          <motion.i whileTap={{ scale: 0.8 }} onClick={togglePlayer}>
+            <IoArrowRedo className="text-textColor hover:text-headingColor text-2xl cursor-pointer" />
+          </motion.i>
+        </div>
+
         {isPlaylist && <PlaylistCard />}
+
+        {miniPlayer && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.6 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="fixed right-2 bottom-2 "
+          >
+            <div className="w-40 h-40 rounded-full flex items-center justify-center relative ">
+              <div className="absolute inset-0 rounded-full bg-green-300 blur-md animate-pulse"></div>
+              <img
+                onClick={togglePlayer}
+                src={currentSong.imageURL}
+                className="z-50 w-32 h-32 rounded-full object-cover cursor-pointer"
+                alt=""
+              />
+            </div>
+          </motion.div>
+        )}
       </div>
     </div>
   );

@@ -3,4 +3,5 @@ export const initialState = {
   isSongPlaying: false,
   allSongs: null,
   currentSong: null,
+  miniPlayer: false,
 };
