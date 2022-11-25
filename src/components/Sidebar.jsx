@@ -13,7 +13,7 @@ const listItems = [
   {
     title: "Home",
     icon: <MdHomeFilled className="text-2xl scale-125 " />,
-    route: "home",
+    route: "",
   },
   {
     title: "Search",
