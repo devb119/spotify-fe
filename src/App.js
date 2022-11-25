@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { validateUser } from "./api";
 import { useStateValue } from "./context/StateProvider";
 import { actionType } from "./context/reducer";
+import NotFound from "./components/NotFound";
 const LazySearch = React.lazy(() => import("./components/Search"));
 const LazyLibrary = React.lazy(() => import("./components/DashboardAlbums"));
 // const LazyHome = React.lazy(() => import("./components/DashboardHome"));
@@ -46,6 +47,7 @@ const App = () => {
         <Routes>
           <Route path="/login" element={<Login setAuth={setAuth} />} />
           <Route path="/" element={<Home />}>
+            <Route path="*" element={<NotFound></NotFound>}></Route>
             <Route path="/" element={<HomeMusic />} />
             <Route
               path="search"
