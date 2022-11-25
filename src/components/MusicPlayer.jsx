@@ -13,9 +13,10 @@ function MusicPlayer() {
   const [{ currentSong }, dispatch] = useStateValue();
   const [isPlaylist, setIsPlaylist] = useState(false);
 
-  const nextTrack = () => {};
+  // TODO
+  // const nextTrack = () => {};
 
-  const previousTrack = () => {};
+  // const previousTrack = () => {};
 
   const togglePlaylist = () => setIsPlaylist(!isPlaylist);
 
@@ -50,8 +51,9 @@ function MusicPlayer() {
             onPlay={() => console.log(`${currentSong?.name} is playing`)}
             autoPlay={true}
             showSkipControls={true}
-            onClickNext={nextTrack}
-            onClickPrevious={previousTrack}
+            // TODO
+            // onClickNext={nextTrack}
+            // onClickPrevious={previousTrack}
           />
         </div>
 
