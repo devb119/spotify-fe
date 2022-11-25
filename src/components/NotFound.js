@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Icon } from "../assets/img/icon";
 function NotFound() {
   return (
-    <div className="text-white w-full h-full items-center content-center">
+    <div className="text-white w-full h-screen items-center content-center">
       <div className="mt-20 text-center">
         <img className="w-12 h-12 m-auto" src={Icon} alt=""></img>
       </div>
