@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     extend: {
       rotate: {
-        24: '24deg',
+        24: "24deg",
       },
 
       width: {
@@ -54,7 +54,7 @@ module.exports = {
         textColor: "#c2c2c2",
         cartNumBg: "#e80013",
         primary: "#111111",
-        cardOverlay: "rgba(256,256,256,0.4)",
+        cardOverlay: "rgba(256,256,256,0.05)",
         darkOverlay: "rgba(0,0,0,0.5)",
         lightOverlay: "rgba(256,256,256,0.2)",
         lighttextGray: "#9ca0ab",
@@ -65,7 +65,7 @@ module.exports = {
         loaderOverlay: "rgba(256,256,256,0.1)",
         cardColor1: "rgb(39, 133, 106)",
         cardColor2: "rgb(30, 50, 100)",
-        cardColor3: "rgb(141, 103, 171)"
+        cardColor3: "rgb(141, 103, 171)",
       },
     },
   },

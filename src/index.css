@@ -6,3 +6,72 @@
 body {
   font-family: "Montserrat", sans-serif;
 }
+
+.rhap_container {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.rhap_play-pause-button {
+  color: #ffffff !important;
+  transition: all 0.05s ease-in-out;
+}
+
+.rhap_play-pause-button:hover {
+  transform: scale(1.09);
+}
+
+.rhap_forward-button,
+.rhap_rewind-button,
+.rhap_skip-button,
+.rhap_volume-button,
+.rhap_repeat-button {
+  transition: all 0.05s ease-in-out;
+}
+
+.rhap_forward-button:hover,
+.rhap_rewind-button:hover,
+.rhap_skip-button:hover,
+.rhap_volume-button:hover,
+.rhap_repeat-button:hover {
+  color: #ffffff;
+}
+
+.rhap_progress-filled,
+.rhap_progress-indicator {
+  background-color: #ffffff !important;
+}
+
+.rhap_volume-indicator {
+  background: #ffffff !important;
+}
+
+.rhap_total-time,
+.rhap_current-time {
+  color: #c2c2c2 !important;
+  font-size: 14px !important;
+}
+
+.rhap_progress-indicator:hover,
+.rhap_volume-indicator:hover {
+  transform: scale(1.2);
+}
+
+.rhap_download-progress,
+.rhap_volume-bar {
+  background-color: #c2c2c2 !important;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #181818;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3c3c3c;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #5e5e5e;
+}
