@@ -87,26 +87,6 @@ function Login({ setAuth }) {
               Continue with Google
             </p>
           </div>
-          <div
-            className="flex items-center justify-center gap-2 mb-2 w-full py-2 rounded-full bg-cardOverlay 
-          cursor-pointer hover:bg-card hover:shadow-md duration-100 ease-in-out transition-all"
-            onClick={loginWithGoogle}
-          >
-            <FcGoogle size={24} />
-            <p className="text-white text-l font-semibold">
-              Continue with Google
-            </p>
-          </div>
-          <div
-            className="flex items-center justify-center gap-2 mb-2 w-full py-2 rounded-full bg-cardOverlay 
-          cursor-pointer hover:bg-card hover:shadow-md duration-100 ease-in-out transition-all"
-            onClick={loginWithGoogle}
-          >
-            <FcGoogle size={24} />
-            <p className="text-white text-l font-semibold">
-              Continue with Google
-            </p>
-          </div>
           <div className="w-full">
             <hr className="divide-white mt-3"></hr>
             <LoginByField></LoginByField>
