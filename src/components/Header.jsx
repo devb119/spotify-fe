@@ -55,6 +55,11 @@ function Header() {
       ) : (
         ""
       )}
+      {pathname.includes("/collection") ? (
+        <div className="text-white"> nav bar</div>
+      ) : (
+        ""
+      )}
 
       <div
         className="flex items-center ml-auto cursor-pointer gap-2 relative"
