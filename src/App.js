@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, Outlet } from "react-router-dom";
 import { Home, Login, Dashboard, HomeMusic, MusicPlayer } from "./components";
 import { app } from "./config/firebase.config";
 import { getAuth } from "firebase/auth";
@@ -9,9 +9,11 @@ import { useStateValue } from "./context/StateProvider";
 import { actionType } from "./context/reducer";
 import NotFound from "./components/NotFound";
 const LazySearch = React.lazy(() => import("./components/Search"));
-const LazyLibrary = React.lazy(() => import("./components/DashboardAlbums"));
+// const LazyLibrary = React.lazy(() => import("./components/DashboardAlbums"));
 // const LazyHome = React.lazy(() => import("./components/DashboardHome"));
-
+const LazyCollectionPlaylist = React.lazy(() =>
+  import("./components/CollectionPlaylist")
+);
 const App = () => {
   // eslint-disable-next-line no-unused-vars
   const [auth, setAuth] = useState(
@@ -74,17 +76,26 @@ const App = () => {
               }
             />
             <Route
-              path="collection/playlists"
+              path="/collection"
               element={
-                <React.Suspense
-                  fallback={
-                    <div className="items-center m-auto">Loading...</div>
-                  }
-                >
-                  <LazyLibrary></LazyLibrary>
-                </React.Suspense>
+                <div>
+                  <Outlet />
+                </div>
               }
-            />
+            >
+              <Route
+                path="/collection/playlists"
+                element={
+                  <React.Suspense
+                    fallback={
+                      <div className="items-center m-auto">Loading...</div>
+                    }
+                  >
+                    <LazyCollectionPlaylist></LazyCollectionPlaylist>
+                  </React.Suspense>
+                }
+              />
+            </Route>
           </Route>
 
           <Route path="/dashboard/*" element={<Dashboard />} />
