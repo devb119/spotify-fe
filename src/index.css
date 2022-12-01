@@ -75,3 +75,14 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #5e5e5e;
 }
+
+.playlist-icon {
+  display: none;
+  justify-content: center;
+}
+
+.playlist-item:hover > .playlist-icon{
+   display: flex;
+}
+
+
