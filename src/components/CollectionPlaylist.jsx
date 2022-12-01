@@ -54,15 +54,15 @@ const likeSong = [
     artist: "Cô đơn trên sofa - Hồ Ngọc Hà",
   },
   { 
-    id: 3,
+    id: 4,
     single: "Hồ Ngọc Hà",
     artist: "Cô đơn trên sofa - Hồ Ngọc Hà",
   },
   { 
-    id: 3,
+    id: 5,
     single: "Hồ Ngọc Hà",
     artist: "Cô đơn trên sofa - Hồ Ngọc Hà",
-  },
+  }
 ]
 
 function CollectionPlaylist( ) {
