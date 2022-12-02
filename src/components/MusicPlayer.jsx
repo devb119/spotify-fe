@@ -82,11 +82,11 @@ function MusicPlayer() {
             className="fixed right-2 bottom-2 "
           >
             <div className="w-40 h-40 rounded-full flex items-center justify-center relative ">
-              <div className="absolute inset-0 rounded-full bg-green-300 blur-md animate-pulse"></div>
+              <div className="absolute inset-0 rounded-full bg-green-300 blur-xl animate-pulse"></div>
               <img
                 onClick={togglePlayer}
                 src={currentSong.imageURL}
-                className="z-50 w-32 h-32 rounded-full object-cover cursor-pointer"
+                className="z-50 w-28 h-28 rounded-full object-cover cursor-pointer"
                 alt=""
               />
             </div>
