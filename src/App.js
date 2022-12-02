@@ -8,6 +8,7 @@ import { validateUser } from "./api";
 import { useStateValue } from "./context/StateProvider";
 import { actionType } from "./context/reducer";
 import NotFound from "./components/NotFound";
+import Playlist from "./components/Playlist";
 const LazySearch = React.lazy(() => import("./components/Search"));
 // const LazyLibrary = React.lazy(() => import("./components/DashboardAlbums"));
 // const LazyHome = React.lazy(() => import("./components/DashboardHome"));
@@ -35,10 +36,10 @@ const App = () => {
         });
         // If the token is expired, immediately redirect to login page
       } else {
-        setAuth(false);
-        window.localStorage.setItem("auth", "false");
+        setAuth(true);
+        window.localStorage.setItem("auth", "true");
         dispatch({ type: actionType.SET_USER, user: null });
-        navigate("/login");
+        // navigate("/login");
       }
     });
   }, [navigate, fireBaseAuth, dispatch]);
@@ -95,6 +96,12 @@ const App = () => {
                   </React.Suspense>
                 }
               />
+            </Route>
+            <Route path="/playlists">
+              <Route
+                path="/playlists/:id"
+                element={<Playlist></Playlist>}
+              ></Route>
             </Route>
           </Route>
 
