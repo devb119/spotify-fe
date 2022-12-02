@@ -102,7 +102,7 @@ function CollectionPlaylist() {
           </div>
 
           <div
-            className={`h-12 w-12 bg-green-500 flex justify-center items-center rounded-full absolute right-7 top-[200px] ${
+            className={`h-12 w-12 bg-green-500 flex justify-center items-center rounded-full absolute right-7 top-[300px] ${
               showPlay ? "opacity-100 -translate-y-3" : "opacity-0"
             } transition-all duration-200`}
           >
