@@ -15,6 +15,7 @@ const LazySearch = React.lazy(() => import("./components/Search"));
 const LazyCollectionPlaylist = React.lazy(() =>
   import("./components/CollectionPlaylist")
 );
+const LazyLikedSongs = React.lazy(() => import("./components/LikedSongs"));
 const App = () => {
   // eslint-disable-next-line no-unused-vars
   const [auth, setAuth] = useState(
@@ -93,6 +94,18 @@ const App = () => {
                     }
                   >
                     <LazyCollectionPlaylist></LazyCollectionPlaylist>
+                  </React.Suspense>
+                }
+              />
+              <Route
+                path="/collection/tracks"
+                element={
+                  <React.Suspense
+                    fallback={
+                      <div className="items-center m-auto">Loading...</div>
+                    }
+                  >
+                    {/* <LazyLikedSongs></LazyLikedSongs> */}
                   </React.Suspense>
                 }
               />

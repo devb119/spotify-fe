@@ -7,42 +7,54 @@ import SongRow from "./SongRow";
 function Playlist() {
   const params = useParams();
   console.log(params.id);
-  let playlist = {
+  const [playlist, setPlaylist] = React.useState({
     img: "https://cdn.123job.vn/123job/uploads/2021/08/28/2021_08_28______428064e6cc43653e50c675ee334a1c60.jpg",
     title: "Morning Playlist",
     creator: "Nguyen Hao",
     songs: [
       {
+        id: 1,
         title: "Reckless",
         img: "https://cdn.123job.vn/123job/uploads/2021/08/28/2021_08_28______428064e6cc43653e50c675ee334a1c60.jpg",
         album: "Reckless",
         artist: "Madison Beer",
         dateAdded: "11/12/2022",
-        liked: "false",
+        liked: false,
         time: "3:23",
       },
       {
+        id: 2,
         title: "Reckless",
         img: "https://cdn.123job.vn/123job/uploads/2021/08/28/2021_08_28______428064e6cc43653e50c675ee334a1c60.jpg",
         album: "Reckless",
         artist: "Madison Beer",
         dateAdded: "11/12/2022",
-        liked: "true",
+        liked: true,
         time: "3:23",
       },
       {
+        id: 3,
         title: "Reckless",
         img: "https://cdn.123job.vn/123job/uploads/2021/08/28/2021_08_28______428064e6cc43653e50c675ee334a1c60.jpg",
         album: "Reckless",
         artist: "Madison Beer",
         dateAdded: "11/12/2022",
-        liked: "true",
+        liked: true,
         time: "3:23",
       },
     ],
-  };
+  });
   //todo
   //playlist=fetchPlaylist(id)
+
+  const toggleLikeSong = (id) => {
+    setPlaylist({
+      ...playlist,
+      songs: playlist.songs.map((song) =>
+        song.id === id ? { ...song, liked: !song.liked } : song
+      ),
+    });
+  };
   return (
     <div>
       <div className="p-8 pt-0  bg-gray-800">
@@ -95,7 +107,12 @@ function Playlist() {
               <hr className="border-t-1 border-neutral-700 my-2"></hr>
               <div>
                 {playlist.songs.map((s, index) => (
-                  <SongRow song={s} id={index + 1} key={index}></SongRow>
+                  <SongRow
+                    song={s}
+                    id={index + 1}
+                    toggleLikeSong={toggleLikeSong}
+                    key={index}
+                  ></SongRow>
                 ))}
               </div>
             </div>

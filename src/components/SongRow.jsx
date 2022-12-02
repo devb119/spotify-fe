@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { BsFillPlayFill } from "react-icons/bs";
 import { RiHeartFill, RiHeartLine } from "react-icons/ri";
-function SongRow({ song, id }) {
+function SongRow({ song, id, toggleLikeSong }) {
   const [isHovered, setIsHovered] = React.useState(false);
   return (
-    <tr
+    <div
       className="py-2 hover:bg-gray-700 text-textColor font-medium grid grid-cols-12 text-xs gap-1 items-center rounded"
       onMouseEnter={() => {
         setIsHovered(true);
@@ -14,14 +14,14 @@ function SongRow({ song, id }) {
         setIsHovered(false);
       }}
     >
-      <td className="text-center items-center grid justify-center">
+      <div className="text-center items-center grid justify-center">
         {isHovered ? (
           <BsFillPlayFill className="text-xl "></BsFillPlayFill>
         ) : (
           <p>{id}</p>
         )}
-      </td>
-      <td className="col-span-4 text-left ">
+      </div>
+      <div className="col-span-4 text-left ">
         <div className="flex items-center">
           <img className="w-10 h-10" src={song.img}></img>
           <div className="ml-4 flex flex-col">
@@ -39,19 +39,29 @@ function SongRow({ song, id }) {
             </Link>
           </div>
         </div>
-      </td>
-      <td className="col-span-3 text-left">{song.album}</td>
-      <td className="col-span-2 text-left">{song.dateAdded}</td>
-      <td className="col-span-1 text-center"> </td>
-      <td className="col-span-1 text-center flex items-center">
-        {song.liked === "true" ? (
-          <RiHeartFill className="fill-green-700 text-base m-2"></RiHeartFill>
+      </div>
+      <div className="col-span-3 text-left">{song.album}</div>
+      <div className="col-span-2 text-left">{song.dateAdded}</div>
+      <div className="col-span-1 text-center"> </div>
+      <div className="col-span-1 text-center flex items-center">
+        {song.liked == true ? (
+          <RiHeartFill
+            className="fill-green-700 text-base m-2 mr-4 hover:cursor-pointer"
+            onClick={() => {
+              toggleLikeSong(song.id);
+            }}
+          ></RiHeartFill>
         ) : (
-          <RiHeartLine className="text-base m-2"></RiHeartLine>
+          <RiHeartLine
+            className="text-base m-2 hover:cursor-pointer mr-4"
+            onClick={() => {
+              toggleLikeSong(song.id);
+            }}
+          ></RiHeartLine>
         )}
         {song.time}
-      </td>
-    </tr>
+      </div>
+    </div>
   );
 }
 
