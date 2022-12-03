@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Icon } from "../assets/img/icon";
+import Icon from "../assets/img/Icon.jsx";
 function NotFound() {
   return (
     <div className="text-white w-full h-screen flex flex-col items-center justify-center">
-      <img className="w-16 h-16" src={Icon} alt=""></img>
+      <img className="w-16 h-16" src={Icon.favicon} alt=""></img>
       <h1 className="mt-10 text-4xl text-center font-bold content-center">
         Page not found
       </h1>

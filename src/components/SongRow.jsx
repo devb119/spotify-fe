@@ -1,12 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { BsFillPlayFill } from "react-icons/bs";
+import { BiPause } from "react-icons/bi";
 import { RiHeartFill, RiHeartLine } from "react-icons/ri";
+import { actionType } from "../context/reducer";
+import { useStateValue } from "../context/StateProvider";
+import Icon from "../assets/img/Icon.jsx";
 function SongRow({ song, id, toggleLikeSong }) {
   const [isHovered, setIsHovered] = React.useState(false);
+  const [{ isSongPlaying, currentSong }, dispatch] = useStateValue();
+
+  const play = () => {
+    if (!isSongPlaying) {
+      dispatch({ type: actionType.SET_IS_SONG_PLAYING, isSongPlaying: true });
+    }
+    if (currentSong?._id !== song._id) {
+      dispatch({ type: actionType.SET_CURRENT_SONG, currentSong: song });
+    }
+  };
+  const pause = () => {};
   return (
     <div
-      className="py-2 hover:bg-gray-700 text-textColor font-medium grid grid-cols-12 text-xs gap-1 items-center rounded"
+      className="py-2 hover:bg-neutral-800 text-textColor font-medium grid grid-cols-12 text-xs gap-1 items-center rounded"
       onMouseEnter={() => {
         setIsHovered(true);
       }}
@@ -14,22 +29,43 @@ function SongRow({ song, id, toggleLikeSong }) {
         setIsHovered(false);
       }}
     >
-      <div className="text-center items-center grid justify-center">
-        {isHovered ? (
-          <BsFillPlayFill className="text-xl "></BsFillPlayFill>
-        ) : (
-          <p>{id}</p>
-        )}
+      <div>
+        <div className="text-center items-center grid justify-center">
+          {currentSong?._id !== song._id ? (
+            <div>
+              {isHovered ? (
+                <BsFillPlayFill
+                  className="text-xl "
+                  onClick={play}
+                ></BsFillPlayFill>
+              ) : (
+                <p>{id}</p>
+              )}
+            </div>
+          ) : (
+            <div>
+              {isHovered ? (
+                <BiPause className="text-2xl " onClick={pause}></BiPause>
+              ) : (
+                <img src={Icon.equalizer}></img>
+              )}
+            </div>
+          )}
+        </div>
       </div>
       <div className="col-span-4 text-left ">
         <div className="flex items-center">
-          <img className="w-10 h-10" src={song.img}></img>
+          <img className="w-10 h-10" src={song.imageURL}></img>
           <div className="ml-4 flex flex-col">
             <Link
               to="#"
-              className="text-sm text-white hover:underline pb-2 hover:cursor-pointer"
+              className={
+                currentSong?._id === song._id
+                  ? "text-sm text-green-500 hover:underline pb-2 hover:cursor-pointer"
+                  : "text-sm text-white hover:underline pb-2 hover:cursor-pointer"
+              }
             >
-              {song.title}
+              {song.name}
             </Link>
             <Link
               to="#"

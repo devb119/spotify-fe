@@ -1,48 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { BsThreeDots } from "react-icons/bs";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { HiOutlineClock } from "react-icons/hi";
+import { getAllSongs } from "../api";
+import { actionType } from "../context/reducer";
+import { useStateValue } from "../context/StateProvider";
 import SongRow from "./SongRow";
 function Playlist() {
   const params = useParams();
   console.log(params.id);
+  const [{ allSongs }, dispatch] = useStateValue();
+  useEffect(() => {
+    getAllSongs().then((songData) => {
+      dispatch({ type: actionType.SET_ALL_SONGS, allSongs: songData.data });
+    });
+  }, [dispatch]);
+  console.log(allSongs);
   const [playlist, setPlaylist] = React.useState({
     img: "https://cdn.123job.vn/123job/uploads/2021/08/28/2021_08_28______428064e6cc43653e50c675ee334a1c60.jpg",
     title: "Morning Playlist",
     creator: "Nguyen Hao",
-    songs: [
-      {
-        id: 1,
-        title: "Reckless",
-        img: "https://cdn.123job.vn/123job/uploads/2021/08/28/2021_08_28______428064e6cc43653e50c675ee334a1c60.jpg",
-        album: "Reckless",
-        artist: "Madison Beer",
-        dateAdded: "11/12/2022",
-        liked: false,
-        time: "3:23",
-      },
-      {
-        id: 2,
-        title: "Reckless",
-        img: "https://cdn.123job.vn/123job/uploads/2021/08/28/2021_08_28______428064e6cc43653e50c675ee334a1c60.jpg",
-        album: "Reckless",
-        artist: "Madison Beer",
-        dateAdded: "11/12/2022",
-        liked: true,
-        time: "3:23",
-      },
-      {
-        id: 3,
-        title: "Reckless",
-        img: "https://cdn.123job.vn/123job/uploads/2021/08/28/2021_08_28______428064e6cc43653e50c675ee334a1c60.jpg",
-        album: "Reckless",
-        artist: "Madison Beer",
-        dateAdded: "11/12/2022",
-        liked: true,
-        time: "3:23",
-      },
-    ],
+    songs: allSongs,
   });
   //todo
   //playlist=fetchPlaylist(id)
@@ -57,7 +36,7 @@ function Playlist() {
   };
   return (
     <div>
-      <div className="p-8 pt-0  bg-gray-800">
+      <div className="p-8 pt-0 bg-neutral-800">
         <div className="flex items-center text-white ">
           <img
             src={playlist.img}
