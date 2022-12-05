@@ -27,7 +27,7 @@ function MusicCard({ song }) {
       <img
         src={song.imageURL}
         alt="song cover"
-        className="rounded-lg w-full mb-3"
+        className="rounded-lg w-40 h-40 mb-3"
       />
       <div
         className={`h-12 w-12 bg-green-500 flex justify-center items-center rounded-full absolute right-7 top-1/2 ${
@@ -37,7 +37,7 @@ function MusicCard({ song }) {
         <GrPlayFill className="text-xl" />
       </div>
       <p className="text-md text-white font-semibold mb-2">
-        {song.name.length > 17 ? `${song.name.slice(0, 17)}...` : song.name}
+        {song.name.length > 14 ? `${song.name.slice(0, 14)}...` : song.name}
       </p>
       <p className="text-sm text-textColor font-semibold">{song.artist}</p>
     </div>
