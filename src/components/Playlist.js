@@ -8,8 +8,7 @@ import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
 import SongRow from "./SongRow";
 function Playlist() {
-  const params = useParams();
-  console.log(params.id);
+  // const params = useParams();
   const [{ allSongs }, dispatch] = useStateValue();
   useEffect(() => {
     getAllSongs().then((songData) => {
@@ -52,7 +51,7 @@ function Playlist() {
       <div className="p-8">
         <div>
           <span className="flex mb-12 items-center">
-            {playlist.songs.length === 0 ? (
+            {playlist.songs?.length === 0 ? (
               ""
             ) : (
               <AiFillPlayCircle
@@ -67,7 +66,7 @@ function Playlist() {
             ></BsThreeDots>
           </span>
 
-          {playlist.songs.length === 0 ? (
+          {playlist.songs?.length === 0 ? (
             <hr className="border-t-1 border-gray-600"></hr>
           ) : (
             <div>
@@ -85,7 +84,7 @@ function Playlist() {
               </div>
               <hr className="border-t-1 border-neutral-700 my-2"></hr>
               <div>
-                {playlist.songs.map((s, index) => (
+                {playlist.songs?.map((s, index) => (
                   <SongRow
                     song={s}
                     id={index + 1}

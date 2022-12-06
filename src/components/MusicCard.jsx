@@ -39,7 +39,7 @@ function MusicCard({ song }) {
       <p className="text-md text-white font-semibold mb-2">
         {song.name.length > 14 ? `${song.name.slice(0, 14)}...` : song.name}
       </p>
-      <p className="text-sm text-textColor font-semibold">{song.artist}</p>
+      <p className="text-sm text-textColor font-semibold">{song.artist.name}</p>
     </div>
   );
 }

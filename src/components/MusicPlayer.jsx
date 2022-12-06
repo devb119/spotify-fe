@@ -42,7 +42,7 @@ function MusicPlayer() {
               : currentSong?.name
           }`}</p>
           <p className="text-textColor">
-            {currentSong?.artist}{" "}
+            {currentSong?.artist.name}{" "}
             <span className="text-sm text-textColor font-semibold">
               {`(${currentSong?.category})`}
             </span>
@@ -141,7 +141,7 @@ export const PlaylistCard = () => {
                 {/* <span className="text-base">{song.album}</span> */}
               </p>
               <p className="text-textColor">
-                {song.artist}{" "}
+                {song.artist.name}{" "}
                 <span className="text-sm text-textColor font-semibold">
                   ({song.category})
                 </span>

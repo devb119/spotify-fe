@@ -47,7 +47,7 @@ function SongRow({ song, id, toggleLikeSong }) {
               {isHovered ? (
                 <BiPause className="text-2xl " onClick={pause}></BiPause>
               ) : (
-                <img src={Icon.equalizer}></img>
+                <img src={Icon.equalizer} alt="icon" />
               )}
             </div>
           )}
@@ -55,7 +55,7 @@ function SongRow({ song, id, toggleLikeSong }) {
       </div>
       <div className="col-span-4 text-left ">
         <div className="flex items-center">
-          <img className="w-10 h-10" src={song.imageURL}></img>
+          <img className="w-10 h-10" src={song.imageURL} alt="song cover" />
           <div className="ml-4 flex flex-col">
             <Link
               to="#"
@@ -71,7 +71,7 @@ function SongRow({ song, id, toggleLikeSong }) {
               to="#"
               className="hover:underline hover:text-white hover:cursor-pointer"
             >
-              {song.artist}
+              {song.artist.name}
             </Link>
           </div>
         </div>
@@ -80,7 +80,7 @@ function SongRow({ song, id, toggleLikeSong }) {
       <div className="col-span-2 text-left">{song.dateAdded}</div>
       <div className="col-span-1 text-center"> </div>
       <div className="col-span-1 text-center flex items-center">
-        {song.liked == true ? (
+        {song.liked === true ? (
           <RiHeartFill
             className="fill-green-700 text-base m-2 mr-4 hover:cursor-pointer"
             onClick={() => {
