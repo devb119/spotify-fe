@@ -40,7 +40,7 @@ const App = () => {
         setAuth(true);
         window.localStorage.setItem("auth", "true");
         dispatch({ type: actionType.SET_USER, user: null });
-        // navigate("/login");
+        navigate("/login");
       }
     });
   }, [navigate, fireBaseAuth, dispatch]);
