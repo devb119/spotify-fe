@@ -1,5 +1,7 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import { useStateValue } from "../context/StateProvider";
+import { getAllCategories } from "../api";
+import { actionType } from "../context/reducer";
 const listCard = [
   {
     id: 1,
@@ -48,6 +50,16 @@ const listCard = [
 ];
 
 function Search() {
+  const [{ allCategories }, dispatch] = useStateValue();
+  useEffect(() => {
+    getAllCategories().then((res) => {
+      dispatch({
+        type: actionType.SET_ALL_CATEGORIES,
+        allCategories: res.data,
+      });
+    });
+  }, [dispatch]);
+  console.log(allCategories);
   return (
     <div className="mx-4 mt-8 mb-12 ">
       <div className="text-white text-xl font-bold">Browse all</div>
@@ -59,7 +71,7 @@ function Search() {
               className={`${item.color} h-56 w-auto  rounded-md overflow-hidden cursor-pointer`}
             >
               <div className="text-white text-xl font-bold mt-5 ml-3 mb-5">
-                {item.title}
+                {allCategories[index]}
               </div>
               <img
                 className="rotate-24 h-2/4 md:mt-16 md:ml-32 lg:mt-20 lg:ml-36 2xl:mt-16 2xl:ml-28"
