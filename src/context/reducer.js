@@ -4,6 +4,7 @@ export const actionType = {
   SET_IS_SONG_PLAYING: "SET_IS_SONG_PLAYING",
   SET_CURRENT_SONG: "SET_CURRENT_SONG",
   SET_MINI_PLAYER: "SET_MINI_PLAYER",
+  SET_ALL_CATEGORIES: "SET_ALL_CATEGORIES",
 };
 
 const reducer = (state, action) => {
@@ -17,6 +18,8 @@ const reducer = (state, action) => {
         ...state,
         allSongs: action.allSongs,
       };
+    case actionType.SET_ALL_CATEGORIES:
+      return { ...state, allCategories: action.allCategories };
     case actionType.SET_MINI_PLAYER:
       return {
         ...state,
