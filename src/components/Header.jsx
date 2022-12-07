@@ -6,6 +6,7 @@ import { useStateValue } from "../context/StateProvider";
 import { app } from "../config/firebase.config";
 import { getAuth } from "firebase/auth";
 import { motion } from "framer-motion";
+import { actionType } from "../context/reducer";
 
 function Header() {
   // eslint-disable-next-line no-unused-vars
@@ -25,6 +26,8 @@ function Header() {
       .catch((err) => {
         console.log(err);
       });
+    dispatch({ type: actionType.SET_IS_SONG_PLAYING, isSongPlaying: false });
+    dispatch({ type: actionType.SET_CURRENT_SONG, currentSong: null });
     navigate("/login", { replace: true });
   };
   return (
