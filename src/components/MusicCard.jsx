@@ -19,7 +19,7 @@ function MusicCard({ song }) {
   };
   return (
     <div
-      className="p-4 w-48 h-auto rounded-lg shadow-md bg-cardBg hover:bg-cardBgLight transition-all duration-200 cursor-pointer relative"
+      className="p-4 w-48 h-auto rounded-lg shadow-md bg-cardBg lg:w-56 hover:bg-cardBgLight transition-all duration-200 cursor-pointer relative"
       onMouseEnter={showIcon}
       onMouseLeave={hideIcon}
       onClick={addToContext}
@@ -27,7 +27,7 @@ function MusicCard({ song }) {
       <img
         src={song.imageURL}
         alt="song cover"
-        className="rounded-lg w-40 h-40 mb-3"
+        className="rounded-lg w-40 h-40 lg:h-48 lg:w-48 mb-3"
       />
       <div
         className={`h-12 w-12 bg-green-500 flex justify-center items-center rounded-full absolute right-7 top-1/2 ${
