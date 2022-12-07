@@ -58,11 +58,8 @@ function HomeMusic() {
   console.log(allSongs);
   return (
     <div className="p-8 pt-0">
-      {/* <SongContainer title="Popular" songs={songs} /> */}
       {allSongs && (
         <>
-          <SongContainer title="Recommended" songs={allSongs} />
-          <SongContainer title="Recommended" songs={allSongs} />
           <SongContainer title="Recommended" songs={allSongs} />
         </>
       )}
