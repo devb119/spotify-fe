@@ -61,28 +61,31 @@ function Search() {
   }, [dispatch]);
   console.log(allCategories);
   return (
-    <div className="mx-4 mt-8 mb-12 ">
+    <div className="p-8 pt-0 mb-12 ">
       <div className="text-white text-xl font-bold">Browse all</div>
-      <div className="grid grid-cols-3 gap-6 mt-4 lg:grid-cols-4 2xl:grid-cols-6 ">
-        {listCard.map((item, index) => {
-          return (
-            <div
-              key={index}
-              className={`${item.color} h-56 w-auto  rounded-md overflow-hidden cursor-pointer`}
-            >
-              <div className="text-white text-xl font-bold mt-5 ml-3 mb-5">
-                {allCategories[index]}
+      {allCategories ? (
+        <div className="grid grid-cols-3 gap-6 mt-4 lg:grid-cols-4 2xl:grid-cols-6 ">
+          {listCard.map((item, index) => {
+            return (
+              <div
+                key={index}
+                className={`${item.color} h-56 w-auto  rounded-md overflow-hidden cursor-pointer`}
+              >
+                <div className="text-white text-xl font-bold mt-5 ml-3 mb-5">
+                  {allCategories[index]}
+                </div>
+                <img
+                  className="rotate-24 h-2/4 md:mt-16 md:ml-32 lg:mt-20 lg:ml-36 2xl:mt-16 2xl:ml-28"
+                  src={item.img}
+                  alt="post"
+                />
               </div>
-              <img
-                className="rotate-24 h-2/4 md:mt-16 md:ml-32 lg:mt-20 lg:ml-36 2xl:mt-16 2xl:ml-28"
-                src={item.img}
-                alt="post"
-              />
-              -
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="flex items-center justify-center">Loading...</div>
+      )}
     </div>
   );
 }
