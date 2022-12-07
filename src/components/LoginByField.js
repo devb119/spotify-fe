@@ -5,7 +5,7 @@ function LoginByField() {
     <div>
       <form className=" mt-8 mb-4 ">
         <div className="mb-4">
-          <p className="text-white text-xs block text-sm font-bold mb-2">
+          <p className="text-white  block text-sm font-bold mb-2">
             Email address or username
           </p>
           <input
@@ -16,9 +16,7 @@ function LoginByField() {
           />
         </div>
         <div className="mb-6">
-          <p className="text-white text-xs block text-sm font-bold mb-2">
-            Password
-          </p>
+          <p className="text-white  block text-sm font-bold mb-2">Password</p>
           <input
             className="shadow text-s appearance-none border border-gray-500 rounded w-full py-3 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
             id="password"
@@ -39,7 +37,7 @@ function LoginByField() {
           </div>
 
           <button
-            className="bg-green-500 hover:bg-green-700 text-white font-semibold py-3 px-8 text-black rounded-full focus:outline-none focus:shadow-outline"
+            className="bg-green-500 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-full focus:outline-none focus:shadow-outline"
             type="button"
           >
             LOG IN
