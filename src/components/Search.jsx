@@ -56,7 +56,7 @@ function Search() {
           return (
             <div
               key={index}
-              className={`${item.color} h-56 w-auto lg:h-204 lg:w-204 rounded-md overflow-hidden cursor-pointer`}
+              className={`${item.color} h-56 w-auto  rounded-md overflow-hidden cursor-pointer`}
             >
               <div className="text-white text-xl font-bold mt-5 ml-3 mb-5">
                 {item.title}
