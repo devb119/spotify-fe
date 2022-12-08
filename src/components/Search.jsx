@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useStateValue } from "../context/StateProvider";
 import { getAllCategories } from "../api";
 import { actionType } from "../context/reducer";
+import { useNavigate } from "react-router-dom";
 const listCard = [
   {
     id: 1,
@@ -50,6 +51,7 @@ const listCard = [
 ];
 
 function Search() {
+  const navigate = useNavigate();
   const [{ allCategories }, dispatch] = useStateValue();
   useEffect(() => {
     getAllCategories().then((res) => {
@@ -64,10 +66,13 @@ function Search() {
     <div className="p-8 pt-0 mb-12 ">
       <div className="text-white text-xl font-bold">Browse all</div>
       {allCategories ? (
-        <div className="grid grid-cols-3 gap-6 mt-4 lg:grid-cols-4 2xl:grid-cols-6 ">
+        <div className="grid grid-cols-3 gap-6 mt-4 lg:grid-cols-4 2xl:grid-cols-6 hover:cursor-pointer">
           {listCard.map((item, index) => {
             return (
               <div
+                onClick={() => {
+                  navigate(`/search/${allCategories[index]}`);
+                }}
                 key={index}
                 className={`${item.color} h-56 w-auto  rounded-md overflow-hidden cursor-pointer`}
               >

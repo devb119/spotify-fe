@@ -9,6 +9,8 @@ import { useStateValue } from "./context/StateProvider";
 import { actionType } from "./context/reducer";
 import NotFound from "./components/NotFound";
 import Playlist from "./components/Playlist";
+import Search from "./components/Search";
+import CategorySongs from "./components/CategorySongs";
 const LazySearch = React.lazy(() => import("./components/Search"));
 // const LazyLibrary = React.lazy(() => import("./components/DashboardAlbums"));
 // const LazyHome = React.lazy(() => import("./components/DashboardHome"));
@@ -61,10 +63,16 @@ const App = () => {
                     <div className="items-center m-auto">Loading...</div>
                   }
                 >
-                  <LazySearch></LazySearch>
+                  {/* <LazySearch></LazySearch>
+                   */}
+                  <Search></Search>
                 </React.Suspense>
               }
             />
+            <Route
+              path="search/:category"
+              element={<CategorySongs></CategorySongs>}
+            ></Route>
             <Route
               path=""
               element={
