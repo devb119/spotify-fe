@@ -12,6 +12,8 @@ function Header() {
   // eslint-disable-next-line no-unused-vars
   const [{ user }, dispatch] = useStateValue();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [query, setQuery] = useState("")
+  console.log(query)
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -48,31 +50,42 @@ function Header() {
               "h-10 max-w-full w-[22.75rem] py-1.5 px-12 mr-6 bg-white rounded-full text-ellipsis placeholder-black/50 text-black text-sm font-semibold outline-none"
             }
             placeholder={"What do you want to listen to ?"}
+            onChange = {(e) => setQuery(e.target.value)}
           />
 
-          <select
-            name="Choose"
-            className="absolute top-0 left-50 right-0 w-25 h-10 rounded-r-full text-ellipsis text-[#635e5e] text-sm font-semibold outline-none  border-l-2 border-black-900"
+        <div 
+        class="select absolute top-0 left-40 right-0 w-25 h-10 ml-40 bg-white rounded-r-full text-ellipsis text-[#635e5e] text-sm font-semibold outline-none  border-l-2 border-black-900"
+        >
+          <select 
+            name="format" id="format" 
+            className="w-25 h-10 rounded-r-full "
           >
-            <option
-              value="song"
-              className="text-ellipsis text-[#635e5e] text-sm font-semibold "
-            >
-              Song
-            </option>
-            <option
-              value="artist"
-              className="text-ellipsis text-[#635e5e] text-sm font-semibold "
-            >
-              Artist
-            </option>
-            <option
-              value="album"
-              className="text-ellipsis text-[#635e5e] text-sm font-semibold "
-            >
-              Album
-            </option>
-          </select>
+                <option
+                  selected disabled 
+                  className=" text-[#120d0d] text-sm font-semibold"
+                >
+                  Choose option
+                </option>
+                <option 
+                  value="songs" 
+                  className="text-[#796c6c] text-sm font-semibold"
+                >
+                  Songs
+                </option>
+                <option
+                  value="artits" 
+                  className="text-[#796c6c] text-sm font-semibold"
+                >
+                  Artists
+                </option>
+                <option 
+                  value="albums" 
+                  className="text-[#796c6c] text-sm font-semibold"
+                >
+                  Albums
+                </option>
+            </select>
+          </div>
         </div>
       ) : (
         ""
