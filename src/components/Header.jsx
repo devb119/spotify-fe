@@ -90,7 +90,8 @@ function Header() {
       ) : (
         ""
       )}
-      {pathname.includes("/collection") ? (
+      {!pathname.includes("/collection/tracks") &&
+      pathname.includes("/collection/") ? (
         <div className="text-white"> nav bar</div>
       ) : (
         ""

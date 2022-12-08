@@ -10,7 +10,7 @@ function CategorySongs() {
   const [songs, setSongs] = React.useState();
   useEffect(() => {
     getSongsByCategories(params.category).then((data) => setSongs(data.data));
-  }, []);
+  }, [params.category]);
   return (
     <div className="p-8 pt-0">
       <div className="mb-4">

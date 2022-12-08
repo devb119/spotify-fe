@@ -3,6 +3,7 @@ import { useStateValue } from "../context/StateProvider";
 import { getAllCategories } from "../api";
 import { actionType } from "../context/reducer";
 import { useNavigate } from "react-router-dom";
+
 const listCard = [
   {
     id: 1,
@@ -33,20 +34,20 @@ const listCard = [
     id: 5,
     title: "Discover",
     img: "https://t.scdn.co/images/d0fb2ab104dc4846bdc56d72b0b0d785.jpeg",
-    color: "bg-cardColor1",
+    color: "bg-cardColor2",
   },
 
   {
     id: 6,
     title: "New Releases",
     img: "https://i.scdn.co/image/ab67706f000000027ea4d505212b9de1f72c5112",
-    color: "bg-cardColor1",
+    color: "bg-cardColor3",
   },
   {
     id: 7,
     title: "Discover",
     img: "https://t.scdn.co/images/d0fb2ab104dc4846bdc56d72b0b0d785.jpeg",
-    color: "bg-cardColor1",
+    color: "bg-cardColor2",
   },
 ];
 
