@@ -49,13 +49,30 @@ function Header() {
             }
             placeholder={"What do you want to listen to ?"}
           />
-         
-            <select name="Choose" className="absolute top-0 left-50 right-0 w-25 h-10 rounded-r-full text-ellipsis text-[#635e5e] text-sm font-semibold outline-none  border-l-2 border-black-900">
-                <option value="song" className="text-ellipsis text-[#635e5e] text-sm font-semibold ">Song</option>
-                <option value="artist" className="text-ellipsis text-[#635e5e] text-sm font-semibold ">Artist</option>
-                <option value="album" className="text-ellipsis text-[#635e5e] text-sm font-semibold " >Album</option>
-            </select>
-         
+
+          <select
+            name="Choose"
+            className="absolute top-0 left-50 right-0 w-25 h-10 rounded-r-full text-ellipsis text-[#635e5e] text-sm font-semibold outline-none  border-l-2 border-black-900"
+          >
+            <option
+              value="song"
+              className="text-ellipsis text-[#635e5e] text-sm font-semibold "
+            >
+              Song
+            </option>
+            <option
+              value="artist"
+              className="text-ellipsis text-[#635e5e] text-sm font-semibold "
+            >
+              Artist
+            </option>
+            <option
+              value="album"
+              className="text-ellipsis text-[#635e5e] text-sm font-semibold "
+            >
+              Album
+            </option>
+          </select>
         </div>
       ) : (
         ""

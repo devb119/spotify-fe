@@ -33,8 +33,9 @@ const App = () => {
     fireBaseAuth.onAuthStateChanged((userCred) => {
       if (userCred) {
         userCred.getIdToken().then((token) => {
+          console.log(token);
           validateUser(token).then((data) => {
-            dispatch({ type: actionType.SET_USER, user: data });
+            dispatch({ type: actionType.SET_USER, user: { ...data, token } });
           });
         });
         // If the token is expired, immediately redirect to login page
