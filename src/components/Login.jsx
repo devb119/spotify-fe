@@ -26,13 +26,14 @@ function Login({ setAuth }) {
         // Add an observer for sign in state
         fireBaseAuth.onAuthStateChanged((userCred) => {
           if (userCred) {
-            userCred
-              .getIdToken()
-              .then((token) =>
-                validateUser(token).then((data) =>
-                  dispatch({ type: actionType.SET_USER, user: data })
-                )
-              );
+            userCred.getIdToken().then((token) =>
+              validateUser(token).then((data) => {
+                dispatch({
+                  type: actionType.SET_USER,
+                  user: { ...data, token: token },
+                });
+              })
+            );
             navigate("/", { replace: true });
           } else {
             setAuth(false);
