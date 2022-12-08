@@ -114,7 +114,7 @@ const App = () => {
                       <div className="items-center m-auto">Loading...</div>
                     }
                   >
-                    {/* <LazyLikedSongs></LazyLikedSongs> */}
+                    <LazyLikedSongs></LazyLikedSongs>
                   </React.Suspense>
                 }
               />

@@ -54,6 +54,15 @@ export const getAllSongs = async () => {
     return null;
   }
 };
+export const getLikedSongs = async () => {
+  try {
+    const res = await axios.get(`${BASE_URL}/user/likedSongs`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
 export const getAllCategories = async () => {
   try {
     const res = await axios.get(`${BASE_URL}/songs/categories`);
