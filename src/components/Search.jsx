@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useStateValue } from "../context/StateProvider";
-import { getAllCategories } from "../api";
+import { getAllCategories, searchSongByName } from "../api";
 import { actionType } from "../context/reducer";
 import { useNavigate } from "react-router-dom";
-
+import { SongContainer } from "./HomeMusic";
 
 const listCard = [
   {
@@ -54,44 +54,63 @@ const listCard = [
 
 function Search() {
   const navigate = useNavigate();
-  const [{ allCategories }, dispatch] = useStateValue();
+  const [allCategories, setAllCategories] = useState([]);
+  const [songs, setSongs] = useState([]);
+  // eslint-disable-next-line no-unused-vars
+  const [{ query, searchType }, dispatch] = useStateValue();
   useEffect(() => {
     getAllCategories().then((res) => {
-      dispatch({
-        type: actionType.SET_ALL_CATEGORIES,
-        allCategories: res.data,
-      });
+      setAllCategories(res.data);
+      console.log(res.data);
     });
+
+    return () => {
+      dispatch({ type: actionType.SET_QUERY, query: "" });
+      dispatch({ type: actionType.SET_SEARCH_TYPE, searchType: "songs" });
+    };
   }, [dispatch]);
+
+  useEffect(() => {
+    if (query) {
+      searchSongByName(query).then((data) => setSongs(data.data));
+    }
+  }, [query]);
   //console.log(allCategories);
+  console.log(searchType);
   return (
     <div className="p-8 pt-0 mb-12 ">
-      <div className="text-white text-xl font-bold">Browse all</div>
-      {allCategories ? (
-        <div className="grid grid-cols-3 gap-6 mt-4 lg:grid-cols-4 2xl:grid-cols-6 hover:cursor-pointer">
-          {listCard.map((item, index) => {
-            return (
-              <div
-                onClick={() => {
-                  navigate(`/search/${allCategories[index]}`);
-                }}
-                key={index}
-                className={`${item.color} h-56 w-auto  rounded-md overflow-hidden cursor-pointer`}
-              >
-                <div className="text-white text-xl font-bold mt-5 ml-3 mb-5">
-                  {allCategories[index]}
-                </div>
-                <img
-                  className="rotate-24 h-2/4 md:mt-16 md:ml-32 lg:mt-20 lg:ml-36 2xl:mt-16 2xl:ml-28"
-                  src={item.img}
-                  alt="post"
-                />
-              </div>
-            );
-          })}
-        </div>
+      {query === "" ? (
+        <>
+          <div className="text-white text-xl font-bold">Browse all</div>
+          {allCategories.length !== 0 ? (
+            <div className="grid grid-cols-3 gap-6 mt-4 lg:grid-cols-4 2xl:grid-cols-6 hover:cursor-pointer">
+              {allCategories.map((item, i) => {
+                return (
+                  <div
+                    onClick={() => {
+                      navigate(`/search/${item}`);
+                    }}
+                    key={item}
+                    className={`${listCard[i].color} h-56 w-auto  rounded-md overflow-hidden cursor-pointer`}
+                  >
+                    <div className="text-white text-xl font-bold mt-5 ml-3 mb-5">
+                      {item}
+                    </div>
+                    <img
+                      className="rotate-24 h-2/4 md:mt-16 md:ml-32 lg:mt-20 lg:ml-36 2xl:mt-16 2xl:ml-28"
+                      src={listCard[i].img}
+                      alt="post"
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="flex items-center justify-center">Loading...</div>
+          )}
+        </>
       ) : (
-        <div className="flex items-center justify-center">Loading...</div>
+        <SongContainer songs={songs} title="Result" />
       )}
     </div>
   );
