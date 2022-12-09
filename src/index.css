@@ -81,8 +81,8 @@ body {
   justify-content: center;
 }
 
-.playlist-item:hover > .playlist-icon{
-   display: flex;
+.playlist-item:hover > .playlist-icon {
+  display: flex;
 }
 
 select {
@@ -90,13 +90,56 @@ select {
   -moz-appearance:none;
   -ms-appearance:none;
   appearance:none; */
-  outline:0;
-  box-shadow:none;
-  border:0!important;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
   padding: 0.5em;
-  cursor:pointer;  
+  cursor: pointer;
+}
+.dot-flashing {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: rgb(78, 76, 76);
+  color: gray;
+  animation: dot-flashing 1s infinite linear alternate;
+  animation-delay: 0.5s;
+}
+.dot-flashing::before,
+.dot-flashing::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+.dot-flashing::before {
+  left: -15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: gray;
+  color: gray;
+  animation: dot-flashing 1s infinite alternate;
+  animation-delay: 0s;
+}
+.dot-flashing::after {
+  left: 15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: gray;
+  color: gray;
+  animation: dot-flashing 1s infinite alternate;
+  animation-delay: 1s;
 }
 
- 
-
-
+@keyframes dot-flashing {
+  0% {
+    background-color: gray;
+  }
+  50%,
+  100% {
+    background-color: rgba(152, 128, 255, 0.2);
+  }
+}
