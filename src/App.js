@@ -33,7 +33,6 @@ const App = () => {
     fireBaseAuth.onAuthStateChanged((userCred) => {
       if (userCred) {
         userCred.getIdToken().then((token) => {
-          console.log(token);
           validateUser(token).then((data) => {
             dispatch({ type: actionType.SET_USER, user: { ...data, token } });
           });

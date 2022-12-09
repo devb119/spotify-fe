@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { FaCrown } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
@@ -8,12 +8,13 @@ import { getAuth } from "firebase/auth";
 import { motion } from "framer-motion";
 import { actionType } from "../context/reducer";
 
+import { searchSongByName } from "../api";
+import MusicCard from "./MusicCard";
+
 function Header() {
   // eslint-disable-next-line no-unused-vars
   const [{ user }, dispatch] = useStateValue();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [query, setQuery] = useState("")
-  console.log(query)
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -32,6 +33,24 @@ function Header() {
     dispatch({ type: actionType.SET_CURRENT_SONG, currentSong: null });
     navigate("/login", { replace: true });
   };
+
+  // search song 
+  const [query, setQuery] = useState("")
+  console.log(query)
+  const [songs, setSongs] = useState();
+  useEffect(() => {
+    searchSongByName(query).then((data) => setSongs(data.data));
+  }, [query]);
+
+  function handleInputOnchange(e) {
+    const { value } = e.target;
+    setQuery(value);
+    //fetchDropdownOptions(value);
+  }
+
+
+  console.log(songs)
+ 
   return (
     <header className="flex items-center w-full p-4 md:py-2 md:px-6">
       {pathname === "/search" ? (
@@ -50,18 +69,20 @@ function Header() {
               "h-10 max-w-full w-[22.75rem] py-1.5 px-12 mr-6 bg-white rounded-full text-ellipsis placeholder-black/50 text-black text-sm font-semibold outline-none"
             }
             placeholder={"What do you want to listen to ?"}
-            onChange = {(e) => setQuery(e.target.value)}
+            onChange = {handleInputOnchange}
           />
 
         <div 
         class="select absolute top-0 left-40 right-0 w-25 h-10 ml-40 bg-white rounded-r-full text-ellipsis text-[#635e5e] text-sm font-semibold outline-none  border-l-2 border-black-900"
         >
           <select 
-            name="format" id="format" 
+            name="format" id="format"
+            defaultValue={'DEFAULT'} 
             className="w-25 h-10 rounded-r-full "
           >
                 <option
-                  selected disabled 
+                  value="DEFAULT"
+                  disabled 
                   className=" text-[#120d0d] text-sm font-semibold"
                 >
                   Choose option
@@ -87,6 +108,7 @@ function Header() {
             </select>
           </div>
         </div>
+        
       ) : (
         ""
       )}
@@ -167,3 +189,4 @@ function Header() {
 }
 
 export default Header;
+

@@ -4,6 +4,7 @@ import { getAllCategories } from "../api";
 import { actionType } from "../context/reducer";
 import { useNavigate } from "react-router-dom";
 
+
 const listCard = [
   {
     id: 1,
@@ -62,7 +63,7 @@ function Search() {
       });
     });
   }, [dispatch]);
-  console.log(allCategories);
+  //console.log(allCategories);
   return (
     <div className="p-8 pt-0 mb-12 ">
       <div className="text-white text-xl font-bold">Browse all</div>
