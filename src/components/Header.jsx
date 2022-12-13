@@ -12,6 +12,7 @@ function Header() {
   // eslint-disable-next-line no-unused-vars
   const [{ user, query, searchType }, dispatch] = useStateValue();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -35,6 +36,12 @@ function Header() {
     const { value } = e.target;
     dispatch({ type: actionType.SET_QUERY, query: value });
   }
+
+  function handleOptionOnchange(e) {
+    const { value } = e.target;
+    dispatch({ type: actionType.SET_SEARCH_TYPE, searchType: value });
+  }
+
 
   return (
     <header className="flex items-center w-full p-4 md:py-2 md:px-6">
@@ -64,6 +71,8 @@ function Header() {
               id="format"
               defaultValue={"DEFAULT"}
               className="w-25 h-10 rounded-r-full "
+              value={searchType}
+              onChange={handleOptionOnchange}
             >
               <option
                 value="DEFAULT"

@@ -61,7 +61,7 @@ function Search() {
   useEffect(() => {
     getAllCategories().then((res) => {
       setAllCategories(res.data);
-      console.log(res.data);
+      //console.log(res.data);
     });
 
     return () => {
