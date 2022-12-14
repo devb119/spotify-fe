@@ -6,6 +6,7 @@ import { RiHeartFill, RiHeartLine } from "react-icons/ri";
 import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
 import Icon from "../assets/img/Icon.jsx";
+import Equalizer from "./Equalizer";
 function SongRow({ song, id, toggleLikeSong }) {
   const [isHovered, setIsHovered] = React.useState(false);
   const [{ isSongPlaying, currentSong }, dispatch] = useStateValue();
@@ -35,19 +36,19 @@ function SongRow({ song, id, toggleLikeSong }) {
             <div>
               {isHovered ? (
                 <BsFillPlayFill
-                  className="text-xl "
+                  className="text-2xl "
                   onClick={play}
                 ></BsFillPlayFill>
               ) : (
-                <p>{id}</p>
+                <p className="text-base">{id}</p>
               )}
             </div>
           ) : (
             <div>
               {isHovered ? (
-                <BiPause className="text-2xl " onClick={pause}></BiPause>
+                <BiPause className="text-3xl " onClick={pause}></BiPause>
               ) : (
-                <img src={Icon.equalizer} alt="icon" />
+                <Equalizer></Equalizer>
               )}
             </div>
           )}
