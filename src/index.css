@@ -140,6 +140,76 @@ select {
   }
   50%,
   100% {
-    background-color: rgba(152, 128, 255, 0.2);
+    background-color: rgba(163, 163, 163, 0.2);
+  }
+}
+
+.equalizer {
+  width: 0.8rem;
+  height: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.equalizer .bar {
+  background-color: rgb(8, 165, 8);
+  width: 0.12rem;
+  height: 0;
+  border: none;
+}
+.equalizer .bar:nth-child(1) {
+  animation: bnce 0.4s 0.8s infinite alternate;
+}
+@keyframes bnce {
+  30% {
+    height: 0.8rem;
+    background-color: rgb(8, 165, 8);
+  }
+  60% {
+    height: 0.6rem;
+    background-color: rgb(8, 165, 8);
+  }
+  100% {
+    height: 0.2rem;
+    background-color: rgb(8, 165, 8);
+  }
+}
+.bar:nth-child(2) {
+  animation: bnce2 0.5s 0.5s infinite alternate;
+}
+@keyframes bnce2 {
+  20% {
+    height: 0.6rem;
+    background-color: rgb(8, 165, 8);
+  }
+  40% {
+    height: 0.4rem;
+    background-color: rgb(8, 165, 8);
+  }
+  100% {
+    height: 0.8rem;
+    background-color: rgb(8, 165, 8);
+  }
+}
+.bar:nth-child(3) {
+  animation: bnce3 0.8s 0.7s infinite alternate;
+}
+@keyframes bnce3 {
+  80% {
+    height: 0.8rem;
+  }
+  100% {
+    background-color: rgb(8, 165, 8);
+  }
+}
+.bar:nth-child(4) {
+  animation: bnce4 0.6s 0.7s infinite alternate;
+}
+@keyframes bnce4 {
+  70% {
+    height: 0.6rem;
+  }
+  100% {
+    background-color: rgb(8, 165, 8);
   }
 }
