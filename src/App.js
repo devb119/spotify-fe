@@ -11,6 +11,7 @@ import NotFound from "./components/NotFound";
 import Playlist from "./components/Playlist";
 import Search from "./components/Search";
 import CategorySongs from "./components/CategorySongs";
+import SongPage from "./components/SongPage";
 const LazySearch = React.lazy(() => import("./components/Search"));
 // const LazyLibrary = React.lazy(() => import("./components/DashboardAlbums"));
 // const LazyHome = React.lazy(() => import("./components/DashboardHome"));
@@ -55,6 +56,7 @@ const App = () => {
           <Route path="*" element={<NotFound />}></Route>
           <Route path="/" element={<Home />}>
             <Route path="/" element={<HomeMusic />} />
+            <Route path="/songs/:id" element={<SongPage></SongPage>}></Route>
             <Route
               path="search"
               element={

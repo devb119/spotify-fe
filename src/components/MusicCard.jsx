@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { GrPlayFill } from "react-icons/gr";
 import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
-
+import { useNavigate } from "react-router-dom";
 function MusicCard({ song }) {
+  const navigate = useNavigate();
   const [showPlay, setShowPlay] = useState(false);
   const [{ isSongPlaying, currentSong }, dispatch] = useStateValue();
 
@@ -22,7 +23,9 @@ function MusicCard({ song }) {
       className="p-4 w-48 h-auto rounded-lg shadow-md bg-cardBg lg:w-56 hover:bg-cardBgLight transition-all duration-200 cursor-pointer relative"
       onMouseEnter={showIcon}
       onMouseLeave={hideIcon}
-      onClick={addToContext}
+      onClick={() => {
+        navigate(`/songs/${song._id}`);
+      }}
     >
       <img
         src={song.imageURL}
@@ -34,7 +37,7 @@ function MusicCard({ song }) {
           showPlay ? "opacity-100 -translate-y-3" : "opacity-0"
         } transition-all duration-200`}
       >
-        <GrPlayFill className="text-xl" />
+        <GrPlayFill className="text-xl" onClick={addToContext} />
       </div>
       <p className="text-md text-white font-semibold mb-2">
         {song.name.length > 14 ? `${song.name.slice(0, 14)}...` : song.name}

@@ -6,19 +6,21 @@ import { getAllSongs } from "../api";
 import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
 import SongRow from "./SongRow";
-export function PlayListCover({ type, playlist }) {
+export function PlayListCover({ type, playlist = null, song = null }) {
   return (
     <div className="p-8 pt-0 bg-neutral-800">
       <div className="flex items-center text-white ">
         <img
-          src={playlist.img}
+          src={playlist ? playlist.img : song.img}
           className="w-60 h-60 shadow-large shardow-black"
         ></img>
         <div className="self-end ml-5">
           <div className="text-xs font-bold">{type}</div>
-          <div className="text-7xl font-bold mb-5 mt-2">{playlist.title}</div>
+          <div className="text-7xl font-bold mb-5 mt-2">
+            {playlist ? playlist.title : song.title}
+          </div>
           <div className="text-xs font-bold">
-            {playlist.creator} {playlist.count} {playlist.time}
+            {playlist ? playlist.creator : song.artist}
           </div>
         </div>
       </div>
