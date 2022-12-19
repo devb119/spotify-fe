@@ -18,6 +18,8 @@ function MusicCard({ song }) {
       dispatch({ type: actionType.SET_CURRENT_SONG, currentSong: song });
     }
   };
+
+  //console.log(song)
   return (
     <div
       className="p-4 w-48 h-auto rounded-lg shadow-md bg-cardBg lg:w-56 hover:bg-cardBgLight transition-all duration-200 cursor-pointer relative"
@@ -42,7 +44,10 @@ function MusicCard({ song }) {
       <p className="text-md text-white font-semibold mb-2">
         {song.name.length > 14 ? `${song.name.slice(0, 14)}...` : song.name}
       </p>
-      <p className="text-sm text-textColor font-semibold">{song.artist.name}</p>
+      <p className="text-sm text-textColor font-semibold">{song.artist.map((item) => {
+        //console.log(item.name)
+        return item.name
+      }).join(', ')}</p>
     </div>
   );
 }
