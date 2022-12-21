@@ -35,7 +35,7 @@ function Playlist() {
   };
   return (
     <div>
-      <div className="p-8 pt-0 bg-neutral-800">
+      <div className="p-8 pt-0 bg-gradient-to-b from-[#690818] to-[#290505]">
         <div className="flex items-center text-white ">
           <img
             src={playlist.img}
