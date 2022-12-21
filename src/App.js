@@ -9,9 +9,9 @@ import { useStateValue } from "./context/StateProvider";
 import { actionType } from "./context/reducer";
 import NotFound from "./components/NotFound";
 import Playlist from "./components/Playlist";
-import Search from "./components/Search";
 import CategorySongs from "./components/CategorySongs";
 import SongPage from "./components/SongPage";
+import CreatePlaylist from "./components/CreatePlaylist";
 const LazySearch = React.lazy(() => import("./components/Search"));
 // const LazyLibrary = React.lazy(() => import("./components/DashboardAlbums"));
 // const LazyHome = React.lazy(() => import("./components/DashboardHome"));
@@ -58,6 +58,10 @@ const App = () => {
             <Route path="/" element={<HomeMusic />} />
             <Route path="/songs/:id" element={<SongPage></SongPage>}></Route>
             <Route
+              path="createPlaylist"
+              element={<CreatePlaylist></CreatePlaylist>}
+            />
+            <Route
               path="search"
               element={
                 <React.Suspense
@@ -65,9 +69,7 @@ const App = () => {
                     <div className="items-center m-auto">Loading...</div>
                   }
                 >
-                  {/* <LazySearch></LazySearch>
-                   */}
-                  <Search></Search>
+                  <LazySearch></LazySearch>
                 </React.Suspense>
               }
             />
