@@ -14,16 +14,27 @@ function CreatePlaylist() {
        <div className="p-8 pt-0 bg-gradient-to-b from-[#4d4c4c] to-[#1d1c1c]">
           <div className="flex items-center pt-9 text-white ">
               <div 
-                 className="w-60 h-60 shadow-large shardow-black bg-[#333333] rounded-sm flex justify-center"
-                 onMouseOver={(e) => 
+                 className="w-60 h-60 shadow-large shardow-black bg-[#333333] rounded-sm flex justify-center cursor-pointer"
+                 onMouseEnter={(e) => 
                   setIsHover(!isHover)
                }
+                 onMouseLeave={(e) =>
+                  setIsHover(!isHover)
+                }
               >
                 <div className="flex items-center">
                   {!isHover ? (
                      <BsMusicNoteBeamed className="h-[76px] w-[102px] text-[#787676]"/>
                    ) : (
-                     <BiPencil className="h-[76px] w-[102px] text-white"/>
+                  <div className="h-[76px] w-[150px] flex-col justify-center">
+                      <div className="flex justify-center">
+                         <BiPencil className="h-[50px] w-[50px] text-white"/>
+                      </div>
+
+                      <div className="justify-center flex font-semibold">
+                          Choose photo
+                      </div>
+                  </div>   
                   )}
                 </div>
               </div>
