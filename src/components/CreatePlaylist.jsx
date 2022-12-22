@@ -100,7 +100,11 @@ function CreatePlaylist() {
 
       {/* Tạo modal để chỉnh sửa thông tin playlist */}
        {modal && (<div className="modal">
-          <div className="overlay"></div>
+          <div 
+              className="overlay"
+              onClick={toggleModal}
+          >
+          </div>
           <div className="modal-content">
              <div className="flex">
                <div className="text-white text-xl font-bold">Edit details</div>
