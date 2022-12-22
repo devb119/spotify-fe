@@ -5,22 +5,37 @@ import { BsMusicNoteBeamed } from "react-icons/bs"
 import { BsThreeDots } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 import { BiPencil } from "react-icons/bi"
+import { AiOutlineClose } from "react-icons/ai"
 
 function CreatePlaylist() {
   const[isHover, setIsHover] = useState(false);
+  const [modal, setModal] = useState(false);
+  
+  const toggleHover = () => {
+    setIsHover(!isHover)
+  };
+
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+
+  if(modal) {
+    document.body.classList.add('active-modal')
+  } else {
+    document.body.classList.remove('active-modal')
+  }
 
   return (
      <div>
+
+      {/* Làm phần header */}
        <div className="p-8 pt-0 bg-gradient-to-b from-[#4d4c4c] to-[#1d1c1c]">
           <div className="flex items-center pt-9 text-white ">
               <div 
                  className="w-60 h-60 shadow-large shardow-black bg-[#333333] rounded-sm flex justify-center cursor-pointer"
-                 onMouseEnter={(e) => 
-                  setIsHover(!isHover)
-               }
-                 onMouseLeave={(e) =>
-                  setIsHover(!isHover)
-                }
+                 onMouseEnter={ toggleHover }
+                 onMouseLeave={ toggleHover }
+                 onClick = { toggleModal }
               >
                 <div className="flex items-center">
                   {!isHover ? (
@@ -40,12 +55,18 @@ function CreatePlaylist() {
               </div>
               <div className="self-end ml-5">
                   <div className="text-xs font-bold">PLAYLIST</div>
-                  <div className="text-7xl font-bold mb-5 mt-2">My Playlist #1</div>
-                  <div className="text-xs font-bold">By Duc Pham</div>
+                  <div 
+                      className="text-7xl font-bold mb-5 mt-2 cursor-pointer"
+                      onClick={ toggleModal }
+                  >
+                      My Playlist #1
+                  </div>
+                  <div className="text-xs font-bold cursor-pointer hover:underline">By Duc Pham</div>
               </div>
           </div>
        </div>
 
+      {/* Làm phần search */}
        <div className="p-8">
          <div className="flex">
             <BsThreeDots
@@ -76,6 +97,23 @@ function CreatePlaylist() {
             </form>
          </div>
        </div>
+
+      {/* Tạo modal để chỉnh sửa thông tin playlist */}
+       {modal && (<div className="modal">
+          <div className="overlay"></div>
+          <div className="modal-content">
+             <div className="flex">
+               <div className="text-white text-xl font-bold">Edit details</div>
+               <div 
+                   className="h-[32px] w-[32px] flex justify-center rounded-full ml-[342px] hover:bg-[#3d3d3d] cursor-pointer"
+                   onClick={ toggleModal }
+                >
+                  <AiOutlineClose className="text-[#a7a7a7] font-semibold h-5 w-5 mt-1"/>
+               </div>
+             </div>
+          </div>
+       </div>
+       )}
      </div>
   );
 }
