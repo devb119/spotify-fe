@@ -253,7 +253,7 @@ body.active-modal {
 
 .modal-content {
   position: absolute;
-  top: 25%;
+  top: 35%;
   left: 50%;
   width: 524px;
   height: auto;

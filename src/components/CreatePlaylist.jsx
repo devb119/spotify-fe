@@ -10,13 +10,18 @@ import { AiOutlineClose } from "react-icons/ai"
 function CreatePlaylist() {
   const[isHover, setIsHover] = useState(false);
   const [modal, setModal] = useState(false);
+  const [hoverIconModal, setHoverIconModal] = useState(false);
   
   const toggleHover = () => {
-    setIsHover(!isHover)
+    setIsHover(!isHover);
   };
 
   const toggleModal = () => {
     setModal(!modal);
+  };
+
+  const toggleIconModal = () => {
+    setHoverIconModal(!hoverIconModal);
   };
 
   if(modal) {
@@ -106,7 +111,7 @@ function CreatePlaylist() {
           >
           </div>
           <div className="modal-content">
-             <div className="flex">
+             <div className="flex pb-5">
                <div className="text-white text-xl font-bold">Edit details</div>
                <div 
                    className="h-[32px] w-[32px] flex justify-center rounded-full ml-[342px] hover:bg-[#3d3d3d] cursor-pointer"
@@ -115,6 +120,83 @@ function CreatePlaylist() {
                   <AiOutlineClose className="text-[#a7a7a7] font-semibold h-5 w-5 mt-1"/>
                </div>
              </div>
+
+             <div className="flex justify-between">
+                <div 
+                    className="relative w-[180px] h-[180px] shadow-large shardow-black bg-[#333333] rounded-sm flex justify-center cursor-pointer"
+                    onMouseEnter={ toggleIconModal }
+                    onMouseLeave={ toggleIconModal }
+                  > 
+                    {hoverIconModal && (
+                      <div className="absolute right-[5%] top-[4%]">
+                        <DropDown/>
+                      </div>
+                    )}
+                    
+                    <div className="flex items-center">
+                      {!hoverIconModal ? (
+                        <BsMusicNoteBeamed className="h-[76px] w-[102px] text-[#787676]"/>
+                      ) : (
+                      <div className="h-[76px] w-[150px] flex-col justify-center">
+                          <div className="flex justify-center">
+                            <BiPencil className="h-[50px] w-[50px] text-white"/>
+                          </div>
+
+                          <div className="justify-center flex font-semibold text-white">
+                              Choose photo
+                          </div>
+                      </div>   
+                      )}
+                    </div>
+                </div>
+
+                <div>
+                    <form>   
+                      <div class="w-[280px]">
+                          <input 
+                             type="text" 
+                             id="name" 
+                             class="block w-[280px] p-[8px] pl-4 text-sm text-[#c1bcbc] font-semibold border-none rounded-sm border-1 bg-[#3e3d3d]"
+                             placeholder="My Playlist #1"  
+                             required 
+                          />
+                      </div>   
+                      <div class="mb-3 w-[280px] pt-2">
+                          <textarea
+                            class="
+                              form-control
+                              block
+                              w-full
+                              p-[8px]
+                              pl-4
+                              font-medium
+                              text-[#c1bcbc]
+                              bg-[#3e3d3d]
+                              rounded
+                              transition
+                              ease-in-out
+                              m-0
+                              text-sm
+                            "
+                            id="input"
+                            rows="6"
+                            placeholder="Add an optional description"
+                          ></textarea>
+                      </div>       
+                   </form>
+                </div>
+             </div>
+
+             <div className="flex justify-end">
+                <button class="bg-white text-black hover:bg-[#cbcaca] font-bold py-[10px] px-7 rounded-full">
+                  Save
+                </button>
+             </div>
+
+             <div className="text-white text-[10px] font-bold pt-2">
+                By proceeding, you agree to give Spotify access to the image you choose to upload. Please make sure you have the right to upload the image.
+             </div>
+
           </div>
        </div>
        )}
