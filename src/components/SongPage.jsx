@@ -8,6 +8,7 @@ import { BsThreeDots } from "react-icons/bs";
 import { useStateValue } from "../context/StateProvider";
 import { RiHeartFill, RiHeartLine } from "react-icons/ri";
 import { getSong } from "../api";
+import PopularTrack from "./PopularTrack";
 function SongPage() {
   const id = useParams().id;
   const [song, setSong] = React.useState(null);
@@ -87,6 +88,7 @@ function SongPage() {
               </div>
             </div>
           </div>
+          <PopularTrack artist={song.artist}></PopularTrack>
         </div>
       )}
     </div>

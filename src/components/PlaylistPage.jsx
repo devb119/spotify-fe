@@ -13,13 +13,21 @@ export function PlayListCover({ type, playlist = null, song = null }) {
         ></img>
         <div className="self-end ml-5">
           <div className="text-xs font-bold">{type}</div>
-          <div className="text-7xl font-bold mb-5 mt-2">
+
+          <div
+            className={
+              (playlist && playlist.title.length < 12) ||
+              (song && song.name.length < 12)
+                ? "text-7xl font-bold mb-5 mt-2"
+                : "text-4xl font-bold mb-5 mt-2"
+            }
+          >
             {playlist ? playlist.title : song.name}
           </div>
           <div className="text-xs font-bold">
             {playlist ? (
               <div className="flex flex-row items-center">
-                <Link className="hover:underline"> playlist.creator</Link>
+                <Link className="hover:underline"> {playlist.creator}</Link>
               </div>
             ) : (
               <div className="flex flex-row items-center">
