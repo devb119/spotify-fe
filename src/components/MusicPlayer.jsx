@@ -33,22 +33,22 @@ function MusicPlayer() {
         <img
           src={currentSong?.imageURL}
           alt=""
-          className="w-16 h-16 object-cover rounded-md"
+          className="w-16 h-16 object-cover rounded-sm"
         />
         <div className="flex items-start flex-col">
-          <p className="text-md text-headingColor font-semibold">{`${
+          <p className="text-xs text-headingColor font-semibold">{`${
             currentSong?.name.length > 30
               ? currentSong?.name.slice(0, 30)
               : currentSong?.name
           }`}</p>
           <p className="text-textColor">
             {currentSong?.artist.name}{" "}
-            <span className="text-sm text-textColor font-semibold">
+            <span className="text-xs text-textColor font-semibold">
               {`(${currentSong?.category})`}
             </span>
           </p>
           <motion.i whileTap={{ scale: 0.8 }} onClick={togglePlaylist}>
-            <RiPlayListFill className="text-textColor hover:text-headingColor text-xl cursor-pointer" />
+            <RiPlayListFill className="text-textColor hover:text-headingColor text-sm cursor-pointer" />
           </motion.i>
         </div>
 
@@ -120,7 +120,7 @@ export const PlaylistCard = () => {
   return (
     <div
       className="absolute left-4 bottom-24 gap-2 py-2 w-350 max-w-[350px] h-510 max-h-[510px]
-  flex flex-col overflow-y-scroll scrollbar-thin rounded-md shadow-md bg-primary"
+  flex flex-col overflow-y-scroll scrollbar-thin rounded-md shadow-md bg-primary text-sm"
     >
       {allSongs.length > 0 ? (
         allSongs.map((song, i) => (
@@ -128,13 +128,13 @@ export const PlaylistCard = () => {
             initial={{ opacity: 0, translateX: -50 }}
             animate={{ opacity: 1, translateX: 0 }}
             transition={{ duration: 0.3, delay: i * 0.1 }}
-            className="group w-full p-4 hover:bg-card flex gap-3 items-center cursor-pointer bg-transparent"
+            className="group w-2/3 p-2 hover:bg-card flex gap-3 items-center cursor-pointer bg-transparent"
             onClick={() => setCurrentSong(song)}
             key={song._id}
           >
             <IoMusicalNote className="text-textColor group-hover:text-headingColor text-2xl cursor-pointer" />
             <div className="flex items-start flex-col">
-              <p className="text-lg text-headingColor font-semibold">
+              <p className="text-xs text-headingColor font-semibold">
                 {song.name.length > 30
                   ? `${song.name.slice(0, 30)}...`
                   : song.name}{" "}

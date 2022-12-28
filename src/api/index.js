@@ -1,9 +1,6 @@
 import axios from "axios";
 
-
 const BASE_URL = "http://localhost:4000/api";
-
-
 
 export const validateUser = async (token) => {
   try {
@@ -48,10 +45,8 @@ export const getAllAlbums = async () => {
   }
 };
 
-
-
 export const searchSongByName = async (name) => {
-  try {   
+  try {
     const res = await axios.get(`${BASE_URL}/songs/search?name=${name}`);
     return res.data;
   } catch (error) {
@@ -92,6 +87,15 @@ export const getSongsByCategories = async (category) => {
     const res = await axios.get(
       `${BASE_URL}/songs/search?category=${category}`
     );
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+export const getSong = async (id) => {
+  try {
+    const res = await axios.get(`${BASE_URL}/songs/${id}`);
     return res.data;
   } catch (error) {
     console.log(error);

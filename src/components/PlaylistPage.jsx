@@ -1,26 +1,38 @@
-import { useParams } from "react-router-dom";
 import { BsThreeDots } from "react-icons/bs";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { HiOutlineClock } from "react-icons/hi";
-import { getAllSongs } from "../api";
-import { actionType } from "../context/reducer";
-import { useStateValue } from "../context/StateProvider";
 import SongRow from "./SongRow";
+import { Link } from "react-router-dom";
 export function PlayListCover({ type, playlist = null, song = null }) {
   return (
     <div className="p-6 px-8 bg-neutral-800">
       <div className="flex items-center text-white  ">
         <img
-          src={playlist ? playlist.img : song.img}
+          src={playlist ? playlist.imageURL : song.imageURL}
           className="w-60 h-60 shadow-large shardow-black"
         ></img>
         <div className="self-end ml-5">
           <div className="text-xs font-bold">{type}</div>
           <div className="text-7xl font-bold mb-5 mt-2">
-            {playlist ? playlist.title : song.title}
+            {playlist ? playlist.title : song.name}
           </div>
           <div className="text-xs font-bold">
-            {playlist ? playlist.creator : song.artist}
+            {playlist ? (
+              <div className="flex flex-row items-center">
+                <Link className="hover:underline"> playlist.creator</Link>
+              </div>
+            ) : (
+              <div className="flex flex-row items-center">
+                <img
+                  className="w-6 h-6 mr-1 rounded-full"
+                  src={song.artist[0].imageURL}
+                  alt="artist"
+                />
+                <Link className="hover:underline">
+                  {song.artist.map((e) => e.name).join(", ")}
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
