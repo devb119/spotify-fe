@@ -1,5 +1,9 @@
 export const initialState = {
   user: null,
   isSongPlaying: false,
-  songIndex: 0,
+  allSongs: null,
+  currentSong: null,
+  miniPlayer: false,
+  query: "",
+  searchType: "song",
 };

@@ -13,7 +13,7 @@ const listItems = [
   {
     title: "Home",
     icon: <MdHomeFilled className="text-2xl scale-125 " />,
-    route: "home",
+    route: "",
   },
   {
     title: "Search",
@@ -77,7 +77,7 @@ function Sidebar() {
           );
         })}
       </div>
-      <hr className="border-t-1 border-gray-700 m-2"></hr>
+      <hr className="border-t-1 border-neutral-700 mx-7 my-2"></hr>
       <div className="bg-black">
         {playlists.map((item, index) => {
           return (

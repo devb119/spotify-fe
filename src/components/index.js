@@ -13,3 +13,4 @@ export { default as DashboardAlbums } from "./DashboardAlbums";
 
 // CARD COMPONENTS
 export { default as MusicCard } from "./MusicCard";
+export { default as MusicPlayer } from "./MusicPlayer";

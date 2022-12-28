@@ -6,3 +6,260 @@
 body {
   font-family: "Montserrat", sans-serif;
 }
+
+.rhap_container {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.rhap_play-pause-button {
+  color: #ffffff !important;
+  transition: all 0.05s ease-in-out;
+}
+
+.rhap_play-pause-button:hover {
+  transform: scale(1.09);
+}
+
+.rhap_forward-button,
+.rhap_rewind-button,
+.rhap_skip-button,
+.rhap_volume-button,
+.rhap_repeat-button {
+  transition: all 0.05s ease-in-out;
+}
+
+.rhap_forward-button:hover,
+.rhap_rewind-button:hover,
+.rhap_skip-button:hover,
+.rhap_volume-button:hover,
+.rhap_repeat-button:hover {
+  color: #ffffff;
+}
+
+.rhap_progress-filled,
+.rhap_progress-indicator {
+  background-color: #ffffff !important;
+}
+
+.rhap_volume-indicator {
+  background: #ffffff !important;
+}
+
+.rhap_total-time,
+.rhap_current-time {
+  color: #c2c2c2 !important;
+  font-size: 14px !important;
+}
+
+.rhap_progress-indicator:hover,
+.rhap_volume-indicator:hover {
+  transform: scale(1.2);
+}
+
+.rhap_download-progress,
+.rhap_volume-bar {
+  background-color: #c2c2c2 !important;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #181818;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3c3c3c;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #5e5e5e;
+}
+
+.playlist-icon {
+  display: none;
+  justify-content: center;
+}
+
+.playlist-item:hover > .playlist-icon {
+  display: flex;
+}
+
+.dropdown-item {
+  padding: 9px;
+  cursor: pointer;
+  color: #ffffff;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+}
+
+.dropdown-item:hover{
+  opacity: 0.6;
+}
+
+select {
+  /* -webkit-appearance:none;
+  -moz-appearance:none;
+  -ms-appearance:none;
+  appearance:none; */
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  padding: 0.5em;
+  cursor: pointer;
+}
+.dot-flashing {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: rgb(78, 76, 76);
+  color: gray;
+  animation: dot-flashing 1s infinite linear alternate;
+  animation-delay: 0.5s;
+}
+.dot-flashing::before,
+.dot-flashing::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+.dot-flashing::before {
+  left: -15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: gray;
+  color: gray;
+  animation: dot-flashing 1s infinite alternate;
+  animation-delay: 0s;
+}
+.dot-flashing::after {
+  left: 15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: gray;
+  color: gray;
+  animation: dot-flashing 1s infinite alternate;
+  animation-delay: 1s;
+}
+
+@keyframes dot-flashing {
+  0% {
+    background-color: gray;
+  }
+  50%,
+  100% {
+    background-color: rgba(163, 163, 163, 0.2);
+  }
+}
+
+.equalizer {
+  width: 0.8rem;
+  height: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.equalizer .bar {
+  background-color: rgb(8, 165, 8);
+  width: 0.12rem;
+  height: 0;
+  border: none;
+}
+.equalizer .bar:nth-child(1) {
+  animation: bnce 0.4s 0.8s infinite alternate;
+}
+@keyframes bnce {
+  30% {
+    height: 0.8rem;
+    background-color: rgb(8, 165, 8);
+  }
+  60% {
+    height: 0.6rem;
+    background-color: rgb(8, 165, 8);
+  }
+  100% {
+    height: 0.2rem;
+    background-color: rgb(8, 165, 8);
+  }
+}
+.bar:nth-child(2) {
+  animation: bnce2 0.5s 0.5s infinite alternate;
+}
+@keyframes bnce2 {
+  20% {
+    height: 0.6rem;
+    background-color: rgb(8, 165, 8);
+  }
+  40% {
+    height: 0.4rem;
+    background-color: rgb(8, 165, 8);
+  }
+  100% {
+    height: 0.8rem;
+    background-color: rgb(8, 165, 8);
+  }
+}
+.bar:nth-child(3) {
+  animation: bnce3 0.8s 0.7s infinite alternate;
+}
+@keyframes bnce3 {
+  80% {
+    height: 0.8rem;
+  }
+  100% {
+    background-color: rgb(8, 165, 8);
+  }
+}
+.bar:nth-child(4) {
+  animation: bnce4 0.6s 0.7s infinite alternate;
+}
+@keyframes bnce4 {
+  70% {
+    height: 0.6rem;
+  }
+  100% {
+    background-color: rgb(8, 165, 8);
+  }
+}
+
+body.active-modal {
+  overflow-y: hidden;
+}
+
+.btn-modal {
+  padding: 10px 20px;
+  display: block;
+  margin: 100px auto 0;
+  font-size: 18px;
+}
+
+.modal, .overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}
+
+.overlay {
+  background-color: rgba(0,0,0,.7);
+}
+
+.modal-content {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  width: 524px;
+  height: auto;
+  transform: translate(-50%, -50%);
+  background-color: #282828;
+  padding: 26px 16px;
+  border-radius: 6px;
+  min-width: 300px;
+}
