@@ -110,7 +110,7 @@ function CollectionPlaylist() {
           </div>
         </div>
         {myPlaylist.map((item) => (
-          <PlaylistSquareCard item={item}></PlaylistSquareCard>
+          <PlaylistSquareCard item={item} key={item.id}></PlaylistSquareCard>
         ))}
       </div>
     </div>

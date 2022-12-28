@@ -86,10 +86,7 @@ function CreatePlaylist() {
         <hr className=" mt-10 mb-7 border-t-1 border-gray-600"></hr>
         <div>
           <form>
-            <label
-              for="default-search"
-              className="text-white text-xl font-bold"
-            >
+            <label for="default-search" class="text-white text-xl font-bold">
               Let's find something for your playlist
             </label>
             <div className="relative mt-5 w-[370px]">
