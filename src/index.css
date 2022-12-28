@@ -85,6 +85,18 @@ body {
   display: flex;
 }
 
+.dropdown-item {
+  padding: 9px;
+  cursor: pointer;
+  color: #ffffff;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+}
+
+.dropdown-item:hover{
+  opacity: 0.6;
+}
+
 select {
   /* -webkit-appearance:none;
   -moz-appearance:none;
@@ -212,4 +224,42 @@ select {
   100% {
     background-color: rgb(8, 165, 8);
   }
+}
+
+body.active-modal {
+  overflow-y: hidden;
+}
+
+.btn-modal {
+  padding: 10px 20px;
+  display: block;
+  margin: 100px auto 0;
+  font-size: 18px;
+}
+
+.modal, .overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}
+
+.overlay {
+  background-color: rgba(0,0,0,.7);
+}
+
+.modal-content {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  width: 524px;
+  height: auto;
+  transform: translate(-50%, -50%);
+  background-color: #282828;
+  padding: 26px 16px;
+  border-radius: 6px;
+  min-width: 300px;
 }

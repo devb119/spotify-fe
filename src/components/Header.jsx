@@ -12,7 +12,7 @@ function Header() {
   // eslint-disable-next-line no-unused-vars
   const [{ user, query, searchType }, dispatch] = useStateValue();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+  console.log(user.token);
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -41,7 +41,6 @@ function Header() {
     const { value } = e.target;
     dispatch({ type: actionType.SET_SEARCH_TYPE, searchType: value });
   }
-
 
   return (
     <header className="flex items-center w-full p-4 md:py-2 md:px-6">
@@ -165,14 +164,12 @@ function Header() {
               )}
 
               <hr />
-              <NavLink to="/userProfile">
-                <p
-                  className="text-base text-textColor hover:bg-slate-600 p-2 hover:text-headingColor rounded-lg duration-150 transition-all ease-in-out"
-                  onClick={logOut}
-                >
-                  Sign Out
-                </p>
-              </NavLink>
+              <p
+                className="text-base text-textColor hover:bg-slate-600 p-2 hover:text-headingColor rounded-lg duration-150 transition-all ease-in-out"
+                onClick={logOut}
+              >
+                Sign Out
+              </p>
             </div>
           </motion.div>
         )}

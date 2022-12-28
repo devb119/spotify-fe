@@ -8,8 +8,8 @@ import { useStateValue } from "../context/StateProvider";
 import SongRow from "./SongRow";
 export function PlayListCover({ type, playlist = null, song = null }) {
   return (
-    <div className="p-8 pt-0 bg-neutral-800">
-      <div className="flex items-center text-white ">
+    <div className="p-6 px-8 bg-neutral-800">
+      <div className="flex items-center text-white  ">
         <img
           src={playlist ? playlist.img : song.img}
           className="w-60 h-60 shadow-large shardow-black"
