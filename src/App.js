@@ -141,7 +141,7 @@ const App = () => {
               miniPlayer ? "bg-transparent" : "bg-cardOverlay backdrop-blur-md"
             } drop-shadow-2xl flex items-center justify-center`}
           >
-            <MusicPlayer />
+            <MusicPlayer className="z-50" />
           </motion.div>
         )}
       </div>
