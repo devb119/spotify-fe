@@ -78,23 +78,23 @@ function CreatePlaylist() {
               size={32}
               className="h-54 mr-10 text-gray-400 hover:text-white hover:cursor-pointer"
             ></BsThreeDots>
-            <button class="bg-white text-black hover:bg-[#cbcaca] font-bold py-3 px-6 rounded-full">
+            <button className="bg-white text-black hover:bg-[#cbcaca] font-bold py-3 px-6 rounded-full">
               Save
             </button>
          </div>
          <hr className=" mt-10 mb-7 border-t-1 border-gray-600"></hr>
          <div>
             <form>   
-                <label for="default-search" class="text-white text-xl font-bold">Let's find something for your playlist</label>
-                <div class="relative mt-5 w-[370px]">
-                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <label for="default-search" className="text-white text-xl font-bold">Let's find something for your playlist</label>
+                <div className="relative mt-5 w-[370px]">
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <FiSearch className="w-5 h-5 text-[#c1bcbc]"/>
                     </div>
                     <input 
                        autoFocus={true}
                        type="search" 
                        id="default-search" 
-                       class="block w-[370px] p-[8px] pl-10 text-sm text-[#c1bcbc] font-semibold outline-none border-none rounded-sm bg-[#2e2c2c]"
+                       className="block w-[370px] p-[8px] pl-10 text-sm text-[#c1bcbc] font-semibold outline-none border-none rounded-sm bg-[#2e2c2c]"
                        placeholder="Searchs for songs or episodes" 
                        required
                     />
@@ -152,18 +152,18 @@ function CreatePlaylist() {
 
                 <div>
                     <form>   
-                      <div class="w-[280px]">
+                      <div className="w-[280px]">
                           <input 
                              type="text" 
                              id="name" 
-                             class="block w-[280px] p-[8px] pl-4 text-sm text-[#c1bcbc] font-semibold border-none rounded-sm border-1 bg-[#3e3d3d]"
+                             className="block w-[280px] p-[8px] pl-4 text-sm text-[#c1bcbc] font-semibold border-none rounded-sm border-1 bg-[#3e3d3d]"
                              placeholder="My Playlist #1"  
                              required 
                           />
                       </div>   
-                      <div class="mb-3 w-[280px] pt-2">
+                      <div className="mb-3 w-[280px] pt-2">
                           <textarea
-                            class="
+                            className="
                               form-control
                               block
                               w-full
@@ -188,7 +188,7 @@ function CreatePlaylist() {
              </div>
 
              <div className="flex justify-end">
-                <button class="bg-white text-black hover:bg-[#cbcaca] font-bold py-[10px] px-7 rounded-full">
+                <button className="bg-white text-black hover:bg-[#cbcaca] font-bold py-[10px] px-7 rounded-full">
                   Save
                 </button>
              </div>
