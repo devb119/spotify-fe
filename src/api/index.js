@@ -1,9 +1,6 @@
 import axios from "axios";
 
-
 const BASE_URL = "http://localhost:4000/api";
-
-
 
 export const validateUser = async (token) => {
   try {
@@ -48,10 +45,8 @@ export const getAllAlbums = async () => {
   }
 };
 
-
-
 export const searchSongByName = async (name) => {
-  try {   
+  try {
     const res = await axios.get(`${BASE_URL}/songs/search?name=${name}`);
     return res.data;
   } catch (error) {
@@ -60,9 +55,15 @@ export const searchSongByName = async (name) => {
   }
 };
 
-export const getAllSongs = async () => {
+export const getAllSongs = async (name) => {
   try {
-    const res = await axios.get(`${BASE_URL}/songs`);
+    let queryString = "";
+    if (name) {
+      queryString = `${BASE_URL}/songs?name=${name}`;
+    } else {
+      queryString = `${BASE_URL}/songs`;
+    }
+    const res = await axios.get(queryString);
     return res.data;
   } catch (error) {
     console.log(error);
