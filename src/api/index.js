@@ -55,9 +55,15 @@ export const searchSongByName = async (name) => {
   }
 };
 
-export const getAllSongs = async () => {
+export const getAllSongs = async (name) => {
   try {
-    const res = await axios.get(`${BASE_URL}/songs`);
+    let queryString = "";
+    if (name) {
+      queryString = `${BASE_URL}/songs?name=${name}`;
+    } else {
+      queryString = `${BASE_URL}/songs`;
+    }
+    const res = await axios.get(queryString);
     return res.data;
   } catch (error) {
     console.log(error);

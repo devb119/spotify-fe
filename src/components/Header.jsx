@@ -12,7 +12,7 @@ function Header() {
   // eslint-disable-next-line no-unused-vars
   const [{ user, query, searchType }, dispatch] = useStateValue();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  console.log(user);
+  // console.log(user.token);
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -64,7 +64,7 @@ function Header() {
             onChange={handleInputOnchange}
           />
 
-          <div class="select absolute top-0 left-40 right-0 w-25 h-10 ml-40 bg-white rounded-r-full text-ellipsis text-[#635e5e] text-sm font-semibold outline-none  border-l-2 border-black-900">
+          <div className="select absolute top-0 left-40 right-0 w-25 h-10 ml-40 bg-white rounded-r-full text-ellipsis text-[#635e5e] text-sm font-semibold outline-none  border-l-2 border-black-900">
             <select
               name="format"
               id="format"
@@ -164,14 +164,12 @@ function Header() {
               )}
 
               <hr />
-              <NavLink to="/userProfile">
-                <p
-                  className="text-base text-textColor hover:bg-slate-600 p-2 hover:text-headingColor rounded-lg duration-150 transition-all ease-in-out"
-                  onClick={logOut}
-                >
-                  Sign Out
-                </p>
-              </NavLink>
+              <p
+                className="text-base text-textColor hover:bg-slate-600 p-2 hover:text-headingColor rounded-lg duration-150 transition-all ease-in-out"
+                onClick={logOut}
+              >
+                Sign Out
+              </p>
             </div>
           </motion.div>
         )}

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useStateValue } from "../context/StateProvider";
-import { getAllCategories, searchSongByName } from "../api";
+import { getAllSongs } from "../api";
 import { actionType } from "../context/reducer";
 import { useNavigate } from "react-router-dom";
 import { SongContainer } from "./HomeMusic";
-
 
 const listCard = [
   {
@@ -60,10 +59,9 @@ function Search() {
   // eslint-disable-next-line no-unused-vars
   const [{ query, searchType }, dispatch] = useStateValue();
   useEffect(() => {
-    getAllCategories().then((res) => {
-      setAllCategories(res.data);
-      //console.log(res.data);
-    });
+    // getAllCategories().then((res) => {
+    //   setAllCategories(res.data);
+    // });
 
     return () => {
       dispatch({ type: actionType.SET_QUERY, query: "" });
@@ -73,10 +71,9 @@ function Search() {
 
   useEffect(() => {
     if (query) {
-      searchSongByName(query).then((data) => setSongs(data.data));
+      getAllSongs(query).then((data) => setSongs(data.data));
     }
   }, [query]);
-  //console.log(allCategories);
   console.log(searchType);
   return (
     <div className="p-8 pt-0 mb-12 ">
