@@ -1,16 +1,24 @@
 import React from "react";
-import { useState } from "react";
 import DropDown from "./DropDown";
 import { BsMusicNoteBeamed } from "react-icons/bs";
 import { BsThreeDots } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 import { BiPencil } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
+import { useState, useEffect } from "react";
+import { getAllSongs } from "../api";
+
+import SongRowSearch from "./SongRowSearch";
+import { actionType } from "../context/reducer";
+import { useStateValue } from "../context/StateProvider";
 
 function CreatePlaylist() {
   const [isHover, setIsHover] = useState(false);
   const [modal, setModal] = useState(false);
   const [hoverIconModal, setHoverIconModal] = useState(false);
+ // const [query, setQuery] = useState("");
+  const [songs, setSongs] = useState([]);
+  const [{ query }, dispatch] = useStateValue();
 
   const toggleHover = () => {
     setIsHover(!isHover);
@@ -29,6 +37,23 @@ function CreatePlaylist() {
   } else {
     document.body.classList.remove("active-modal");
   }
+
+
+//  ghép api cho search
+  function handleInputOnchange(e) {
+    const { value } = e.target;
+    dispatch({ type: actionType.SET_QUERY, query: value });
+    //setQuery(value)
+  }
+
+  useEffect(() => {
+    if (query) {
+      getAllSongs(query).then((data) => setSongs(data.data));
+    }
+  }, [query]);
+  console.log(query);
+  console.log(songs)
+  
 
   return (
     <div>
@@ -86,7 +111,7 @@ function CreatePlaylist() {
         <hr className=" mt-10 mb-7 border-t-1 border-gray-600"></hr>
         <div>
           <form>
-            <label for="default-search" class="text-white text-xl font-bold">
+            <label htmlFor="default-search" className="text-white text-xl font-bold">
               Let's find something for your playlist
             </label>
             <div className="relative mt-5 w-[370px]">
@@ -100,10 +125,30 @@ function CreatePlaylist() {
                 className="block w-[370px] p-[8px] pl-10 text-sm text-[#c1bcbc] font-semibold outline-none border-none rounded-sm bg-[#2e2c2c]"
                 placeholder="Searchs for songs or episodes"
                 required
+                value={query}
+                onChange={handleInputOnchange}
               />
             </div>
           </form>
         </div>
+      </div>
+
+
+      <div className="p-8 pt-0 mb-12 ">
+          {query === "" ? (
+            <>
+            </>
+          ) : (
+            <div>
+               {songs.map((s, index) => (
+                  <SongRowSearch
+                    song={s}
+                    key={index}
+                  ></SongRowSearch>
+            ))}
+            </div>
+           
+          )}
       </div>
 
       {/* Tạo modal để chỉnh sửa thông tin playlist */}

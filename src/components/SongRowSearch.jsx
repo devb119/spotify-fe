@@ -2,11 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { BsFillPlayFill } from "react-icons/bs";
 import { BiPause } from "react-icons/bi";
-import { RiHeartFill, RiHeartLine } from "react-icons/ri";
 import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
 import Equalizer from "./Equalizer";
-function SongRow({ song, id, toggleLikeSong }) {
+
+function SongRowSearch({ song }) {
   const [isHovered, setIsHovered] = React.useState(false);
   const [{ isSongPlaying, currentSong }, dispatch] = useStateValue();
 
@@ -33,13 +33,11 @@ function SongRow({ song, id, toggleLikeSong }) {
         <div className="text-center items-center grid justify-center">
           {currentSong?._id !== song._id ? (
             <div>
-              {isHovered ? (
+              {isHovered && (
                 <BsFillPlayFill
                   className="text-2xl "
                   onClick={play}
                 ></BsFillPlayFill>
-              ) : (
-                <p className="text-base">{id}</p>
               )}
             </div>
           ) : (
@@ -80,28 +78,15 @@ function SongRow({ song, id, toggleLikeSong }) {
         </div>
       </div>
       <div className="col-span-3 text-left">{song.album}</div>
-      <div className="col-span-2 text-left">{song.dateAdded}</div>
-      <div className="col-span-1 text-center"> </div>
+      <div className="col-span-2 text-left"></div>
+      <div className="col-span-1 text-center"></div>
       <div className="col-span-1 text-center flex items-center">
-        {song.liked === true ? (
-          <RiHeartFill
-            className="fill-green-700 text-base m-2 mr-4 hover:cursor-pointer"
-            onClick={() => {
-              toggleLikeSong(song.id);
-            }}
-          ></RiHeartFill>
-        ) : (
-          <RiHeartLine
-            className="text-base m-2 hover:cursor-pointer mr-4"
-            onClick={() => {
-              toggleLikeSong(song.id);
-            }}
-          ></RiHeartLine>
-        )}
-        {song.time}
+          <button className="bg-transparent text-white border-[#e4e1e1] border-[0.5px] hover:border-2 font-bold py-2 px-4 rounded-full">
+            Add
+          </button>
       </div>
     </div>
   );
 }
 
-export default SongRow;
+export default SongRowSearch;
