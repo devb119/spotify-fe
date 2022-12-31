@@ -12,7 +12,7 @@ function Header() {
   // eslint-disable-next-line no-unused-vars
   const [{ user, query, searchType }, dispatch] = useStateValue();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // console.log(user.token);
+  console.log(user);
 
   const navigate = useNavigate();
   const { pathname } = useLocation();

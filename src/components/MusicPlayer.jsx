@@ -42,7 +42,10 @@ function MusicPlayer() {
               : currentSong?.name
           }`}</p>
           <p className="text-textColor">
-            {currentSong?.artist.name}{" "}
+            {currentSong?.artist.map((item) => {
+              //console.log(item.name)
+              return item.name;
+            }).join(", ")}{" "}
             <span className="text-xs text-textColor font-semibold">
               {`(${currentSong?.category})`}
             </span>
@@ -141,7 +144,10 @@ export const PlaylistCard = () => {
                 {/* <span className="text-base">{song.album}</span> */}
               </p>
               <p className="text-textColor">
-                {song.artist.name}{" "}
+                {song.artist.map((item) => {
+              //console.log(item.name)
+                  return item.name;
+            }).join(", ")}{" "}
                 <span className="text-sm text-textColor font-semibold">
                   ({song.category})
                 </span>
