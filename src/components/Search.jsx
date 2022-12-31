@@ -76,7 +76,7 @@ function Search() {
   }, [query]);
   console.log(searchType);
   return (
-    <div className="p-8 pt-0 mb-12 ">
+    <div className="p-8 pt-0 mb-12 h-screen">
       {query === "" ? (
         <>
           <div className="text-white text-xl font-bold">Browse all</div>

@@ -57,7 +57,7 @@ function Header() {
             id="search-input"
             autoFocus={true}
             className={
-              "h-10 max-w-full w-[22.75rem] py-1.5 px-12 mr-6 bg-white rounded-full text-ellipsis placeholder-black/50 text-black text-sm font-semibold outline-none"
+              "h-10 max-w-full w-[23rem] py-1.5 px-12 mr-6 bg-white rounded-full text-ellipsis placeholder-black/50 text-black text-sm font-semibold outline-none"
             }
             value={query}
             placeholder={"What do you want to listen to ?"}
@@ -69,7 +69,7 @@ function Header() {
               name="format"
               id="format"
               defaultValue={"DEFAULT"}
-              className="w-25 h-10 rounded-r-full "
+              className="w-25 h-10 rounded-r-full appearance-none "
               value={searchType}
               onChange={handleOptionOnchange}
             >
@@ -82,7 +82,7 @@ function Header() {
               </option>
               <option
                 value="songs"
-                className="text-[#796c6c] text-sm font-semibold"
+                className="text-[#796c6c] text-sm font-semibold p-3"
               >
                 Songs
               </option>
