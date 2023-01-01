@@ -26,7 +26,7 @@ function MusicCard2({ song = null, album = null }) {
         </div>
 
         <div className=" pl-4 text-md text-white font-semibold mb-2 flex items-center">
-            {song.title}
+           {song.title.length > 14 ? `${song.title.slice(0, 14)}...` : song.title}
         </div>
 
         <div
