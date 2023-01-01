@@ -9,9 +9,9 @@ import { useStateValue } from "./context/StateProvider";
 import { actionType } from "./context/reducer";
 import NotFound from "./components/NotFound";
 import Playlist from "./components/Playlist";
-import CategorySongs from "./components/CategorySongs";
 import SongPage from "./components/SongPage";
 import CreatePlaylist from "./components/CreatePlaylist";
+import SectionGenre from "./components/SectionGenre";
 const LazySearch = React.lazy(() => import("./components/Search"));
 // const LazyLibrary = React.lazy(() => import("./components/DashboardAlbums"));
 // const LazyHome = React.lazy(() => import("./components/DashboardHome"));
@@ -43,7 +43,7 @@ const App = () => {
         setAuth(true);
         window.localStorage.setItem("auth", "true");
         dispatch({ type: actionType.SET_USER, user: null });
-        //navigate("/login");
+        navigate("/login");
       }
     });
   }, [navigate, fireBaseAuth, dispatch]);
@@ -74,8 +74,8 @@ const App = () => {
               }
             />
             <Route
-              path="search/:category"
-              element={<CategorySongs></CategorySongs>}
+              path="sections/:id"
+              element={<SectionGenre></SectionGenre>}
             ></Route>
             <Route
               path=""

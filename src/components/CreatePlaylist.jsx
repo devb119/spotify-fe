@@ -16,7 +16,7 @@ function CreatePlaylist() {
   const [isHover, setIsHover] = useState(false);
   const [modal, setModal] = useState(false);
   const [hoverIconModal, setHoverIconModal] = useState(false);
- // const [query, setQuery] = useState("");
+  // const [query, setQuery] = useState("");
   const [songs, setSongs] = useState([]);
   const [{ query }, dispatch] = useStateValue();
 
@@ -38,8 +38,7 @@ function CreatePlaylist() {
     document.body.classList.remove("active-modal");
   }
 
-
-//  ghép api cho search
+  //  ghép api cho search
   function handleInputOnchange(e) {
     const { value } = e.target;
     dispatch({ type: actionType.SET_QUERY, query: value });
@@ -52,8 +51,7 @@ function CreatePlaylist() {
     }
   }, [query]);
   console.log(query);
-  console.log(songs)
-  
+  console.log(songs);
 
   return (
     <div>
@@ -102,16 +100,19 @@ function CreatePlaylist() {
         <div className="flex">
           <BsThreeDots
             size={32}
-            className="h-54 mr-10 text-gray-400 hover:text-white hover:cursor-pointer"
+            className="h-54 mr-10 text-textColor hover:text-white hover:cursor-pointer"
           ></BsThreeDots>
           <button className="bg-white text-black hover:bg-[#cbcaca] font-bold py-3 px-6 rounded-full">
             Save
           </button>
         </div>
-        <hr className=" mt-10 mb-7 border-t-1 border-gray-600"></hr>
+        <hr className=" mt-10 mb-7 border-t-1 border-neutral-600"></hr>
         <div>
           <form>
-            <label htmlFor="default-search" className="text-white text-xl font-bold">
+            <label
+              htmlFor="default-search"
+              className="text-white text-xl font-bold"
+            >
               Let's find something for your playlist
             </label>
             <div className="relative mt-5 w-[370px]">
@@ -122,7 +123,7 @@ function CreatePlaylist() {
                 autoFocus={true}
                 type="search"
                 id="default-search"
-                className="block w-[370px] p-[8px] pl-10 text-sm text-[#c1bcbc] font-semibold outline-none border-none rounded-sm bg-[#2e2c2c]"
+                className="block w-[370px] p-[8px] pl-10 text-sm text-textColor placeholder-neutral-500 font-semibold outline-none border-none rounded-sm bg-[#2e2c2c]"
                 placeholder="Searchs for songs or episodes"
                 required
                 value={query}
@@ -133,22 +134,16 @@ function CreatePlaylist() {
         </div>
       </div>
 
-
       <div className="p-8 pt-0 mb-12 ">
-          {query === "" ? (
-            <>
-            </>
-          ) : (
-            <div>
-               {songs.map((s, index) => (
-                  <SongRowSearch
-                    song={s}
-                    key={index}
-                  ></SongRowSearch>
+        {query === "" ? (
+          <></>
+        ) : (
+          <div>
+            {songs.map((s, index) => (
+              <SongRowSearch song={s} key={index}></SongRowSearch>
             ))}
-            </div>
-           
-          )}
+          </div>
+        )}
       </div>
 
       {/* Tạo modal để chỉnh sửa thông tin playlist */}

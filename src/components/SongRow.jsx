@@ -6,7 +6,7 @@ import { RiHeartFill, RiHeartLine } from "react-icons/ri";
 import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
 import Equalizer from "./Equalizer";
-function SongRow({ song, id, toggleLikeSong }) {
+function SongRow({ song, id, toggleLikeSong, type = 1 }) {
   const [isHovered, setIsHovered] = React.useState(false);
   const [{ isSongPlaying, currentSong }, dispatch] = useStateValue();
 
@@ -53,7 +53,11 @@ function SongRow({ song, id, toggleLikeSong }) {
           )}
         </div>
       </div>
-      <div className="col-span-4 text-left ">
+      <div
+        className={
+          type == 1 ? "col-span-4 text-left " : "col-span-6 text-left "
+        }
+      >
         <div className="flex items-center">
           <img className="w-10 h-10" src={song.imageURL} alt="song cover" />
           <div className="ml-4 flex flex-col">
@@ -67,20 +71,36 @@ function SongRow({ song, id, toggleLikeSong }) {
             >
               {song.name}
             </Link>
-            <Link
-              to="#"
-              className="hover:underline hover:text-white hover:cursor-pointer"
-            >
-              {song.artist.map((item) => {
-              //console.log(item.name)
-              return item.name;
-            }).join(", ")}
-            </Link>
+            {type == 1 && (
+              <Link
+                to="#"
+                className="hover:underline hover:text-white hover:cursor-pointer"
+              >
+                {song.artist
+                  .map((item) => {
+                    //console.log(item.name)
+                    return item.name;
+                  })
+                  .join(", ")}
+              </Link>
+            )}
           </div>
         </div>
       </div>
-      <div className="col-span-3 text-left">{song.album}</div>
-      <div className="col-span-2 text-left">{song.dateAdded}</div>
+      {type == 1 && (
+        <>
+          <div className="col-span-3 text-left">{song.album}</div>
+          <div className="col-span-2 text-left">{song.dateAdded}</div>{" "}
+        </>
+      )}
+      {type == 2 && (
+        <>
+          <div className="col-span-3 text-left">
+            {song.countListen.toLocaleString()}
+          </div>
+        </>
+      )}
+
       <div className="col-span-1 text-center"> </div>
       <div className="col-span-1 text-center flex items-center">
         {song.liked === true ? (
@@ -98,7 +118,10 @@ function SongRow({ song, id, toggleLikeSong }) {
             }}
           ></RiHeartLine>
         )}
-        {song.time}
+        <div>
+          <span>{Math.floor(song.duration / 60)}</span>:
+          <span>{song.duration - Math.floor(song.duration / 60) * 60}</span>
+        </div>
       </div>
     </div>
   );

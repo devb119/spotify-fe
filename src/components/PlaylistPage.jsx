@@ -73,7 +73,7 @@ function PlaylistPage({ playlist, setPlaylist }) {
 
             <BsThreeDots
               size={32}
-              className="h-54  text-gray-400 hover:text-white hover:cursor-pointer"
+              className="h-54  text-textColor hover:text-white hover:cursor-pointer"
             ></BsThreeDots>
           </span>
 

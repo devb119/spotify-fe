@@ -34,6 +34,15 @@ export const getAllArtists = async () => {
     return null;
   }
 };
+export const getArtist = async (id) => {
+  try {
+    const res = await axios.get(`${BASE_URL}/artists/${id}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
 
 export const getAllAlbums = async () => {
   try {
@@ -81,7 +90,7 @@ export const getLikedSongs = async () => {
 };
 export const getAllCategories = async () => {
   try {
-    const res = await axios.get(`${BASE_URL}/songs/categories`);
+    const res = await axios.get(`${BASE_URL}/genres`);
     return res.data;
   } catch (error) {
     console.log(error);
@@ -90,9 +99,7 @@ export const getAllCategories = async () => {
 };
 export const getSongsByCategories = async (category) => {
   try {
-    const res = await axios.get(
-      `${BASE_URL}/songs/search?category=${category}`
-    );
+    const res = await axios.get(`${BASE_URL}/sections?genre=${category}`);
     return res.data;
   } catch (error) {
     console.log(error);

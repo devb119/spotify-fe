@@ -3,7 +3,7 @@ import { GrPlayFill } from "react-icons/gr";
 import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
 import { useNavigate } from "react-router-dom";
-function MusicCard({ song }) {
+function MusicCard({ song = null, album = null }) {
   const navigate = useNavigate();
   const [showPlay, setShowPlay] = useState(false);
   const [{ isSongPlaying, currentSong }, dispatch] = useStateValue();
@@ -28,25 +28,35 @@ function MusicCard({ song }) {
     >
       <div
         onClick={() => {
-          navigate(`/songs/${song._id}`);
+          song
+            ? navigate(`/songs/${song._id}`)
+            : navigate(`/albums/${album._id}`);
         }}
       >
         <img
-          src={song.imageURL}
+          src={song ? song.imageURL : album.imageURL}
           alt="song cover"
           className="rounded-lg w-40 h-40 lg:h-48 lg:w-48 mb-3"
         />
-
-        <p className="text-md text-white font-semibold mb-2">
-          {song.name.length > 14 ? `${song.name.slice(0, 14)}...` : song.name}
-        </p>
+        {song ? (
+          <p className="text-md text-white font-semibold mb-2">
+            {song.name.length > 14 ? `${song.name.slice(0, 14)}...` : song.name}
+          </p>
+        ) : (
+          <p className="text-md text-white font-semibold mb-2">
+            {album.name.length > 14
+              ? `${album.name.slice(0, 14)}...`
+              : song.name}
+          </p>
+        )}
         <p className="text-sm text-textColor font-semibold">
-          {song.artist
-            .map((item) => {
-              //console.log(item.name)
-              return item.name;
-            })
-            .join(", ")}
+          {song &&
+            song.artist
+              .map((item) => {
+                //console.log(item.name)
+                return item.name;
+              })
+              .join(", ")}
         </p>
       </div>
       <div

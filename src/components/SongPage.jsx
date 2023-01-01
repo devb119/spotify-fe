@@ -8,7 +8,8 @@ import { BsThreeDots } from "react-icons/bs";
 import { useStateValue } from "../context/StateProvider";
 import { RiHeartFill, RiHeartLine } from "react-icons/ri";
 import { getSong } from "../api";
-import PopularTrack from "./PopularTrack";
+import PopularTrack from "./PopularSuggestion";
+import PopularSuggestion from "./PopularSuggestion";
 function SongPage() {
   const id = useParams().id;
   const [song, setSong] = React.useState(null);
@@ -53,7 +54,7 @@ function SongPage() {
               ></RiHeartFill>
             ) : (
               <RiHeartLine
-                className="text-4xl text-neutral-400 m-2 hover:cursor-pointer mr-4"
+                className="text-4xl text-textColor m-2 hover:cursor-pointer mr-4"
                 onClick={() => {
                   toggleLikeSong();
                 }}
@@ -61,16 +62,16 @@ function SongPage() {
             )}
             <BsThreeDots
               size={32}
-              className="h-54  text-neutral-400 hover:text-white hover:cursor-pointer"
+              className="h-54  text-textColor hover:text-white hover:cursor-pointer"
             ></BsThreeDots>
           </div>
-          <div className="px-8 text-neutral-400">
+          <div className="px-8 text-textColor">
             <h2 className="text-white text-xl font-bold">Lyrics</h2>
-            <p className="mt-6 text-sm font-semibold">
+            <div className="mt-6 text-sm font-semibold">
               {song.lyric.split("\n").map((e) => (
                 <div>{e}</div>
               ))}
-            </p>
+            </div>
             <div className=" hover:bg-neutral-700  my-4 rounded flex items-center">
               <img
                 className="w-24 h-24 p-2 rounded-full"
@@ -78,7 +79,7 @@ function SongPage() {
                 alt="artist"
               />
               <div className="flex flex-col m-2 text-white  ">
-                <p className="font-semibold text-xs">ARTIST</p>
+                <p className="font-semibold text-xs tracking-widest">ARTIST</p>
                 <Link
                   to=""
                   className="font-bold text-base mt-2 hover:underline"
@@ -88,7 +89,7 @@ function SongPage() {
               </div>
             </div>
           </div>
-          <PopularTrack artist={song.artist}></PopularTrack>
+          <PopularSuggestion artist={song.artist}></PopularSuggestion>
         </div>
       )}
     </div>

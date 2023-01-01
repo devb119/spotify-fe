@@ -14,6 +14,7 @@ export default function Home() {
         </div>
 
         <Outlet></Outlet>
+        <div className="h-16"></div>
       </div>
     </div>
   );
