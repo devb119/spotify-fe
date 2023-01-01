@@ -51,7 +51,7 @@ const playlists = [
 
 function Sidebar() {
   return (
-    <div className="font-bold text-xs bg-black w-72">
+    <div className="font-bold text-xs bg-black w-64 fixed h-full">
       <div className="bg-black h-16">
         <NavLink to="/" className="bg-black  w-full">
           <img src={Logo} alt="Logo" className="w-32 p-30 mt-6 ml-7" />

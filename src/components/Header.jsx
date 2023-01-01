@@ -43,67 +43,70 @@ function Header() {
   }
 
   return (
-    <header className="flex items-center w-full p-4 md:py-2 md:px-6">
-      {pathname === "/search" ? (
-        <div className="mr-auto ml-4 relative">
-          <label
-            htmlFor="search-input"
-            className="w-10 h-10 flex items-center justify-center absolute top-0 left-1 right-3 text-[#121212]"
-          >
-            <FiSearch className="text-2xl text-black cursor-text" />
-          </label>
-          <input
-            type={"text"}
-            id="search-input"
-            autoFocus={true}
-            className={
-              "h-10 max-w-full w-[23rem] py-1.5 px-12 mr-6 bg-white rounded-full text-ellipsis placeholder-black/50 text-black text-sm font-semibold outline-none"
-            }
-            value={query}
-            placeholder={"What do you want to listen to ?"}
-            onChange={handleInputOnchange}
-          />
-
-          <div className="select absolute top-0 left-40 right-0 w-25 h-10 ml-40 bg-white rounded-r-full text-ellipsis text-[#635e5e] text-sm font-semibold outline-none  border-l-2 border-black-900">
-            <select
-              name="format"
-              id="format"
-              defaultValue={"DEFAULT"}
-              className="w-25 h-10 rounded-r-full appearance-none "
-              value={searchType}
-              onChange={handleOptionOnchange}
+    <header className="flex items-center justify-between h-20 bg-black z-50 w-full p-4 md:py-2 md:px-6 fixed">
+      <div>
+        {" "}
+        {pathname === "/search" ? (
+          <div className="mr-auto ml-4 relative">
+            <label
+              htmlFor="search-input"
+              className="w-10 h-10 flex items-center justify-center absolute top-0 left-1 right-3 text-[#121212]"
             >
-              <option
-                value="DEFAULT"
-                disabled
-                className=" text-[#120d0d] text-sm font-semibold"
+              <FiSearch className="text-2xl text-black cursor-text" />
+            </label>
+            <input
+              type={"text"}
+              id="search-input"
+              autoFocus={true}
+              className={
+                "h-10 max-w-full w-[23rem] py-1.5 px-12 mr-6 bg-white rounded-full text-ellipsis placeholder-black/50 text-black text-sm font-semibold outline-none"
+              }
+              value={query}
+              placeholder={"What do you want to listen to ?"}
+              onChange={handleInputOnchange}
+            />
+
+            <div className="select absolute top-0 left-40 right-0 w-25 h-10 ml-40 bg-white rounded-r-full text-ellipsis text-[#635e5e] text-sm font-semibold outline-none  border-l-2 border-black-900">
+              <select
+                name="format"
+                id="format"
+                defaultValue={"DEFAULT"}
+                className="w-25 h-10 rounded-r-full appearance-none "
+                value={searchType}
+                onChange={handleOptionOnchange}
               >
-                Choose option
-              </option>
-              <option
-                value="songs"
-                className="text-[#796c6c] text-sm font-semibold p-3"
-              >
-                Songs
-              </option>
-              <option
-                value="artists"
-                className="text-[#796c6c] text-sm font-semibold"
-              >
-                Artists
-              </option>
-              <option
-                value="albums"
-                className="text-[#796c6c] text-sm font-semibold"
-              >
-                Albums
-              </option>
-            </select>
+                <option
+                  value="DEFAULT"
+                  disabled
+                  className=" text-[#120d0d] text-sm font-semibold"
+                >
+                  Choose option
+                </option>
+                <option
+                  value="songs"
+                  className="text-[#796c6c] text-sm font-semibold p-3"
+                >
+                  Songs
+                </option>
+                <option
+                  value="artists"
+                  className="text-[#796c6c] text-sm font-semibold"
+                >
+                  Artists
+                </option>
+                <option
+                  value="albums"
+                  className="text-[#796c6c] text-sm font-semibold"
+                >
+                  Albums
+                </option>
+              </select>
+            </div>
           </div>
-        </div>
-      ) : (
-        ""
-      )}
+        ) : (
+          ""
+        )}
+      </div>
       {!pathname.includes("/collection/tracks") &&
       pathname.includes("/collection/") ? (
         <div className="text-white"> nav bar</div>
@@ -112,7 +115,7 @@ function Header() {
       )}
 
       <div
-        className="flex items-center ml-auto cursor-pointer gap-2 relative"
+        className="flex items-center mr-72 cursor-pointer gap-2 relative"
         onMouseEnter={() => setIsMenuOpen(true)}
         onMouseLeave={() => setIsMenuOpen(false)}
       >
@@ -139,16 +142,16 @@ function Header() {
             exit={{ opacity: 0, y: 50, zIndex: 10 }}
           >
             <div
-              className="absolute top-11 right-0 w-275 gap-1 bg-card 
-        shadow-lg rounded-lg backdrop-blur-sm flex flex-col p-1"
+              className="absolute top-11 text-xs font-semibold right-0 w-225 gap-1 bg-card 
+        shadow-lg rounded-sm backdrop-blur-sm flex flex-col p-1"
             >
               <NavLink to="/userProfile">
-                <p className="text-base text-textColor hover:bg-slate-600 p-2 hover:text-headingColor rounded-lg duration-150 transition-all ease-in-out">
+                <p className=" text-textColor hover:bg-neutral-700 p-2 hover:text-headingColor rounded-sm duration-150 transition-all ease-in-out">
                   Profile
                 </p>
               </NavLink>
               <NavLink to="/userProfile">
-                <p className="text-base text-textColor hover:bg-slate-600 p-2 hover:text-headingColor rounded-lg duration-150 transition-all ease-in-out">
+                <p className=" text-textColor hover:bg-neutral-700 p-2 hover:text-headingColor rounded-sm duration-150 transition-all ease-in-out">
                   My Favourites
                 </p>
               </NavLink>
@@ -156,16 +159,17 @@ function Header() {
                 <>
                   <hr />
                   <NavLink to="/dashboard/home">
-                    <p className="text-base text-textColor hover:bg-slate-600 p-2 hover:text-headingColor rounded-lg duration-150 transition-all ease-in-out">
+                    <p className=" text-textColor hover:bg-neutral-700 p-2 hover:text-headingColor rounded-sm duration-150 transition-all ease-in-out">
                       Dashboard
                     </p>
                   </NavLink>
                 </>
               )}
 
-              <hr />
+              <hr className="border-t-1 border-neutral-700 "></hr>
+
               <p
-                className="text-base text-textColor hover:bg-slate-600 p-2 hover:text-headingColor rounded-lg duration-150 transition-all ease-in-out"
+                className=" text-textColor hover:bg-neutral-700 p-2 hover:text-headingColor rounded-sm duration-150 transition-all ease-in-out"
                 onClick={logOut}
               >
                 Sign Out

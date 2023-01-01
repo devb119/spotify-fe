@@ -8,12 +8,12 @@ export default function Home() {
   return (
     <div className="flex flex-horizontal h-full w-full flex-grow">
       <Sidebar />
-      <div className="w-full">
-        <div className="h-20">
-          <Header />
-        </div>
+      <div className="ml-64 w-full ">
+        <Header />
 
-        <Outlet></Outlet>
+        <div className="mt-28">
+          <Outlet></Outlet>
+        </div>
         <div className="h-16"></div>
       </div>
     </div>
