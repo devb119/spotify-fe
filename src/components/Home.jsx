@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Outlet } from "react-router-dom";
+import Footer from "./Footer";
 
 import Header from "./Header";
 import Sidebar from "./Sidebar";
@@ -15,6 +16,7 @@ export default function Home() {
           <Outlet></Outlet>
         </div>
         <div className="h-16"></div>
+        <Footer/>
       </div>
     </div>
   );
