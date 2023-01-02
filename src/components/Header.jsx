@@ -7,6 +7,7 @@ import { app } from "../config/firebase.config";
 import { getAuth } from "firebase/auth";
 import { motion } from "framer-motion";
 import { actionType } from "../context/reducer";
+import SideBarLibrary from "./SideBarLibrary";
 
 function Header() {
   // eslint-disable-next-line no-unused-vars
@@ -109,7 +110,9 @@ function Header() {
       </div>
       {!pathname.includes("/collection/tracks") &&
       pathname.includes("/collection/") ? (
-        <div className="text-white"> nav bar</div>
+        <div className="text-white relative flex items-center"> 
+           <SideBarLibrary/>
+        </div>
       ) : (
         ""
       )}

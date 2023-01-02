@@ -109,6 +109,18 @@ const App = () => {
                   </React.Suspense>
                 }
               />
+               {/* <Route
+                path="/collection/playlists/podcasts"
+                element={
+                  <React.Suspense
+                    fallback={
+                      <div className="items-center m-auto">Loading...</div>
+                    }
+                  >
+                    <LazyCollectionPlaylist></LazyCollectionPlaylist>
+                  </React.Suspense>
+                }
+              /> */}
               <Route
                 path="/collection/tracks"
                 element={

@@ -4,6 +4,13 @@ export const isActiveStyles =
 export const isNotActiveStyles =
   "text-lg mx-5 text-textColor font-semibold hover:text-headingColor duration-100 transition-all ease-in-out";
 
+export const isActiveStyles2 =
+  "text-lg mx-3 text-headingColor font-semibold bg-[#2a2a2a] duration-100 transition-all ease-in-out";
+
+export const isNotActiveStyles2 =
+  "text-lg mx-3 text-headingColor font-semibold duration-100 transition-all ease-in-out";
+
+
 export const bgColors = [
   "#e9e2ff",
   "#fae2ff",
