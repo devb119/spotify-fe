@@ -60,7 +60,7 @@ function MusicCard({ song = null, album = null }) {
         </p>
       </div>
       <div
-        className={`h-12 w-12 bg-green-500 flex z-2 justify-center z-50 items-center rounded-full absolute right-7 top-1/2 ${
+        className={`h-12 w-12 bg-green-500 flex z-2 justify-center z-40 items-center rounded-full absolute right-7 top-1/2 ${
           showPlay ? "opacity-100 -translate-y-3" : "opacity-0"
         } transition-all duration-200`}
       >
