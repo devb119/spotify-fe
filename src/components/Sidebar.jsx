@@ -1,4 +1,3 @@
-import React from "react";
 import { isActiveStyles, isNotActiveStyles } from "../utils/styles";
 import { NavLink } from "react-router-dom";
 import { Logo } from "../assets/img";
@@ -8,6 +7,10 @@ import { FiSearch } from "react-icons/fi";
 import { BsPlusSquareFill, BsArrowDownCircle } from "react-icons/bs";
 import { FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useStateValue } from "../context/StateProvider";
+import { useEffect, useState } from "react";
+import { getMyPlaylists } from "../api";
+import { useMemo } from "react";
 
 const listItems = [
   {
@@ -38,18 +41,26 @@ const listItems = [
     route: "collection/tracks",
   },
 ];
-const playlists = [
-  {
-    title: "My Playlist #1",
-    route: "playlists/1",
-  },
-  {
-    title: "My Playlist #2",
-    route: "playlists/2",
-  },
-];
 
 function Sidebar() {
+  const [{ user }] = useStateValue();
+  const [playlists, setPlaylists] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const token = useMemo(() => {
+    if (user) return user.token;
+    else return null;
+  }, [user]);
+
+  useEffect(() => {
+    if (token) {
+      setIsLoading(true);
+      getMyPlaylists(token)
+        .then((data) => setPlaylists(data.data))
+        .finally(() => setIsLoading(false));
+    }
+  }, [token]);
+
   return (
     <div className="font-bold text-xs bg-black w-64 fixed h-full">
       <div className="bg-black h-16">
@@ -79,21 +90,22 @@ function Sidebar() {
       </div>
       <hr className="border-t-1 border-neutral-700 mx-7 my-2"></hr>
       <div className="bg-black">
-        {playlists.map((item, index) => {
-          return (
-            <NavLink
-              to={item.route}
-              key={index}
-              className={({ isActive }) =>
-                isActive
-                  ? `ml-2 p-2 flex flex-horizontal ${isActiveStyles}`
-                  : `ml-2 p-2 flex flex-horizontal ${isNotActiveStyles}`
-              }
-            >
-              <p className="ml-4 text-xs">{item.title}</p>
-            </NavLink>
-          );
-        })}
+        {!isLoading &&
+          playlists.map((item) => {
+            return (
+              <NavLink
+                to={`playlists/${item._id}`}
+                key={item._id}
+                className={({ isActive }) =>
+                  isActive
+                    ? `ml-2 p-2 flex flex-horizontal ${isActiveStyles}`
+                    : `ml-2 p-2 flex flex-horizontal ${isNotActiveStyles}`
+                }
+              >
+                <p className="ml-4 text-xs">{item.name}</p>
+              </NavLink>
+            );
+          })}
         <Link
           to="#"
           className="text-textColor hover:text-white flex items-center gap-2 
