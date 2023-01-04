@@ -79,6 +79,15 @@ export const getAllSongs = async (name) => {
     return null;
   }
 };
+export const getSong = async (id) => {
+  try {
+    const res = await axios.get(`${BASE_URL}/songs/${id}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
 export const getLikedSongs = async (token) => {
   try {
     const res = await axios.get(`${BASE_URL}/users/likedSongs`, {
@@ -90,6 +99,8 @@ export const getLikedSongs = async (token) => {
     return null;
   }
 };
+
+////////////////////////////////////////////////////////////////
 export const getAllCategories = async () => {
   try {
     const res = await axios.get(`${BASE_URL}/genres`);
@@ -99,7 +110,7 @@ export const getAllCategories = async () => {
     return null;
   }
 };
-export const getSongsByCategories = async (category) => {
+export const getSectionsByCategories = async (category) => {
   try {
     const res = await axios.get(`${BASE_URL}/sections?genre=${category}`);
     return res.data;
@@ -108,9 +119,10 @@ export const getSongsByCategories = async (category) => {
     return null;
   }
 };
-export const getSong = async (id) => {
+
+export const getSongsBySections = async (sectionId) => {
   try {
-    const res = await axios.get(`${BASE_URL}/songs/${id}`);
+    const res = await axios.get(`${BASE_URL}/songs/sections/${sectionId}`);
     return res.data;
   } catch (error) {
     console.log(error);

@@ -89,7 +89,7 @@ function Search() {
                 return (
                   <div
                     onClick={() => {
-                      navigate(`/sections/${item._id}`);
+                      navigate(`/genres/${item._id}`);
                     }}
                     key={item._id}
                     className={`${
@@ -115,7 +115,9 @@ function Search() {
           )}
         </>
       ) : (
-        <SongContainer songs={songs} title="Result" />
+        <div className="h-screen">
+          <SongContainer songs={songs} title="Result" />
+        </div>
       )}
     </div>
   );

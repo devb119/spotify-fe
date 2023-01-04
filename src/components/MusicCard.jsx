@@ -22,7 +22,7 @@ function MusicCard({ song = null, album = null }) {
   //console.log(song)
   return (
     <div
-      className="relative p-4 w-44 h-auto rounded-lg shadow-md bg-cardBg lg:w-52 hover:bg-cardBgLight transition-all duration-200 cursor-pointer "
+      className="relative p-4 w-48 h-auto rounded-lg shadow-md bg-cardBg lg:w-52 hover:bg-cardBgLight transition-all duration-200 cursor-pointer "
       onMouseEnter={showIcon}
       onMouseLeave={hideIcon}
     >

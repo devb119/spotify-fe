@@ -12,6 +12,7 @@ import Playlist from "./components/Playlist";
 import SongPage from "./components/SongPage";
 import CreatePlaylist from "./components/CreatePlaylist";
 import SectionGenre from "./components/SectionGenre";
+import SongSection from "./components/SongSection";
 const LazySearch = React.lazy(() => import("./components/Search"));
 // const LazyLibrary = React.lazy(() => import("./components/DashboardAlbums"));
 // const LazyHome = React.lazy(() => import("./components/DashboardHome"));
@@ -43,7 +44,7 @@ const App = () => {
         setAuth(true);
         window.localStorage.setItem("auth", "true");
         dispatch({ type: actionType.SET_USER, user: null });
-        navigate("/login");
+        //  navigate("/login");
       }
     });
   }, [navigate, fireBaseAuth, dispatch]);
@@ -73,8 +74,9 @@ const App = () => {
                 </React.Suspense>
               }
             />
+
             <Route
-              path="sections/:id"
+              path="genres/:id"
               element={<SectionGenre></SectionGenre>}
             ></Route>
             <Route
@@ -89,6 +91,10 @@ const App = () => {
                 </React.Suspense>
               }
             />
+            <Route
+              path="songs/sections/:id"
+              element={<SongSection></SongSection>}
+            ></Route>
             <Route
               path="/collection"
               element={
@@ -109,7 +115,7 @@ const App = () => {
                   </React.Suspense>
                 }
               />
-               {/* <Route
+              {/* <Route
                 path="/collection/playlists/podcasts"
                 element={
                   <React.Suspense
