@@ -113,9 +113,10 @@ function Header() {
         ""
       )}
 
-      {!pathname.includes("/collection") && pathname !== "/search" && (
+      {(!pathname.includes("/collection") && pathname !== "/search") ||
+      pathname === "/collection/tracks" ? (
         <div></div>
-      )}
+      ) : null}
       <div
         className="flex items-center mr-72 cursor-pointer gap-2 relative"
         onMouseEnter={() => setIsMenuOpen(true)}

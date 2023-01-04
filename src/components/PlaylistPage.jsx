@@ -1,8 +1,70 @@
+import React from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { HiOutlineClock } from "react-icons/hi";
+import { FiSearch } from "react-icons/fi";
+import { BsDot } from "react-icons/bs";
 import SongRow from "./SongRow";
 import { Link } from "react-router-dom";
+import { actionType } from "../context/reducer";
+import { useStateValue } from "../context/StateProvider";
+import SongRowSearch from "./SongRowSearch";
+function Search({ query, handleInputOnchange, songs }) {
+  return (
+    <>
+      {/* Làm phần search */}
+      <div className="p-8">
+        <div className="flex">
+          <BsThreeDots
+            size={32}
+            className="h-54 mr-10 text-textColor hover:text-white hover:cursor-pointer"
+          ></BsThreeDots>
+          <button className="bg-white text-black hover:bg-[#cbcaca] font-bold py-3 px-6 rounded-full">
+            Save
+          </button>
+        </div>
+        <hr className=" mt-10 mb-7 border-t-1 border-neutral-600"></hr>
+        <div>
+          <form>
+            <label
+              htmlFor="default-search"
+              className="text-white text-xl font-bold"
+            >
+              Let's find something for your playlist
+            </label>
+            <div className="relative mt-5 w-[370px]">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <FiSearch className="w-5 h-5 text-[#c1bcbc]" />
+              </div>
+              <input
+                autoFocus={true}
+                type="search"
+                id="default-search"
+                className="block w-[370px] p-[8px] pl-10 text-sm text-textColor placeholder-neutral-500 font-semibold outline-none border-none rounded-sm bg-[#2e2c2c]"
+                placeholder="Searchs for songs or episodes"
+                required
+                value={query}
+                onChange={handleInputOnchange}
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div className="p-8 pt-0 mb-12 ">
+        {query === "" ? (
+          <></>
+        ) : (
+          <div>
+            {songs.map((s, index) => (
+              <SongRowSearch song={s} key={index}></SongRowSearch>
+            ))}
+          </div>
+        )}
+      </div>
+    </>
+  );
+}
 export function PlayListCover({ type, playlist = null, song = null }) {
   return (
     <div className="p-6 px-8 bg-neutral-800">
@@ -27,8 +89,12 @@ export function PlayListCover({ type, playlist = null, song = null }) {
           </div>
           <div className="text-xs font-bold">
             {playlist ? (
-              <div className="flex flex-row items-center">
+              <div className="flex flex-row  gap-1 items-center">
                 <Link className="hover:underline"> {playlist.creator}</Link>
+                <BsDot className="text-xl"></BsDot>
+                <p className="font-bold text-xs">
+                  {playlist.songs.length} songs
+                </p>
               </div>
             ) : (
               <div className="flex flex-row items-center">
@@ -49,6 +115,12 @@ export function PlayListCover({ type, playlist = null, song = null }) {
   );
 }
 function PlaylistPage({ playlist, setPlaylist }) {
+  const [{ user, query }, dispatch] = useStateValue();
+  function handleInputOnchange(e) {
+    const { value } = e.target;
+    dispatch({ type: actionType.SET_QUERY, query: value });
+    //setQuery(value)
+  }
   const toggleLikeSong = (id) => {
     setPlaylist({
       ...playlist,

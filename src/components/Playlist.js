@@ -6,9 +6,70 @@ import { getAllSongs } from "../api";
 import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
 import SongRow from "./SongRow";
+import { FiSearch } from "react-icons/fi";
+
+import { PlayListCover } from "./PlaylistPage";
+import SongRowSearch from "./SongRowSearch";
+function Search({ query, handleInputOnchange, songs }) {
+  return (
+    <>
+      {/* Làm phần search */}
+      <div className="p-8">
+        <div className="flex">
+          <BsThreeDots
+            size={32}
+            className="h-54 mr-10 text-textColor hover:text-white hover:cursor-pointer"
+          ></BsThreeDots>
+          <button className="bg-white text-black hover:bg-[#cbcaca] font-bold py-3 px-6 rounded-full">
+            Save
+          </button>
+        </div>
+        <hr className=" mt-10 mb-7 border-t-1 border-neutral-600"></hr>
+        <div>
+          <form>
+            <label
+              htmlFor="default-search"
+              className="text-white text-xl font-bold"
+            >
+              Let's find something for your playlist
+            </label>
+            <div className="relative mt-5 w-[370px]">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <FiSearch className="w-5 h-5 text-[#c1bcbc]" />
+              </div>
+              <input
+                autoFocus={true}
+                type="search"
+                id="default-search"
+                className="block w-[370px] p-[8px] pl-10 text-sm text-textColor placeholder-neutral-500 font-semibold outline-none border-none rounded-sm bg-[#2e2c2c]"
+                placeholder="Searchs for songs or episodes"
+                required
+                value={query}
+                onChange={handleInputOnchange}
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div className="p-8 pt-0 mb-12 ">
+        {query === "" ? (
+          <></>
+        ) : (
+          <div>
+            {songs.map((s, index) => (
+              <SongRowSearch song={s} key={index}></SongRowSearch>
+            ))}
+          </div>
+        )}
+      </div>
+    </>
+  );
+}
 function Playlist() {
   // const params = useParams();
-  const [{ allSongs }, dispatch] = useStateValue();
+  const [songs, setSongs] = React.useState([]);
+  const [{ allSongs, user, query }, dispatch] = useStateValue();
   useEffect(() => {
     getAllSongs().then((songData) => {
       dispatch({ type: actionType.SET_ALL_SONGS, allSongs: songData.data });
@@ -17,12 +78,21 @@ function Playlist() {
   const [playlist, setPlaylist] = React.useState({
     img: "https://cdn.123job.vn/123job/uploads/2021/08/28/2021_08_28______428064e6cc43653e50c675ee334a1c60.jpg",
     title: "Morning Playlist",
-    creator: "Nguyen Hao",
+    creator: user.data.name,
     songs: allSongs,
   });
+  useEffect(() => {
+    if (query) {
+      getAllSongs(query).then((data) => setSongs(data.data));
+    }
+  }, [query]);
   //todo
   //playlist=fetchPlaylist(id)
-
+  function handleInputOnchange(e) {
+    const { value } = e.target;
+    dispatch({ type: actionType.SET_QUERY, query: value });
+    //setQuery(value)
+  }
   const toggleLikeSong = (id) => {
     setPlaylist({
       ...playlist,
@@ -33,20 +103,7 @@ function Playlist() {
   };
   return (
     <div>
-      <div className="p-8 pt-0 bg-gradient-to-b from-[#690818] to-[#290505]">
-        <div className="flex items-center text-white ">
-          <img
-            src={playlist.img}
-            className="w-60 h-60 shadow-large shardow-black"
-            alt=""
-          />
-          <div className="self-end ml-5">
-            <div className="text-xs font-bold">PLAYLIST</div>
-            <div className="text-7xl font-bold mb-5 mt-2">{playlist.title}</div>
-            <div className="text-xs font-bold">{playlist.creator}</div>
-          </div>
-        </div>
-      </div>
+      <PlayListCover playlist={playlist} type="PLAYLIST"></PlayListCover>
       <div className="p-8">
         <div>
           <span className="flex mb-12 items-center">
@@ -96,6 +153,11 @@ function Playlist() {
           )}
         </div>
       </div>
+      <Search
+        handleInputOnchange={handleInputOnchange}
+        query={query}
+        songs={songs}
+      ></Search>
     </div>
   );
 }

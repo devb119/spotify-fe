@@ -15,7 +15,6 @@ export default function Home() {
         <div className="mt-28">
           <Outlet></Outlet>
         </div>
-        <div className="h-16"></div>
         <Footer />
       </div>
     </div>
