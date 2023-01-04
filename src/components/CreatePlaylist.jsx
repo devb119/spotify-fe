@@ -16,10 +16,10 @@ function CreatePlaylist() {
   const [isHover, setIsHover] = useState(false);
   const [modal, setModal] = useState(false);
   const [hoverIconModal, setHoverIconModal] = useState(false);
-  
+
   // const [query, setQuery] = useState("");
   const [songs, setSongs] = useState([]);
-  const [{ query }, dispatch] = useStateValue();
+  const [{ user, query }, dispatch] = useStateValue();
 
   const toggleHover = () => {
     setIsHover(!isHover);
@@ -90,7 +90,7 @@ function CreatePlaylist() {
               My Playlist #1
             </div>
             <div className="text-xs font-bold cursor-pointer hover:underline">
-              By Duc Pham
+              By {user.data.name}
             </div>
           </div>
         </div>

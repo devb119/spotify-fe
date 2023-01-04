@@ -41,9 +41,31 @@ const App = () => {
         });
         // If the token is expired, immediately redirect to login page
       } else {
+        dispatch({
+          type: actionType.SET_USER,
+          user: {
+            data: {
+              _id: "6367da53f36d4f01dd4aefb2",
+              name: "Đức Anh Nguyễn",
+              email: "ducanh11092001@gmail.com",
+              imageURL:
+                "https://lh3.googleusercontent.com/a/ALm5wu2vSZScN5x9hq5XLhDcvLM7KF-HX4LiBhpqaX1DrQ=s96-c",
+              userId: "yUMocIXEsjRFpalpflzaLpNgHd73",
+              emailVerified: true,
+              role: "admin",
+              authTime: "1672840090",
+              createdAt: "2022-11-06T16:01:23.938Z",
+              updatedAt: "2023-01-04T15:51:03.826Z",
+              __v: 0,
+              likedSongs: ["636f4e6523edd55d9eb1d3b0"],
+            },
+            token:
+              "eyJhbGciOiJSUzI1NiIsImtpZCI6ImNlOWI4ODBmODE4MmRkYTU1N2Y3YzcwZTIwZTRlMzcwZTNkMTI3NDciLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoixJDhu6ljIEFuaCBOZ3V54buFbiIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BTG01d3UydlNaU2NONXg5aHE1WExoRGN2TE03S0YtSFg0TGlCaHBxYVgxRHJRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3Nwb3RpZnktYXBwLWIzOGU0IiwiYXVkIjoic3BvdGlmeS1hcHAtYjM4ZTQiLCJhdXRoX3RpbWUiOjE2NzI4NDAwOTAsInVzZXJfaWQiOiJ5VU1vY0lYRXNqUkZwYWxwZmx6YUxwTmdIZDczIiwic3ViIjoieVVNb2NJWEVzalJGcGFscGZsemFMcE5nSGQ3MyIsImlhdCI6MTY3Mjg1MTE4MywiZXhwIjoxNjcyODU0NzgzLCJlbWFpbCI6ImR1Y2FuaDExMDkyMDAxQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7Imdvb2dsZS5jb20iOlsiMTA2NDUzNzM1Mjc5NTAxNzMwMjM1Il0sImVtYWlsIjpbImR1Y2FuaDExMDkyMDAxQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.L8evBCiHm29jxS5yp1aSfsCKVecaFnCYBzpnGKCC57fhFjsfaLJb_4pQEWdmht1s6xJTlztyqRxMlIn5VQ0k2Ds3hRla64GunZB1o2bfZ-proL2sukuzK2-m7K8zfb9pyVvc9JsyazAcBaDMfbeRxUrN9WQ9IUUAXvCisy71G3BM4leLklO2Ly-qWPuYdxcG8xuk3pZy8il4z2KeIMp8G50NTjfetS78vFg-gHOEr7iCCQ8MPM1z9pDWaS7TfYfFPsmKcGohRxRa7KJpGpcbQNyAwN_NoFmLUf-CzH6JrC_Wkrva3pfGOKBvsKAdRiB1KVr-R5xMOp_RNXih3MoAAQ",
+          },
+        });
         setAuth(true);
         window.localStorage.setItem("auth", "true");
-        dispatch({ type: actionType.SET_USER, user: null });
+        // dispatch({ type: actionType.SET_USER, user: null });
         //  navigate("/login");
       }
     });

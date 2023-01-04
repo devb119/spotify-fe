@@ -56,7 +56,10 @@ function Sidebar() {
     if (token) {
       setIsLoading(true);
       getMyPlaylists(token)
-        .then((data) => setPlaylists(data.data))
+        .then((data) => {
+          console.log(data);
+          setPlaylists(data.data);
+        })
         .finally(() => setIsLoading(false));
     }
   }, [token]);
