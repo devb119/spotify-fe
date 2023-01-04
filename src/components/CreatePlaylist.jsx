@@ -6,11 +6,12 @@ import { FiSearch } from "react-icons/fi";
 import { BiPencil } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
 import { useState, useEffect } from "react";
-import { getAllSongs } from "../api";
+import { createPlaylist, getAllSongs, getMyPlaylists } from "../api";
 
 import SongRowSearch from "./SongRowSearch";
 import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
+import { useNavigate } from "react-router-dom";
 
 function CreatePlaylist() {
   const [isHover, setIsHover] = useState(false);
@@ -18,7 +19,9 @@ function CreatePlaylist() {
   const [hoverIconModal, setHoverIconModal] = useState(false);
   // const [query, setQuery] = useState("");
   const [songs, setSongs] = useState([]);
-  const [{ query }, dispatch] = useStateValue();
+  const [{ query, user }, dispatch] = useStateValue();
+
+  const navigate = useNavigate();
 
   const toggleHover = () => {
     setIsHover(!isHover);
@@ -45,13 +48,27 @@ function CreatePlaylist() {
     //setQuery(value)
   }
 
+  const handleSavePlaylist = async (e) => {
+    e.preventDefault();
+    const name = e.target.form[0].value;
+    const description = e.target.form[1].value;
+    const newPlaylist = await createPlaylist(name, description, [], user.token);
+    getMyPlaylists(user.token)
+      .then((data) => {
+        dispatch({ type: actionType.SET_PLAYLISTS, playlists: data.data });
+      })
+      .finally(() =>
+        navigate(`/playlists/${newPlaylist.data._id}`, { replace: true })
+      );
+  };
+
   useEffect(() => {
     if (query) {
-      getAllSongs(query).then((data) => setSongs(data.data));
+      getAllSongs(query).then((data) => {
+        setSongs(data.data);
+      });
     }
   }, [query]);
-  console.log(query);
-  console.log(songs);
 
   return (
     <div>
@@ -102,36 +119,34 @@ function CreatePlaylist() {
             size={32}
             className="h-54 mr-10 text-textColor hover:text-white hover:cursor-pointer"
           ></BsThreeDots>
-          <button className="bg-white text-black hover:bg-[#cbcaca] font-bold py-3 px-6 rounded-full">
-            Save
-          </button>
         </div>
-        <hr className=" mt-10 mb-7 border-t-1 border-neutral-600"></hr>
-        <div>
-          <form>
-            <label
-              htmlFor="default-search"
-              className="text-white text-xl font-bold"
-            >
-              Let's find something for your playlist
-            </label>
-            <div className="relative mt-5 w-[370px]">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <FiSearch className="w-5 h-5 text-[#c1bcbc]" />
+
+        {/* <div>
+            <hr className=" mt-10 mb-7 border-t-1 border-neutral-600"></hr>
+            <form>
+              <label
+                htmlFor="default-search"
+                className="text-white text-xl font-bold"
+              >
+                Let's find something for your playlist
+              </label>
+              <div className="relative mt-5 w-[370px]">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                  <FiSearch className="w-5 h-5 text-[#c1bcbc]" />
+                </div>
+                <input
+                  autoFocus={true}
+                  type="search"
+                  id="default-search"
+                  className="block w-[370px] p-[8px] pl-10 text-sm text-textColor placeholder-neutral-500 font-semibold outline-none border-none rounded-sm bg-[#2e2c2c]"
+                  placeholder="Searchs for songs or episodes"
+                  required
+                  value={query}
+                  onChange={handleInputOnchange}
+                />
               </div>
-              <input
-                autoFocus={true}
-                type="search"
-                id="default-search"
-                className="block w-[370px] p-[8px] pl-10 text-sm text-textColor placeholder-neutral-500 font-semibold outline-none border-none rounded-sm bg-[#2e2c2c]"
-                placeholder="Searchs for songs or episodes"
-                required
-                value={query}
-                onChange={handleInputOnchange}
-              />
-            </div>
-          </form>
-        </div>
+            </form>
+          </div> */}
       </div>
 
       <div className="p-8 pt-0 mb-12 ">
@@ -148,7 +163,7 @@ function CreatePlaylist() {
 
       {/* Tạo modal để chỉnh sửa thông tin playlist */}
       {modal && (
-        <div className="modal">
+        <form className="modal">
           <div className="overlay" onClick={toggleModal}></div>
           <div className="modal-content">
             <div className="flex pb-5">
@@ -191,19 +206,17 @@ function CreatePlaylist() {
               </div>
 
               <div>
-                <form>
-                  <div className="w-[280px]">
-                    <input
-                      type="text"
-                      id="name"
-                      className="block w-[280px] p-[8px] pl-4 text-sm text-[#c1bcbc] font-semibold border-none rounded-sm border-1 bg-[#3e3d3d]"
-                      placeholder="My Playlist #1"
-                      required
-                    />
-                  </div>
-                  <div className="mb-3 w-[280px] pt-2">
-                    <textarea
-                      className="
+                <input
+                  type="text"
+                  id="name"
+                  name="playlist"
+                  className="block w-[280px] p-[8px] pl-4 text-sm text-[#c1bcbc] font-semibold border-none rounded-sm border-1 bg-[#3e3d3d]"
+                  placeholder="My Playlist #1"
+                  required
+                />
+                <div className="mb-3 w-[280px] pt-2">
+                  <textarea
+                    className="
                               form-control
                               block
                               w-full
@@ -218,17 +231,21 @@ function CreatePlaylist() {
                               m-0
                               text-sm
                             "
-                      id="input"
-                      rows="6"
-                      placeholder="Add an optional description"
-                    ></textarea>
-                  </div>
-                </form>
+                    id="input"
+                    name="description"
+                    rows="6"
+                    placeholder="Add an optional description"
+                  ></textarea>
+                </div>
               </div>
             </div>
 
             <div className="flex justify-end">
-              <button className="bg-white text-black hover:bg-[#cbcaca] font-bold py-[10px] px-7 rounded-full">
+              <button
+                className="bg-white text-black hover:bg-[#cbcaca] font-bold py-[10px] px-7 rounded-full"
+                type="button"
+                onClick={handleSavePlaylist}
+              >
                 Save
               </button>
             </div>
@@ -239,7 +256,7 @@ function CreatePlaylist() {
               the image.
             </div>
           </div>
-        </div>
+        </form>
       )}
     </div>
   );

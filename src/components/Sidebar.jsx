@@ -11,6 +11,7 @@ import { useStateValue } from "../context/StateProvider";
 import { useEffect, useState } from "react";
 import { getMyPlaylists } from "../api";
 import { useMemo } from "react";
+import { actionType } from "../context/reducer";
 
 const listItems = [
   {
@@ -43,8 +44,7 @@ const listItems = [
 ];
 
 function Sidebar() {
-  const [{ user }] = useStateValue();
-  const [playlists, setPlaylists] = useState([]);
+  const [{ user, playlists }, dispatch] = useStateValue();
   const [isLoading, setIsLoading] = useState(true);
 
   const token = useMemo(() => {
@@ -56,10 +56,12 @@ function Sidebar() {
     if (token) {
       setIsLoading(true);
       getMyPlaylists(token)
-        .then((data) => setPlaylists(data.data))
+        .then((data) =>
+          dispatch({ type: actionType.SET_PLAYLISTS, playlists: data.data })
+        )
         .finally(() => setIsLoading(false));
     }
-  }, [token]);
+  }, [dispatch, token]);
 
   return (
     <div className="font-bold text-xs bg-black w-64 fixed h-full">
