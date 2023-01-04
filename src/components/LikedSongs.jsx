@@ -9,7 +9,7 @@ function LikedSongs() {
   const [playlist, setPlaylist] = React.useState({
     img: "https://cdn.123job.vn/123job/uploads/2021/08/28/2021_08_28______428064e6cc43653e50c675ee334a1c60.jpg",
     title: "Liked Songs",
-    creator: "Nguyen Hao",
+    creator: user.data.name,
     songs: [],
   });
   useEffect(() => {

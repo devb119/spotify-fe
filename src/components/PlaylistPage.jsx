@@ -1,6 +1,7 @@
 import { BsThreeDots } from "react-icons/bs";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { HiOutlineClock } from "react-icons/hi";
+import { BsDot} from "react-icons/bs"
 import SongRow from "./SongRow";
 import { Link } from "react-router-dom";
 export function PlayListCover({ type, playlist = null, song = null }) {
@@ -27,8 +28,10 @@ export function PlayListCover({ type, playlist = null, song = null }) {
           </div>
           <div className="text-xs font-bold">
             {playlist ? (
-              <div className="flex flex-row items-center">
+              <div className="flex flex-row  gap-1 items-center">
                 <Link className="hover:underline"> {playlist.creator}</Link>
+                <BsDot className="text-xl"></BsDot>
+                <p className="font-bold text-xs">{playlist.songs.length} songs</p>
               </div>
             ) : (
               <div className="flex flex-row items-center">

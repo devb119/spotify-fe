@@ -16,6 +16,7 @@ function CreatePlaylist() {
   const [isHover, setIsHover] = useState(false);
   const [modal, setModal] = useState(false);
   const [hoverIconModal, setHoverIconModal] = useState(false);
+  
   // const [query, setQuery] = useState("");
   const [songs, setSongs] = useState([]);
   const [{ query }, dispatch] = useStateValue();
