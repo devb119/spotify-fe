@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { BsThreeDots } from "react-icons/bs";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { HiOutlineClock } from "react-icons/hi";
@@ -40,7 +39,8 @@ function Playlist() {
           <img
             src={playlist.img}
             className="w-60 h-60 shadow-large shardow-black"
-          ></img>
+            alt=""
+          />
           <div className="self-end ml-5">
             <div className="text-xs font-bold">PLAYLIST</div>
             <div className="text-7xl font-bold mb-5 mt-2">{playlist.title}</div>
@@ -89,8 +89,8 @@ function Playlist() {
                     song={s}
                     id={index + 1}
                     toggleLikeSong={toggleLikeSong}
-                    key={index}
-                  ></SongRow>
+                    key={s._id}
+                  />
                 ))}
               </div>
             </div>

@@ -101,8 +101,8 @@ function PlaylistPage({ playlist, setPlaylist }) {
                     song={s}
                     id={index + 1}
                     toggleLikeSong={toggleLikeSong}
-                    key={index}
-                  ></SongRow>
+                    key={s._id}
+                  />
                 ))}
               </div>
             </div>
