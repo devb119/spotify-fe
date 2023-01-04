@@ -89,8 +89,8 @@ function SongRow({ song, id, toggleLikeSong, type = 1 }) {
       </div>
       {type == 1 && (
         <>
-          <div className="col-span-3 text-left">{song.album}</div>
-          <div className="col-span-2 text-left">{song.dateAdded}</div>{" "}
+          <div className="col-span-3 text-left">{song.album?.name}</div>
+          <div className="col-span-2 text-left">{song.updatedAt}</div>{" "}
         </>
       )}
       {type == 2 && (
