@@ -79,9 +79,11 @@ export const getAllSongs = async (name) => {
     return null;
   }
 };
-export const getLikedSongs = async () => {
+export const getLikedSongs = async (token) => {
   try {
-    const res = await axios.get(`${BASE_URL}/user/likedSongs`);
+    const res = await axios.get(`${BASE_URL}/users/likedSongs`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     return res.data;
   } catch (error) {
     console.log(error);
@@ -113,5 +115,33 @@ export const getSong = async (id) => {
   } catch (error) {
     console.log(error);
     return null;
+  }
+};
+
+//////////////////////////////// PLAYLIST API //////////////////////////////////
+export const getMyPlaylists = async (token) => {
+  try {
+    const res = await axios.get(`${BASE_URL}/playlists/me`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const createPlaylist = async (
+  name = `Playlist ${Date.now()}`,
+  description = "",
+  songs = [],
+  token
+) => {
+  try {
+    const data = { name, description, songs };
+    const res = await axios.post(`${BASE_URL}/playlists/me`, data, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return res.data;
+  } catch (error) {
+    console.log(error);
   }
 };
