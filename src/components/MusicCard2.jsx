@@ -9,7 +9,7 @@ function MusicCard2({ song = null, album = null }) {
 
   return (
     <div
-      className="relative w-[395px] h-auto rounded-[4px] shadow-md bg-[#2a2a2a] hover:bg-cardBgLight transition-all duration-200 cursor-pointer flex "
+      className="relative w-[320px] h-auto rounded-[4px] lg:w-[390px] shadow-md bg-[#2a2a2a] hover:bg-cardBgLight transition-all duration-200 cursor-pointer flex "
       onMouseEnter={showIcon}
       onMouseLeave={hideIcon}
     >

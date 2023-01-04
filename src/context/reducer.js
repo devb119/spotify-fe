@@ -8,7 +8,7 @@ export const actionType = {
   SET_MINI_PLAYER: "SET_MINI_PLAYER",
   SET_ALL_CATEGORIES: "SET_ALL_CATEGORIES",
   SET_QUERY: "SET_QUERY",
-  SET_SEARCH_TYPE: "SET_SEARCH_TYPE",
+  // SET_SEARCH_TYPE: "SET_SEARCH_TYPE",
 };
 
 const reducer = (state, action) => {
@@ -38,8 +38,8 @@ const reducer = (state, action) => {
       return { ...state, currentSong: action.currentSong };
     case actionType.SET_QUERY:
       return { ...state, query: action.query };
-    case actionType.SET_SEARCH_TYPE:
-      return { ...state, searchType: action.searchType };
+    // case actionType.SET_SEARCH_TYPE:
+    //   return { ...state, searchType: action.searchType };
     default:
       return state;
   }

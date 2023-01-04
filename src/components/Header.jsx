@@ -38,10 +38,10 @@ function Header() {
     dispatch({ type: actionType.SET_QUERY, query: value });
   }
 
-  function handleOptionOnchange(e) {
-    const { value } = e.target;
-    dispatch({ type: actionType.SET_SEARCH_TYPE, searchType: value });
-  }
+  // function handleOptionOnchange(e) {
+  //   const { value } = e.target;
+  //   dispatch({ type: actionType.SET_SEARCH_TYPE, searchType: value });
+  // }
 
   return (
     <header className="flex items-center justify-between h-20 bg-black z-50 w-full p-4 md:py-2 md:px-6 fixed">
@@ -67,7 +67,7 @@ function Header() {
               onChange={handleInputOnchange}
             />
 
-            <div className="select absolute top-0 left-40 right-0 w-25 h-10 ml-40 bg-white rounded-r-full text-ellipsis text-[#635e5e] text-sm font-semibold outline-none  border-l-2 border-black-900">
+            {/* <div className="select absolute top-0 left-40 right-0 w-25 h-10 ml-40 bg-white rounded-r-full text-ellipsis text-[#635e5e] text-sm font-semibold outline-none  border-l-2 border-black-900">
               <select
                 name="format"
                 id="format"
@@ -102,7 +102,7 @@ function Header() {
                   Albums
                 </option>
               </select>
-            </div>
+            </div> */}
           </div>
         ) : (
           ""
