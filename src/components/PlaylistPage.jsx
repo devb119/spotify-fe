@@ -10,7 +10,8 @@ export function PlayListCover({ type, playlist = null, song = null }) {
         <img
           src={playlist ? playlist.imageURL : song.imageURL}
           className="w-60 h-60 shadow-large shardow-black"
-        ></img>
+          alt=""
+        />
         <div className="self-end ml-5">
           <div className="text-xs font-bold">{type}</div>
 
