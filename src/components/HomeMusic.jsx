@@ -41,7 +41,7 @@ const myPlaylist = [
 export const SongContainer = ({ title, songs }) => (
   <div className="mb-8">
     <p className="mb-4 font-bold text-white text-xl">{title}</p>
-    <div className="flex items-center gap-6 flex-wrap">
+    <div className="flex items-center gap-8 flex-wrap">
       {songs.map((song) => (
         <MusicCard key={song._id} song={song} />
       ))}
@@ -52,7 +52,7 @@ export const SongContainer = ({ title, songs }) => (
 export const SongContainer2 = ({ title, songs }) => (
   <div className="mb-16">
     <p className="mb-4 font-bold text-white text-2xl">{title}</p>
-    <div className="flex items-center gap-6 flex-wrap">
+    <div className="flex items-center gap-4 flex-wrap">
       {songs.map((song) => (
         <MusicCard2 key={song.id} song={song} />
       ))}

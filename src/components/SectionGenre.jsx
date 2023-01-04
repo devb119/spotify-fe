@@ -1,11 +1,52 @@
 import React from "react";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { getSongsByCategories } from "../api";
+import { useNavigate, useParams } from "react-router-dom";
+import { getSectionsByCategories, getSongsBySections } from "../api";
 import DotFlashing from "./DotFlashing";
+import MusicCard from "./MusicCard";
 
-function Section({ sectionId }) {
-  return <div> Section</div>;
+function Section({ section }) {
+  const [songs, setSongs] = React.useState(null);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const navigate = useNavigate();
+  useEffect(() => {
+    setIsLoading(true);
+    console.log(section._id);
+    getSongsBySections(section._id)
+      .then((data) => {
+        console.log(data);
+        setSongs(data.data);
+      })
+      .finally(() => setIsLoading(false));
+  }, []);
+  return (
+    <div className="text-white">
+      {isLoading ? (
+        <DotFlashing />
+      ) : (
+        <>
+          <div className="flex justify-between">
+            <h2 className="font-bold text-2xl hover:underline">
+              {section.name}
+            </h2>
+            {songs.length > 4 && (
+              <p
+                onClick={() => navigate(`/songs/sections/${section._id}`)}
+                className="font-semibold text-xs hover:underline tracking-widest text-textColor hover:text-white"
+              >
+                SHOW ALL
+              </p>
+            )}
+          </div>
+          <div className="my-4 flex flex-row gap-6">
+            {songs.slice(0, 4).map((e) => (
+              <MusicCard song={e}></MusicCard>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
 }
 
 function SectionGenre() {
@@ -15,7 +56,7 @@ function SectionGenre() {
   const [loading, setLoading] = React.useState(true);
   useEffect(() => {
     setLoading(true);
-    getSongsByCategories(params.id)
+    getSectionsByCategories(params.id)
       .then((data) => {
         console.log(data);
         setSections(data.data);
@@ -32,9 +73,9 @@ function SectionGenre() {
             </h1>
           </div>
 
-          <div className="flex flex-wrap gap-6">
+          <div className="">
             {sections.map((s) => (
-              <Section sectionId={s._id}></Section>
+              <Section section={s}></Section>
             ))}
           </div>
         </div>

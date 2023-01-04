@@ -17,38 +17,37 @@ const listCard = [
     color: "bg-cardColor3",
   },
   {
-    color: "bg-cardColor1",
-  },
-  {
-    color: "bg-cardColor2",
-  },
-  {
-    color: "bg-cardColor3",
-  },
-  {
-    color: "bg-cardColor1",
-  },
-
-  {
-    color: "bg-cardColor2",
-  },
-  {
-    color: "bg-cardColor3",
-  },
-  {
     color: "bg-cardColor4",
   },
   {
-    color: "bg-cardColor2",
+    color: "bg-cardColor5",
   },
   {
-    color: "bg-cardColor2",
+    color: "bg-cardColor6",
   },
   {
-    color: "bg-cardColor1",
+    color: "bg-cardColor7",
   },
   {
-    color: "bg-cardColor4",
+    color: "bg-cardColor8",
+  },
+  {
+    color: "bg-cardColor9",
+  },
+  {
+    color: "bg-cardColor10",
+  },
+  {
+    color: "bg-cardColor11",
+  },
+  {
+    color: "bg-cardColor12",
+  },
+  {
+    color: "bg-cardColor13",
+  },
+  {
+    color: "bg-cardColor14",
   },
 ];
 
@@ -69,7 +68,7 @@ function Search() {
       .finally(() => setIsLoading(false));
     return () => {
       dispatch({ type: actionType.SET_QUERY, query: "" });
-      dispatch({ type: actionType.SET_SEARCH_TYPE, searchType: "songs" });
+      //dispatch({ type: actionType.SET_SEARCH_TYPE, searchType: "songs" });
     };
   }, [dispatch]);
 
@@ -80,7 +79,7 @@ function Search() {
   }, [query]);
   // console.log(searchType);
   return (
-    <div className="p-8 pt-0 mb-12 h-screen">
+    <div className="p-8 pt-0 mb-12 h-full">
       {query === "" ? (
         <>
           <div className="text-white text-xl font-bold">Browse all</div>
@@ -90,7 +89,7 @@ function Search() {
                 return (
                   <div
                     onClick={() => {
-                      navigate(`/sections/${item._id}`);
+                      navigate(`/genres/${item._id}`);
                     }}
                     key={item._id}
                     className={`${
@@ -116,7 +115,9 @@ function Search() {
           )}
         </>
       ) : (
-        <SongContainer songs={songs} title="Result" />
+        <div className="h-screen">
+          <SongContainer songs={songs} title="Result" />
+        </div>
       )}
     </div>
   );

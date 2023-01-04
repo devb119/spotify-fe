@@ -22,7 +22,7 @@ function MusicCard({ song = null, album = null }) {
   //console.log(song)
   return (
     <div
-      className="relative p-4 w-48 h-auto rounded-lg shadow-md bg-cardBg lg:w-56 hover:bg-cardBgLight transition-all duration-200 cursor-pointer "
+      className="relative p-4 w-48 h-auto rounded-lg shadow-md bg-cardBg lg:w-52 hover:bg-cardBgLight transition-all duration-200 cursor-pointer "
       onMouseEnter={showIcon}
       onMouseLeave={hideIcon}
     >
@@ -36,7 +36,7 @@ function MusicCard({ song = null, album = null }) {
         <img
           src={song ? song.imageURL : album.imageURL}
           alt="song cover"
-          className="rounded-lg w-40 h-40 lg:h-48 lg:w-48 mb-3"
+          className="rounded-lg w-38 h-38 lg:h-44 lg:w-44 mb-3"
         />
         {song ? (
           <p className="text-md text-white font-semibold mb-2">
