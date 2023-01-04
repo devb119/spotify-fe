@@ -2,6 +2,7 @@ export const actionType = {
   SET_USER: "SET_USER",
   SET_ALL_SONGS: "SET_ALL_SONGS",
   SET_LIKED_SONGS: "SET_LIKED_SONGS",
+  SET_PLAYLISTS: "SET_PLAYLISTS",
 
   SET_IS_SONG_PLAYING: "SET_IS_SONG_PLAYING",
   SET_CURRENT_SONG: "SET_CURRENT_SONG",
@@ -40,6 +41,8 @@ const reducer = (state, action) => {
       return { ...state, query: action.query };
     case actionType.SET_SEARCH_TYPE:
       return { ...state, searchType: action.searchType };
+    case actionType.SET_PLAYLISTS:
+      return { ...state, playlists: action.playlists };
     default:
       return state;
   }
