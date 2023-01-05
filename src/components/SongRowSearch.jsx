@@ -69,21 +69,23 @@ function SongRowSearch({ song }) {
               to="#"
               className="hover:underline hover:text-white hover:cursor-pointer"
             >
-              {song.artist.map((item) => {
-              //console.log(item.name)
-              return item.name;
-            }).join(", ")}
+              {song.artist
+                .map((item) => {
+                  //console.log(item.name)
+                  return item.name;
+                })
+                .join(", ")}
             </Link>
           </div>
         </div>
       </div>
-      <div className="col-span-3 text-left">{song.album}</div>
+      <div className="col-span-3 text-left">{song.album.name}</div>
       <div className="col-span-2 text-left"></div>
       <div className="col-span-1 text-center"></div>
       <div className="col-span-1 text-center flex items-center">
-          <button className="bg-transparent text-white border-[#e4e1e1] border-[0.5px] hover:border-2 font-bold py-2 px-4 rounded-full">
-            Add
-          </button>
+        <button className="bg-transparent text-white border-[#e4e1e1] border-[0.5px] hover:border-2 font-bold py-2 px-4 rounded-full">
+          Add
+        </button>
       </div>
     </div>
   );
