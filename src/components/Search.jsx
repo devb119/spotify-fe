@@ -115,7 +115,7 @@ function Search() {
           )}
         </>
       ) : (
-        <div className="h-screen">
+        <div>
           <SongContainer songs={songs} title="Result" />
         </div>
       )}
