@@ -19,3 +19,7 @@ export const bgColors = [
   "#e2f4ff",
   "#ffffe2",
 ];
+
+ export const valueDropDown1 = ["Change photo", "Remove photo"]
+
+ export const valueDropDown2 = ["Edit info", "Delete"]

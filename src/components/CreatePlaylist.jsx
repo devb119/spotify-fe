@@ -7,16 +7,20 @@ import { BiPencil } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
 import { useState, useEffect } from "react";
 import { createPlaylist, getAllSongs, getMyPlaylists } from "../api";
-
+import { valueDropDown1 , valueDropDown2 } from "../utils/styles";
 import SongRowSearch from "./SongRowSearch";
 import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
 import { useNavigate } from "react-router-dom";
 
+
+
 function CreatePlaylist() {
   const [isHover, setIsHover] = useState(false);
   const [modal, setModal] = useState(false);
   const [hoverIconModal, setHoverIconModal] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const [isActive2, setIsActive2] = useState(false);
 
   // const [query, setQuery] = useState("");
   const [songs, setSongs] = useState([]);
@@ -26,6 +30,14 @@ function CreatePlaylist() {
 
   const toggleHover = () => {
     setIsHover(!isHover);
+  };
+
+  const toggleDropDown = () => {
+    setIsActive(!isActive);
+  };
+
+  const toggleDropDown2 = () => {
+    setIsActive2(!isActive2);
   };
 
   const toggleModal = () => {
@@ -115,11 +127,16 @@ function CreatePlaylist() {
 
       {/* Làm phần search */}
       <div className="p-8">
-        <div className="flex">
-          <BsThreeDots
+        <div className="flex relative">
+          {/* <BsThreeDots
             size={32}
             className="h-54 mr-10 text-textColor hover:text-white hover:cursor-pointer"
-          ></BsThreeDots>
+          ></BsThreeDots> */}
+          <DropDown
+             setIsActive={toggleDropDown2}
+             isActive = {isActive2}
+             options = {valueDropDown2}
+          />
         </div>
 
         {/* <div>
@@ -185,7 +202,14 @@ function CreatePlaylist() {
               >
                 {hoverIconModal && (
                   <div className="absolute right-[5%] top-[4%]">
-                    <DropDown />
+                    <div className="h-8 w-8 bg-[#212121] rounded-full flex justify-center relative cursor-pointer">
+                      <DropDown  
+                        setIsActive={toggleDropDown}
+                        isActive = {isActive}
+                        options = {valueDropDown1}
+                        type = {1}
+                      />
+                    </div>
                   </div>
                 )}
 
