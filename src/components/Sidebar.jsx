@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { getMyPlaylists } from "../api";
 import { useMemo } from "react";
 import { actionType } from "../context/reducer";
+import DotFlashing from "./DotFlashing";
 
 const listItems = [
   {
@@ -92,7 +93,11 @@ function Sidebar() {
       </div>
       <hr className="border-t-1 border-neutral-700 mx-7 my-2"></hr>
       <div className="bg-black">
-        {!isLoading &&
+        {isLoading ? (
+          <div className="flex justify-center items-center mt-3">
+            <DotFlashing />
+          </div>
+        ) : (
           playlists.map((item) => {
             return (
               <NavLink
@@ -107,7 +112,8 @@ function Sidebar() {
                 <p className="ml-4 text-xs">{item.name}</p>
               </NavLink>
             );
-          })}
+          })
+        )}
         <Link
           to="#"
           className="text-textColor hover:text-white flex items-center gap-2 
