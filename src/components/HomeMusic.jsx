@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
-import { getAllSongs } from "../api";
-import { actionType } from "../context/reducer";
-import { useStateValue } from "../context/StateProvider";
+import { getAllSongs, getHomeSections } from "../api";
+// import { actionType } from "../context/reducer";
+// import { useStateValue } from "../context/StateProvider";
+import DotFlashing from "./DotFlashing";
 import MusicCard from "./MusicCard";
 import MusicCard2 from "./MusicCard2";
+import { useNavigate, useParams } from "react-router-dom";
 
 const myPlaylist = [
   {
@@ -61,20 +63,50 @@ export const SongContainer2 = ({ title, songs }) => (
 );
 
 function HomeMusic() {
-  const [{ allSongs }, dispatch] = useStateValue();
+  const [sections, setSections] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const navigate = useNavigate();
   useEffect(() => {
-    getAllSongs().then((songData) => {
-      dispatch({ type: actionType.SET_ALL_SONGS, allSongs: songData.data });
-    });
-  }, [dispatch]);
+    setIsLoading(true);
+    getHomeSections()
+      .then((res) => {
+        console.log(res.data);
+        setSections(res.data);
+      })
+      .finally(() => setIsLoading(false));
+  }, []);
   return (
-    
     <div className="p-8 pt-0">
-      <SongContainer2 title="Good morning" songs={myPlaylist}/>
+      <SongContainer2 title="Good morning" songs={myPlaylist} />
 
-      {allSongs && (
+      {isLoading ? (
+        <div className="flex justify-around">
+          <DotFlashing></DotFlashing>
+        </div>
+      ) : (
         <>
-          <SongContainer title="Recommended" songs={allSongs} />
+          {sections.map((s) => (
+            <>
+              <div className="flex justify-between text-white">
+                <h2 className="font-bold text-2xl hover:underline">
+                  {s.section.name}
+                </h2>
+                {s.songs.length > 4 && (
+                  <p
+                    onClick={() => navigate(`/songs/sections/${s.section._id}`)}
+                    className="font-semibold text-xs hover:underline tracking-widest text-textColor hover:text-white"
+                  >
+                    SHOW ALL
+                  </p>
+                )}
+              </div>
+              <div className="my-4 flex flex-row gap-6">
+                {s.songs.slice(0, 4).map((e, index) => (
+                  <MusicCard song={e} key={index}></MusicCard>
+                ))}
+              </div>
+            </>
+          ))}
         </>
       )}
     </div>
