@@ -8,7 +8,8 @@ import { useStateValue } from "../context/StateProvider";
 import Equalizer from "./Equalizer";
 function SongRow({ song, id, toggleLikeSong, type = 1 }) {
   const [isHovered, setIsHovered] = React.useState(false);
-  const [{ isSongPlaying, currentSong }, dispatch] = useStateValue();
+  const [{ isSongPlaying, currentSong, likedSongs }, dispatch] =
+    useStateValue();
 
   const play = () => {
     if (!isSongPlaying) {
@@ -62,7 +63,7 @@ function SongRow({ song, id, toggleLikeSong, type = 1 }) {
           <img className="w-10 h-10" src={song.imageURL} alt="song cover" />
           <div className="ml-4 flex flex-col">
             <Link
-              to="#"
+              to={`/songs/${song._id}`}
               className={
                 currentSong?._id === song._id
                   ? "text-sm text-green-500 hover:underline pb-2 hover:cursor-pointer"
@@ -103,7 +104,7 @@ function SongRow({ song, id, toggleLikeSong, type = 1 }) {
 
       <div className="col-span-1 text-center"> </div>
       <div className="col-span-1 text-center flex items-center">
-        {song.liked === true ? (
+        {likedSongs.includes(song) === true ? (
           <RiHeartFill
             className="fill-green-700 text-base m-2 mr-4 hover:cursor-pointer"
             onClick={() => {
@@ -120,7 +121,11 @@ function SongRow({ song, id, toggleLikeSong, type = 1 }) {
         )}
         <div>
           <span>{Math.floor(song.duration / 60)}</span>:
-          <span>{song.duration - Math.floor(song.duration / 60) * 60}</span>
+          <span>
+            {song.duration - Math.floor(song.duration / 60) * 60 < 10
+              ? "0" + song.duration - Math.floor(song.duration / 60) * 60
+              : song.duration - Math.floor(song.duration / 60) * 60}
+          </span>
         </div>
       </div>
     </div>
