@@ -53,16 +53,16 @@ export function PopularAlbum({ artist }) {
         </div>
       </div>
       <div>
-        {artist.popularAlbums.map((e) => {
-          <div>e.name</div>;
-          {
-            /* <MusicCard
-            key={e._id}
-            album={e}
-            song={artist.popularTracks[0]}
-          ></MusicCard>; */
-          }
-        })}
+        {artist.popularAlbums.map((e) => (
+          <>
+            <div>{e.name}</div>
+            <MusicCard
+              key={e.MusicCard_id}
+              album={e}
+              song={artist.popularTracks[0]}
+            ></MusicCard>
+          </>
+        ))}
       </div>
     </div>
   );
