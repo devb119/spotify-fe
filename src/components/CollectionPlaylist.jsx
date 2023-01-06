@@ -1,7 +1,13 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { GrPlayFill } from "react-icons/gr";
 import PlaylistSquareCard from "./PlaylistSquareCard";
+import { getMyPlaylists } from "../api";
+import { useMemo } from "react";
+import { useStateValue } from "../context/StateProvider";
+import { actionType } from "../context/reducer";
+import DotFlashing from "./DotFlashing";
+import { NavLink } from "react-router-dom";
 
 const myPlaylist = [
   {
@@ -67,6 +73,27 @@ const likeSong = [
 function CollectionPlaylist() {
   const [showPlay, setShowPlay] = useState(false);
 
+  const [{ user, playlists }, dispatch] = useStateValue();
+  const [isLoading, setIsLoading] = useState(true);
+
+  const token = useMemo(() => {
+    if (user) return user.token;
+    else return null;
+  }, [user]);
+
+  useEffect(() => {
+    if (token) {
+      setIsLoading(true);
+      getMyPlaylists(token)
+        .then((data) =>
+          dispatch({ type: actionType.SET_PLAYLISTS, playlists: data.data })
+        )
+        .finally(() => setIsLoading(false));
+    }
+  }, [dispatch, token]);
+  console.log(playlists)
+ // console.log(user.data.name)
+
   const showIcon = () => setShowPlay(true);
   const hideIcon = () => setShowPlay(false);
   return (
@@ -109,9 +136,23 @@ function CollectionPlaylist() {
             <GrPlayFill className="text-xl" />
           </div>
         </div>
-        {myPlaylist.map((item) => (
-          <PlaylistSquareCard item={item} key={item.id}></PlaylistSquareCard>
-        ))}
+        {isLoading ? (
+          <div className="flex justify-center items-center mt-3">
+            <DotFlashing />
+          </div>
+        ) : ( 
+          playlists.map((item) => {
+            return (
+              <NavLink
+                to={`playlists/${item._id}`}
+                key={item._id}
+              >
+                 <PlaylistSquareCard item={item} userName={user.data.name}></PlaylistSquareCard>
+              </NavLink>
+            );
+          })
+        )}
+        
       </div>
     </div>
   );
