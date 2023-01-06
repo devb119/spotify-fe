@@ -7,13 +7,11 @@ import { BiPencil } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
 import { useState, useEffect } from "react";
 import { createPlaylist, getAllSongs, getMyPlaylists } from "../api";
-import { valueDropDown1 , valueDropDown2 } from "../utils/styles";
+import { valueDropDown1, valueDropDown2 } from "../utils/styles";
 import SongRowSearch from "./SongRowSearch";
 import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
 import { useNavigate } from "react-router-dom";
-
-
 
 function CreatePlaylist() {
   const [isHover, setIsHover] = useState(false);
@@ -133,9 +131,9 @@ function CreatePlaylist() {
             className="h-54 mr-10 text-textColor hover:text-white hover:cursor-pointer"
           ></BsThreeDots> */}
           <DropDown
-             setIsActive={toggleDropDown2}
-             isActive = {isActive2}
-             options = {valueDropDown2}
+            setIsActive={toggleDropDown2}
+            isActive={isActive2}
+            options={valueDropDown2}
           />
         </div>
 
@@ -203,11 +201,11 @@ function CreatePlaylist() {
                 {hoverIconModal && (
                   <div className="absolute right-[5%] top-[4%]">
                     <div className="h-8 w-8 bg-[#212121] rounded-full flex justify-center relative cursor-pointer">
-                      <DropDown  
+                      <DropDown
                         setIsActive={toggleDropDown}
-                        isActive = {isActive}
-                        options = {valueDropDown1}
-                        type = {1}
+                        isActive={isActive}
+                        options={valueDropDown1}
+                        type={1}
                       />
                     </div>
                   </div>
