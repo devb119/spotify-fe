@@ -1,27 +1,29 @@
 import React from "react";
 import { BsThreeDots } from "react-icons/bs";
-import { useState } from "react";
 
 
-function DropDown() {
 
-  const [isActive, setIsActive] = useState(false);
+function DropDown({isActive, setIsActive, options = [], type}) {
 
-  return <div className="h-8 w-8 bg-[#212121] rounded-full flex justify-center relative cursor-pointer">
+  // const [isActive, setIsActive] = useState(false);
+
+  return <div>
     <div 
-       onClick={(e) => 
-       setIsActive(!isActive)
-    }>
-       <BsThreeDots className="h-4 w-4 font-bold mt-2 text-white"/>
+       onClick={setIsActive}
+    > 
+       <BsThreeDots className = {type === 1 ? " h-4 w-4 font-bold mt-2 text-white" : "h-54 mr-10 text-[32px] text-textColor hover:text-white hover:cursor-pointer"}/>
     </div>
     { isActive && (
     <div className="absolute z-1 top-0 left-0 mt-10 rounded-sm w-[160px] h-[88px] bg-[#282828] font-semibold">
-            <div className="dropdown-item">
-              Change photo
-            </div>
-            <div className="dropdown-item">
+            {options.map((option) => {
+                  return <div className="dropdown-item">
+                      {option}
+                  </div>
+              })}
+           
+            {/* <div className="dropdown-item">
               Remove photo
-            </div>
+            </div> */}
      </div>
     )}
 </div>;
