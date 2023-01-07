@@ -44,7 +44,7 @@ function Header() {
   // }
 
   return (
-    <header className="flex items-center justify-between h-20 bg-black z-50 w-full p-4 md:py-2 md:px-6 fixed">
+    <header className="flex items-center justify-between h-20 bg-transparent z-50 w-full p-4 md:py-2 md:px-6 fixed">
       {pathname === "/search" ? (
         <div className="mr-auto ml-4 relative">
           <label

@@ -12,7 +12,7 @@ export default function Home() {
       <div className="ml-64 w-full ">
         <Header />
 
-        <div className="mt-28">
+        <div>
           <Outlet></Outlet>
         </div>
         <Footer />

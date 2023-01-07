@@ -60,7 +60,7 @@ const App = () => {
               likedSongs: ["636f4e6523edd55d9eb1d3b0"],
             },
             token:
-              "eyJhbGciOiJSUzI1NiIsImtpZCI6ImNlOWI4ODBmODE4MmRkYTU1N2Y3YzcwZTIwZTRlMzcwZTNkMTI3NDciLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoixJDhu6ljIEFuaCBOZ3V54buFbiIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BTG01d3UydlNaU2NONXg5aHE1WExoRGN2TE03S0YtSFg0TGlCaHBxYVgxRHJRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3Nwb3RpZnktYXBwLWIzOGU0IiwiYXVkIjoic3BvdGlmeS1hcHAtYjM4ZTQiLCJhdXRoX3RpbWUiOjE2NzI5NjU5MjMsInVzZXJfaWQiOiJ5VU1vY0lYRXNqUkZwYWxwZmx6YUxwTmdIZDczIiwic3ViIjoieVVNb2NJWEVzalJGcGFscGZsemFMcE5nSGQ3MyIsImlhdCI6MTY3Mjk3MzE1NiwiZXhwIjoxNjcyOTc2NzU2LCJlbWFpbCI6ImR1Y2FuaDExMDkyMDAxQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7Imdvb2dsZS5jb20iOlsiMTA2NDUzNzM1Mjc5NTAxNzMwMjM1Il0sImVtYWlsIjpbImR1Y2FuaDExMDkyMDAxQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.hKyALps7ye6PmYTzjyIhU9oOQUeV3uAxOKAFoE9vkLzVrrSa_BkGx6P2F3ZYioOxxBCbSMYqU2C3InKag480HKtzH_23d__UQD-mFbhvredgkI2evvnkQsk4QA6AMF97qamqqc10RgVrDoxSxuSudC2okb793mkC0-TG7Ei_0ok4wKkfEKZV8OyhF6O5ulxi9G00UL-tR9BDJQ_JLbsQk2yl8fdjbGkdAPLWCG3JxBXIzqGlspK42sstsqyaKAg5KCenZfCqYFcDiQ1DjNwAuvsYiR3dIC6oaMV9b66C_bkVrY6dpgNrFlkCrUu3beLCMvuivGGiivIYh6F4n8gI3A",
+              "eyJhbGciOiJSUzI1NiIsImtpZCI6ImNlOWI4ODBmODE4MmRkYTU1N2Y3YzcwZTIwZTRlMzcwZTNkMTI3NDciLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoixJDhu6ljIEFuaCBOZ3V54buFbiIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BTG01d3UydlNaU2NONXg5aHE1WExoRGN2TE03S0YtSFg0TGlCaHBxYVgxRHJRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3Nwb3RpZnktYXBwLWIzOGU0IiwiYXVkIjoic3BvdGlmeS1hcHAtYjM4ZTQiLCJhdXRoX3RpbWUiOjE2NzI5OTU2NTAsInVzZXJfaWQiOiJ5VU1vY0lYRXNqUkZwYWxwZmx6YUxwTmdIZDczIiwic3ViIjoieVVNb2NJWEVzalJGcGFscGZsemFMcE5nSGQ3MyIsImlhdCI6MTY3MzA3ODc5MiwiZXhwIjoxNjczMDgyMzkyLCJlbWFpbCI6ImR1Y2FuaDExMDkyMDAxQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7Imdvb2dsZS5jb20iOlsiMTA2NDUzNzM1Mjc5NTAxNzMwMjM1Il0sImVtYWlsIjpbImR1Y2FuaDExMDkyMDAxQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.Vpic3QY-TUuDHIgPqst4mQ_TCPfQ8Ak_OjlR6zUWXAXfflgex-ysTKY_HoIYQRpQZ702ibPwX79K4Cei5jAnLkkaKppdzXNseTUAFGZcQVaI-c9RW7tometv8q8HIWVdwq9KjuwwSJv48pfaIMiy4eLVRLFNLQ_oyGbcTVeNGGxOq804za5-PQ6V_VgJES1Os97JtDoGnV-C1Xv6KyzABFaLo0AtIFdVJFn23tRH8nEU4IcDHTxEJu4IatutysuxSz6B1Lv9Q1qtiy7fXY4le9xTGDQVZf8sHEAIWLiJnRK2ikBLmmU4r7qUPiTdoJ1zNelIxbd1AnKeBzyCulMQSg",
           },
         });
         setAuth(true);
@@ -96,7 +96,6 @@ const App = () => {
                 </React.Suspense>
               }
             />
-
             <Route
               path="genres/:id"
               element={<SectionGenre></SectionGenre>}
@@ -137,8 +136,6 @@ const App = () => {
                   </React.Suspense>
                 }
               />
-               
-        
               <Route
                 path="/collection/tracks"
                 element={

@@ -8,53 +8,97 @@ import SongRow from "./SongRow";
 import { Link } from "react-router-dom";
 import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
-
+import { FastAverageColor } from "fast-average-color";
+const fac = new FastAverageColor();
+export function useAverageColor(dom) {
+  React.useEffect(() => {
+    fac
+      .getColorAsync(dom)
+      .then((color) => {
+        console.log(color);
+        return color;
+      })
+      .catch((error) => console.log(error));
+  });
+}
 export function PlayListCover({ type, playlist = null, song = null }) {
-  return (
-    <div className="p-6 px-8 bg-neutral-800">
-      <div className="flex items-center text-white  ">
-        <img
-          src={playlist ? playlist.imgURL : song.imageURL}
-          className="w-60 h-60 shadow-large shardow-black"
-          alt=""
-        />
-        <div className="self-end ml-5">
-          <div className="text-xs font-bold">{type}</div>
+  const [loading, setLoading] = React.useState(true);
+  const [gradient, setGradient] = React.useState();
 
-          <div
-            className={
-              (playlist && playlist.name.length < 12) ||
-              (song && song.name.length < 12)
-                ? "text-7xl font-bold mb-5 mt-2"
-                : "text-4xl font-bold mb-5 mt-2"
-            }
-          >
-            {playlist ? playlist.name : song.name}
-          </div>
-          <div className="text-xs font-bold">
-            {playlist ? (
-              <div className="flex flex-row  gap-1 items-center">
-                <Link className="hover:underline">{playlist.creator.name}</Link>
-                <BsDot className="text-xl"></BsDot>
-                <p className="font-bold text-xs">
-                  {playlist.songs.length} songs
-                </p>
+  React.useEffect(() => {
+    setLoading(true);
+    fac
+      .getColorAsync(playlist ? playlist.imgURL : song.imageURL, {
+        algorithm: "sqrt",
+      })
+      .then((color) => {
+        console.log(color);
+        setGradient(
+          `p-6 px-8 pt-28 bg-gradient-to-b from-[${color.hex}] to-[#43434318]`
+        );
+      })
+      .catch((error) => console.log(error))
+      .finally(() => setLoading(false));
+  }, []);
+  return (
+    <div>
+      {loading ? (
+        ""
+      ) : (
+        <div
+          className={
+            gradient
+              ? gradient
+              : "p-6 px-8 pt-28 bg-gradient-to-b from-green to-[#43434318]"
+          }
+        >
+          <div className="flex items-center text-white  ">
+            <img
+              src={playlist ? playlist.imgURL : song.imageURL}
+              className="w-60 h-60 drop-shadow-large shardow-black"
+              alt=""
+            />
+            <div className="self-end ml-5">
+              <div className="text-xs font-bold">{type}</div>
+
+              <div
+                className={
+                  (playlist && playlist.name.length < 12) ||
+                  (song && song.name.length < 12)
+                    ? "text-7xl font-bold mb-5 mt-2"
+                    : "text-4xl font-bold mb-5 mt-2"
+                }
+              >
+                {playlist ? playlist.name : song.name}
               </div>
-            ) : (
-              <div className="flex flex-row items-center">
-                <img
-                  className="w-6 h-6 mr-1 rounded-full"
-                  src={song.artist[0].imageURL}
-                  alt="artist"
-                />
-                <Link className="hover:underline">
-                  {song.artist.map((e) => e.name).join(", ")}
-                </Link>
+              <div className="text-xs font-bold">
+                {playlist ? (
+                  <div className="flex flex-row  gap-1 items-center">
+                    <Link className="hover:underline">
+                      {playlist.creator.name}
+                    </Link>
+                    <BsDot className="text-xl"></BsDot>
+                    <p className="font-bold text-xs">
+                      {playlist.songs.length} songs
+                    </p>
+                  </div>
+                ) : (
+                  <div className="flex flex-row items-center">
+                    <img
+                      className="w-6 h-6 mr-1 rounded-full"
+                      src={song.artist[0].imageURL}
+                      alt="artist"
+                    />
+                    <Link className="hover:underline">
+                      {song.artist.map((e) => e.name).join(", ")}
+                    </Link>
+                  </div>
+                )}
               </div>
-            )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

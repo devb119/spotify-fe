@@ -65,7 +65,7 @@ function Playlist() {
     setLoading(true);
     getPlaylist(user.token, id)
       .then((res) => {
-        setPlaylist(res.data);
+        setPlaylist({ ...res.data, imgURL: res.data.songs[0].imageURL });
       })
       .finally(() => setLoading(false));
   }, []);
