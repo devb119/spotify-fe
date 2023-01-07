@@ -20,7 +20,7 @@ function LikedSongs() {
       .then((data) => {
         dispatch({
           type: actionType.SET_LIKED_SONGS,
-          likedSongs: data.data.likedSongs,
+          likedSongs: data.data.likedSongs.map((el) => el._id),
         });
         setPlaylist({
           ...playlist,
@@ -31,13 +31,12 @@ function LikedSongs() {
       })
       .finally(() => setIsLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, user.token]);
-  console.log(playlist);
+  }, [dispatch, user.token, likedSongs?.length]);
   return (
     <div>
       {isLoading ? (
-        <div className="flex  mt-64 justify-center h-screen">
-          <DotFlashing></DotFlashing>
+        <div className="h-screen flex items-center justify-center">
+          <DotFlashing />
         </div>
       ) : (
         <PlaylistPage playlist={playlist} setPlaylist={setPlaylist} />

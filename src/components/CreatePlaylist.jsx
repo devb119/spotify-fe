@@ -1,14 +1,11 @@
 import React from "react";
 import DropDown from "./DropDown";
 import { BsMusicNoteBeamed } from "react-icons/bs";
-import { BsThreeDots } from "react-icons/bs";
-import { FiSearch } from "react-icons/fi";
 import { BiPencil } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
-import { useState, useEffect } from "react";
-import { createPlaylist, getAllSongs, getMyPlaylists } from "../api";
+import { useState } from "react";
+import { createPlaylist, getMyPlaylists } from "../api";
 import { valueDropDown1, valueDropDown2 } from "../utils/styles";
-import SongRowSearch from "./SongRowSearch";
 import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
 import { useNavigate } from "react-router-dom";
@@ -19,10 +16,7 @@ function CreatePlaylist() {
   const [hoverIconModal, setHoverIconModal] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [isActive2, setIsActive2] = useState(false);
-
-  // const [query, setQuery] = useState("");
-  const [songs, setSongs] = useState([]);
-  const [{ query, user }, dispatch] = useStateValue();
+  const [{ user }, dispatch] = useStateValue();
 
   const navigate = useNavigate();
 
@@ -52,13 +46,6 @@ function CreatePlaylist() {
     document.body.classList.remove("active-modal");
   }
 
-  //  ghép api cho search
-  function handleInputOnchange(e) {
-    const { value } = e.target;
-    dispatch({ type: actionType.SET_QUERY, query: value });
-    //setQuery(value)
-  }
-
   const handleSavePlaylist = async (e) => {
     e.preventDefault();
     const name = e.target.form[0].value;
@@ -72,14 +59,6 @@ function CreatePlaylist() {
         navigate(`/playlists/${newPlaylist.data._id}`, { replace: true })
       );
   };
-
-  useEffect(() => {
-    if (query) {
-      getAllSongs(query).then((data) => {
-        setSongs(data.data);
-      });
-    }
-  }, [query]);
 
   return (
     <div>
@@ -136,45 +115,6 @@ function CreatePlaylist() {
             options={valueDropDown2}
           />
         </div>
-
-        {/* <div>
-            <hr className=" mt-10 mb-7 border-t-1 border-neutral-600"></hr>
-            <form>
-              <label
-                htmlFor="default-search"
-                className="text-white text-xl font-bold"
-              >
-                Let's find something for your playlist
-              </label>
-              <div className="relative mt-5 w-[370px]">
-                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  <FiSearch className="w-5 h-5 text-[#c1bcbc]" />
-                </div>
-                <input
-                  autoFocus={true}
-                  type="search"
-                  id="default-search"
-                  className="block w-[370px] p-[8px] pl-10 text-sm text-textColor placeholder-neutral-500 font-semibold outline-none border-none rounded-sm bg-[#2e2c2c]"
-                  placeholder="Searchs for songs or episodes"
-                  required
-                  value={query}
-                  onChange={handleInputOnchange}
-                />
-              </div>
-            </form>
-          </div> */}
-      </div>
-
-      <div className="p-8 pt-0 mb-12 ">
-        {query === "" ? (
-          <></>
-        ) : (
-          <div>
-            {songs.map((s, index) => (
-              <SongRowSearch song={s} key={index}></SongRowSearch>
-            ))}
-          </div>
-        )}
       </div>
 
       {/* Tạo modal để chỉnh sửa thông tin playlist */}
