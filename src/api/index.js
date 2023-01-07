@@ -157,3 +157,29 @@ export const createPlaylist = async (
     console.log(error);
   }
 };
+
+export const addLikedSongs = async (songId, token) => {
+  try {
+    const url = `${BASE_URL}/users/likedSongs/${songId}`;
+    const res = await axios.post(url, null, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    console.log(res);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteLikedSongs = async (songId, token) => {
+  try {
+    const url = `${BASE_URL}/users/likedSongs/${songId}`;
+    const res = await axios.delete(url, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    console.log(res);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
