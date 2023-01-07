@@ -120,7 +120,7 @@ function Header() {
         <div></div>
       ) : null}
       <div
-        className="flex items-center mr-72 cursor-pointer bg-neutral-900 rounded-full p-[2px] gap-2 relative"
+        className="flex items-center mr-72 cursor-pointer bg-black rounded-full p-[2px] gap-2 relative"
         onMouseEnter={() => setIsMenuOpen(true)}
         onMouseLeave={() => setIsMenuOpen(false)}
       >

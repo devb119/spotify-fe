@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { GrPlayFill } from "react-icons/gr";
-
-function MusicCard2({ song = null, album = null }) {
+import Icon from "../assets/img/Icon";
+function MusicCard2({ song = null }) {
   const [showPlay, setShowPlay] = useState(false);
 
   const showIcon = () => setShowPlay(true);
@@ -15,7 +15,7 @@ function MusicCard2({ song = null, album = null }) {
     >
       <div className="rounded-[4px] w-20 h-20">
         <img
-          src={song.img}
+          src={song.img ? song.img : Icon.plain}
           alt="song cover"
           className="rounded-[4px] w-20 h-20"
         />

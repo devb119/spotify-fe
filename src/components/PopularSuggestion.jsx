@@ -52,16 +52,9 @@ export function PopularAlbum({ artist }) {
           SEE DISCOGRAPHY
         </div>
       </div>
-      <div>
-        {artist.popularAlbums.map((e) => (
-          <>
-            <div>{e.name}</div>
-            <MusicCard
-              key={e.MusicCard_id}
-              album={e}
-              song={artist.popularTracks[0]}
-            ></MusicCard>
-          </>
+      <div className="flex flex-row gap-6 p-8 pt-0">
+        {artist.popularAlbums.slice(0, 4).map((e) => (
+          <MusicCard key={e.MusicCard_id} song={e} type="albums"></MusicCard>
         ))}
       </div>
     </div>

@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 import { PlayListCover } from "./PlaylistPage";
 import SongRowSearch from "./SongRowSearch";
 import DotFlashing from "./DotFlashing";
+import Icon from "../assets/img/Icon";
 function Search({ query, handleInputOnchange, songs }) {
   return (
     <>
@@ -65,11 +66,10 @@ function Playlist() {
     setLoading(true);
     getPlaylist(user.token, id)
       .then((res) => {
-        setPlaylist({ ...res.data, imgURL: res.data.songs[0].imageURL });
+        setPlaylist({ ...res.data, imageURL: Icon.plain });
       })
       .finally(() => setLoading(false));
-  }, []);
-
+  }, [id]);
   useEffect(() => {
     if (query) {
       getAllSongs(query).then((data) => setSongs(data.data));

@@ -28,13 +28,13 @@ export function PlayListCover({ type, playlist = null, song = null }) {
   React.useEffect(() => {
     setLoading(true);
     fac
-      .getColorAsync(playlist ? playlist.imgURL : song.imageURL, {
+      .getColorAsync(playlist ? playlist.imageURL : song.imageURL, {
         algorithm: "sqrt",
       })
       .then((color) => {
         console.log(color);
         setGradient(
-          `p-6 px-8 pt-28 bg-gradient-to-b from-[${color.hex}] to-[#43434318]`
+          `p-6 px-8 pt-20 bg-gradient-to-b from-[${color.hex}] to-[#43434318]`
         );
       })
       .catch((error) => console.log(error))
@@ -49,14 +49,14 @@ export function PlayListCover({ type, playlist = null, song = null }) {
           className={
             gradient
               ? gradient
-              : "p-6 px-8 pt-28 bg-gradient-to-b from-green to-[#43434318]"
+              : "p-6 px-8 pt-20 bg-gradient-to-b from-neutral-600 to-neutral-900"
           }
         >
           <div className="flex items-center text-white  ">
             <img
-              src={playlist ? playlist.imgURL : song.imageURL}
+              src={playlist ? playlist.imageURL : song.imageURL}
               className="w-60 h-60 drop-shadow-large shardow-black"
-              alt=""
+              alt="cover image"
             />
             <div className="self-end ml-5">
               <div className="text-xs font-bold">{type}</div>
@@ -77,10 +77,14 @@ export function PlayListCover({ type, playlist = null, song = null }) {
                     <Link className="hover:underline">
                       {playlist.creator.name}
                     </Link>
-                    <BsDot className="text-xl"></BsDot>
-                    <p className="font-bold text-xs">
-                      {playlist.songs.length} songs
-                    </p>
+                    {playlist.songs.length > 0 && (
+                      <>
+                        <BsDot className="text-xl"></BsDot>
+                        <p className="font-bold text-xs">
+                          {playlist.songs.length} songs
+                        </p>
+                      </>
+                    )}
                   </div>
                 ) : (
                   <div className="flex flex-row items-center">

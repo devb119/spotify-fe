@@ -19,7 +19,7 @@ function SongSection() {
       .finally(() => setIsLoading(false));
   }, []);
   return (
-    <div className="text-white p-8 pt-0">
+    <div className="text-white p-8 pt-20">
       {isLoading ? (
         <DotFlashing />
       ) : (

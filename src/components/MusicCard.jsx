@@ -3,60 +3,55 @@ import { GrPlayFill } from "react-icons/gr";
 import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
 import { useNavigate } from "react-router-dom";
-function MusicCard({ song = null, album = null }) {
+import Icon from "../assets/img/Icon";
+function MusicCard({ song, type = "songs" }) {
   const navigate = useNavigate();
   const [showPlay, setShowPlay] = useState(false);
-  const [{ isSongPlaying, currentSong }, dispatch] = useStateValue();
+  const [{ isSongPlaying, currentSong, user }, dispatch] = useStateValue();
 
   const showIcon = () => setShowPlay(true);
   const hideIcon = () => setShowPlay(false);
   const addToContext = () => {
-    if (!isSongPlaying) {
-      dispatch({ type: actionType.SET_IS_SONG_PLAYING, isSongPlaying: true });
-    }
-    if (currentSong?._id !== song._id) {
-      dispatch({ type: actionType.SET_CURRENT_SONG, currentSong: song });
+    if (type === "songs") {
+      if (!isSongPlaying) {
+        dispatch({ type: actionType.SET_IS_SONG_PLAYING, isSongPlaying: true });
+      }
+      if (currentSong?._id !== song._id) {
+        dispatch({ type: actionType.SET_CURRENT_SONG, currentSong: song });
+      }
     }
   };
 
   //console.log(song)
   return (
     <div
-      className="relative p-4 w-48 h-auto rounded-lg shadow-md bg-cardBg lg:w-52 hover:bg-cardBgLight transition-all duration-200 cursor-pointer "
+      className="relative p-4 w-48 h-auto rounded-lg shadow-md bg-cardBg lg:w-52 hover:bg-neutral-800 transition-all duration-200 cursor-pointer "
       onMouseEnter={showIcon}
       onMouseLeave={hideIcon}
     >
       <div
         onClick={() => {
-          song
-            ? navigate(`/songs/${song._id}`)
-            : navigate(`/albums/${album._id}`);
+          navigate(`/${type}/${song._id}`);
         }}
       >
         <img
-          src={song ? song.imageURL : album.imageURL}
+          src={song.imageURL ? song.imageURL : Icon.plain}
           alt="song cover"
-          className="rounded-lg w-38 h-38 lg:h-44 lg:w-44 mb-3"
+          className="rounded-md w-38 h-38 lg:h-44 lg:w-44 mb-3 drop-shadow-xl shadow-black"
         />
-        {song ? (
-          <p className="text-md text-white font-semibold mb-2">
-            {song.name.length > 14 ? `${song.name.slice(0, 14)}...` : song.name}
-          </p>
-        ) : (
-          <p className="text-md text-white font-semibold mb-2">
-            {album.name.length > 14
-              ? `${album.name.slice(0, 14)}...`
-              : song.name}
-          </p>
-        )}
+        <p className="text-md text-white font-semibold mb-2">
+          {song.name.length > 14 ? `${song.name.slice(0, 14)}...` : song.name}
+        </p>
         <p className="text-sm text-textColor font-semibold">
-          {song &&
+          {type === "songs" &&
             song.artist
               .map((item) => {
                 //console.log(item.name)
                 return item.name;
               })
               .join(", ")}
+          {type === "playlists" && `by ${user.data.name}`}
+          {type === "albums" && song.description}
         </p>
       </div>
       <div

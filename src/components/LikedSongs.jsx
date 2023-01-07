@@ -4,11 +4,12 @@ import { getLikedSongs } from "../api";
 import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
 import DotFlashing from "./DotFlashing";
+import Icon from "../assets/img/Icon";
 function LikedSongs() {
   const [{ user, likedSongs }, dispatch] = useStateValue();
   const [isLoading, setIsLoading] = useState(true);
   const [playlist, setPlaylist] = React.useState({
-    imgURL: "",
+    imageURL: Icon.like,
     name: "Liked Songs",
     creator: { name: user.data.name },
     songs: [],
@@ -25,7 +26,6 @@ function LikedSongs() {
         setPlaylist({
           ...playlist,
           songs: data.data.likedSongs,
-          imgURL: data.data.likedSongs[0].imageURL,
         });
         console.log(data.data.likedSongs);
       })
