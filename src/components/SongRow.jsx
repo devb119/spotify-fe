@@ -8,7 +8,8 @@ import { useStateValue } from "../context/StateProvider";
 import Equalizer from "./Equalizer";
 function SongRow({ song, id, toggleLikeSong, type = 1 }) {
   const [isHovered, setIsHovered] = React.useState(false);
-  const [{ isSongPlaying, currentSong }, dispatch] = useStateValue();
+  const [{ isSongPlaying, currentSong, likedSongs }, dispatch] =
+    useStateValue();
 
   const play = () => {
     if (!isSongPlaying) {
@@ -103,7 +104,7 @@ function SongRow({ song, id, toggleLikeSong, type = 1 }) {
 
       <div className="col-span-1 text-center"> </div>
       <div className="col-span-1 text-center flex items-center">
-        {song.liked === true ? (
+        {likedSongs.includes(song._id) === true ? (
           <RiHeartFill
             className="fill-green-700 text-base m-2 mr-4 hover:cursor-pointer"
             onClick={() => {

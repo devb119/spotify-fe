@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { getLikedSongs } from "../api";
 import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
+import DotFlashing from "./DotFlashing";
 function LikedSongs() {
   const [{ user, likedSongs }, dispatch] = useStateValue();
   const [isLoading, setIsLoading] = useState(true);
@@ -19,19 +20,20 @@ function LikedSongs() {
       .then((data) => {
         dispatch({
           type: actionType.SET_LIKED_SONGS,
-          likedSongs: data.data.likedSongs,
+          likedSongs: data.data.likedSongs.map((el) => el._id),
         });
         setPlaylist({ ...playlist, songs: data.data.likedSongs });
         console.log(data.data.likedSongs);
       })
       .finally(() => setIsLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, user.token]);
-  console.log(playlist);
+  }, [dispatch, user.token, likedSongs?.length]);
   return (
     <div>
       {isLoading ? (
-        ""
+        <div className="h-screen flex items-center justify-center">
+          <DotFlashing />
+        </div>
       ) : (
         <PlaylistPage playlist={playlist} setPlaylist={setPlaylist} />
       )}
