@@ -8,6 +8,7 @@ import { getAuth } from "firebase/auth";
 import { motion } from "framer-motion";
 import { actionType } from "../context/reducer";
 import SideBarLibrary from "./SideBarLibrary";
+import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
 
 function Header() {
   // eslint-disable-next-line no-unused-vars
@@ -118,68 +119,76 @@ function Header() {
         <div></div>
       ) : null}
       <div
-        className="flex items-center mr-72 cursor-pointer gap-2 relative"
+        className="flex items-center mr-72 cursor-pointer bg-neutral-900 rounded-full p-[2px] gap-2 relative"
         onMouseEnter={() => setIsMenuOpen(true)}
         onMouseLeave={() => setIsMenuOpen(false)}
       >
         <img
           src={user?.data.imageURL}
           referrerPolicy="no-referrer"
-          className="w-12 min-w-{44px} object-cover rounded-full shadow-lg"
+          className="w-7 min-w-{44px} object-cover rounded-full shadow-lg"
           alt="user avatar"
         />
-        <div className="flex flex-col">
-          <p className="text-textColor text-lg hover:text-headingColor">
-            {user?.data.name}
-          </p>
-          <p className="flex items-center gap-2 text-xs text-gray-500 font-normal">
-            Premium member.{" "}
-            <FaCrown className="text-sm -ml-1 text-yellow-500" />
-          </p>
-        </div>
-
-        {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: 50, zIndex: 10 }}
-            animate={{ opacity: 1, y: -20, zIndex: 10 }}
-            exit={{ opacity: 0, y: 50, zIndex: 10 }}
-          >
-            <div
-              className="absolute top-11 text-xs font-semibold right-0 w-225 gap-1 bg-card 
-        shadow-lg rounded-sm backdrop-blur-sm flex flex-col p-1"
-            >
-              <NavLink to="/userProfile">
-                <p className=" text-textColor hover:bg-neutral-700 p-2 hover:text-headingColor rounded-sm duration-150 transition-all ease-in-out">
-                  Profile
-                </p>
-              </NavLink>
-              <NavLink to="/userProfile">
-                <p className=" text-textColor hover:bg-neutral-700 p-2 hover:text-headingColor rounded-sm duration-150 transition-all ease-in-out">
-                  My Favourites
-                </p>
-              </NavLink>
-              {user?.data.role === "admin" && (
-                <>
-                  <hr />
-                  <NavLink to="/dashboard/home">
-                    <p className=" text-textColor hover:bg-neutral-700 p-2 hover:text-headingColor rounded-sm duration-150 transition-all ease-in-out">
-                      Dashboard
-                    </p>
-                  </NavLink>
-                </>
+        <div className="flex ">
+          <div className="text-white flex flex-row text-xs font-semibold hover:text-headingColor">
+            <span>{user?.data.name}</span>
+            <span>
+              {!isMenuOpen ? (
+                <MdArrowDropDown className="text-2xl"></MdArrowDropDown>
+              ) : (
+                <MdArrowDropUp className="text-2xl"></MdArrowDropUp>
               )}
-
-              <hr className="border-t-1 border-neutral-700 "></hr>
-
-              <p
-                className=" text-textColor hover:bg-neutral-700 p-2 hover:text-headingColor rounded-sm duration-150 transition-all ease-in-out"
-                onClick={logOut}
+            </span>
+          </div>
+          {/* <p className="flex items-center gap-2 text-xs text-gray-200 font-normal">
+            Premium member
+            <FaCrown className="text-sm -ml-1 text-yellow-500" />
+          </p> */}
+        </div>
+        <div>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: 50, zIndex: 10 }}
+              animate={{ opacity: 1, y: -20, zIndex: 10 }}
+              exit={{ opacity: 0, y: 50, zIndex: 10 }}
+            >
+              <div
+                className="absolute top-11 text-xs font-semibold right-0 w-225 gap-1 bg-card 
+        shadow-lg rounded-sm backdrop-blur-sm flex flex-col p-1"
               >
-                Sign Out
-              </p>
-            </div>
-          </motion.div>
-        )}
+                <NavLink to="/userProfile">
+                  <p className=" text-textColor hover:bg-neutral-700 p-2 hover:text-headingColor rounded-sm duration-150 transition-all ease-in-out">
+                    Profile
+                  </p>
+                </NavLink>
+                <NavLink to="/userProfile">
+                  <p className=" text-textColor hover:bg-neutral-700 p-2 hover:text-headingColor rounded-sm duration-150 transition-all ease-in-out">
+                    My Favourites
+                  </p>
+                </NavLink>
+                {user?.data.role === "admin" && (
+                  <>
+                    <hr />
+                    <NavLink to="/dashboard/home">
+                      <p className=" text-textColor hover:bg-neutral-700 p-2 hover:text-headingColor rounded-sm duration-150 transition-all ease-in-out">
+                        Dashboard
+                      </p>
+                    </NavLink>
+                  </>
+                )}
+
+                <hr className="border-t-1 border-neutral-700 "></hr>
+
+                <p
+                  className=" text-textColor hover:bg-neutral-700 p-2 hover:text-headingColor rounded-sm duration-150 transition-all ease-in-out"
+                  onClick={logOut}
+                >
+                  Sign Out
+                </p>
+              </div>
+            </motion.div>
+          )}
+        </div>
       </div>
     </header>
   );
