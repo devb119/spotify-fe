@@ -12,7 +12,7 @@ import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
 
 function Header() {
   // eslint-disable-next-line no-unused-vars
-  const [{ user, query, searchType }, dispatch] = useStateValue();
+  const [{ user, query, searchType, currentColor }, dispatch] = useStateValue();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   console.log(user);
 
@@ -43,9 +43,10 @@ function Header() {
   //   const { value } = e.target;
   //   dispatch({ type: actionType.SET_SEARCH_TYPE, searchType: value });
   // }
+  const style = `flex items-center justify-between h-16 bg-[${currentColor.hex}] z-50 w-full p-4 md:py-2 md:px-6 fixed`;
 
   return (
-    <header className="flex items-center justify-between h-20 bg-transparent z-50 w-full p-4 md:py-2 md:px-6 fixed">
+    <header className={style}>
       {pathname === "/search" ? (
         <div className="mr-auto ml-4 relative">
           <label
@@ -131,14 +132,13 @@ function Header() {
         />
         <div className="flex ">
           <div className="text-white flex flex-row text-xs font-semibold hover:text-headingColor">
-            <span>{user?.data.name}</span>
-            <span>
-              {!isMenuOpen ? (
-                <MdArrowDropDown className="text-2xl"></MdArrowDropDown>
-              ) : (
-                <MdArrowDropUp className="text-2xl"></MdArrowDropUp>
-              )}
-            </span>
+            <p className="text-end">{user?.data.name}</p>
+
+            {!isMenuOpen ? (
+              <MdArrowDropDown className="text-2xl"></MdArrowDropDown>
+            ) : (
+              <MdArrowDropUp className="text-2xl"></MdArrowDropUp>
+            )}
           </div>
           {/* <p className="flex items-center gap-2 text-xs text-gray-200 font-normal">
             Premium member

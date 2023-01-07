@@ -91,13 +91,13 @@ function CollectionPlaylist() {
         .finally(() => setIsLoading(false));
     }
   }, [dispatch, token]);
-  console.log(playlists)
- // console.log(user.data.name)
+  console.log(playlists);
+  // console.log(user.data.name)
 
   const showIcon = () => setShowPlay(true);
   const hideIcon = () => setShowPlay(false);
   return (
-    <div className="mx-4 mb-12 ">
+    <div className="p-8 pt-28 ">
       <div className="text-white text-xl font-bold mb-5">Playlists</div>
       <div className="grid grid-cols-4 gap-6 mt-4 lg:grid-cols-4 2xl:grid-cols-6">
         <div
@@ -140,19 +140,18 @@ function CollectionPlaylist() {
           <div className="flex justify-center items-center mt-3">
             <DotFlashing />
           </div>
-        ) : ( 
+        ) : (
           playlists.map((item) => {
             return (
-              <NavLink
-                to={`playlists/${item._id}`}
-                key={item._id}
-              >
-                 <PlaylistSquareCard item={item} userName={user.data.name}></PlaylistSquareCard>
+              <NavLink to={`playlists/${item._id}`} key={item._id}>
+                <PlaylistSquareCard
+                  item={item}
+                  userName={user.data.name}
+                ></PlaylistSquareCard>
               </NavLink>
             );
           })
         )}
-        
       </div>
     </div>
   );

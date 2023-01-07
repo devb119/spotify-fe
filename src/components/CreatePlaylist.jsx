@@ -63,7 +63,7 @@ function CreatePlaylist() {
   return (
     <div>
       {/* Làm phần header */}
-      <div className="p-8 pt-0 bg-gradient-to-b from-[#4d4c4c] to-[#1d1c1c]">
+      <div className="p-8 pt-12 bg-gradient-to-b from-[#4d4c4c] to-[#1d1c1c]">
         <div className="flex items-center pt-9 text-white ">
           <div
             className="w-60 h-60 shadow-large shardow-black bg-[#333333] rounded-sm flex justify-center cursor-pointer"

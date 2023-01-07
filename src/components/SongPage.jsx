@@ -83,7 +83,7 @@ function SongPage() {
           size={60}
           className="fill-green-500 mr-5 hover:fill-green-400 hover:scale-105 hover:cursor-pointer"
         ></AiFillPlayCircle>
-        {song.liked === true ? (
+        {likedSongs.includes(song) === true ? (
           <RiHeartFill
             className="fill-green-500 text-4xl m-2 mr-4 hover:cursor-pointer"
             onClick={() => {

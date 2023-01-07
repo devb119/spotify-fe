@@ -10,6 +10,7 @@ export const actionType = {
   SET_ALL_CATEGORIES: "SET_ALL_CATEGORIES",
   SET_QUERY: "SET_QUERY",
   // SET_SEARCH_TYPE: "SET_SEARCH_TYPE",
+  SET_CURRENT_COLOR: "SET_CURRENT_COLOR",
 };
 
 const reducer = (state, action) => {
@@ -43,6 +44,8 @@ const reducer = (state, action) => {
     //   return { ...state, searchType: action.searchType };
     case actionType.SET_PLAYLISTS:
       return { ...state, playlists: action.playlists };
+    case actionType.SET_CURRENT_COLOR:
+      return { ...state, currentColor: action.currentColor };
     default:
       return state;
   }

@@ -76,7 +76,7 @@ function HomeMusic() {
       .finally(() => setIsLoading(false));
   }, []);
   return (
-    <div className="p-8 pt-0">
+    <div className="p-8 pt-28">
       <SongContainer2 title="Good morning" songs={myPlaylist} />
 
       {isLoading ? (

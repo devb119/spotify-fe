@@ -79,7 +79,7 @@ function Search() {
   }, [query]);
   // console.log(searchType);
   return (
-    <div className="p-8 pt-0 mb-12 h-full">
+    <div className="p-8 pt-28 mb-12 h-full">
       {query === "" ? (
         <>
           <div className="text-white text-xl font-bold">Browse all</div>

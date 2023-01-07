@@ -6,5 +6,6 @@ export const initialState = {
   miniPlayer: false,
   query: "",
   searchType: "song",
-  playlists: null
+  playlists: null,
+  currentColor: { hex: "#50d71e" },
 };
