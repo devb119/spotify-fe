@@ -3,7 +3,7 @@ import DropDown from "./DropDown";
 import { BsMusicNoteBeamed } from "react-icons/bs";
 import { BiPencil } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { createPlaylist, getMyPlaylists } from "../api";
 import { valueDropDown1, valueDropDown2 } from "../utils/styles";
 import { actionType } from "../context/reducer";

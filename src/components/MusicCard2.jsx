@@ -9,15 +9,15 @@ function MusicCard2({ song = null, album = null }) {
 
   return (
     <div
-      className="relative w-[320px] h-auto rounded-[4px] lg:w-[390px] shadow-md bg-[#2a2a2a] hover:bg-cardBgLight transition-all duration-200 cursor-pointer flex "
+      className="relative w-80 h-auto rounded lg:w-72 shadow-md bg-[#2a2a2a] hover:bg-cardBgLight transition-all duration-200 cursor-pointer flex "
       onMouseEnter={showIcon}
       onMouseLeave={hideIcon}
     >
-      <div className="rounded-[4px] w-[80px] h-[80px] ">
+      <div className="rounded-[4px] w-20 h-20">
         <img
           src={song.img}
           alt="song cover"
-          className="rounded-[4px] w-[80px] h-[80px]"
+          className="rounded-[4px] w-20 h-20"
         />
       </div>
 

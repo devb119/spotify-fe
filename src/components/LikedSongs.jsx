@@ -8,9 +8,9 @@ function LikedSongs() {
   const [{ user, likedSongs }, dispatch] = useStateValue();
   const [isLoading, setIsLoading] = useState(true);
   const [playlist, setPlaylist] = React.useState({
-    img: "https://cdn.123job.vn/123job/uploads/2021/08/28/2021_08_28______428064e6cc43653e50c675ee334a1c60.jpg",
-    title: "Liked Songs",
-    creator: user.data.name,
+    imgURL: "",
+    name: "Liked Songs",
+    creator: { name: user.data.name },
     songs: [],
   });
   useEffect(() => {
@@ -22,7 +22,11 @@ function LikedSongs() {
           type: actionType.SET_LIKED_SONGS,
           likedSongs: data.data.likedSongs.map((el) => el._id),
         });
-        setPlaylist({ ...playlist, songs: data.data.likedSongs });
+        setPlaylist({
+          ...playlist,
+          songs: data.data.likedSongs,
+          imgURL: data.data.likedSongs[0].imageURL,
+        });
         console.log(data.data.likedSongs);
       })
       .finally(() => setIsLoading(false));

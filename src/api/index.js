@@ -141,6 +141,18 @@ export const getMyPlaylists = async (token) => {
     console.log(error);
   }
 };
+
+export const getPlaylist = async (token, playlistId) => {
+  try {
+    const res = await axios.get(`${BASE_URL}/playlists/me/${playlistId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const createPlaylist = async (
   name = `Playlist ${Date.now()}`,
   description = "",
@@ -178,6 +190,16 @@ export const deleteLikedSongs = async (songId, token) => {
       headers: { Authorization: `Bearer ${token}` },
     });
     console.log(res);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+// get home section
+
+export const getHomeSections = async () => {
+  try {
+    const res = await axios.get(`${BASE_URL}/songs/sections`);
     return res.data;
   } catch (error) {
     console.log(error);

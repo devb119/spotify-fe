@@ -63,7 +63,7 @@ function SongRow({ song, id, toggleLikeSong, type = 1 }) {
           <img className="w-10 h-10" src={song.imageURL} alt="song cover" />
           <div className="ml-4 flex flex-col">
             <Link
-              to="#"
+              to={`/songs/${song._id}`}
               className={
                 currentSong?._id === song._id
                   ? "text-sm text-green-500 hover:underline pb-2 hover:cursor-pointer"
@@ -121,7 +121,11 @@ function SongRow({ song, id, toggleLikeSong, type = 1 }) {
         )}
         <div>
           <span>{Math.floor(song.duration / 60)}</span>:
-          <span>{song.duration - Math.floor(song.duration / 60) * 60}</span>
+          <span>
+            {song.duration - Math.floor(song.duration / 60) * 60 < 10
+              ? "0" + song.duration - Math.floor(song.duration / 60) * 60
+              : song.duration - Math.floor(song.duration / 60) * 60}
+          </span>
         </div>
       </div>
     </div>
