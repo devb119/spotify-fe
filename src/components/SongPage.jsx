@@ -37,7 +37,7 @@ function SongPage() {
       getLikedSongs(user.token).then((data) =>
         dispatch({
           type: actionType.SET_LIKED_SONGS,
-          likedSongs: data.data.likedSongs.map((el) => el._id),
+          likedSongs: data.data.likedSongs,
         })
       );
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -46,23 +46,18 @@ function SongPage() {
   useEffect(() => {
     setIsLoading(true);
     getSong(id)
-      .then((song) =>
-        setSong({ ...song.data, liked: likedSongs.includes(song.data._id) })
-      )
+      .then((song) => setSong(song.data))
       .finally(() => setIsLoading(false));
   }, [id]);
 
   async function handleLikeSong() {
-    if (likedSongs.includes(song._id)) {
-      setSong({ ...song, liked: false });
+    if (likedSongs.find((el) => el._id === song._id)) {
       const newLikedSongs = await deleteLikedSongs(song._id, user.token);
-      console.log(newLikedSongs);
       dispatch({
         type: actionType.SET_LIKED_SONGS,
         likedSongs: newLikedSongs.data,
       });
     } else {
-      setSong({ ...song, liked: true });
       const newLikedSongs = await addLikedSongs(song._id, user.token);
       dispatch({
         type: actionType.SET_LIKED_SONGS,
@@ -83,7 +78,7 @@ function SongPage() {
           size={60}
           className="fill-green-500 mr-5 hover:fill-green-400 hover:scale-105 hover:cursor-pointer"
         ></AiFillPlayCircle>
-        {likedSongs.includes(song) === true ? (
+        {likedSongs.find((el) => el._id === song._id) ? (
           <RiHeartFill
             className="fill-green-500 text-4xl m-2 mr-4 hover:cursor-pointer"
             onClick={() => {
