@@ -50,7 +50,7 @@ function CollectionPlaylist() {
   const hideIcon = () => setShowPlay(false);
   const navigate = useNavigate();
   return (
-    <div className="p-8 pt-28 ">
+    <div className="p-8 pt-28 mb-56 ">
       <div className="text-white text-xl font-bold mb-5">Playlists</div>
       <div className="grid grid-cols-4 gap-6 mt-4 lg:grid-cols-4 2xl:grid-cols-6">
         <div
