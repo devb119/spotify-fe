@@ -15,21 +15,26 @@ function LikedSongs() {
     songs: [],
   });
   useEffect(() => {
-    setIsLoading(true);
     if (!user.token) return;
-    getLikedSongs(user.token)
-      .then((data) => {
-        dispatch({
-          type: actionType.SET_LIKED_SONGS,
-          likedSongs: data.data.likedSongs,
-        });
-        setPlaylist({
-          ...playlist,
-          songs: data.data.likedSongs,
-        });
-        console.log(data.data.likedSongs);
-      })
-      .finally(() => setIsLoading(false));
+    if (likedSongs) {
+      setPlaylist({ ...playlist, songs: likedSongs });
+      setIsLoading(false);
+    } else {
+      setIsLoading(true);
+      getLikedSongs(user.token)
+        .then((data) => {
+          dispatch({
+            type: actionType.SET_LIKED_SONGS,
+            likedSongs: data.data.likedSongs,
+          });
+          setPlaylist({
+            ...playlist,
+            songs: data.data.likedSongs,
+          });
+          console.log(data.data.likedSongs);
+        })
+        .finally(() => setIsLoading(false));
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, user.token, likedSongs?.length]);
   return (

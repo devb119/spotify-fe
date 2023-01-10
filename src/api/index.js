@@ -238,3 +238,18 @@ export const getHomeSections = async () => {
     console.log(error);
   }
 };
+
+// add song to playlist
+
+export const addSongToPlaylist = async (playlistId, songId, token) => {
+  try {
+    const url = `${BASE_URL}/playlists/${playlistId}/${songId}`;
+    const res = await axios.post(url, null, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    console.log(res);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

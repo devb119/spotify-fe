@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { HiOutlineClock } from "react-icons/hi";
-import { getAllSongs, getPlaylist } from "../api";
+import { addSongToPlaylist, getAllSongs, getPlaylist } from "../api";
 import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
 import SongRow from "./SongRow";
@@ -12,10 +12,9 @@ import { PlayListCover } from "./PlaylistPage";
 import SongRowSearch from "./SongRowSearch";
 import DotFlashing from "./DotFlashing";
 import Icon from "../assets/img/Icon";
-function Search({ query, handleInputOnchange, songs }) {
+function Search({ query, handleInputOnchange, songs, addToPlaylist }) {
   return (
     <>
-      {/* Làm phần search */}
       <div className="p-8">
         <form>
           <label
@@ -48,7 +47,11 @@ function Search({ query, handleInputOnchange, songs }) {
         ) : (
           <div>
             {songs.map((s, index) => (
-              <SongRowSearch song={s} key={index}></SongRowSearch>
+              <SongRowSearch
+                song={s}
+                key={index}
+                addClicked={() => addToPlaylist(s)}
+              ></SongRowSearch>
             ))}
           </div>
         )}
@@ -62,6 +65,21 @@ function Playlist() {
   const [playlist, setPlaylist] = React.useState({});
   const [loading, setLoading] = React.useState(true);
   const [{ user, query }, dispatch] = useStateValue();
+  const addToPlaylist = (song) => {
+    console.log("add");
+    if (playlist.songs.includes(song)) return;
+    else {
+      addSongToPlaylist(id, song._id, user.token)
+        .then((data) => {
+          console.log(data);
+          setPlaylist(data.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {});
+    }
+  };
   useEffect(() => {
     setLoading(true);
     getPlaylist(user.token, id)
@@ -69,7 +87,7 @@ function Playlist() {
         setPlaylist({ ...res.data, imageURL: Icon.plain });
       })
       .finally(() => setLoading(false));
-  }, [id]);
+  }, [id, playlist.length]);
   useEffect(() => {
     if (query) {
       getAllSongs(query).then((data) => setSongs(data.data));
@@ -152,6 +170,7 @@ function Playlist() {
             handleInputOnchange={handleInputOnchange}
             query={query}
             songs={songs}
+            addToPlaylist={addToPlaylist}
           ></Search>
         </>
       )}

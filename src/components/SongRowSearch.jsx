@@ -6,7 +6,7 @@ import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
 import Equalizer from "./Equalizer";
 
-function SongRowSearch({ song }) {
+function SongRowSearch({ song, addClicked }) {
   const [isHovered, setIsHovered] = React.useState(false);
   const [{ isSongPlaying, currentSong }, dispatch] = useStateValue();
 
@@ -83,7 +83,10 @@ function SongRowSearch({ song }) {
       <div className="col-span-2 text-left"></div>
       <div className="col-span-1 text-center"></div>
       <div className="col-span-1 text-center flex items-center">
-        <button className="bg-transparent text-white border-[#e4e1e1] border-[0.5px] hover:border-2 font-bold py-2 px-4 rounded-full">
+        <button
+          onClick={addClicked}
+          className="bg-transparent text-white border-[#e4e1e1] border-[0.5px] hover:border-2 font-bold py-2 px-4 rounded-full"
+        >
           Add
         </button>
       </div>
