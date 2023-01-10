@@ -5,6 +5,7 @@ import { getAllSongs, getHomeSections } from "../api";
 import DotFlashing from "./DotFlashing";
 import MusicCard from "./MusicCard";
 import MusicCard2 from "./MusicCard2";
+import ArtistsCard from "./ArtistsCard";
 import { useNavigate, useParams } from "react-router-dom";
 
 const myPlaylist = [
@@ -43,11 +44,23 @@ const myPlaylist = [
 export const SongContainer = ({ title, songs }) => (
   <div className="mb-8">
     <p className="mb-4 font-bold text-white text-xl">{title}</p>
-    <div className="flex items-center gap-8 flex-wrap">
+    {title === "Songs" && <div className="flex items-center gap-8 flex-wrap">
       {songs.map((song) => (
         <MusicCard key={song._id} song={song} />
       ))}
-    </div>
+    </div>}
+    {title === "Artists" &&  <div className="flex items-center gap-8 flex-wrap">
+      {songs.map((song) => (
+        <ArtistsCard key={song._id} artist={song} />
+      ))}
+    </div> }
+    {title === "Albums" && <div className="flex items-center gap-8 flex-wrap">
+      {songs.map((song) => (
+        <MusicCard key={song._id} song={song} type = "albums" />
+      ))}
+    </div>}
+  
+    
   </div>
 );
 

@@ -51,7 +51,7 @@ function MusicCard({ song, type = "songs" }) {
               })
               .join(", ")}
           {type === "playlists" && `by ${user.data.name}`}
-          {type === "albums" && song.description}
+          {type === "albums" && song.section.name}
         </p>
       </div>
       <div
