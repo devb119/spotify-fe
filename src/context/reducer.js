@@ -9,7 +9,6 @@ export const actionType = {
   SET_MINI_PLAYER: "SET_MINI_PLAYER",
   SET_ALL_CATEGORIES: "SET_ALL_CATEGORIES",
   SET_QUERY: "SET_QUERY",
-  // SET_SEARCH_TYPE: "SET_SEARCH_TYPE",
   SET_CURRENT_COLOR: "SET_CURRENT_COLOR",
 };
 
@@ -42,8 +41,6 @@ const reducer = (state, action) => {
       return { ...state, currentSong: action.currentSong };
     case actionType.SET_QUERY:
       return { ...state, query: action.query };
-    // case actionType.SET_SEARCH_TYPE:
-    //   return { ...state, searchType: action.searchType };
     case actionType.SET_PLAYLISTS:
       return { ...state, playlists: action.playlists };
     case actionType.SET_CURRENT_COLOR:

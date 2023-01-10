@@ -21,7 +21,7 @@ function LikedSongs() {
       .then((data) => {
         dispatch({
           type: actionType.SET_LIKED_SONGS,
-          likedSongs: data.data.likedSongs.map((el) => el._id),
+          likedSongs: data.data.likedSongs,
         });
         setPlaylist({
           ...playlist,

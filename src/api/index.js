@@ -25,15 +25,15 @@ export const getAllUsers = async () => {
   }
 };
 
-export const getAllArtists = async () => {
-  try {
-    const res = await axios.get(`${BASE_URL}/artists`);
-    return res.data;
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
-};
+// export const getAllArtists = async () => {
+//   try {
+//     const res = await axios.get(`${BASE_URL}/artists`);
+//     return res.data;
+//   } catch (error) {
+//     console.log(error);
+//     return null;
+//   }
+// };
 export const getArtist = async (id) => {
   try {
     const res = await axios.get(`${BASE_URL}/artists/${id}`);
@@ -44,15 +44,15 @@ export const getArtist = async (id) => {
   }
 };
 
-export const getAllAlbums = async () => {
-  try {
-    const res = await axios.get(`${BASE_URL}/albums`);
-    return res.data;
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
-};
+// export const getAllAlbums = async () => {
+//   try {
+//     const res = await axios.get(`${BASE_URL}/albums`);
+//     return res.data;
+//   } catch (error) {
+//     console.log(error);
+//     return null;
+//   }
+// };
 
 export const searchSongByName = async (name) => {
   try {
@@ -79,6 +79,39 @@ export const getAllSongs = async (name) => {
     return null;
   }
 };
+
+export const getAllArtists = async (name) => {
+  try {
+    let queryString = "";
+    if (name) {
+      queryString = `${BASE_URL}/artists?name=${name}`;
+    } else {
+      queryString = `${BASE_URL}/artists`;
+    }
+    const res = await axios.get(queryString);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const getAllAlbums = async (name) => {
+  try {
+    let queryString = "";
+    if (name) {
+      queryString = `${BASE_URL}/albums?name=${name}`;
+    } else {
+      queryString = `${BASE_URL}/albums`;
+    }
+    const res = await axios.get(queryString);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
 export const getSong = async (id) => {
   try {
     const res = await axios.get(`${BASE_URL}/songs/${id}`);

@@ -8,6 +8,7 @@ import { actionType } from "../context/reducer";
 import DotFlashing from "./DotFlashing";
 import { useNavigate } from "react-router-dom";
 import MusicCard from "./MusicCard";
+import { getLikedSongs } from "../api";
 
 function CollectionPlaylist() {
   const [showPlay, setShowPlay] = useState(false);
@@ -28,17 +29,28 @@ function CollectionPlaylist() {
           console.log(data.data);
           dispatch({ type: actionType.SET_PLAYLISTS, playlists: data.data });
         })
+
+      getLikedSongs(user.token)
+      .then((data) => {
+        dispatch({
+          type: actionType.SET_LIKED_SONGS,
+          likedSongs: data.data.likedSongs,
+        });
+        console.log(data.data.likedSongs);
+      })
         .finally(() => setIsLoading(false));
     }
   }, [dispatch, token]);
   console.log(playlists);
+  console.log(likedSongs)
+  // console.log(user);
   // console.log(user.data.name)
 
   const showIcon = () => setShowPlay(true);
   const hideIcon = () => setShowPlay(false);
   const navigate = useNavigate();
   return (
-    <div className="p-8 pt-28 ">
+    <div className="p-8 pt-28 mb-56 ">
       <div className="text-white text-xl font-bold mb-5">Playlists</div>
       <div className="grid grid-cols-4 gap-6 mt-4 lg:grid-cols-4 2xl:grid-cols-6">
         <div
@@ -57,10 +69,15 @@ function CollectionPlaylist() {
                 return (
                   <span key={item.id}>
                     <span className="text-white font-semibold text-sm">
-                      {`${item.single} `}
+                      {`${item.name} `}
                     </span>
                     <span className="text-[#d4d1d1] font-semibold text-sm">
-                      {item.artist}・
+                      {item.artist
+                          .map((item) => {
+                            //console.log(item.name)
+                            return item.name;
+                          })
+                          .join(", ")}・
                     </span>
                   </span>
                 );
