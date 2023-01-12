@@ -61,7 +61,7 @@ function CreatePlaylist() {
   };
 
   return (
-    <div>
+    <div className="pb-52">
       {/* Làm phần header */}
       <div className="p-8 pt-12 bg-gradient-to-b from-[#4d4c4c] to-[#1d1c1c]">
         <div className="flex items-center pt-9 text-white ">

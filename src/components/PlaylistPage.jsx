@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
 import { FastAverageColor } from "fast-average-color";
+import { valueDropDown2 } from "../utils/styles";
+import DropDown from "./DropDown";
 const fac = new FastAverageColor();
 export function useAverageColor(dom) {
   React.useEffect(() => {
@@ -24,6 +26,7 @@ export function useAverageColor(dom) {
 export function PlayListCover({ type, playlist = null, song = null }) {
   const [loading, setLoading] = React.useState(true);
   const [gradient, setGradient] = React.useState();
+
 
   React.useEffect(() => {
     setLoading(true);
@@ -108,6 +111,11 @@ export function PlayListCover({ type, playlist = null, song = null }) {
 }
 function PlaylistPage({ playlist, setPlaylist }) {
   const [{ user, query }, dispatch] = useStateValue();
+  const [isActive3, setIsActive3] = React.useState(false);
+
+  const toggleDropDown3 = () => {
+    setIsActive3(!isActive3);
+  };
 
   const toggleLikeSong = (id) => {
     setPlaylist({
@@ -131,11 +139,14 @@ function PlaylistPage({ playlist, setPlaylist }) {
                 className="fill-green-500 mr-5 hover:fill-green-400 hover:scale-105 hover:cursor-pointer"
               ></AiFillPlayCircle>
             )}
+          <div className="flex relative">
+            <DropDown
+              setIsActive={toggleDropDown3}
+              isActive={isActive3}
+              options={valueDropDown2}
+            />
+          </div>
 
-            <BsThreeDots
-              size={32}
-              className="h-54  text-textColor hover:text-white hover:cursor-pointer"
-            ></BsThreeDots>
           </span>
 
           {playlist.songs?.length === 0 ? (

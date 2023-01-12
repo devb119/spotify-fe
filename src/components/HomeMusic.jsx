@@ -113,7 +113,7 @@ function HomeMusic() {
                   </p>
                 )}
               </div>
-              <div className="my-4 flex flex-row gap-6">
+              <div className="my-4 mb-12 flex flex-row gap-6">
                 {s.songs.slice(0, 4).map((e, index) => (
                   <MusicCard song={e} key={index}></MusicCard>
                 ))}

@@ -12,6 +12,8 @@ import { PlayListCover } from "./PlaylistPage";
 import SongRowSearch from "./SongRowSearch";
 import DotFlashing from "./DotFlashing";
 import Icon from "../assets/img/Icon";
+import { valueDropDown2 } from "../utils/styles";
+import DropDown from "./DropDown";
 function Search({ query, handleInputOnchange, songs, addToPlaylist }) {
   return (
     <>
@@ -65,6 +67,11 @@ function Playlist() {
   const [playlist, setPlaylist] = React.useState({});
   const [loading, setLoading] = React.useState(true);
   const [{ user, query }, dispatch] = useStateValue();
+  const [isActive4, setIsActive4] = React.useState(false);
+
+  const toggleDropDown4 = () => {
+    setIsActive4(!isActive4);
+  };
   const addToPlaylist = (song) => {
     console.log("add");
     if (playlist.songs.includes(song)) return;
@@ -129,10 +136,17 @@ function Playlist() {
                   ></AiFillPlayCircle>
                 )}
 
-                <BsThreeDots
+                {/* <BsThreeDots
                   size={32}
                   className="h-54  text-gray-400 hover:text-white hover:cursor-pointer"
-                ></BsThreeDots>
+                ></BsThreeDots> */}
+                <div className="flex relative">
+                    <DropDown
+                      setIsActive={toggleDropDown4}
+                      isActive={isActive4}
+                      options={valueDropDown2}
+                    />
+                </div>
               </span>
 
               {playlist.songs?.length === 0 ? (
