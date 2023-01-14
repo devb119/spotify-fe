@@ -1,16 +1,11 @@
 import React from "react";
-import { BsThreeDots } from "react-icons/bs";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { HiOutlineClock } from "react-icons/hi";
-
 import { BsDot } from "react-icons/bs";
 import SongRow from "./SongRow";
 import { Link } from "react-router-dom";
-import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
 import { FastAverageColor } from "fast-average-color";
-import { valueDropDown2 } from "../utils/styles";
-import DropDown from "./DropDown";
 import Icon from "../assets/img/Icon";
 const fac = new FastAverageColor();
 
@@ -25,7 +20,12 @@ export function useAverageColor(dom) {
       .catch((error) => console.log(error));
   });
 }
-export function PlayListCover({ type, playlist = null, song = null }) {
+export function PlayListCover({
+  type,
+  playlist = null,
+  song = null,
+  imageType = "playlist",
+}) {
   const [loading, setLoading] = React.useState(true);
   const [gradient, setGradient] = React.useState();
   const [{ user }, dispatch] = useStateValue();
@@ -61,23 +61,42 @@ export function PlayListCover({ type, playlist = null, song = null }) {
         ""
       ) : (
         <div
-          style={{
-            background: `linear-gradient(to bottom, ${gradient} )`,
-          }}
+          style={
+            gradient
+              ? {
+                  background: `linear-gradient(to bottom, ${gradient} )`,
+                }
+              : imageType === "likedSongs"
+              ? {
+                  background: `linear-gradient(to bottom, #5a4ba1, #261a49)`,
+                }
+              : {
+                  background: `linear-gradient(to bottom, #3a3a3a, #0f0f0f)`,
+                }
+          }
           className={"p-6 px-8 pt-20"}
         >
           <div className="flex items-center text-white  ">
-            <img
-              src={
-                playlist
-                  ? playlist.songs[0]
-                    ? playlist.songs[0].imageURL
-                    : Icon.plain
-                  : song.imageURL
-              }
-              className="w-60 h-60 drop-shadow-large shadow-black "
-              alt="cover"
-            />
+            {imageType === "playlist" && (
+              <img
+                src={
+                  playlist
+                    ? playlist.songs[0]
+                      ? playlist.songs[0].imageURL
+                      : Icon.plain
+                    : song.imageURL
+                }
+                className="w-60 h-60 drop-shadow-large shadow-black "
+                alt="cover"
+              />
+            )}
+            {imageType === "likedSongs" && (
+              <img
+                src={Icon.like}
+                className="w-60 h-60 drop-shadow-large shadow-black "
+                alt="cover"
+              />
+            )}
             <div className="self-end ml-5">
               <div className="text-xs font-bold">{type}</div>
 
@@ -132,12 +151,6 @@ export function PlayListCover({ type, playlist = null, song = null }) {
   );
 }
 function PlaylistPage({ playlist, setPlaylist }) {
-  const [isActive3, setIsActive3] = React.useState(false);
-
-  const toggleDropDown3 = () => {
-    setIsActive3(!isActive3);
-  };
-
   const toggleLikeSong = (id) => {
     setPlaylist({
       ...playlist,
@@ -148,7 +161,11 @@ function PlaylistPage({ playlist, setPlaylist }) {
   };
   return (
     <div>
-      <PlayListCover type="Playlist" playlist={playlist}></PlayListCover>
+      <PlayListCover
+        type="PLAYLIST"
+        playlist={playlist}
+        imageType="likedSongs"
+      ></PlayListCover>
       <div className="p-8">
         <div>
           <span className="flex mb-12 items-center">

@@ -23,8 +23,8 @@ const listItems = [
 
 function SideBarLibrary() {
   return (
-    <div className="font-bold text-sm bg-black">
-      <div className="bg-black flex ">
+    <div className="font-bold text-sm">
+      <div className=" flex ">
         {listItems.map((item, index) => {
           return (
             <NavLink

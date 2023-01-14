@@ -110,7 +110,7 @@ function HomeMusic() {
                 </h2>
                 {s.songs.length > 4 && (
                   <p
-                    onClick={() => navigate(`/songs/sections/${s.section._id}`)}
+                    onClick={() => navigate(`/songs/sections/${s._id}`)}
                     className="font-semibold text-xs hover:underline tracking-widest text-textColor hover:text-white"
                   >
                     SHOW ALL
