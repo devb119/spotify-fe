@@ -44,23 +44,27 @@ const myPlaylist = [
 export const SongContainer = ({ title, songs }) => (
   <div className="mb-8">
     <p className="mb-4 font-bold text-white text-xl">{title}</p>
-    {title === "Songs" && <div className="flex items-center gap-8 flex-wrap">
-      {songs.map((song) => (
-        <MusicCard key={song._id} song={song} />
-      ))}
-    </div>}
-    {title === "Artists" &&  <div className="flex items-center gap-8 flex-wrap">
-      {songs.map((song) => (
-        <ArtistsCard key={song._id} artist={song} />
-      ))}
-    </div> }
-    {title === "Albums" && <div className="flex items-center gap-8 flex-wrap">
-      {songs.map((song) => (
-        <MusicCard key={song._id} song={song} type = "albums" />
-      ))}
-    </div>}
-  
-    
+    {title === "Songs" && (
+      <div className="flex items-center gap-8 flex-wrap">
+        {songs.map((song) => (
+          <MusicCard key={song._id} song={song} />
+        ))}
+      </div>
+    )}
+    {title === "Artists" && (
+      <div className="flex items-center gap-8 flex-wrap">
+        {songs.map((song) => (
+          <ArtistsCard key={song._id} artist={song} />
+        ))}
+      </div>
+    )}
+    {title === "Albums" && (
+      <div className="flex items-center gap-8 flex-wrap">
+        {songs.map((song) => (
+          <MusicCard key={song._id} song={song} type="albums" />
+        ))}
+      </div>
+    )}
   </div>
 );
 
@@ -99,7 +103,7 @@ function HomeMusic() {
       ) : (
         <>
           {sections.map((s) => (
-            <>
+            <div key={s._id}>
               <div className="flex justify-between text-white">
                 <h2 className="font-bold text-2xl hover:underline">
                   {s.section.name}
@@ -118,7 +122,7 @@ function HomeMusic() {
                   <MusicCard song={e} key={index}></MusicCard>
                 ))}
               </div>
-            </>
+            </div>
           ))}
         </>
       )}
