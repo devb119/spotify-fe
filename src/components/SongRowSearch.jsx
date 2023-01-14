@@ -79,7 +79,7 @@ function SongRowSearch({ song }) {
           </div>
         </div>
       </div>
-      <div className="col-span-3 text-left">{song.album.name}</div>
+      <div className="col-span-3 text-left">{song.album?.name}</div>
       <div className="col-span-2 text-left"></div>
       <div className="col-span-1 text-center"></div>
       <div className="col-span-1 text-center flex items-center">
