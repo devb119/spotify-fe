@@ -76,7 +76,7 @@ export function PlayListCover({ type, playlist = null, song = null }) {
                   : song.imageURL
               }
               className="w-60 h-60 drop-shadow-large shadow-black "
-              alt="cover image"
+              alt="cover"
             />
             <div className="self-end ml-5">
               <div className="text-xs font-bold">{type}</div>
@@ -160,13 +160,6 @@ function PlaylistPage({ playlist, setPlaylist }) {
                 className="fill-green-500 mr-5 hover:fill-green-400 hover:scale-105 hover:cursor-pointer"
               ></AiFillPlayCircle>
             )}
-            <div className="flex relative">
-              <DropDown
-                setIsActive={toggleDropDown3}
-                isActive={isActive3}
-                options={valueDropDown2}
-              />
-            </div>
           </span>
 
           {playlist.songs?.length === 0 ? (
