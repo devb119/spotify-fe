@@ -13,7 +13,7 @@ import { useStateValue } from "../context/StateProvider";
 import SongRow from "./SongRow";
 import { FiSearch } from "react-icons/fi";
 import { useNavigate, useParams } from "react-router-dom";
-import { PlayListCover } from "./PlaylistPage";
+import { PlayListCover } from "./LikedSongList";
 import SongRowSearch from "./SongRowSearch";
 import DotFlashing from "./DotFlashing";
 import Icon from "../assets/img/Icon";
@@ -72,7 +72,8 @@ function Playlist() {
   const [songs, setSongs] = React.useState([]);
   const [playlist, setPlaylist] = React.useState({});
   const [loading, setLoading] = React.useState(true);
-  const [{ user, query }, dispatch] = useStateValue();
+  const [{ user, query, isSongPlaying, currentSong }, dispatch] =
+    useStateValue();
   const [isActive4, setIsActive4] = React.useState(false);
   const [selectedRow, setSelectedRow] = React.useState(false);
   const navigate = useNavigate();
@@ -128,7 +129,23 @@ function Playlist() {
       ),
     });
   };
-
+  const play = (playlist) => {
+    if (!isSongPlaying) {
+      dispatch({
+        type: actionType.SET_IS_SONG_PLAYING,
+        isSongPlaying: true,
+      });
+    }
+    if (
+      playlist.songs.filter((song) => song._id === currentSong?._id).length ===
+      0
+    ) {
+      dispatch({
+        type: actionType.SET_CURRENT_SONG,
+        currentSong: playlist.songs[0],
+      });
+    }
+  };
   const handleDeletePlaylist = async () => {
     await deletePlaylist(id, user.token);
     getMyPlaylists(user.token)
@@ -153,6 +170,7 @@ function Playlist() {
                   ""
                 ) : (
                   <AiFillPlayCircle
+                    onClick={() => play(playlist)}
                     size={60}
                     className="fill-green-500 mr-5 hover:fill-green-400 hover:scale-105 hover:cursor-pointer"
                   ></AiFillPlayCircle>

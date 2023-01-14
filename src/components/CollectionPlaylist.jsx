@@ -13,14 +13,33 @@ import { getLikedSongs } from "../api";
 function CollectionPlaylist() {
   const [showPlay, setShowPlay] = useState(false);
 
-  const [{ user, playlists, likedSongs }, dispatch] = useStateValue();
+  const [
+    { user, playlists, likedSongs, isSongPlaying, currentSong },
+    dispatch,
+  ] = useStateValue();
   const [isLoading, setIsLoading] = useState(true);
 
   const token = useMemo(() => {
     if (user) return user.token;
     else return null;
   }, [user]);
-
+  const play = () => {
+    if (!isSongPlaying) {
+      dispatch({
+        type: actionType.SET_IS_SONG_PLAYING,
+        isSongPlaying: true,
+      });
+    }
+    if (
+      likedSongs.filter((song) => song._id === currentSong?._id).length === 0
+    ) {
+      // alert("play");
+      dispatch({
+        type: actionType.SET_CURRENT_SONG,
+        currentSong: likedSongs[0],
+      });
+    }
+  };
   useEffect(() => {
     if (token) {
       setIsLoading(true);
@@ -93,11 +112,12 @@ function CollectionPlaylist() {
               </div>
 
               <div
-                className={`h-12 w-12 bg-green-500 flex justify-center items-center rounded-full absolute right-7 bottom-4 ${
+                className={`h-12 w-12 bg-green-500 flex justify-center hover:cursor-pointer items-center rounded-full absolute right-7 bottom-4 ${
                   showPlay ? "opacity-100 -translate-y-3" : "opacity-0"
                 } transition-all duration-200`}
+                onClick={() => play()}
               >
-                <GrPlayFill className="text-xl" />
+                <GrPlayFill className="text-xl " />
               </div>
             </div>
             {playlists.map((item) => {

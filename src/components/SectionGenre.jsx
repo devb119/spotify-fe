@@ -6,6 +6,7 @@ import DotFlashing from "./DotFlashing";
 import MusicCard from "./MusicCard";
 
 function Section({ section }) {
+  console.log(section);
   const [songs, setSongs] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(true);
   const navigate = useNavigate();

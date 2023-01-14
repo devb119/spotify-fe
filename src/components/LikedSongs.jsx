@@ -1,4 +1,4 @@
-import PlaylistPage from "./PlaylistPage";
+import PlaylistPage from "./LikedSongList";
 import React, { useEffect, useState } from "react";
 import { getLikedSongs } from "../api";
 import { actionType } from "../context/reducer";
