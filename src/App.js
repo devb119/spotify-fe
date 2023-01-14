@@ -41,32 +41,32 @@ const App = () => {
         });
         // If the token is expired, immediately redirect to login page
       } else {
-        dispatch({
-          type: actionType.SET_USER,
-          user: {
-            data: {
-              _id: "6367da53f36d4f01dd4aefb2",
-              name: "Đức Anh Nguyễn",
-              email: "ducanh11092001@gmail.com",
-              imageURL:
-                "https://lh3.googleusercontent.com/a/ALm5wu2vSZScN5x9hq5XLhDcvLM7KF-HX4LiBhpqaX1DrQ=s96-c",
-              userId: "yUMocIXEsjRFpalpflzaLpNgHd73",
-              emailVerified: true,
-              role: "admin",
-              authTime: "1672840090",
-              createdAt: "2022-11-06T16:01:23.938Z",
-              updatedAt: "2023-01-04T15:51:03.826Z",
-              __v: 0,
-              likedSongs: ["636f4e6523edd55d9eb1d3b0"],
-            },
-            token:
-              "eyJhbGciOiJSUzI1NiIsImtpZCI6ImNlOWI4ODBmODE4MmRkYTU1N2Y3YzcwZTIwZTRlMzcwZTNkMTI3NDciLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoixJDhu6ljIEFuaCBOZ3V54buFbiIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BTG01d3UydlNaU2NONXg5aHE1WExoRGN2TE03S0YtSFg0TGlCaHBxYVgxRHJRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3Nwb3RpZnktYXBwLWIzOGU0IiwiYXVkIjoic3BvdGlmeS1hcHAtYjM4ZTQiLCJhdXRoX3RpbWUiOjE2NzI5OTU2NTAsInVzZXJfaWQiOiJ5VU1vY0lYRXNqUkZwYWxwZmx6YUxwTmdIZDczIiwic3ViIjoieVVNb2NJWEVzalJGcGFscGZsemFMcE5nSGQ3MyIsImlhdCI6MTY3MzM3MDQ1MiwiZXhwIjoxNjczMzc0MDUyLCJlbWFpbCI6ImR1Y2FuaDExMDkyMDAxQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7Imdvb2dsZS5jb20iOlsiMTA2NDUzNzM1Mjc5NTAxNzMwMjM1Il0sImVtYWlsIjpbImR1Y2FuaDExMDkyMDAxQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.BN8c5a0ktPTNtRjEwigi2c1x7WdlM5j0iu6AuLTn-YfG8xH1nqyTdw2EAVt9b6XrHw_3rDkw-VjSURiIXl62w_6b5UXAgqumFTIaYotd3ik0QG6c6unGWFEcJfrx8rPRONAQgPMREsPqxemq0vLcI27Eh59DehKbjuke3B2wxB4mUVv-dPQc0FEHNgnanMATU1JIeihLOyCFkr3UA4qOY8O-K31w9cQfQbJMkXJBB2UnnfCewIfyKt6fxymXp3UYKvgABCVireYeDguCoIwQj18np2GkBD7XcgmDYJODh0SKcELW33TT_-Nr7HW78_hkIou6gCIDq3FqiS2u8ktUVw",
-          },
-        });
+        // dispatch({
+        //   type: actionType.SET_USER,
+        //   user: {
+        //     data: {
+        //       _id: "6367da53f36d4f01dd4aefb2",
+        //       name: "Đức Anh Nguyễn",
+        //       email: "ducanh11092001@gmail.com",
+        //       imageURL:
+        //         "https://lh3.googleusercontent.com/a/ALm5wu2vSZScN5x9hq5XLhDcvLM7KF-HX4LiBhpqaX1DrQ=s96-c",
+        //       userId: "yUMocIXEsjRFpalpflzaLpNgHd73",
+        //       emailVerified: true,
+        //       role: "admin",
+        //       authTime: "1672840090",
+        //       createdAt: "2022-11-06T16:01:23.938Z",
+        //       updatedAt: "2023-01-04T15:51:03.826Z",
+        //       __v: 0,
+        //       likedSongs: ["636f4e6523edd55d9eb1d3b0"],
+        //     },
+        //     token:
+        //       "eyJhbGciOiJSUzI1NiIsImtpZCI6ImY1NWU0ZDkxOGE0ODY0YWQxMzUxMDViYmRjMDEwYWY5Njc5YzM0MTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoixJDhu6ljIEFuaCBOZ3V54buFbiIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BTG01d3UydlNaU2NONXg5aHE1WExoRGN2TE03S0YtSFg0TGlCaHBxYVgxRHJRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3Nwb3RpZnktYXBwLWIzOGU0IiwiYXVkIjoic3BvdGlmeS1hcHAtYjM4ZTQiLCJhdXRoX3RpbWUiOjE2NzI5OTU2NTAsInVzZXJfaWQiOiJ5VU1vY0lYRXNqUkZwYWxwZmx6YUxwTmdIZDczIiwic3ViIjoieVVNb2NJWEVzalJGcGFscGZsemFMcE5nSGQ3MyIsImlhdCI6MTY3MzcwMjg5OSwiZXhwIjoxNjczNzA2NDk5LCJlbWFpbCI6ImR1Y2FuaDExMDkyMDAxQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7Imdvb2dsZS5jb20iOlsiMTA2NDUzNzM1Mjc5NTAxNzMwMjM1Il0sImVtYWlsIjpbImR1Y2FuaDExMDkyMDAxQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.NjWOgKMm7Qqz9jH8AV2moqx7OOYKUOMwKzewxN-ujQpMPUAcXVcX2qjqgvSBLRyFdFhj2dglDXv84Y0HU5ybQo3XowPdxeL4tKz2tea2_dLekBwkl19if6400YGVpRxIK8SKb4qvx2W9v5Q7CvInp5Jy_UxX89VHhhphz8l-wC9CiE_zLuAs5C16g1kkDqHFyHHtj3oHPIkCCEB8cMHaG7FThyKBLY-HtNi0gkjUgwKvCvKL4Zrv-cB9C_4D-_2NYb2gpNwqMRryMjXwteI6JGMU_8RZGx2YdMYnCz6HyFTQ2ski2modM2kyrc55z8QCpcdSOqI6gKabLOBOVY08BA",
+        //   },
+        // });
         setAuth(true);
         window.localStorage.setItem("auth", "true");
-        // dispatch({ type: actionType.SET_USER, user: null });
-        //  navigate("/login");
+        dispatch({ type: actionType.SET_USER, user: null });
+        navigate("/login");
       }
     });
   }, [navigate, fireBaseAuth, dispatch]);

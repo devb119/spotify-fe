@@ -11,7 +11,9 @@ import { useStateValue } from "../context/StateProvider";
 import { FastAverageColor } from "fast-average-color";
 import { valueDropDown2 } from "../utils/styles";
 import DropDown from "./DropDown";
+import Icon from "../assets/img/Icon";
 const fac = new FastAverageColor();
+
 export function useAverageColor(dom) {
   React.useEffect(() => {
     fac
@@ -26,18 +28,28 @@ export function useAverageColor(dom) {
 export function PlayListCover({ type, playlist = null, song = null }) {
   const [loading, setLoading] = React.useState(true);
   const [gradient, setGradient] = React.useState();
-
-
+  const [{ user }, dispatch] = useStateValue();
   React.useEffect(() => {
     setLoading(true);
     fac
-      .getColorAsync(playlist ? playlist.imageURL : song.imageURL, {
-        algorithm: "sqrt",
-      })
+      .getColorAsync(
+        playlist
+          ? playlist.songs[0]
+            ? playlist.songs[0].imageURL
+            : Icon.plain
+          : song.imageURL,
+        {
+          algorithm: "sqrt",
+        }
+      )
       .then((color) => {
         console.log(color);
         setGradient(
-          `p-6 px-8 pt-20 bg-gradient-to-b from-[${color.hex}] to-[#43434318]`
+          `${color.hex}` +
+            "," +
+            `rgba(${color.value[0] - 80},${color.value[1] - 80},${
+              color.value[2] - 80
+            },${color.value[3] - 80})`
         );
       })
       .catch((error) => console.log(error))
@@ -49,16 +61,21 @@ export function PlayListCover({ type, playlist = null, song = null }) {
         ""
       ) : (
         <div
-          className={
-            gradient
-              ? gradient
-              : "p-6 px-8 pt-20 bg-gradient-to-b from-neutral-600 to-neutral-900"
-          }
+          style={{
+            background: `linear-gradient(to bottom, ${gradient} )`,
+          }}
+          className={"p-6 px-8 pt-20"}
         >
           <div className="flex items-center text-white  ">
             <img
-              src={playlist ? playlist.imageURL : song.imageURL}
-              className="w-60 h-60 drop-shadow-large shardow-black"
+              src={
+                playlist
+                  ? playlist.songs[0]
+                    ? playlist.songs[0].imageURL
+                    : Icon.plain
+                  : song.imageURL
+              }
+              className="w-60 h-60 drop-shadow-large shadow-black "
               alt="cover image"
             />
             <div className="self-end ml-5">
@@ -77,13 +94,18 @@ export function PlayListCover({ type, playlist = null, song = null }) {
               <div className="text-xs font-bold">
                 {playlist ? (
                   <div className="flex flex-row  gap-1 items-center">
+                    <img
+                      className="w-6 h-6 mr-1 rounded-full"
+                      src={user.data.imageURL}
+                      alt="creator"
+                    />
                     <Link className="hover:underline">
                       {playlist.creator.name}
                     </Link>
                     {playlist.songs.length > 0 && (
                       <>
                         <BsDot className="text-xl"></BsDot>
-                        <p className="font-bold text-xs">
+                        <p className="font-semibold text-xs">
                           {playlist.songs.length} songs
                         </p>
                       </>
@@ -110,7 +132,6 @@ export function PlayListCover({ type, playlist = null, song = null }) {
   );
 }
 function PlaylistPage({ playlist, setPlaylist }) {
-  const [{ user, query }, dispatch] = useStateValue();
   const [isActive3, setIsActive3] = React.useState(false);
 
   const toggleDropDown3 = () => {
@@ -139,14 +160,13 @@ function PlaylistPage({ playlist, setPlaylist }) {
                 className="fill-green-500 mr-5 hover:fill-green-400 hover:scale-105 hover:cursor-pointer"
               ></AiFillPlayCircle>
             )}
-          <div className="flex relative">
-            <DropDown
-              setIsActive={toggleDropDown3}
-              isActive={isActive3}
-              options={valueDropDown2}
-            />
-          </div>
-
+            <div className="flex relative">
+              <DropDown
+                setIsActive={toggleDropDown3}
+                isActive={isActive3}
+                options={valueDropDown2}
+              />
+            </div>
           </span>
 
           {playlist.songs?.length === 0 ? (

@@ -8,7 +8,33 @@ import { useStateValue } from "../context/StateProvider";
 import Equalizer from "./Equalizer";
 import { addLikedSongs, deleteLikedSongs } from "../api";
 
-function SongRow({ song, id, type = 1 }) {
+export function DropDown({ options }) {
+  return (
+    <div>
+      <div className="absolute top-10 right-72 z-30 rounded-sm w-44 p-1 bg-neutral-800 text-white font-semibold">
+        {options.map((option) => {
+          return (
+            <div
+              className="hover:bg-neutral-700 p-2 text-left hover:cursor-pointer"
+              onClick={option.action}
+            >
+              {option.text}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+function SongRow({
+  key,
+  song,
+  id,
+  type = 1,
+  selectedRow,
+  setSelectedRow,
+  deleteSongFromPlaylist,
+}) {
   const [isHovered, setIsHovered] = React.useState(false);
   const [{ isSongPlaying, currentSong, likedSongs, user }, dispatch] =
     useStateValue();
@@ -25,6 +51,14 @@ function SongRow({ song, id, type = 1 }) {
     dispatch({ type: actionType.SET_IS_SONG_PLAYING, isSongPlaying: false });
   };
 
+  const options = [
+    {
+      text: "Remove from playlist",
+      action: () => deleteSongFromPlaylist(song._id),
+    },
+    { text: "Go to artist", action: () => {} },
+  ];
+
   async function handleLikeSong() {
     if (likedSongs.find((el) => el._id === song._id)) {
       const newLikedSongs = await deleteLikedSongs(song._id, user.token);
@@ -40,15 +74,28 @@ function SongRow({ song, id, type = 1 }) {
       });
     }
   }
+  function handleClick(e) {
+    if (e.type === "contextmenu") {
+      e.preventDefault();
+      // alert("right click");
+      if (selectedRow !== id) setSelectedRow(id);
+      else setSelectedRow(0);
+    }
+  }
   return (
     <div
-      className="py-2 hover:bg-neutral-800 text-textColor font-medium grid grid-cols-12 text-xs gap-1 items-center rounded"
+      className={
+        selectedRow === id
+          ? "py-2 bg-neutral-600 text-textColor relative font-medium grid grid-cols-12 text-xs gap-1 items-center rounded hover:text-white"
+          : "py-2 hover:bg-neutral-800 text-textColor relative font-medium grid  grid-cols-12 text-xs gap-1 items-center rounded hover:text-white"
+      }
       onMouseEnter={() => {
         setIsHovered(true);
       }}
       onMouseLeave={() => {
         setIsHovered(false);
       }}
+      onContextMenu={handleClick}
     >
       <div>
         <div className="text-center items-center grid justify-center">
@@ -108,6 +155,7 @@ function SongRow({ song, id, type = 1 }) {
           </div>
         </div>
       </div>
+
       {type == 1 && (
         <>
           <div className="col-span-3 text-left">{song.album?.name}</div>
@@ -122,7 +170,9 @@ function SongRow({ song, id, type = 1 }) {
         </>
       )}
 
-      <div className="col-span-1 text-center"> </div>
+      <div className="col-span-1 text-center">
+        {selectedRow === id && <DropDown options={options}></DropDown>}
+      </div>
       <div className="col-span-1 text-center flex items-center">
         {likedSongs.find((el) => el._id === song._id) ? (
           <RiHeartFill

@@ -2,7 +2,12 @@ import React, { useEffect } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { HiOutlineClock } from "react-icons/hi";
-import { addSongToPlaylist, getAllSongs, getPlaylist } from "../api";
+import {
+  addSongToPlaylist,
+  deletePlaylistSong,
+  getAllSongs,
+  getPlaylist,
+} from "../api";
 import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
 import SongRow from "./SongRow";
@@ -68,18 +73,18 @@ function Playlist() {
   const [loading, setLoading] = React.useState(true);
   const [{ user, query }, dispatch] = useStateValue();
   const [isActive4, setIsActive4] = React.useState(false);
-
+  const [selectedRow, setSelectedRow] = React.useState(false);
   const toggleDropDown4 = () => {
     setIsActive4(!isActive4);
   };
   const addToPlaylist = (song) => {
-    console.log("add");
-    if (playlist.songs.includes(song)) return;
+    // console.log("add");
+    if (playlist.songs.filter((s) => s._id === song._id).length !== 0) return;
     else {
       addSongToPlaylist(id, song._id, user.token)
         .then((data) => {
           console.log(data);
-          setPlaylist(data.data);
+          setPlaylist({ ...data.data });
         })
         .catch((error) => {
           console.log(error);
@@ -107,6 +112,12 @@ function Playlist() {
     dispatch({ type: actionType.SET_QUERY, query: value });
     //setQuery(value)
   }
+  const deleteSongFromPlaylist = (songId) => {
+    alert("deleteSongFromPlaylist");
+    deletePlaylistSong(id, songId, user.token).then((data) =>
+      setPlaylist(data.data)
+    );
+  };
   const toggleLikeSong = (id) => {
     setPlaylist({
       ...playlist,
@@ -141,11 +152,11 @@ function Playlist() {
                   className="h-54  text-gray-400 hover:text-white hover:cursor-pointer"
                 ></BsThreeDots> */}
                 <div className="flex relative">
-                    <DropDown
-                      setIsActive={toggleDropDown4}
-                      isActive={isActive4}
-                      options={valueDropDown2}
-                    />
+                  <DropDown
+                    setIsActive={toggleDropDown4}
+                    isActive={isActive4}
+                    options={valueDropDown2}
+                  />
                 </div>
               </span>
 
@@ -173,6 +184,9 @@ function Playlist() {
                         id={index + 1}
                         toggleLikeSong={toggleLikeSong}
                         key={s._id}
+                        selectedRow={selectedRow}
+                        setSelectedRow={setSelectedRow}
+                        deleteSongFromPlaylist={deleteSongFromPlaylist}
                       />
                     ))}
                   </div>

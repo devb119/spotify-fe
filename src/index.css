@@ -86,14 +86,14 @@ body {
 }
 
 .dropdown-item {
-  padding: 9px;
+  padding: 0.75rem 1rem;
   cursor: pointer;
   color: #ffffff;
   transition: all 0.2s;
-  font-size: 0.9rem;
+  font-size: 0.75rem;
 }
 
-.dropdown-item:hover{
+.dropdown-item:hover {
   opacity: 0.6;
 }
 
@@ -237,7 +237,8 @@ body.active-modal {
   font-size: 18px;
 }
 
-.modal, .overlay {
+.modal,
+.overlay {
   width: 100vw;
   height: 100vh;
   top: 0;
@@ -248,7 +249,7 @@ body.active-modal {
 }
 
 .overlay {
-  background-color: rgba(0,0,0,.7);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .modal-content {
