@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
-import { FaCrown } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
 import { useStateValue } from "../context/StateProvider";
 import { app } from "../config/firebase.config";
@@ -8,6 +7,7 @@ import { getAuth } from "firebase/auth";
 import { motion } from "framer-motion";
 import { actionType } from "../context/reducer";
 import SideBarLibrary from "./SideBarLibrary";
+import { getLikedSongs } from "../api";
 import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
 
 function Header() {
@@ -38,6 +38,17 @@ function Header() {
     const { value } = e.target;
     dispatch({ type: actionType.SET_QUERY, query: value });
   }
+
+  useEffect(() => {
+    if (user?.token) {
+      getLikedSongs(user.token).then((data) =>
+        dispatch({
+          type: actionType.SET_LIKED_SONGS,
+          likedSongs: data.data.likedSongs,
+        })
+      );
+    }
+  }, [dispatch, user?.token]);
 
   // function handleOptionOnchange(e) {
   //   const { value } = e.target;
