@@ -10,7 +10,6 @@ export const isActiveStyles2 =
 export const isNotActiveStyles2 =
   "text-lg mx-3 text-headingColor font-semibold duration-100 transition-all ease-in-out";
 
-
 export const bgColors = [
   "#e9e2ff",
   "#fae2ff",
@@ -20,6 +19,6 @@ export const bgColors = [
   "#ffffe2",
 ];
 
- export const valueDropDown1 = ["Change photo", "Remove photo"]
+export const valueDropDown1 = ["Change photo", "Remove photo"];
 
- export const valueDropDown2 = ["Edit info", "Delete"]
+export const valueDropDown2 = ["Edit details", "Delete"];

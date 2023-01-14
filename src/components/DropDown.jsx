@@ -1,7 +1,13 @@
 import React from "react";
 import { BsThreeDots } from "react-icons/bs";
 
-export function DropDown({ isActive, setIsActive, options = [], type }) {
+export function DropDown({
+  isActive,
+  setIsActive,
+  options = [],
+  type,
+  onClick = [],
+}) {
   // const [isActive, setIsActive] = useState(false);
 
   return (
@@ -17,8 +23,12 @@ export function DropDown({ isActive, setIsActive, options = [], type }) {
       </div>
       {isActive && (
         <div className="absolute z-1 top-0 left-0 mt-10 rounded-sm w-[160px] bg-[#282828] font-semibold">
-          {options.map((option) => {
-            return <div className="dropdown-item">{option}</div>;
+          {options.map((option, i) => {
+            return (
+              <div key={option} className="dropdown-item" onClick={onClick[i]}>
+                {option}
+              </div>
+            );
           })}
 
           {/* <div className="dropdown-item">

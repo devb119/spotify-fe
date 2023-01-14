@@ -1,24 +1,25 @@
 import React, { useEffect } from "react";
-import { BsThreeDots } from "react-icons/bs";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { HiOutlineClock } from "react-icons/hi";
 import {
   addSongToPlaylist,
   deletePlaylistSong,
   getAllSongs,
+  getMyPlaylists,
   getPlaylist,
 } from "../api";
 import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
 import SongRow from "./SongRow";
 import { FiSearch } from "react-icons/fi";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { PlayListCover } from "./PlaylistPage";
 import SongRowSearch from "./SongRowSearch";
 import DotFlashing from "./DotFlashing";
 import Icon from "../assets/img/Icon";
 import { valueDropDown2 } from "../utils/styles";
 import DropDown from "./DropDown";
+import { deletePlaylist } from "../api";
 function Search({ query, handleInputOnchange, songs, addToPlaylist }) {
   return (
     <>
@@ -74,6 +75,7 @@ function Playlist() {
   const [{ user, query }, dispatch] = useStateValue();
   const [isActive4, setIsActive4] = React.useState(false);
   const [selectedRow, setSelectedRow] = React.useState(false);
+  const navigate = useNavigate();
   const toggleDropDown4 = () => {
     setIsActive4(!isActive4);
   };
@@ -126,6 +128,15 @@ function Playlist() {
       ),
     });
   };
+
+  const handleDeletePlaylist = async () => {
+    await deletePlaylist(id, user.token);
+    getMyPlaylists(user.token)
+      .then((data) =>
+        dispatch({ type: actionType.SET_PLAYLISTS, playlists: data.data })
+      )
+      .finally(() => navigate("/collection/playlists"));
+  };
   return (
     <div>
       {loading ? (
@@ -156,6 +167,7 @@ function Playlist() {
                     setIsActive={toggleDropDown4}
                     isActive={isActive4}
                     options={valueDropDown2}
+                    onClick={[null, handleDeletePlaylist]}
                   />
                 </div>
               </span>

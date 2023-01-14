@@ -204,6 +204,17 @@ export const createPlaylist = async (
   }
 };
 
+export const deletePlaylist = async (playlistId, token) => {
+  try {
+    const res = await axios.delete(`${BASE_URL}/playlists/me/${playlistId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const addLikedSongs = async (songId, token) => {
   try {
     const url = `${BASE_URL}/users/likedSongs/${songId}`;
