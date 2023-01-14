@@ -45,28 +45,28 @@ const App = () => {
           type: actionType.SET_USER,
           user: {
             data: {
-              likedSongs: [],
-              _id: "638054ceb53ecf81f8037ce9",
-              name: "Đức Phạm Hồng",
-              email: "ducphamhong2@gmail.com",
+              _id: "6367da53f36d4f01dd4aefb2",
+              name: "Đức Anh Nguyễn",
+              email: "ducanh11092001@gmail.com",
               imageURL:
-                "https://lh3.googleusercontent.com/a/ALm5wu3bW4rSwLFgauxt5fSpfkZPk0ia0s1KEI2JPKkE=s96-c",
-              userId: "fHx87a0F3nMnQlc8JaYwPn9NUzi1",
+                "https://lh3.googleusercontent.com/a/ALm5wu2vSZScN5x9hq5XLhDcvLM7KF-HX4LiBhpqaX1DrQ=s96-c",
+              userId: "yUMocIXEsjRFpalpflzaLpNgHd73",
               emailVerified: true,
-              role: "member",
-              authTime: "1673009240",
-              createdAt: "2022-11-25T05:38:22.353Z",
-              updatedAt: "2023-01-07T02:53:34.184Z",
+              role: "admin",
+              authTime: "1672840090",
+              createdAt: "2022-11-06T16:01:23.938Z",
+              updatedAt: "2023-01-04T15:51:03.826Z",
               __v: 0,
+              likedSongs: ["636f4e6523edd55d9eb1d3b0"],
             },
             token:
-              "eyJhbGciOiJSUzI1NiIsImtpZCI6ImNlOWI4ODBmODE4MmRkYTU1N2Y3YzcwZTIwZTRlMzcwZTNkMTI3NDciLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoixJDhu6ljIFBo4bqhbSBI4buTbmciLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNWZTM3hOM0lyQkNScWxJem1vYUNZWkU4YVVwYzlHUUtvaFM5cW09czk2LWMiLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vc3BvdGlmeS1hcHAtYjM4ZTQiLCJhdWQiOiJzcG90aWZ5LWFwcC1iMzhlNCIsImF1dGhfdGltZSI6MTY3MzEwMDAxNiwidXNlcl9pZCI6IjRHSG85WGpIR1NTREQwQmR3OFFxQlhvTjduSzIiLCJzdWIiOiI0R0hvOVhqSEdTU0REMEJkdzhRcUJYb043bksyIiwiaWF0IjoxNjczMTAxNjE1LCJleHAiOjE2NzMxMDUyMTUsImVtYWlsIjoiZHVjcGhhbWhvbmcwNUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMzYwOTQxNjg5MjU5MzQ2MTkzMSJdLCJlbWFpbCI6WyJkdWNwaGFtaG9uZzA1QGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.NGfLnlUTJKg6Ufa7nRzPydv3-74L0O16hAw1TzNM5M84Qz0MKAjDrV0a8MaLVhUFKF_8Gml6hHjKRLbYW-AnYAYIB9X3njNnwqALUlOjCT1ZVpPdcPhM5OrUCTxwklj0WLN29XQbbAqr9TWkfpQdw1iPoiEYDtl5tWdMb6wO-B6O39NlMXP-omDVw7wyqaVht2-36Dk2V1QDOnmioa4a7b648S5v1rob-PnSfX1FmsvlqIBguVA3haxP61_qJ3q1kNjvZkxkrG9Wo68fhLPWLBR6CbcG97vXWabYeoO5_C0L1bhRS-CNq56bL3NLs-azKA0wH_wXuIEbpcBoaicYAQ",
+              "eyJhbGciOiJSUzI1NiIsImtpZCI6ImNlOWI4ODBmODE4MmRkYTU1N2Y3YzcwZTIwZTRlMzcwZTNkMTI3NDciLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoixJDhu6ljIEFuaCBOZ3V54buFbiIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BTG01d3UydlNaU2NONXg5aHE1WExoRGN2TE03S0YtSFg0TGlCaHBxYVgxRHJRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3Nwb3RpZnktYXBwLWIzOGU0IiwiYXVkIjoic3BvdGlmeS1hcHAtYjM4ZTQiLCJhdXRoX3RpbWUiOjE2NzI5OTU2NTAsInVzZXJfaWQiOiJ5VU1vY0lYRXNqUkZwYWxwZmx6YUxwTmdIZDczIiwic3ViIjoieVVNb2NJWEVzalJGcGFscGZsemFMcE5nSGQ3MyIsImlhdCI6MTY3MzM3MDQ1MiwiZXhwIjoxNjczMzc0MDUyLCJlbWFpbCI6ImR1Y2FuaDExMDkyMDAxQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7Imdvb2dsZS5jb20iOlsiMTA2NDUzNzM1Mjc5NTAxNzMwMjM1Il0sImVtYWlsIjpbImR1Y2FuaDExMDkyMDAxQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.BN8c5a0ktPTNtRjEwigi2c1x7WdlM5j0iu6AuLTn-YfG8xH1nqyTdw2EAVt9b6XrHw_3rDkw-VjSURiIXl62w_6b5UXAgqumFTIaYotd3ik0QG6c6unGWFEcJfrx8rPRONAQgPMREsPqxemq0vLcI27Eh59DehKbjuke3B2wxB4mUVv-dPQc0FEHNgnanMATU1JIeihLOyCFkr3UA4qOY8O-K31w9cQfQbJMkXJBB2UnnfCewIfyKt6fxymXp3UYKvgABCVireYeDguCoIwQj18np2GkBD7XcgmDYJODh0SKcELW33TT_-Nr7HW78_hkIou6gCIDq3FqiS2u8ktUVw",
           },
         });
         setAuth(true);
         window.localStorage.setItem("auth", "true");
         // dispatch({ type: actionType.SET_USER, user: null });
-        // navigate("/login");
+        //  navigate("/login");
       }
     });
   }, [navigate, fireBaseAuth, dispatch]);
