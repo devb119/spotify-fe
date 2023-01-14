@@ -5,7 +5,7 @@ import { BiPencil } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
 import { useState } from "react";
 import { createPlaylist, getMyPlaylists } from "../api";
-import { valueDropDown1, valueDropDown2 } from "../utils/styles";
+import { valueDropDown1 } from "../utils/styles";
 import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,6 @@ function CreatePlaylist() {
   const [modal, setModal] = useState(false);
   const [hoverIconModal, setHoverIconModal] = useState(false);
   const [isActive, setIsActive] = useState(false);
-  const [isActive2, setIsActive2] = useState(false);
   const [{ user }, dispatch] = useStateValue();
 
   const navigate = useNavigate();
@@ -26,10 +25,6 @@ function CreatePlaylist() {
 
   const toggleDropDown = () => {
     setIsActive(!isActive);
-  };
-
-  const toggleDropDown2 = () => {
-    setIsActive2(!isActive2);
   };
 
   const toggleModal = () => {
@@ -61,7 +56,7 @@ function CreatePlaylist() {
   };
 
   return (
-    <div className="pb-52">
+    <div className="pb-52 h-screen">
       {/* Làm phần header */}
       <div className="p-8 pt-12 bg-gradient-to-b from-[#4d4c4c] to-[#1d1c1c]">
         <div className="flex items-center pt-9 text-white ">
@@ -101,22 +96,6 @@ function CreatePlaylist() {
           </div>
         </div>
       </div>
-
-      {/* Làm phần search */}
-      <div className="p-8">
-        <div className="flex relative">
-          {/* <BsThreeDots
-            size={32}
-            className="h-54 mr-10 text-textColor hover:text-white hover:cursor-pointer"
-          ></BsThreeDots> */}
-          <DropDown
-            setIsActive={toggleDropDown2}
-            isActive={isActive2}
-            options={valueDropDown2}
-          />
-        </div>
-      </div>
-
       {/* Tạo modal để chỉnh sửa thông tin playlist */}
       {modal && (
         <form className="modal">
