@@ -63,9 +63,6 @@ function Sidebar() {
         .finally(() => setIsLoading(false));
     }
   }, [dispatch, token]);
-  console.log(playlists)
-  //console.log(user.data.name)
-
 
   return (
     <div className="font-bold text-xs bg-black w-64 fixed h-full">
