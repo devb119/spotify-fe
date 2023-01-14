@@ -256,10 +256,8 @@ body.active-modal {
   position: absolute;
   top: 35%;
   left: 50%;
-  width: 524px;
   height: auto;
   transform: translate(-50%, -50%);
-  background-color: #282828;
   padding: 26px 16px;
   border-radius: 6px;
   min-width: 300px;

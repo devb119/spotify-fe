@@ -71,7 +71,7 @@ function CollectionPlaylist() {
       ) : (
         <div className="p-8 pt-28 mb-56 ">
           <div className="text-white text-xl font-bold mb-5">Playlists</div>
-          <div className="grid grid-cols-4 gap-6 mt-4 lg:grid-cols-4 2xl:grid-cols-6">
+          <div className="grid grid-cols-3 gap-4 mt-4 lg:grid-cols-4 2xl:grid-cols-5">
             <div
               className="col-span-2 bg-gradient-to-t from-[#8e8ee5] to-[#450af5] transition-all duration-200 cursor-pointer relative rounded-lg flex justify-center"
               onMouseEnter={showIcon}

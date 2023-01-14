@@ -30,10 +30,6 @@ export function DropDown({
               </div>
             );
           })}
-
-          {/* <div className="dropdown-item">
-              Remove photo
-            </div> */}
         </div>
       )}
     </div>

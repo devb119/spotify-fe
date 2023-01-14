@@ -80,6 +80,17 @@ function Playlist() {
   const toggleDropDown4 = () => {
     setIsActive4(!isActive4);
   };
+
+  const [modal, setModal] = React.useState(false);
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+  if (modal) {
+    document.body.classList.add("active-modal");
+  } else {
+    document.body.classList.remove("active-modal");
+  }
+
   const addToPlaylist = (song) => {
     // console.log("add");
     if (playlist.songs.filter((s) => s._id === song._id).length !== 0) return;
@@ -185,7 +196,7 @@ function Playlist() {
                     setIsActive={toggleDropDown4}
                     isActive={isActive4}
                     options={valueDropDown2}
-                    onClick={[null, handleDeletePlaylist]}
+                    onClick={[null, toggleModal]}
                   />
                 </div>
               </span>
@@ -232,6 +243,38 @@ function Playlist() {
           ></Search>
         </>
       )}
+     {modal && (
+        <form className="modal">
+          <div className="overlay" onClick={toggleModal}></div>
+          <div className="modal-content bg-white w-[420px]">
+              <div className="pb-6 px-4">
+                <div className="text-black text-xl font-bold">
+                  Delete from Library?
+                </div>
+                <div className="text-black text-sm font-bold pt-5 pb-3">
+                 { `This will delete ${playlist.name} from Your Library.`}
+                </div>
+              </div>
+              <div className="flex justify-end">
+                  <button
+                    className="bg-white text-black hover:font-bold font-semibold py-3 px-7 mr-4 rounded-full"
+                    type="button"
+                    onClick={toggleModal}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="bg-[#1ed760] text-black hover:bg-[#1fdf64] font-semibold hover:font-bold mr-4 py-3 px-7 rounded-full"
+                    type="button"
+                    onClick={handleDeletePlaylist}
+                  >
+                    Delete
+                  </button>
+              </div>
+            </div>
+        </form>
+      )}
+
     </div>
   );
 }

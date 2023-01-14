@@ -100,7 +100,7 @@ function CreatePlaylist() {
       {modal && (
         <form className="modal">
           <div className="overlay" onClick={toggleModal}></div>
-          <div className="modal-content">
+          <div className="modal-content bg-[#282828] w-[524px]">
             <div className="flex pb-5">
               <div className="text-white text-xl font-bold">Edit details</div>
               <div
