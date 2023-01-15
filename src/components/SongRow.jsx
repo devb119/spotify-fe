@@ -36,7 +36,7 @@ function SongRow({
   deleteSongFromPlaylist,
 }) {
   const [isHovered, setIsHovered] = React.useState(false);
-  const [{ isSongPlaying, currentSong, likedSongs, user }, dispatch] =
+  const [{ isSongPlaying, currentSong, likedSongs, user, player }, dispatch] =
     useStateValue();
 
   const play = () => {
@@ -48,7 +48,8 @@ function SongRow({
     }
   };
   const pause = () => {
-    dispatch({ type: actionType.SET_IS_SONG_PLAYING, isSongPlaying: false });
+    player.current.audio.current.pause();
+    dispatch({ type: actionType.SET_IS_SONG_PAUSING, isSongPausing: true });
   };
 
   const options = [

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useStateValue } from "../context/StateProvider";
 import { RiPlayListFill } from "react-icons/ri";
 import { motion } from "framer-motion";
@@ -12,6 +12,11 @@ function MusicPlayer() {
   // eslint-disable-next-line no-unused-vars
   const [{ currentSong, miniPlayer }, dispatch] = useStateValue();
   const [isPlaylist, setIsPlaylist] = useState(false);
+  const player = useRef();
+
+  useEffect(() => {
+    dispatch({ type: actionType.SET_PLAYER, player });
+  }, [dispatch]);
 
   // TODO
   // const nextTrack = () => {};
@@ -42,10 +47,12 @@ function MusicPlayer() {
               : currentSong?.name
           }`}</p>
           <p className="text-textColor">
-            {currentSong?.artist.map((item) => {
-              //console.log(item.name)
-              return item.name;
-            }).join(", ")}{" "}
+            {currentSong?.artist
+              .map((item) => {
+                //console.log(item.name)
+                return item.name;
+              })
+              .join(", ")}{" "}
             <span className="text-xs text-textColor font-semibold">
               {`(${currentSong?.category})`}
             </span>
@@ -61,6 +68,7 @@ function MusicPlayer() {
             onPlay={() => console.log(`${currentSong?.name} is playing`)}
             autoPlay={true}
             showSkipControls={true}
+            ref={player}
             // TODO
             // onClickNext={nextTrack}
             // onClickPrevious={previousTrack}
@@ -144,10 +152,12 @@ export const PlaylistCard = () => {
                 {/* <span className="text-base">{song.album}</span> */}
               </p>
               <p className="text-textColor">
-                {song.artist.map((item) => {
-              //console.log(item.name)
-                  return item.name;
-            }).join(", ")}{" "}
+                {song.artist
+                  .map((item) => {
+                    //console.log(item.name)
+                    return item.name;
+                  })
+                  .join(", ")}{" "}
                 <span className="text-sm text-textColor font-semibold">
                   ({song.category})
                 </span>
