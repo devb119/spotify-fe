@@ -92,7 +92,7 @@ function Sidebar() {
         })}
       </div>
       <hr className="border-t-1 border-neutral-700 mx-7 my-2"></hr>
-      <div className="bg-black">
+      <div className="bg-black overflow-auto h-[50%]">
         {isLoading ? (
           <div className="flex justify-center items-center mt-3">
             <DotFlashing />
