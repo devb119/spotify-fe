@@ -97,7 +97,7 @@ function HomeMusic() {
       <SongContainer2 title="Good morning" songs={myPlaylist} />
 
       {isLoading ? (
-        <div className="flex justify-around">
+        <div className="flex h-screen justify-around">
           <DotFlashing></DotFlashing>
         </div>
       ) : (
