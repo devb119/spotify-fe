@@ -13,6 +13,7 @@ import SongPage from "./components/SongPage";
 import CreatePlaylist from "./components/CreatePlaylist";
 import SectionGenre from "./components/SectionGenre";
 import SongSection from "./components/SongSection";
+import ArtistPage from "./components/ArtistPage";
 const LazySearch = React.lazy(() => import("./components/Search"));
 // const LazyLibrary = React.lazy(() => import("./components/DashboardAlbums"));
 // const LazyHome = React.lazy(() => import("./components/DashboardHome"));
@@ -60,7 +61,7 @@ const App = () => {
         //       likedSongs: ["636f4e6523edd55d9eb1d3b0"],
         //     },
         //     token:
-        //       "eyJhbGciOiJSUzI1NiIsImtpZCI6ImY1NWU0ZDkxOGE0ODY0YWQxMzUxMDViYmRjMDEwYWY5Njc5YzM0MTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoixJDhu6ljIEFuaCBOZ3V54buFbiIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BTG01d3UydlNaU2NONXg5aHE1WExoRGN2TE03S0YtSFg0TGlCaHBxYVgxRHJRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3Nwb3RpZnktYXBwLWIzOGU0IiwiYXVkIjoic3BvdGlmeS1hcHAtYjM4ZTQiLCJhdXRoX3RpbWUiOjE2NzI5OTU2NTAsInVzZXJfaWQiOiJ5VU1vY0lYRXNqUkZwYWxwZmx6YUxwTmdIZDczIiwic3ViIjoieVVNb2NJWEVzalJGcGFscGZsemFMcE5nSGQ3MyIsImlhdCI6MTY3MzcwMjg5OSwiZXhwIjoxNjczNzA2NDk5LCJlbWFpbCI6ImR1Y2FuaDExMDkyMDAxQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7Imdvb2dsZS5jb20iOlsiMTA2NDUzNzM1Mjc5NTAxNzMwMjM1Il0sImVtYWlsIjpbImR1Y2FuaDExMDkyMDAxQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.NjWOgKMm7Qqz9jH8AV2moqx7OOYKUOMwKzewxN-ujQpMPUAcXVcX2qjqgvSBLRyFdFhj2dglDXv84Y0HU5ybQo3XowPdxeL4tKz2tea2_dLekBwkl19if6400YGVpRxIK8SKb4qvx2W9v5Q7CvInp5Jy_UxX89VHhhphz8l-wC9CiE_zLuAs5C16g1kkDqHFyHHtj3oHPIkCCEB8cMHaG7FThyKBLY-HtNi0gkjUgwKvCvKL4Zrv-cB9C_4D-_2NYb2gpNwqMRryMjXwteI6JGMU_8RZGx2YdMYnCz6HyFTQ2ski2modM2kyrc55z8QCpcdSOqI6gKabLOBOVY08BA",
+        //       "eyJhbGciOiJSUzI1NiIsImtpZCI6ImY1NWU0ZDkxOGE0ODY0YWQxMzUxMDViYmRjMDEwYWY5Njc5YzM0MTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoixJDhu6ljIEFuaCBOZ3V54buFbiIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BTG01d3UydlNaU2NONXg5aHE1WExoRGN2TE03S0YtSFg0TGlCaHBxYVgxRHJRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3Nwb3RpZnktYXBwLWIzOGU0IiwiYXVkIjoic3BvdGlmeS1hcHAtYjM4ZTQiLCJhdXRoX3RpbWUiOjE2NzI5OTU2NTAsInVzZXJfaWQiOiJ5VU1vY0lYRXNqUkZwYWxwZmx6YUxwTmdIZDczIiwic3ViIjoieVVNb2NJWEVzalJGcGFscGZsemFMcE5nSGQ3MyIsImlhdCI6MTY3Mzc2MjA3MywiZXhwIjoxNjczNzY1NjczLCJlbWFpbCI6ImR1Y2FuaDExMDkyMDAxQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7Imdvb2dsZS5jb20iOlsiMTA2NDUzNzM1Mjc5NTAxNzMwMjM1Il0sImVtYWlsIjpbImR1Y2FuaDExMDkyMDAxQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.bTYgyerJp3NchD8ctG5NEk2Z3L4TV9GuC19g0QwQTA84LWtZmo6I4GdyOkKW7qfgUHJVXCqLhx9C2Z15NxUknez6BwQBQ120zTVcSzdeqEe4rb6-lpDLIiZ1Z5x_wUMC_IW1POcVP9Hn9IRBXNJTfZFeJro1kzEwofP_6-PebJtFv8qMSpkkU6qsCMlwRXnAKFeevlRp1VPp13l4BZ9_qJx_nfR6pbrYIlmc_TvoSDXQamiISV7rYi6nHqaXdZ0ye0oVMC0zQYEEDOnxDhSiA3JezWZtzYnCNCx-D_nc4-jbqSNAs-ffkAVYwkL8w9xI5yFF6Ug_uTEsmZnKGDKyNg",
         //   },
         // });
         setAuth(true);
@@ -112,6 +113,10 @@ const App = () => {
                 </React.Suspense>
               }
             />
+            <Route
+              path="artists/:id"
+              element={<ArtistPage></ArtistPage>}
+            ></Route>
             <Route
               path="songs/sections/:id"
               element={<SongSection></SongSection>}

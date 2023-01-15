@@ -137,9 +137,14 @@ export function PlayListCover({
                       src={song.artist[0].imageURL}
                       alt="artist"
                     />
-                    <Link className="hover:underline">
-                      {song.artist.map((e) => e.name).join(", ")}
-                    </Link>
+                    {song.artist.map((e) => (
+                      <Link
+                        className="hover:underline"
+                        to={`/artists/${e._id}`}
+                      >
+                        {e.name + " "}
+                      </Link>
+                    ))}
                   </div>
                 )}
               </div>
