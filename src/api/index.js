@@ -191,10 +191,15 @@ export const createPlaylist = async (
   name = `Playlist ${Date.now()}`,
   description = "",
   songs = [],
+  imageURL,
   token
 ) => {
+  imageURL =
+    imageURL === ""
+      ? "https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2?v=v2"
+      : imageURL;
   try {
-    const data = { name, description, songs };
+    const data = { name, description, songs, imageURL };
     const res = await axios.post(`${BASE_URL}/playlists/me`, data, {
       headers: { Authorization: `Bearer ${token}` },
     });

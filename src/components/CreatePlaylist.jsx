@@ -4,6 +4,8 @@ import { BsMusicNoteBeamed } from "react-icons/bs";
 import { BiPencil } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
 import { useState } from "react";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { storage } from "../config/firebase.config";
 import { createPlaylist, getMyPlaylists } from "../api";
 import { valueDropDown1 } from "../utils/styles";
 import { actionType } from "../context/reducer";
@@ -15,6 +17,9 @@ function CreatePlaylist() {
   const [modal, setModal] = useState(false);
   const [hoverIconModal, setHoverIconModal] = useState(false);
   const [isActive, setIsActive] = useState(false);
+  const [playlistImg, setPlaylistImg] = useState("");
+  const [progress, setProgress] = useState(0);
+  const [isUploading, setIsUploading] = useState(false);
   const [{ user }, dispatch] = useStateValue();
 
   const navigate = useNavigate();
@@ -41,14 +46,50 @@ function CreatePlaylist() {
     document.body.classList.remove("active-modal");
   }
 
+  const handleUploadFile = (e) => {
+    const uploadedImage = e.target.files[0];
+    setIsUploading(true);
+    const storageRef = ref(
+      storage,
+      `images/${Date.now()}-${uploadedImage.name}`
+    );
+    const uploadTask = uploadBytesResumable(storageRef, uploadedImage);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        setProgress((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref)
+          .then(async (downloadURL) => {
+            setPlaylistImg(downloadURL);
+          })
+          .finally(() => setIsUploading(false));
+      }
+    );
+  };
+
   const handleSavePlaylist = async (e) => {
     e.preventDefault();
     const name = e.target.form[0].value;
     const description = e.target.form[1].value;
-    const newPlaylist = await createPlaylist(name, description, [], user.token);
+    const newPlaylist = await createPlaylist(
+      name,
+      description,
+      [],
+      playlistImg,
+      user.token
+    );
     getMyPlaylists(user.token)
       .then((data) => {
-        dispatch({ type: actionType.SET_PLAYLISTS, playlists: data.data });
+        dispatch({
+          type: actionType.SET_PLAYLISTS,
+          playlists: data.data,
+        });
       })
       .finally(() =>
         navigate(`/playlists/${newPlaylist.data._id}`, { replace: true })
@@ -131,18 +172,34 @@ function CreatePlaylist() {
                 )}
 
                 <div className="flex items-center">
-                  {!hoverIconModal ? (
-                    <BsMusicNoteBeamed className="h-[76px] w-[102px] text-[#787676]" />
+                  {playlistImg === "" ? (
+                    !hoverIconModal ? (
+                      <BsMusicNoteBeamed className="h-[76px] w-[102px] text-[#787676]" />
+                    ) : (
+                      <label className="justify-center flex font-semibold text-white cursor-pointer">
+                        <div className="h-[76px] w-[150px] flex-col justify-center">
+                          <div className="flex justify-center">
+                            <BiPencil className="h-[50px] w-[50px] text-white" />
+                          </div>
+                          <input
+                            type="file"
+                            name="upload-file"
+                            accept="image/*"
+                            className="w-0 h-0"
+                            onChange={handleUploadFile}
+                          />
+                          <p className="flex items-center justify-center">
+                            Choose an image
+                          </p>
+                        </div>
+                      </label>
+                    )
                   ) : (
-                    <div className="h-[76px] w-[150px] flex-col justify-center">
-                      <div className="flex justify-center">
-                        <BiPencil className="h-[50px] w-[50px] text-white" />
-                      </div>
-
-                      <div className="justify-center flex font-semibold text-white">
-                        Choose photo
-                      </div>
-                    </div>
+                    <img
+                      src={playlistImg}
+                      className="w-40"
+                      alt="user's playlist"
+                    />
                   )}
                 </div>
               </div>
@@ -187,8 +244,11 @@ function CreatePlaylist() {
                 className="bg-white text-black hover:bg-[#cbcaca] font-bold py-[10px] px-7 rounded-full"
                 type="button"
                 onClick={handleSavePlaylist}
+                disabled={isUploading}
               >
-                Save
+                {isUploading
+                  ? `Uploading image: ${progress.toFixed(2)}%`
+                  : "Save"}
               </button>
             </div>
 

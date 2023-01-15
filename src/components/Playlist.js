@@ -112,7 +112,10 @@ function Playlist() {
     setLoading(true);
     getPlaylist(user.token, id)
       .then((res) => {
-        setPlaylist({ ...res.data, imageURL: Icon.plain });
+        setPlaylist({
+          ...res.data,
+          imageURL: res.data.imageURL ? res.data.imageURL : Icon.plain,
+        });
       })
       .finally(() => setLoading(false));
   }, [id, playlist.length]);
