@@ -79,13 +79,7 @@ export function PlayListCover({
           <div className="flex items-center text-white  ">
             {imageType === "playlist" && (
               <img
-                src={
-                  playlist
-                    ? playlist.songs[0]
-                      ? playlist.songs[0].imageURL
-                      : Icon.plain
-                    : song.imageURL
-                }
+                src={playlist ? playlist.imageURL : song.imageURL}
                 className="w-60 h-60 drop-shadow-large shadow-black "
                 alt="cover"
               />
