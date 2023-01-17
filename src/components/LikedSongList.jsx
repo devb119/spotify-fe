@@ -28,7 +28,7 @@ export function PlayListCover({
 }) {
   const [loading, setLoading] = React.useState(true);
   const [gradient, setGradient] = React.useState();
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user }] = useStateValue();
   React.useEffect(() => {
     setLoading(true);
     fac
@@ -54,7 +54,7 @@ export function PlayListCover({
       })
       .catch((error) => console.log(error))
       .finally(() => setLoading(false));
-  }, []);
+  }, [song.imageURL]);
   return (
     <div>
       {loading ? (
