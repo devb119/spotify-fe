@@ -27,7 +27,6 @@ export function DropDown({ options }) {
   );
 }
 function SongRow({
-  key,
   song,
   id,
   type = 1,
@@ -36,13 +35,21 @@ function SongRow({
   deleteSongFromPlaylist,
 }) {
   const [isHovered, setIsHovered] = React.useState(false);
-  const [{ isSongPlaying, currentSong, likedSongs, user, player }, dispatch] =
-    useStateValue();
+  const [
+    { isSongPlaying, currentSong, isSongPausing, likedSongs, user, player },
+    dispatch,
+  ] = useStateValue();
 
   const play = () => {
     if (!isSongPlaying) {
       dispatch({ type: actionType.SET_IS_SONG_PLAYING, isSongPlaying: true });
+    } else {
+      player.current.audio.current.play();
     }
+    dispatch({
+      type: actionType.SET_IS_SONG_PAUSING,
+      isSongPausing: false,
+    });
     if (currentSong?._id !== song._id) {
       dispatch({ type: actionType.SET_CURRENT_SONG, currentSong: song });
     }
@@ -113,10 +120,21 @@ function SongRow({
             </div>
           ) : (
             <div>
-              {isHovered ? (
-                <BiPause className="text-3xl " onClick={pause}></BiPause>
+              {!isSongPausing ? (
+                isHovered ? (
+                  <BiPause className="text-3xl " onClick={pause}></BiPause>
+                ) : (
+                  <Equalizer></Equalizer>
+                )
+              ) : !isHovered ? (
+                <p className="text-base text-green-600" onClick={play}>
+                  {id}
+                </p>
               ) : (
-                <Equalizer></Equalizer>
+                <BsFillPlayFill
+                  className="text-2xl "
+                  onClick={play}
+                ></BsFillPlayFill>
               )}
             </div>
           )}

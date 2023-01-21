@@ -10,7 +10,8 @@ import { IoMusicalNote, IoArrowRedo } from "react-icons/io5";
 
 function MusicPlayer() {
   // eslint-disable-next-line no-unused-vars
-  const [{ currentSong, miniPlayer }, dispatch] = useStateValue();
+  const [{ currentSong, miniPlayer, isSongPausing }, dispatch] =
+    useStateValue();
   const [isPlaylist, setIsPlaylist] = useState(false);
   const player = useRef();
 
@@ -65,7 +66,19 @@ function MusicPlayer() {
         <div className="flex-1">
           <AudioPlayer
             src={currentSong?.songURL}
-            onPlay={() => console.log(`${currentSong?.name} is playing`)}
+            onPlay={() => {
+              dispatch({
+                type: actionType.SET_IS_SONG_PAUSING,
+                isSongPausing: false,
+              });
+              //  console.log(`${currentSong?.name} is playing`);
+            }}
+            onPause={() => {
+              dispatch({
+                type: actionType.SET_IS_SONG_PAUSING,
+                isSongPausing: true,
+              });
+            }}
             autoPlay={true}
             showSkipControls={true}
             ref={player}

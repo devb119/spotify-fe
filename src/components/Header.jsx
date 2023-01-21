@@ -77,43 +77,6 @@ function Header() {
             placeholder={"What do you want to listen to ?"}
             onChange={handleInputOnchange}
           />
-
-          {/* <div className="select absolute top-0 left-40 right-0 w-25 h-10 ml-40 bg-white rounded-r-full text-ellipsis text-[#635e5e] text-sm font-semibold outline-none  border-l-2 border-black-900">
-              <select
-                name="format"
-                id="format"
-                defaultValue={"DEFAULT"}
-                className="w-25 h-10 rounded-r-full appearance-none "
-                value={searchType}
-                onChange={handleOptionOnchange}
-              >
-                <option
-                  value="DEFAULT"
-                  disabled
-                  className=" text-[#120d0d] text-sm font-semibold"
-                >
-                  Choose option
-                </option>
-                <option
-                  value="songs"
-                  className="text-[#796c6c] text-sm font-semibold p-3"
-                >
-                  Songs
-                </option>
-                <option
-                  value="artists"
-                  className="text-[#796c6c] text-sm font-semibold"
-                >
-                  Artists
-                </option>
-                <option
-                  value="albums"
-                  className="text-[#796c6c] text-sm font-semibold"
-                >
-                  Albums
-                </option>
-              </select>
-            </div> */}
         </div>
       ) : (
         ""
