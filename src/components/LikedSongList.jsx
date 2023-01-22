@@ -24,6 +24,7 @@ export function PlayListCover({
   type,
   playlist = null,
   song = null,
+  album = null,
   imageType = "playlist",
 }) {
   const [loading, setLoading] = React.useState(true);
@@ -33,11 +34,7 @@ export function PlayListCover({
     setLoading(true);
     fac
       .getColorAsync(
-        playlist
-          ? playlist.songs[0]
-            ? playlist.songs[0].imageURL
-            : Icon.plain
-          : song.imageURL,
+        playlist ? playlist.imageURL : song ? song.imageURL : album.imageURL,
         {
           algorithm: "sqrt",
         }
@@ -79,7 +76,13 @@ export function PlayListCover({
           <div className="flex items-center text-white  ">
             {imageType === "playlist" && (
               <img
-                src={playlist ? playlist.imageURL : song.imageURL}
+                src={
+                  playlist
+                    ? playlist.imageURL
+                    : song
+                    ? song.imageURL
+                    : album.imageURL
+                }
                 className="w-60 h-60 drop-shadow-large shadow-black "
                 alt="cover"
               />
@@ -97,12 +100,13 @@ export function PlayListCover({
               <div
                 className={
                   (playlist && playlist.name.length < 12) ||
-                  (song && song.name.length < 12)
+                  (song && song.name.length < 12) ||
+                  (album && album.name.length < 12)
                     ? "text-7xl font-bold mb-5 mt-2"
                     : "text-4xl font-bold mb-5 mt-2"
                 }
               >
-                {playlist ? playlist.name : song.name}
+                {playlist ? playlist.name : song ? song.name : playlist.name}
               </div>
               <div className="text-xs font-bold">
                 {playlist ? (
@@ -124,7 +128,7 @@ export function PlayListCover({
                       </>
                     )}
                   </div>
-                ) : (
+                ) : song ? (
                   <div className="flex flex-row items-center">
                     <img
                       className="w-6 h-6 mr-1 rounded-full"
@@ -139,6 +143,23 @@ export function PlayListCover({
                         {e.name + " "}
                       </Link>
                     ))}
+                  </div>
+                ) : (
+                  <div className="flex flex-row  gap-1 items-center">
+                    <img
+                      className="w-6 h-6 mr-1 rounded-full"
+                      src={user.data.imageURL}
+                      alt="creator"
+                    />
+                    <Link className="hover:underline">{album.artist.name}</Link>
+                    {album.songs.length > 0 && (
+                      <>
+                        <BsDot className="text-xl"></BsDot>
+                        <p className="font-semibold text-xs">
+                          {album.songs.length} songs
+                        </p>
+                      </>
+                    )}
                   </div>
                 )}
               </div>

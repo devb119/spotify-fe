@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { AiFillPlayCircle } from "react-icons/ai";
+import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai";
 import { HiOutlineClock } from "react-icons/hi";
 import {
   addSongToPlaylist,
@@ -69,13 +69,15 @@ function Search({ query, handleInputOnchange, songs, addToPlaylist }) {
     </>
   );
 }
-function Playlist() {
+function PlaylistPage() {
   const id = useParams().id;
   const [songs, setSongs] = React.useState([]);
   const [playlist, setPlaylist] = React.useState({});
   const [loading, setLoading] = React.useState(true);
-  const [{ user, query, isSongPlaying, currentSong }, dispatch] =
-    useStateValue();
+  const [
+    { user, query, isSongPlaying, player, isSongPausing, currentSong },
+    dispatch,
+  ] = useStateValue();
   const [isActive4, setIsActive4] = React.useState(false);
   const [selectedRow, setSelectedRow] = React.useState(false);
   const navigate = useNavigate();
@@ -151,6 +153,8 @@ function Playlist() {
         type: actionType.SET_IS_SONG_PLAYING,
         isSongPlaying: true,
       });
+    } else {
+      player.current.audio.current.play();
     }
     if (
       playlist.songs.filter((song) => song._id === currentSong?._id).length ===
@@ -162,6 +166,11 @@ function Playlist() {
       });
     }
   };
+  const pause = () => {
+    player.current.audio.current.pause();
+    dispatch({ type: actionType.SET_IS_SONG_PAUSING, isSongPausing: true });
+  };
+
   const handleDeletePlaylist = async () => {
     await deletePlaylist(id, user.token);
     getMyPlaylists(user.token)
@@ -184,12 +193,18 @@ function Playlist() {
               <span className="flex mb-12 items-center">
                 {playlist.songs?.length === 0 ? (
                   ""
-                ) : (
+                ) : isSongPausing ? (
                   <AiFillPlayCircle
                     onClick={() => play(playlist)}
                     size={60}
                     className="fill-green-500 mr-5 hover:fill-green-400 hover:scale-105 hover:cursor-pointer"
                   ></AiFillPlayCircle>
+                ) : (
+                  <AiFillPauseCircle
+                    onClick={() => pause()}
+                    size={60}
+                    className="fill-green-500 mr-5 hover:fill-green-400 hover:scale-105 hover:cursor-pointer"
+                  ></AiFillPauseCircle>
                 )}
 
                 {/* <BsThreeDots
@@ -258,4 +273,4 @@ function Playlist() {
     </div>
   );
 }
-export default Playlist;
+export default PlaylistPage;

@@ -45,15 +45,15 @@ export const getArtist = async (id) => {
   }
 };
 
-// export const getAllAlbums = async () => {
-//   try {
-//     const res = await axios.get(`${BASE_URL}/albums`);
-//     return res.data;
-//   } catch (error) {
-//     console.log(error);
-//     return null;
-//   }
-// };
+export const getAlbum = async (id) => {
+  try {
+    const res = await axios.get(`${BASE_URL}/albums/${id}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
 
 export const searchSongByName = async (name) => {
   try {

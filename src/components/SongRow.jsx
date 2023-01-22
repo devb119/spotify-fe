@@ -26,6 +26,9 @@ export function DropDown({ options }) {
     </div>
   );
 }
+//type = 1 : has album name and added date ( used on playlist)
+// type =2 : has count listen ( used on popular sugestions)
+// type =3 : 3 cols blank (used on album page)
 function SongRow({
   song,
   id,
@@ -188,6 +191,7 @@ function SongRow({
           </div>
         </>
       )}
+      {type == 3 && <div className="col-span-3 text-left"></div>}
 
       <div className="col-span-1 text-center">
         {selectedRow === id && <DropDown options={options}></DropDown>}

@@ -8,12 +8,13 @@ import { validateUser } from "./api";
 import { useStateValue } from "./context/StateProvider";
 import { actionType } from "./context/reducer";
 import NotFound from "./components/NotFound";
-import Playlist from "./components/Playlist";
+import PlaylistPage from "./components/PlaylistPage";
 import SongPage from "./components/SongPage";
 import CreatePlaylist from "./components/CreatePlaylist";
 import SectionGenre from "./components/SectionGenre";
 import SongSection from "./components/SongSection";
 import ArtistPage from "./components/ArtistPage";
+import AlbumPage from "./components/AlbumPage";
 const LazySearch = React.lazy(() => import("./components/Search"));
 // const LazyLibrary = React.lazy(() => import("./components/DashboardAlbums"));
 // const LazyHome = React.lazy(() => import("./components/DashboardHome"));
@@ -62,7 +63,7 @@ const App = () => {
               likedSongs: ["636f4e6523edd55d9eb1d3b0"],
             },
             token:
-              "eyJhbGciOiJSUzI1NiIsImtpZCI6ImQwNTU5YzU5MDgzZDc3YWI2NDUxOThiNTIxZmM4ZmVmZmVlZmJkNjIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoixJDhu6ljIEFuaCBOZ3V54buFbiIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BTG01d3UydlNaU2NONXg5aHE1WExoRGN2TE03S0YtSFg0TGlCaHBxYVgxRHJRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3Nwb3RpZnktYXBwLWIzOGU0IiwiYXVkIjoic3BvdGlmeS1hcHAtYjM4ZTQiLCJhdXRoX3RpbWUiOjE2NzI5OTU2NTAsInVzZXJfaWQiOiJ5VU1vY0lYRXNqUkZwYWxwZmx6YUxwTmdIZDczIiwic3ViIjoieVVNb2NJWEVzalJGcGFscGZsemFMcE5nSGQ3MyIsImlhdCI6MTY3NDI3MjgwOCwiZXhwIjoxNjc0Mjc2NDA4LCJlbWFpbCI6ImR1Y2FuaDExMDkyMDAxQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7Imdvb2dsZS5jb20iOlsiMTA2NDUzNzM1Mjc5NTAxNzMwMjM1Il0sImVtYWlsIjpbImR1Y2FuaDExMDkyMDAxQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.ecxj-4DUI8CfJvm0jyCmRczdiET3yniYDEB-quJHAEKo1zyXFs7oAv10Ye6uzsIxHlP567KIFNxWrfeXsq_NVfcM8jbD_S9DEZl4mPws7s38tCRtQKb7rTBIEQnRLFarPbmejmc9XBBau_p_4oz1n0X6hNTcO6Wxl-8kOi27Jhm8-gOQ_eU-LQnnC4BIw4xoOAYYoRuPJ1vucyNpN0rmI2FlVe4mlCMYnbAeuq_V-NcnziUFYpeqUOS4nghVaSw3DS3ckwsMGLowQwFR1OAGBk-DYprfTo_JUZGXYwodpUd1xlXlw-bXkjElLlWQhy_cUdRl1KCaAG2zZTkdjPIzqg",
+              "eyJhbGciOiJSUzI1NiIsImtpZCI6ImQwNTU5YzU5MDgzZDc3YWI2NDUxOThiNTIxZmM4ZmVmZmVlZmJkNjIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoixJDhu6ljIEFuaCBOZ3V54buFbiIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BTG01d3UydlNaU2NONXg5aHE1WExoRGN2TE03S0YtSFg0TGlCaHBxYVgxRHJRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3Nwb3RpZnktYXBwLWIzOGU0IiwiYXVkIjoic3BvdGlmeS1hcHAtYjM4ZTQiLCJhdXRoX3RpbWUiOjE2NzI5OTU2NTAsInVzZXJfaWQiOiJ5VU1vY0lYRXNqUkZwYWxwZmx6YUxwTmdIZDczIiwic3ViIjoieVVNb2NJWEVzalJGcGFscGZsemFMcE5nSGQ3MyIsImlhdCI6MTY3NDM4NzAxNywiZXhwIjoxNjc0MzkwNjE3LCJlbWFpbCI6ImR1Y2FuaDExMDkyMDAxQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7Imdvb2dsZS5jb20iOlsiMTA2NDUzNzM1Mjc5NTAxNzMwMjM1Il0sImVtYWlsIjpbImR1Y2FuaDExMDkyMDAxQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.JTPdNWM4qMQGFjR11BVYWV7j_qGn0vfQiyE3jowny1eA76PCTQXouzZpGvnUynMzL7B4_p9e0EyLZUVHbauXD21NssNJ6a8QtNdV34gWb6AQkXYrA5NpAJD2zSpiPL_Y4z8fH9qRMlC06C5d-T527p8kcrxFflcgi4ZhSuGHzL977ewdwcT-Pb3TOJOiQTeekFHKS-lQB09BIt5ELomZP81QqPmjcqIYFMP49X9ks1vMKVCGI9RyqT-S5W-KohNZtIXtzY_NyV6Diq_dC1vm0dX41rYXACj4NIJqjb-sc1URw8-OecfTqTHnTQ5I2ktzEVoCyacHE0-m1dIrdLVK4A",
           },
         });
         setAuth(true);
@@ -158,9 +159,10 @@ const App = () => {
             <Route path="/playlists">
               <Route
                 path="/playlists/:id"
-                element={<Playlist></Playlist>}
+                element={<PlaylistPage></PlaylistPage>}
               ></Route>
             </Route>
+            <Route path="/albums/:id" element={<AlbumPage></AlbumPage>}></Route>
           </Route>
 
           <Route path="/dashboard/*" element={<Dashboard />} />

@@ -1,6 +1,6 @@
 import { PlayListCover } from "./LikedSongList";
 import { Link, useParams } from "react-router-dom";
-import { AiFillPlayCircle } from "react-icons/ai";
+import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai";
 import { actionType } from "../context/reducer";
 import { BsThreeDots } from "react-icons/bs";
 import { useStateValue } from "../context/StateProvider";
@@ -19,16 +19,24 @@ function SongPage() {
   const id = useParams().id;
   const [song, setSong] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [{ isSongPlaying, currentSong, user, likedSongs }, dispatch] =
-    useStateValue();
+  const [
+    { isSongPlaying, currentSong, player, isSongPausing, user, likedSongs },
+    dispatch,
+  ] = useStateValue();
 
-  const playSong = () => {
+  const play = () => {
     if (!isSongPlaying) {
       dispatch({ type: actionType.SET_IS_SONG_PLAYING, isSongPlaying: true });
+    } else {
+      player.current.audio.current.play();
     }
     if (currentSong?._id !== song._id) {
       dispatch({ type: actionType.SET_CURRENT_SONG, currentSong: song });
     }
+  };
+  const pause = () => {
+    player.current.audio.current.pause();
+    dispatch({ type: actionType.SET_IS_SONG_PAUSING, isSongPausing: true });
   };
 
   useEffect(() => {
@@ -72,11 +80,19 @@ function SongPage() {
     <>
       <PlayListCover type="SONG" song={song} />
       <div className="px-8 py-6 flex items-center">
-        <AiFillPlayCircle
-          onClick={playSong}
-          size={60}
-          className="fill-green-500 mr-5 hover:fill-green-400 hover:scale-105 hover:cursor-pointer"
-        ></AiFillPlayCircle>
+        {isSongPausing ? (
+          <AiFillPlayCircle
+            onClick={() => play()}
+            size={60}
+            className="fill-green-500 mr-5 hover:fill-green-400 hover:scale-105 hover:cursor-pointer"
+          ></AiFillPlayCircle>
+        ) : (
+          <AiFillPauseCircle
+            onClick={() => pause()}
+            size={60}
+            className="fill-green-500 mr-5 hover:fill-green-400 hover:scale-105 hover:cursor-pointer"
+          ></AiFillPauseCircle>
+        )}
         {likedSongs.find((el) => el._id === song._id) ? (
           <RiHeartFill
             className="fill-green-500 text-4xl m-2 mr-4 hover:cursor-pointer"
