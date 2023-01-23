@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { GrPlayFill } from "react-icons/gr";
 import Icon from "../assets/img/Icon";
 import { useNavigate } from "react-router-dom";
+
 function MusicCard2({ song = null, type = "playlists" }) {
   const [showPlay, setShowPlay] = useState(false);
 
@@ -15,12 +16,11 @@ function MusicCard2({ song = null, type = "playlists" }) {
       className="relative w-80 h-auto rounded lg:w-72 shadow-md bg-[#2a2a2a] hover:bg-cardBgLight transition-all duration-200 cursor-pointer flex "
       onMouseEnter={showIcon}
       onMouseLeave={hideIcon}
-    >
-      <div className="rounded-[4px] w-20 h-20"
-       onClick={() => {
+      onClick={() => {
         navigate(`/${type}/${song._id}`);
       }}
-      >
+    >
+      <div className="rounded-[4px] w-20 h-20" >
         <img
           src={song.imageURL ? song.imageURL : Icon.plain}
           alt="song cover"
