@@ -1,28 +1,35 @@
+import { type } from "@testing-library/user-event/dist/type";
 import React, { useState } from "react";
 import { GrPlayFill } from "react-icons/gr";
 import Icon from "../assets/img/Icon";
-function MusicCard2({ song = null }) {
+import { useNavigate } from "react-router-dom";
+
+function MusicCard2({ song = null, type = "playlists" }) {
   const [showPlay, setShowPlay] = useState(false);
 
   const showIcon = () => setShowPlay(true);
   const hideIcon = () => setShowPlay(false);
+  const navigate = useNavigate();
 
   return (
     <div
       className="relative w-80 h-auto rounded lg:w-72 shadow-md bg-[#2a2a2a] hover:bg-cardBgLight transition-all duration-200 cursor-pointer flex "
       onMouseEnter={showIcon}
       onMouseLeave={hideIcon}
+      onClick={() => {
+        navigate(`/${type}/${song._id}`);
+      }}
     >
-      <div className="rounded-[4px] w-20 h-20">
+      <div className="rounded-[4px] w-20 h-20" >
         <img
-          src={song.img ? song.img : Icon.plain}
+          src={song.imageURL ? song.imageURL : Icon.plain}
           alt="song cover"
           className="rounded-[4px] w-20 h-20"
         />
       </div>
 
       <div className=" pl-4 text-md text-white font-semibold mb-2 flex items-center">
-        {song.title.length > 14 ? `${song.title.slice(0, 14)}...` : song.title}
+        {song.name.length > 14 ? `${song.name.slice(0, 14)}...` : song.name}
       </div>
 
       <div

@@ -28,7 +28,7 @@ function MusicPlayer() {
 
   const togglePlayer = () =>
     dispatch({ type: actionType.SET_MINI_PLAYER, miniPlayer: !miniPlayer });
-
+   console.log(currentSong)
   return (
     <div className="w-full flex items-center gap-3">
       <div
