@@ -1,4 +1,4 @@
-import PlaylistPage from "./LikedSongList";
+import LikedSongList from "./LikedSongList";
 import React, { useEffect, useState } from "react";
 import { getLikedSongs } from "../api";
 import { actionType } from "../context/reducer";
@@ -7,6 +7,7 @@ import DotFlashing from "./DotFlashing";
 import Icon from "../assets/img/Icon";
 function LikedSongs() {
   const [{ user, likedSongs }, dispatch] = useStateValue();
+  console.log(user);
   const [isLoading, setIsLoading] = useState(true);
   const [playlist, setPlaylist] = React.useState({
     imageURL: Icon.like,
@@ -44,7 +45,7 @@ function LikedSongs() {
           <DotFlashing />
         </div>
       ) : (
-        <PlaylistPage playlist={playlist} setPlaylist={setPlaylist} />
+        <LikedSongList playlist={playlist} setPlaylist={setPlaylist} />
       )}
     </div>
   );

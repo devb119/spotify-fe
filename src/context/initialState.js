@@ -1,7 +1,7 @@
 export const initialState = {
   user: null,
   isSongPlaying: false,
-  isSongPausing: false,
+  isSongPausing: true,
   allSongs: null,
   currentSong: null,
   player: null,

@@ -54,7 +54,7 @@ export function PlayListCover({
       })
       .catch((error) => console.log(error))
       .finally(() => setLoading(false));
-  }, [song.imageURL]);
+  }, [song?.imageURL]);
   return (
     <div>
       {loading ? (
@@ -149,7 +149,7 @@ export function PlayListCover({
     </div>
   );
 }
-function PlaylistPage({ playlist, setPlaylist }) {
+function LikedSongList({ playlist, setPlaylist }) {
   const toggleLikeSong = (id) => {
     setPlaylist({
       ...playlist,
@@ -213,4 +213,4 @@ function PlaylistPage({ playlist, setPlaylist }) {
   );
 }
 
-export default PlaylistPage;
+export default LikedSongList;
