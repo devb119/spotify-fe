@@ -1,11 +1,14 @@
+import { type } from "@testing-library/user-event/dist/type";
 import React, { useState } from "react";
 import { GrPlayFill } from "react-icons/gr";
 import Icon from "../assets/img/Icon";
-function MusicCard2({ song = null }) {
+import { useNavigate } from "react-router-dom";
+function MusicCard2({ song = null, type = "playlists" }) {
   const [showPlay, setShowPlay] = useState(false);
 
   const showIcon = () => setShowPlay(true);
   const hideIcon = () => setShowPlay(false);
+  const navigate = useNavigate();
 
   return (
     <div
@@ -13,7 +16,11 @@ function MusicCard2({ song = null }) {
       onMouseEnter={showIcon}
       onMouseLeave={hideIcon}
     >
-      <div className="rounded-[4px] w-20 h-20">
+      <div className="rounded-[4px] w-20 h-20"
+       onClick={() => {
+        navigate(`/${type}/${song._id}`);
+      }}
+      >
         <img
           src={song.imageURL ? song.imageURL : Icon.plain}
           alt="song cover"
