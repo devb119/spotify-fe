@@ -11,8 +11,6 @@ import { useMemo } from "react";
 import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
 
-
-
 export const SongContainer = ({ title, songs }) => (
   <div className="mb-8">
     <p className="mb-4 font-bold text-white text-xl">{title}</p>
@@ -42,10 +40,10 @@ export const SongContainer = ({ title, songs }) => (
 
 export const SongContainer2 = ({ title, songs = [] }) => (
   <div className="mb-16">
-    <p className="mb-4 font-bold text-white text-2xl">{title}</p>
+    <p className="mb-4 font-bold text-white text-3xl">{title}</p>
     <div className="flex items-center gap-4 flex-wrap">
       {songs.map((song) => (
-         <MusicCard2 key={song._id} song={song} />
+        <MusicCard2 key={song._id} arg={song} type="playlists" />
         // console.log(song)
       ))}
     </div>
@@ -57,10 +55,7 @@ function HomeMusic() {
   const [isLoading, setIsLoading] = React.useState(true);
   const navigate = useNavigate();
 
-  const [
-    { user, playlists },
-    dispatch,
-  ] = useStateValue();
+  const [{ user, playlists }, dispatch] = useStateValue();
 
   const token = useMemo(() => {
     if (user) return user.token;
@@ -88,19 +83,25 @@ function HomeMusic() {
     }
   }, [dispatch, token]);
 
-  console.log(playlists);
+  const getSongContainerTitle = () => {
+    const d = new Date();
+    let hour = d.getHours();
+    if (hour < 12) return "Good morning";
+    else if (hour > 12 && hour < 17) return "Good afternoon";
+    else if (hour < 22) return "Good evening";
+    else return "Good night";
+  };
+  //console.log(playlists);
 
   return (
     <div className="p-8 pt-28">
-
-
       {isLoading ? (
         <div className="flex h-screen justify-around">
           <DotFlashing></DotFlashing>
         </div>
       ) : (
         <>
-         <SongContainer2 title="Good morning" songs={playlists} />
+          <SongContainer2 title={getSongContainerTitle()} songs={playlists} />
           {sections.map((s) => (
             <div key={s._id}>
               <div className="flex justify-between text-white">

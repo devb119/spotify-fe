@@ -26,7 +26,7 @@ function AlbumPage() {
           <DotFlashing></DotFlashing>
         </div>
       ) : (
-        <>{/* <PlayListCover album={album} type="ALBUM"></PlayListCover> */}</>
+        <PlayListCover album={album} type="ALBUM"></PlayListCover>
       )}
     </div>
   );

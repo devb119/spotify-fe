@@ -106,7 +106,7 @@ export function PlayListCover({
                     : "text-4xl font-bold mb-5 mt-2"
                 }
               >
-                {playlist ? playlist.name : song ? song.name : playlist.name}
+                {playlist ? playlist.name : song ? song.name : album.name}
               </div>
               <div className="text-xs font-bold">
                 {playlist ? (
@@ -135,12 +135,14 @@ export function PlayListCover({
                       src={song.artist[0].imageURL}
                       alt="artist"
                     />
-                    {song.artist.map((e) => (
+                    {song.artist.map((e, index) => (
                       <Link
                         className="hover:underline"
                         to={`/artists/${e._id}`}
                       >
-                        {e.name + " "}
+                        {index < song.artist.length - 1
+                          ? e.name + ", "
+                          : e.name}
                       </Link>
                     ))}
                   </div>
@@ -148,10 +150,19 @@ export function PlayListCover({
                   <div className="flex flex-row  gap-1 items-center">
                     <img
                       className="w-6 h-6 mr-1 rounded-full"
-                      src={user.data.imageURL}
-                      alt="creator"
+                      src={album.artist[0].imageURL}
+                      alt="artist"
                     />
-                    <Link className="hover:underline">{album.artist.name}</Link>
+                    {/* {album.artist.map((e, index) => (
+                      <Link
+                        className="hover:underline"
+                        to={`/artists/${e._id}`}
+                      >
+                        {index < song.artist.length - 1
+                          ? e.name + ", "
+                          : e.name}
+                      </Link>
+                    ))} */}
                     {album.songs.length > 0 && (
                       <>
                         <BsDot className="text-xl"></BsDot>

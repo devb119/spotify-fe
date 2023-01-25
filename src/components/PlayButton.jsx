@@ -3,24 +3,25 @@ import React from "react";
 import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
 import { useNavigate } from "react-router-dom";
-import { GrPlayFill, GrPauseFill } from "react-icons/gr";
-function PlayButton({ showPlay, song = null, playlist = null }) {
+import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai";
+
+export function PlayButton({ showPlay, song = null, playlist = null }) {
   const [
     { isSongPlaying, isSongPausing, player, currentSong, user },
     dispatch,
   ] = useStateValue();
   const addToContext = () => {
+    if (!isSongPlaying) {
+      dispatch({
+        type: actionType.SET_IS_SONG_PLAYING,
+        isSongPlaying: true,
+      });
+    }
+    //song already playing
+    else {
+      player.current.audio.current.play();
+    }
     if (song !== null) {
-      if (!isSongPlaying) {
-        dispatch({
-          type: actionType.SET_IS_SONG_PLAYING,
-          isSongPlaying: true,
-        });
-      }
-      //song already playing
-      else {
-        player.current.audio.current.play();
-      }
       dispatch({
         type: actionType.SET_IS_SONG_PAUSING,
         isSongPausing: false,
@@ -28,32 +29,40 @@ function PlayButton({ showPlay, song = null, playlist = null }) {
       if (currentSong?._id !== song._id) {
         dispatch({ type: actionType.SET_CURRENT_SONG, currentSong: song });
       }
-    }
-  };
-  const pause = () => {
-    if (song !== null) {
-      player.current.audio.current.pause();
-      dispatch({
-        type: actionType.SET_IS_SONG_PAUSING,
-        isSongPausing: true,
-      });
-
-      if (currentSong?._id !== song._id) {
-        dispatch({ type: actionType.SET_CURRENT_SONG, currentSong: song });
+    } else if (playlist !== null) {
+      if (
+        playlist.songs.filter((song) => song._id === currentSong?._id)
+          .length === 0
+      ) {
+        dispatch({
+          type: actionType.SET_CURRENT_SONG,
+          currentSong: playlist.songs[0],
+        });
       }
     }
   };
+  const pause = () => {
+    player.current.audio.current.pause();
+    dispatch({
+      type: actionType.SET_IS_SONG_PAUSING,
+      isSongPausing: true,
+    });
+  };
 
   return (
-    <div
-      className={`h-12 w-12 bg-green-500 flex z-2 justify-center z-40 items-center rounded-full absolute right-7 top-1/2 ${
-        showPlay ? "opacity-100 -translate-y-3" : "opacity-0"
-      } transition-all duration-200`}
-    >
+    <div>
       {!isSongPausing && currentSong?._id === song._id ? (
-        <GrPauseFill className="text-xl" onClick={pause} />
+        <AiFillPauseCircle
+          size={56}
+          className="fill-green-500 mr-5 rounded-full hover:fill-green-400 hover:scale-105 hover:cursor-pointer"
+          onClick={pause}
+        />
       ) : (
-        <GrPlayFill className="text-xl" onClick={addToContext} />
+        <AiFillPlayCircle
+          size={56}
+          className="fill-green-500 mr-5 hover:fill-green-400 hover:scale-105 hover:cursor-pointer"
+          onClick={addToContext}
+        />
       )}
     </div>
   );

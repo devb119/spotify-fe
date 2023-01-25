@@ -166,17 +166,13 @@ function SongRow({
                 {song.name}
               </Link>
               {type == 1 && (
-                <Link
-                  to="#"
-                  className="hover:underline hover:text-white hover:cursor-pointer"
-                >
-                  {song.artist
-                    .map((item) => {
-                      //console.log(item.name)
-                      return item.name;
-                    })
-                    .join(", ")}
-                </Link>
+                <div>
+                  {song.artist.map((e, index) => (
+                    <Link className="hover:underline" to={`/artists/${e._id}`}>
+                      {index < song.artist.length - 1 ? e.name + ", " : e.name}
+                    </Link>
+                  ))}
+                </div>
               )}
             </div>
           </div>

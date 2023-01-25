@@ -190,22 +190,24 @@ function PlaylistPage() {
           <PlayListCover playlist={playlist} type="PLAYLIST"></PlayListCover>
           <div className="p-8">
             <div>
-              <span className="flex mb-12 items-center">
-                {playlist.songs?.length === 0 ? (
-                  ""
-                ) : isSongPausing ? (
-                  <AiFillPlayCircle
-                    onClick={() => play(playlist)}
-                    size={60}
-                    className="fill-green-500 mr-5 hover:fill-green-400 hover:scale-105 hover:cursor-pointer"
-                  ></AiFillPlayCircle>
-                ) : (
-                  <AiFillPauseCircle
-                    onClick={() => pause()}
-                    size={60}
-                    className="fill-green-500 mr-5 hover:fill-green-400 hover:scale-105 hover:cursor-pointer"
-                  ></AiFillPauseCircle>
-                )}
+              <div className="flex mb-12 items-center">
+                <div>
+                  {playlist.songs?.length === 0 ? (
+                    ""
+                  ) : isSongPausing ? (
+                    <AiFillPlayCircle
+                      onClick={() => play(playlist)}
+                      size={60}
+                      className="fill-green-500 mr-5 hover:fill-green-400 hover:scale-105 hover:cursor-pointer"
+                    ></AiFillPlayCircle>
+                  ) : (
+                    <AiFillPauseCircle
+                      onClick={() => pause()}
+                      size={60}
+                      className="fill-green-500 mr-5 hover:fill-green-400 hover:scale-105 hover:cursor-pointer"
+                    ></AiFillPauseCircle>
+                  )}
+                </div>
 
                 {/* <BsThreeDots
                   size={32}
@@ -219,7 +221,7 @@ function PlaylistPage() {
                     onClick={[null, toggleModal]}
                   />
                 </div>
-              </span>
+              </div>
 
               {playlist.songs?.length === 0 ? (
                 <hr className="border-t-1 border-gray-600"></hr>

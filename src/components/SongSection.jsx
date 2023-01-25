@@ -19,11 +19,13 @@ function SongSection() {
       .finally(() => setIsLoading(false));
   }, []);
   return (
-    <div className="text-white p-8 pt-20">
+    <div>
       {isLoading ? (
-        <DotFlashing />
+        <div className="h-screen">
+          <DotFlashing />
+        </div>
       ) : (
-        <div>
+        <div className="text-white p-8 pt-20 h-full">
           <h2 className="font-bold text-2xl hover:underline">
             {songs[0].section.name}
           </h2>

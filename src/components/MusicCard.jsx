@@ -45,7 +45,13 @@ function MusicCard({ song, type = "songs" }) {
           {type === "albums" && song.section.name}
         </p>
       </div>
-      <PlayButton showPlay={showPlay} song={song}></PlayButton>
+      <div
+        className={`flex absolute drop-shadow-xl shadow-black right-1 top-36 ${
+          showPlay ? "opacity-100 -translate-y-3" : "opacity-0"
+        } transition-all duration-200`}
+      >
+        <PlayButton song={song}></PlayButton>
+      </div>
     </div>
   );
 }
