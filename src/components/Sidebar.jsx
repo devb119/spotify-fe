@@ -115,7 +115,7 @@ function Sidebar() {
           })
         )}
         <Link
-          to="#"
+          to="/download"
           className="text-textColor hover:text-white flex items-center gap-2
               duration-100 transition-all ease-in-out p-2 mx-5"
         >

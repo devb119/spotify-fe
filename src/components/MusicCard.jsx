@@ -50,7 +50,8 @@ function MusicCard({ song, type = "songs" }) {
           showPlay ? "opacity-100 -translate-y-3" : "opacity-0"
         } transition-all duration-200`}
       >
-        <PlayButton song={song}></PlayButton>
+        {type === "playlists" && <PlayButton playlist={song}></PlayButton>}
+        {type === "songs" && <PlayButton song={song}></PlayButton>}
       </div>
     </div>
   );
