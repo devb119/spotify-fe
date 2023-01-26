@@ -147,6 +147,7 @@ export const getAllCategories = async () => {
 export const getSectionsByCategories = async (category) => {
   try {
     const res = await axios.get(`${BASE_URL}/sections?genre=${category}`);
+    console.log(res.data);
     return res.data;
   } catch (error) {
     console.log(error);

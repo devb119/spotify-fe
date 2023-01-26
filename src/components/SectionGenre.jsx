@@ -62,7 +62,7 @@ function SectionGenre() {
     setLoading(true);
     getSectionsByCategories(params.id)
       .then((data) => {
-        console.log(data);
+        console.log(data.data);
         setSections(data.data);
       })
       .finally(() => setLoading(false));
