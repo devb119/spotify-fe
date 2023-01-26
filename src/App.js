@@ -44,32 +44,32 @@ const App = () => {
         });
         // If the token is expired, immediately redirect to login page
       } else {
-        dispatch({
-          type: actionType.SET_USER,
-          user: {
-            data: {
-              likedSongs: [],
-              _id: "638054ceb53ecf81f8037ce9",
-              name: "Đức Phạm Hồng",
-              email: "ducphamhong2@gmail.com",
-              imageURL:
-                "https://lh3.googleusercontent.com/a/ALm5wu3bW4rSwLFgauxt5fSpfkZPk0ia0s1KEI2JPKkE=s96-c",
-              userId: "fHx87a0F3nMnQlc8JaYwPn9NUzi1",
-              emailVerified: true,
-              role: "member",
-              authTime: "1673085554",
-              createdAt: "2022-11-25T05:38:22.353Z",
-              updatedAt: "2023-01-07T05:44:08.525Z",
-              __v: 0,
-            },
-            token:
-              "eyJhbGciOiJSUzI1NiIsImtpZCI6ImQwNTU5YzU5MDgzZDc3YWI2NDUxOThiNTIxZmM4ZmVmZmVlZmJkNjIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoixJDhu6ljIFBo4bqhbSBI4buTbmciLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNWZTM3hOM0lyQkNScWxJem1vYUNZWkU4YVVwYzlHUUtvaFM5cW09czk2LWMiLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vc3BvdGlmeS1hcHAtYjM4ZTQiLCJhdWQiOiJzcG90aWZ5LWFwcC1iMzhlNCIsImF1dGhfdGltZSI6MTY3NDQ3MTIxOCwidXNlcl9pZCI6IjRHSG85WGpIR1NTREQwQmR3OFFxQlhvTjduSzIiLCJzdWIiOiI0R0hvOVhqSEdTU0REMEJkdzhRcUJYb043bksyIiwiaWF0IjoxNjc0NzQzNjIyLCJleHAiOjE2NzQ3NDcyMjIsImVtYWlsIjoiZHVjcGhhbWhvbmcwNUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMzYwOTQxNjg5MjU5MzQ2MTkzMSJdLCJlbWFpbCI6WyJkdWNwaGFtaG9uZzA1QGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.iz7BhugxOYXj2HcMx_4Mb3auFI-lsChtoHDzp3KRffalhKxBwEoYrCbUHcJcgbzwWB4kTgR66vpoFIX29w1f42kAtqZfwUwL2Na5hfOsfnuNxCJBRln4Ma6JveZ580xqDFwSg06WZMaPQi8zuSSnAJq2EIEXhRbdJNquQQCJo47lELm9K0sgtAy69uC7hIJbgINhHXJ-a0RhbzZQNrLmeQ_u4n0Tm8aZ22R6slqCUJyg4RrURxRnK4dY-qySaSbIGIIdsU0Ph5plkqLd9na1Wk1J8VuLP0z-mLrIWBfL6-mBlul4HCm7iC7WXB-Ro_n4ynkwDvwg82VmiV2-23569Q",
-          },
-        });
+        // dispatch({
+        //   type: actionType.SET_USER,
+        //   user: {
+        //     data: {
+        //       likedSongs: [],
+        //       _id: "638054ceb53ecf81f8037ce9",
+        //       name: "Đức Phạm Hồng",
+        //       email: "ducphamhong2@gmail.com",
+        //       imageURL:
+        //         "https://lh3.googleusercontent.com/a/ALm5wu3bW4rSwLFgauxt5fSpfkZPk0ia0s1KEI2JPKkE=s96-c",
+        //       userId: "fHx87a0F3nMnQlc8JaYwPn9NUzi1",
+        //       emailVerified: true,
+        //       role: "member",
+        //       authTime: "1673085554",
+        //       createdAt: "2022-11-25T05:38:22.353Z",
+        //       updatedAt: "2023-01-07T05:44:08.525Z",
+        //       __v: 0,
+        //     },
+        //     token:
+        //       "eyJhbGciOiJSUzI1NiIsImtpZCI6ImQwNTU5YzU5MDgzZDc3YWI2NDUxOThiNTIxZmM4ZmVmZmVlZmJkNjIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoixJDhu6ljIFBo4bqhbSBI4buTbmciLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNWZTM3hOM0lyQkNScWxJem1vYUNZWkU4YVVwYzlHUUtvaFM5cW09czk2LWMiLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vc3BvdGlmeS1hcHAtYjM4ZTQiLCJhdWQiOiJzcG90aWZ5LWFwcC1iMzhlNCIsImF1dGhfdGltZSI6MTY3NDQ3MTIxOCwidXNlcl9pZCI6IjRHSG85WGpIR1NTREQwQmR3OFFxQlhvTjduSzIiLCJzdWIiOiI0R0hvOVhqSEdTU0REMEJkdzhRcUJYb043bksyIiwiaWF0IjoxNjc0NzQzNjIyLCJleHAiOjE2NzQ3NDcyMjIsImVtYWlsIjoiZHVjcGhhbWhvbmcwNUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMzYwOTQxNjg5MjU5MzQ2MTkzMSJdLCJlbWFpbCI6WyJkdWNwaGFtaG9uZzA1QGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.iz7BhugxOYXj2HcMx_4Mb3auFI-lsChtoHDzp3KRffalhKxBwEoYrCbUHcJcgbzwWB4kTgR66vpoFIX29w1f42kAtqZfwUwL2Na5hfOsfnuNxCJBRln4Ma6JveZ580xqDFwSg06WZMaPQi8zuSSnAJq2EIEXhRbdJNquQQCJo47lELm9K0sgtAy69uC7hIJbgINhHXJ-a0RhbzZQNrLmeQ_u4n0Tm8aZ22R6slqCUJyg4RrURxRnK4dY-qySaSbIGIIdsU0Ph5plkqLd9na1Wk1J8VuLP0z-mLrIWBfL6-mBlul4HCm7iC7WXB-Ro_n4ynkwDvwg82VmiV2-23569Q",
+        //   },
+        // });
         setAuth(true);
         window.localStorage.setItem("auth", "true");
-        // dispatch({ type: actionType.SET_USER, user: null });
-        // navigate("/login");
+        dispatch({ type: actionType.SET_USER, user: null });
+        navigate("/login");
       }
     });
   }, [navigate, fireBaseAuth, dispatch]);
