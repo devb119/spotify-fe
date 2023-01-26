@@ -19,7 +19,7 @@ function Section({ section }) {
         setSongs(data.data);
       })
       .finally(() => setIsLoading(false));
-  }, []);
+  }, [section._id]);
   return (
     <div className="text-white">
       {isLoading ? (
@@ -27,7 +27,10 @@ function Section({ section }) {
       ) : (
         <>
           <div className="flex justify-between">
-            <h2 className="font-bold text-2xl hover:underline">
+            <h2
+              onClick={() => navigate(`/songs/sections/${section._id}`)}
+              className="font-bold text-2xl hover:underline hover:cursor-pointer"
+            >
               {section.name}
             </h2>
             {songs.length > 4 && (

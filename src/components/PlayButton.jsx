@@ -1,15 +1,12 @@
 import React from "react";
-
 import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
-import { useNavigate } from "react-router-dom";
 import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai";
 
-export function PlayButton({ showPlay, song = null, playlist = null }) {
-  const [
-    { isSongPlaying, isSongPausing, player, currentSong, user },
-    dispatch,
-  ] = useStateValue();
+export function PlayButton({ song = null, playlist = null }) {
+  console.log(playlist);
+  const [{ isSongPlaying, isSongPausing, player, currentSong }, dispatch] =
+    useStateValue();
   const addToContext = () => {
     if (!isSongPlaying) {
       dispatch({
@@ -51,7 +48,10 @@ export function PlayButton({ showPlay, song = null, playlist = null }) {
 
   return (
     <div>
-      {!isSongPausing && currentSong?._id === song._id ? (
+      {!isSongPausing &&
+      (currentSong?._id === song?._id ||
+        playlist?.songs.filter((s) => s._id === currentSong?._id).length >
+          0) ? (
         <AiFillPauseCircle
           size={56}
           className="fill-green-500 mr-5 rounded-full hover:fill-green-400 hover:scale-105 hover:cursor-pointer"

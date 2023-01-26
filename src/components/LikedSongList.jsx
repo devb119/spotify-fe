@@ -1,5 +1,4 @@
 import React from "react";
-import { AiFillPlayCircle } from "react-icons/ai";
 import { HiOutlineClock } from "react-icons/hi";
 import { BsDot } from "react-icons/bs";
 import SongRow from "./SongRow";
@@ -7,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useStateValue } from "../context/StateProvider";
 import { FastAverageColor } from "fast-average-color";
 import Icon from "../assets/img/Icon";
+import { PlayPlaylist } from "./PlaylistPage";
 const fac = new FastAverageColor();
 
 export function useAverageColor(dom) {
@@ -30,6 +30,7 @@ export function PlayListCover({
   const [loading, setLoading] = React.useState(true);
   const [gradient, setGradient] = React.useState();
   const [{ user }] = useStateValue();
+
   React.useEffect(() => {
     setLoading(true);
     fac
@@ -51,7 +52,8 @@ export function PlayListCover({
       })
       .catch((error) => console.log(error))
       .finally(() => setLoading(false));
-  }, [song?.imageURL]);
+  }, [song?.imageURL, album?.imageURL, playlist?.imageURL, song?.imageURL]);
+  console.log(album);
   return (
     <div>
       {loading ? (
@@ -123,7 +125,9 @@ export function PlayListCover({
                       <>
                         <BsDot className="text-xl"></BsDot>
                         <p className="font-semibold text-xs">
-                          {playlist.songs.length} songs
+                          {playlist.songs.length > 1
+                            ? playlist.songs.length + " songs"
+                            : playlist.songs.length + " song"}
                         </p>
                       </>
                     )}
@@ -141,7 +145,7 @@ export function PlayListCover({
                         to={`/artists/${e._id}`}
                       >
                         {index < song.artist.length - 1
-                          ? e.name + ", "
+                          ? e.name + ",  "
                           : e.name}
                       </Link>
                     ))}
@@ -153,21 +157,23 @@ export function PlayListCover({
                       src={album.artist[0].imageURL}
                       alt="artist"
                     />
-                    {/* {album.artist.map((e, index) => (
+                    {album.artist.map((e, index) => (
                       <Link
                         className="hover:underline"
                         to={`/artists/${e._id}`}
                       >
-                        {index < song.artist.length - 1
+                        {index < album.artist.length - 1
                           ? e.name + ", "
                           : e.name}
                       </Link>
-                    ))} */}
+                    ))}
                     {album.songs.length > 0 && (
                       <>
                         <BsDot className="text-xl"></BsDot>
                         <p className="font-semibold text-xs">
-                          {album.songs.length} songs
+                          {album.songs.length > 1
+                            ? album.songs.length + " songs"
+                            : album.songs.length + " song"}
                         </p>
                       </>
                     )}
@@ -200,14 +206,7 @@ function LikedSongList({ playlist, setPlaylist }) {
       <div className="p-8">
         <div>
           <span className="flex mb-12 items-center">
-            {playlist.songs?.length === 0 ? (
-              ""
-            ) : (
-              <AiFillPlayCircle
-                size={60}
-                className="fill-green-500 mr-5 hover:fill-green-400 hover:scale-105 hover:cursor-pointer"
-              ></AiFillPlayCircle>
-            )}
+            <PlayPlaylist playlist={playlist}></PlayPlaylist>
           </span>
 
           {playlist.songs?.length === 0 ? (

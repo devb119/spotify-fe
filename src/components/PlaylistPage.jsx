@@ -21,7 +21,52 @@ import { valueDropDown2 } from "../utils/styles";
 import DropDown from "./DropDown";
 import { deletePlaylist } from "../api";
 import ConfirmBox from "./ConfirmBox";
-
+export function PlayPlaylist({ playlist }) {
+  const [{ isSongPlaying, player, isSongPausing, currentSong }, dispatch] =
+    useStateValue();
+  const play = (playlist) => {
+    if (!isSongPlaying) {
+      dispatch({
+        type: actionType.SET_IS_SONG_PLAYING,
+        isSongPlaying: true,
+      });
+    } else {
+      player.current.audio.current.play();
+    }
+    if (
+      playlist.songs.filter((song) => song._id === currentSong?._id).length ===
+      0
+    ) {
+      dispatch({
+        type: actionType.SET_CURRENT_SONG,
+        currentSong: playlist.songs[0],
+      });
+    }
+  };
+  const pause = () => {
+    player.current.audio.current.pause();
+    dispatch({ type: actionType.SET_IS_SONG_PAUSING, isSongPausing: true });
+  };
+  return (
+    <div>
+      {playlist.songs?.length === 0 ? (
+        ""
+      ) : isSongPausing ? (
+        <AiFillPlayCircle
+          onClick={() => play(playlist)}
+          size={60}
+          className="fill-green-500 mr-5 hover:fill-green-400 hover:scale-105 hover:cursor-pointer"
+        ></AiFillPlayCircle>
+      ) : (
+        <AiFillPauseCircle
+          onClick={() => pause()}
+          size={60}
+          className="fill-green-500 mr-5 hover:fill-green-400 hover:scale-105 hover:cursor-pointer"
+        ></AiFillPauseCircle>
+      )}
+    </div>
+  );
+}
 function Search({ query, handleInputOnchange, songs, addToPlaylist }) {
   return (
     <>
@@ -74,10 +119,7 @@ function PlaylistPage() {
   const [songs, setSongs] = React.useState([]);
   const [playlist, setPlaylist] = React.useState({});
   const [loading, setLoading] = React.useState(true);
-  const [
-    { user, query, isSongPlaying, player, isSongPausing, currentSong },
-    dispatch,
-  ] = useStateValue();
+  const [{ user, query }, dispatch] = useStateValue();
   const [isActive4, setIsActive4] = React.useState(false);
   const [selectedRow, setSelectedRow] = React.useState(false);
   const navigate = useNavigate();
@@ -120,7 +162,7 @@ function PlaylistPage() {
         });
       })
       .finally(() => setLoading(false));
-  }, [id, playlist.length]);
+  }, [id, playlist.length, user.token]);
   useEffect(() => {
     if (query) {
       getAllSongs(query).then((data) => setSongs(data.data));
@@ -147,29 +189,6 @@ function PlaylistPage() {
       ),
     });
   };
-  const play = (playlist) => {
-    if (!isSongPlaying) {
-      dispatch({
-        type: actionType.SET_IS_SONG_PLAYING,
-        isSongPlaying: true,
-      });
-    } else {
-      player.current.audio.current.play();
-    }
-    if (
-      playlist.songs.filter((song) => song._id === currentSong?._id).length ===
-      0
-    ) {
-      dispatch({
-        type: actionType.SET_CURRENT_SONG,
-        currentSong: playlist.songs[0],
-      });
-    }
-  };
-  const pause = () => {
-    player.current.audio.current.pause();
-    dispatch({ type: actionType.SET_IS_SONG_PAUSING, isSongPausing: true });
-  };
 
   const handleDeletePlaylist = async () => {
     await deletePlaylist(id, user.token);
@@ -191,28 +210,7 @@ function PlaylistPage() {
           <div className="p-8">
             <div>
               <div className="flex mb-12 items-center">
-                <div>
-                  {playlist.songs?.length === 0 ? (
-                    ""
-                  ) : isSongPausing ? (
-                    <AiFillPlayCircle
-                      onClick={() => play(playlist)}
-                      size={60}
-                      className="fill-green-500 mr-5 hover:fill-green-400 hover:scale-105 hover:cursor-pointer"
-                    ></AiFillPlayCircle>
-                  ) : (
-                    <AiFillPauseCircle
-                      onClick={() => pause()}
-                      size={60}
-                      className="fill-green-500 mr-5 hover:fill-green-400 hover:scale-105 hover:cursor-pointer"
-                    ></AiFillPauseCircle>
-                  )}
-                </div>
-
-                {/* <BsThreeDots
-                  size={32}
-                  className="h-54  text-gray-400 hover:text-white hover:cursor-pointer"
-                ></BsThreeDots> */}
+                <PlayPlaylist playlist={playlist}></PlayPlaylist>
                 <div className="flex relative">
                   <DropDown
                     setIsActive={toggleDropDown4}

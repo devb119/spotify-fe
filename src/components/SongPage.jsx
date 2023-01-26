@@ -128,9 +128,13 @@ function SongPage() {
           />
           <div className="flex flex-col m-2 text-white  ">
             <p className="font-semibold text-xs tracking-widest">ARTIST</p>
-            <Link to="" className="font-bold text-base mt-2 hover:underline">
-              {song.artist.map((e) => e.name).join(",")}
-            </Link>
+            <p to="" className="font-bold text-base mt-2">
+              {song.artist.map((e, index) => (
+                <Link className="hover:underline" to={`/artists/${e._id}`}>
+                  {index < song.artist.length - 1 ? e.name + ",  " : e.name}
+                </Link>
+              ))}
+            </p>
           </div>
         </div>
       </div>
