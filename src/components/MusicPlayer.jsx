@@ -28,7 +28,7 @@ function MusicPlayer() {
 
   const togglePlayer = () =>
     dispatch({ type: actionType.SET_MINI_PLAYER, miniPlayer: !miniPlayer });
-   console.log(currentSong)
+  console.log(currentSong);
   return (
     <div className="w-full flex items-center gap-3">
       <div
@@ -55,7 +55,7 @@ function MusicPlayer() {
               })
               .join(", ")}{" "}
             <span className="text-xs text-textColor font-semibold">
-              {`(${currentSong?.category})`}
+              {`(${currentSong?.album.name})`}
             </span>
           </p>
           <motion.i whileTap={{ scale: 0.8 }} onClick={togglePlaylist}>
@@ -146,13 +146,13 @@ export const PlaylistCard = () => {
       className="absolute left-4 bottom-24 gap-2 py-2 w-350 max-w-[350px] h-510 max-h-[510px]
   flex flex-col overflow-y-scroll scrollbar-thin rounded-md shadow-md bg-primary text-sm"
     >
-      {allSongs.length > 0 ? (
+      {allSongs?.length > 0 ? (
         allSongs.map((song, i) => (
           <motion.div
             initial={{ opacity: 0, translateX: -50 }}
             animate={{ opacity: 1, translateX: 0 }}
             transition={{ duration: 0.3, delay: i * 0.1 }}
-            className="group w-2/3 p-2 hover:bg-card flex gap-3 items-center cursor-pointer bg-transparent"
+            className="group w-full p-2 hover:bg-card flex gap-3 items-center cursor-pointer bg-transparent"
             onClick={() => setCurrentSong(song)}
             key={song._id}
           >
@@ -172,7 +172,7 @@ export const PlaylistCard = () => {
                   })
                   .join(", ")}{" "}
                 <span className="text-sm text-textColor font-semibold">
-                  ({song.category})
+                  ({song.album?.name})
                 </span>
               </p>
             </div>
