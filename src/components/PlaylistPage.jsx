@@ -25,6 +25,10 @@ export function PlayPlaylist({ playlist }) {
   const [{ isSongPlaying, player, isSongPausing, currentSong }, dispatch] =
     useStateValue();
   const play = (playlist) => {
+    dispatch({
+      type: actionType.SET_CURRENT_PLAYLIST,
+      currentPlaylist: playlist.songs,
+    });
     if (!isSongPlaying) {
       dispatch({
         type: actionType.SET_IS_SONG_PLAYING,
