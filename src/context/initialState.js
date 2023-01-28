@@ -4,6 +4,7 @@ export const initialState = {
   isSongPausing: true,
   allSongs: null,
   currentSong: null,
+  currentPlaylist: null,
   player: null,
   miniPlayer: false,
   query: "",

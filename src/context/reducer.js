@@ -6,6 +6,7 @@ export const actionType = {
   SET_IS_SONG_PAUSING: "SET_IS_SONG_PAUSING",
   SET_IS_SONG_PLAYING: "SET_IS_SONG_PLAYING",
   SET_CURRENT_SONG: "SET_CURRENT_SONG",
+  SET_CURRENT_PLAYLIST: "SET_CURRENT_PLAYLIST",
   SET_MINI_PLAYER: "SET_MINI_PLAYER",
   SET_PLAYER: "SET_PLAYER",
   SET_ALL_CATEGORIES: "SET_ALL_CATEGORIES",
@@ -45,6 +46,8 @@ const reducer = (state, action) => {
       };
     case actionType.SET_CURRENT_SONG:
       return { ...state, currentSong: action.currentSong };
+    case actionType.SET_CURRENT_PLAYLIST:
+      return { ...state, currentPlaylist: action.currentPlaylist };
     case actionType.SET_QUERY:
       return { ...state, query: action.query };
     case actionType.SET_PLAYLISTS:
