@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { useStateValue } from "../context/StateProvider";
 import { RiPlayListFill } from "react-icons/ri";
 import { motion } from "framer-motion";
-import { getAllSongs } from "../api";
 import { actionType } from "../context/reducer";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
@@ -10,7 +9,7 @@ import { IoMusicalNote, IoArrowRedo } from "react-icons/io5";
 
 function MusicPlayer() {
   // eslint-disable-next-line no-unused-vars
-  const [{ currentSong, miniPlayer, isSongPausing }, dispatch] =
+  const [{ currentSong, miniPlayer, currentPlaylist }, dispatch] =
     useStateValue();
   const [isPlaylist, setIsPlaylist] = useState(false);
   const player = useRef();
@@ -20,15 +19,37 @@ function MusicPlayer() {
   }, [dispatch]);
 
   // TODO
-  // const nextTrack = () => {};
+  const nextTrack = () => {
+    if (!currentPlaylist) return;
+    const index = currentPlaylist.findIndex(
+      (song) => song.id === currentSong?._id
+    );
+    dispatch({
+      type: actionType.SET_CURRENT_SONG,
+      currentSong: currentPlaylist[(index + 1) % currentPlaylist.length],
+    });
+  };
 
-  // const previousTrack = () => {};
+  const previousTrack = () => {
+    if (!currentPlaylist) return;
+    let index = currentPlaylist.findIndex(
+      (song) => song.id === currentSong?._id
+    );
+    // Prev of first song is last
+    if (index === 0) index = currentPlaylist.length;
+    // If not found any song in current playlist => play first song in the list
+    if (index === -1) index = 1;
+    dispatch({
+      type: actionType.SET_CURRENT_SONG,
+      currentSong: currentPlaylist[index - 1],
+    });
+  };
 
   const togglePlaylist = () => setIsPlaylist(!isPlaylist);
 
   const togglePlayer = () =>
     dispatch({ type: actionType.SET_MINI_PLAYER, miniPlayer: !miniPlayer });
-  console.log(currentSong);
+  console.log(currentPlaylist);
   return (
     <div className="w-full flex items-center gap-3">
       <div
@@ -55,7 +76,11 @@ function MusicPlayer() {
               })
               .join(", ")}{" "}
             <span className="text-xs text-textColor font-semibold">
-              {`(${currentSong?.album.name})`}
+              (
+              {currentSong.album?.name.length > 10
+                ? `${currentSong.album.name.slice(0, 10)}...`
+                : currentSong.album.name}
+              )
             </span>
           </p>
           <motion.i whileTap={{ scale: 0.8 }} onClick={togglePlaylist}>
@@ -83,8 +108,8 @@ function MusicPlayer() {
             showSkipControls={true}
             ref={player}
             // TODO
-            // onClickNext={nextTrack}
-            // onClickPrevious={previousTrack}
+            onClickNext={nextTrack}
+            onClickPrevious={previousTrack}
           />
         </div>
 
@@ -122,15 +147,8 @@ function MusicPlayer() {
 }
 
 export const PlaylistCard = () => {
-  const [{ currentSong, allSongs, isSongPlaying }, dispatch] = useStateValue();
-  useEffect(() => {
-    if (!allSongs) {
-      getAllSongs().then((songData) => {
-        dispatch({ type: actionType.SET_ALL_SONGS, allSongs: songData.data });
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
+  const [{ currentSong, currentPlaylist, isSongPlaying }, dispatch] =
+    useStateValue();
 
   const setCurrentSong = (song) => {
     if (!isSongPlaying) {
@@ -143,11 +161,11 @@ export const PlaylistCard = () => {
   };
   return (
     <div
-      className="absolute left-4 bottom-24 gap-2 py-2 w-350 max-w-[350px] h-510 max-h-[510px]
+      className="absolute left-4 bottom-24 gap-2 py-2 w-350 max-w-[350px] h-420 max-h-[510px]
   flex flex-col overflow-y-scroll scrollbar-thin rounded-md shadow-md bg-primary text-sm"
     >
-      {allSongs?.length > 0 ? (
-        allSongs.map((song, i) => (
+      {currentPlaylist?.length > 0 ? (
+        currentPlaylist.map((song, i) => (
           <motion.div
             initial={{ opacity: 0, translateX: -50 }}
             animate={{ opacity: 1, translateX: 0 }}
@@ -179,7 +197,9 @@ export const PlaylistCard = () => {
           </motion.div>
         ))
       ) : (
-        <></>
+        <div className="text-sm text-textColor font-semibold p-2 flex justify-center items-center">
+          No playlist is playing
+        </div>
       )}
     </div>
   );

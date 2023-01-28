@@ -10,7 +10,6 @@ function MusicCard2({ arg = null, type = "playlists" }) {
   const showIcon = () => setShowPlay(true);
   const hideIcon = () => setShowPlay(false);
   const navigate = useNavigate();
-  console.log(arg);
   return (
     <div
       className="relative w-80 h-auto rounded lg:w-72 shadow-md bg-[#2a2a2a] hover:bg-cardBgLight transition-all duration-200 cursor-pointer "
