@@ -108,17 +108,23 @@ function CreatePlaylist() {
             onClick={toggleModal}
           >
             <div className="flex items-center">
-              {!isHover ? (
-                <BsMusicNoteBeamed className="h-[76px] w-[102px] text-[#787676]" />
+              {playlistImg === "" ? (
+                !isHover ? (
+                  <BsMusicNoteBeamed className="h-[76px] w-[102px] text-[#787676]" />
+                ) : (
+                  <div className="h-[76px] w-[150px] flex-col justify-center">
+                    <div className="flex justify-center">
+                      <BiPencil className="h-[50px] w-[50px] text-white" />
+                    </div>
+
+                    <div className="justify-center flex font-semibold">
+                      Choose photo
+                    </div>
+                  </div>
+                )
               ) : (
                 <div className="h-[76px] w-[150px] flex-col justify-center">
-                  <div className="flex justify-center">
-                    <BiPencil className="h-[50px] w-[50px] text-white" />
-                  </div>
-
-                  <div className="justify-center flex font-semibold">
-                    Choose photo
-                  </div>
+                  <img src={playlistImg} alt="playlist cover" />
                 </div>
               )}
             </div>
