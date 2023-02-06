@@ -74,12 +74,12 @@ function MusicPlayer() {
                 //console.log(item.name)
                 return item.name;
               })
-              .join(", ")}{" "}
+              .join(", ")}
             <span className="text-xs text-textColor font-semibold">
               (
               {currentSong.album?.name.length > 10
-                ? `${currentSong.album.name.slice(0, 10)}...`
-                : currentSong.album.name}
+                ? `${currentSong.album?.name.slice(0, 10)}...`
+                : currentSong.album?.name}
               )
             </span>
           </p>

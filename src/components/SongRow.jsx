@@ -165,7 +165,7 @@ function SongRow({
               >
                 {song.name}
               </Link>
-              {type == 1 && (
+              {(type == 1 || type == 3) && (
                 <div>
                   {song.artist.map((e, index) => (
                     <Link className="hover:underline" to={`/artists/${e._id}`}>

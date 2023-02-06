@@ -124,11 +124,11 @@ function PlaylistPage() {
   const [playlist, setPlaylist] = React.useState({});
   const [loading, setLoading] = React.useState(true);
   const [{ user, query }, dispatch] = useStateValue();
-  const [isActive4, setIsActive4] = React.useState(false);
+  const [isActive, setIsActive] = React.useState(false);
   const [selectedRow, setSelectedRow] = React.useState(false);
   const navigate = useNavigate();
   const toggleDropDown4 = () => {
-    setIsActive4(!isActive4);
+    setIsActive(!isActive);
   };
 
   const [modal, setModal] = React.useState(false);
@@ -185,14 +185,6 @@ function PlaylistPage() {
       setPlaylist(data.data)
     );
   };
-  const toggleLikeSong = (id) => {
-    setPlaylist({
-      ...playlist,
-      songs: playlist.songs.map((song) =>
-        song.id === id ? { ...song, liked: !song.liked } : song
-      ),
-    });
-  };
 
   const handleDeletePlaylist = async () => {
     await deletePlaylist(id, user.token);
@@ -218,7 +210,7 @@ function PlaylistPage() {
                 <div className="flex relative">
                   <DropDown
                     setIsActive={toggleDropDown4}
-                    isActive={isActive4}
+                    isActive={isActive}
                     options={valueDropDown2}
                     onClick={[null, toggleModal]}
                   />
@@ -247,7 +239,6 @@ function PlaylistPage() {
                       <SongRow
                         song={s}
                         id={index + 1}
-                        toggleLikeSong={toggleLikeSong}
                         key={s._id}
                         selectedRow={selectedRow}
                         setSelectedRow={setSelectedRow}
