@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate, Outlet } from "react-router-dom";
 import { Home, Dashboard, HomeMusic, MusicPlayer } from "./components";
-
 import { app } from "./config/firebase.config";
 import { getAuth } from "firebase/auth";
 import { AnimatePresence, motion } from "framer-motion";

@@ -13,6 +13,6 @@ export { default as DashboardAlbums } from "./DashboardAlbums";
 // CARD COMPONENTS
 export { default as MusicCard } from "./MusicCard/MusicCard";
 export { default as MusicCard2 } from "./MusicCard/MusicCard2";
-export { default as MusicPlayer } from "./MusicPlayer";
+export { default as MusicPlayer } from "./MusicPlayer/MusicPlayer";
 export { default as DotFlashing } from "./DotFlashing";
 //
