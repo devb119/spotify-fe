@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useStateValue } from "../context/StateProvider";
-import { getAllSongs, getAllAlbums, getAllArtists } from "../api";
+import {
+  getAllSongs,
+  getAllCategories,
+  getAllAlbums,
+  getAllArtists,
+} from "../api";
 import { actionType } from "../context/reducer";
 import { useNavigate } from "react-router-dom";
 import { SongContainer } from "./HomeMusic";
-import { getAllCategories } from "../api";
-import DotFlashing from "./DotFlashing";
+import { DotFlashing } from "../components";
 const listCard = [
   {
     color: "bg-cardColor1",
@@ -83,7 +87,7 @@ function Search() {
   }, [query]);
   // console.log(searchType);
   console.log(albums);
-  console.log(artists)
+  console.log(artists);
   return (
     <div className="p-8 pt-28 mb-12 h-full">
       {query === "" ? (
@@ -124,9 +128,8 @@ function Search() {
         <div>
           <SongContainer songs={artists} title="Artists" />
           <SongContainer songs={songs} title="Songs" />
-          <SongContainer songs={albums} title="Albums" /> 
+          <SongContainer songs={albums} title="Albums" />
         </div>
-        
       )}
     </div>
   );

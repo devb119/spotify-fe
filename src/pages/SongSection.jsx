@@ -1,8 +1,7 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
-
-import DotFlashing from "./DotFlashing";
-import MusicCard from "./MusicCard";
+import { useParams } from "react-router-dom";
+import DotFlashing from "../components/DotFlashing";
+import MusicCard from "../components/MusicCard/MusicCard";
 import { getSongsBySections } from "../api";
 function SongSection() {
   const id = useParams().id;

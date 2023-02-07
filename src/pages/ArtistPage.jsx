@@ -2,11 +2,9 @@ import React from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getArtist } from "../api";
-import DotFlashing from "./DotFlashing";
-import PopularSuggestion, {
-  PopularAlbum,
-  PopularSongs,
-} from "./PopularSuggestion";
+import { DotFlashing } from "../components";
+import PopularAlbum from "../components/PopularSuggestion/PopularAlbum";
+import PopularSongs from "../components/PopularSuggestion/PopularSongs";
 function ArtistPage() {
   const id = useParams().id;
 
@@ -35,7 +33,7 @@ function ArtistPage() {
               <div className="text-sm font-semibold">ARTIST</div>
               <div className="text-7xl font-bold mt-1">{artist.name}</div>
               <div className=" font-semibold mt-10">
-                677,949,049 monthly listeners{" "}
+                677,949,049 monthly listeners
               </div>
             </div>
           </div>

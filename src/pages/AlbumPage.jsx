@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { getAlbum } from "../api";
-import DotFlashing from "./DotFlashing";
-import { PlayListCover } from "./LikedSongList";
+import { DotFlashing } from "../components";
+import { PlayListCover } from "../components/LikedSongList";
 import { useParams } from "react-router-dom";
 import { PlayPlaylist } from "./PlaylistPage";
 import { HiOutlineClock } from "react-icons/hi";
-import SongRow from "./SongRow";
+import SongRow from "../components/SongRow/SongRow";
 function AlbumPage() {
   const id = useParams().id;
   const [album, setAlbum] = useState(null);

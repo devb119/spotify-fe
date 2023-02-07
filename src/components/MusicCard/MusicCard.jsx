@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-
-import { actionType } from "../context/reducer";
-import { useStateValue } from "../context/StateProvider";
+import { useStateValue } from "../../context/StateProvider";
 import { useNavigate } from "react-router-dom";
 import PlayButton from "./PlayButton";
-import Icon from "../assets/img/Icon";
+import Icon from "../../assets/img/Icon";
 function MusicCard({ song, type = "songs" }) {
   const navigate = useNavigate();
   const [showPlay, setShowPlay] = useState(false);
@@ -52,6 +50,7 @@ function MusicCard({ song, type = "songs" }) {
       >
         {type === "playlists" && <PlayButton playlist={song}></PlayButton>}
         {type === "songs" && <PlayButton song={song}></PlayButton>}
+        {type === "albums" && <PlayButton playlist={song}></PlayButton>}
       </div>
     </div>
   );

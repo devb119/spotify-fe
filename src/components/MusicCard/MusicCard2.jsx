@@ -1,7 +1,6 @@
 import { type } from "@testing-library/user-event/dist/type";
 import React, { useState } from "react";
-import { GrPlayFill } from "react-icons/gr";
-import Icon from "../assets/img/Icon";
+import Icon from "../../assets/img/Icon";
 import { useNavigate } from "react-router-dom";
 import PlayButton from "./PlayButton";
 

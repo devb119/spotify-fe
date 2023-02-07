@@ -1,14 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { GrPlayFill } from "react-icons/gr";
-import { getMyPlaylists } from "../api";
+import { getMyPlaylists, getLikedSongs } from "../api";
 import { useMemo } from "react";
 import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
-import DotFlashing from "./DotFlashing";
+import { DotFlashing } from "../components";
 import { useNavigate } from "react-router-dom";
-import MusicCard from "./MusicCard";
-import { getLikedSongs } from "../api";
+import MusicCard from "../components/MusicCard/MusicCard";
 
 function CollectionPlaylist() {
   const [showPlay, setShowPlay] = useState(false);

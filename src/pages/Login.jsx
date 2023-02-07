@@ -8,7 +8,7 @@ import { actionType } from "../context/reducer";
 import { validateUser } from "../api";
 import { LoginBg } from "../assets/video";
 import { Logo } from "../assets/img";
-import LoginByField from "../components/LoginByField";
+import LoginByField from "./LoginByField";
 function Login({ setAuth }) {
   // Get app information to authen
   const fireBaseAuth = getAuth(app);

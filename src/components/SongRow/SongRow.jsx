@@ -1,31 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { BsFillPlayFill } from "react-icons/bs";
-import { BiPause } from "react-icons/bi";
 import { RiHeartFill, RiHeartLine } from "react-icons/ri";
-import { actionType } from "../context/reducer";
-import { useStateValue } from "../context/StateProvider";
-import Equalizer from "./Equalizer";
-import { addLikedSongs, deleteLikedSongs } from "../api";
+import { actionType } from "../../context/reducer";
+import { useStateValue } from "../../context/StateProvider";
+import DropDown from "./DropDown";
+import { useNavigate } from "react-router-dom";
+import SongRowPlayButton from "./SongRowPlayButton";
+import { addLikedSongs, deleteLikedSongs } from "../../api";
 import ReactCursorPosition from "react-cursor-position";
-export function DropDown({ options }) {
-  return (
-    <div className="">
-      <div className="rounded-sm w-44 p-1 z-50 mt-3 drop-shadow-sm shadow-black absolute bg-neutral-800 text-white font-semibold">
-        {options.map((option) => {
-          return (
-            <div
-              className="hover:bg-neutral-700 p-2 text-left hover:cursor-pointer"
-              onClick={option.action}
-            >
-              {option.text}
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
 //type = 1 : has album name and added date ( used on playlist)
 // type = 2 : has count listen ( used on popular sugestions)
 // type = 3 : a div 3-col-span is blank (used on album page)
@@ -38,36 +20,19 @@ function SongRow({
   deleteSongFromPlaylist,
 }) {
   const [isHovered, setIsHovered] = React.useState(false);
-  const [
-    { isSongPlaying, currentSong, isSongPausing, likedSongs, user, player },
-    dispatch,
-  ] = useStateValue();
-
-  const play = () => {
-    if (!isSongPlaying) {
-      dispatch({ type: actionType.SET_IS_SONG_PLAYING, isSongPlaying: true });
-    } else {
-      player.current.audio.current.play();
-    }
-    dispatch({
-      type: actionType.SET_IS_SONG_PAUSING,
-      isSongPausing: false,
-    });
-    if (currentSong?._id !== song._id) {
-      dispatch({ type: actionType.SET_CURRENT_SONG, currentSong: song });
-    }
-  };
-  const pause = () => {
-    player.current.audio.current.pause();
-    dispatch({ type: actionType.SET_IS_SONG_PAUSING, isSongPausing: true });
-  };
-
+  const [{ currentSong, likedSongs, user }, dispatch] = useStateValue();
+  const navigate = useNavigate();
   const options = [
     {
       text: "Remove from playlist",
       action: () => deleteSongFromPlaylist(song._id),
     },
-    { text: "Go to artist", action: () => {} },
+    {
+      text: "Go to artist",
+      action: () => {
+        navigate(`/artists/${song.artist[0]._id}`);
+      },
+    },
   ];
 
   async function handleLikeSong() {
@@ -113,39 +78,11 @@ function SongRow({
         onContextMenu={handleClick}
       >
         <div>
-          <div className="text-center items-center grid justify-center">
-            {currentSong?._id !== song._id ? (
-              <div>
-                {isHovered ? (
-                  <BsFillPlayFill
-                    className="text-2xl "
-                    onClick={play}
-                  ></BsFillPlayFill>
-                ) : (
-                  <p className="text-base">{id}</p>
-                )}
-              </div>
-            ) : (
-              <div>
-                {!isSongPausing ? (
-                  isHovered ? (
-                    <BiPause className="text-3xl " onClick={pause}></BiPause>
-                  ) : (
-                    <Equalizer></Equalizer>
-                  )
-                ) : !isHovered ? (
-                  <p className="text-base text-green-600" onClick={play}>
-                    {id}
-                  </p>
-                ) : (
-                  <BsFillPlayFill
-                    className="text-2xl "
-                    onClick={play}
-                  ></BsFillPlayFill>
-                )}
-              </div>
-            )}
-          </div>
+          <SongRowPlayButton
+            isHovered={isHovered}
+            song={song}
+            id={id}
+          ></SongRowPlayButton>
         </div>
         <div
           className={

@@ -6,6 +6,7 @@ import { actionType } from "../context/reducer";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import { IoMusicalNote, IoArrowRedo } from "react-icons/io5";
+import { getAllSongs } from "../api";
 
 function MusicPlayer() {
   // eslint-disable-next-line no-unused-vars
@@ -13,14 +14,28 @@ function MusicPlayer() {
     useStateValue();
   const [isPlaylist, setIsPlaylist] = useState(false);
   const player = useRef();
-
+  const [allSongs, setAllSongs] = useState();
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     dispatch({ type: actionType.SET_PLAYER, player });
   }, [dispatch]);
+  useEffect(() => {
+    setLoading(true);
+    getAllSongs()
+      .then((allSongs) => setAllSongs(allSongs.data))
+      .finally(() => setLoading(false));
+  }, []);
 
   // TODO
   const nextTrack = () => {
-    if (!currentPlaylist) return;
+    if (!currentPlaylist) {
+      // get random song to play.
+      if (!loading)
+        dispatch({
+          type: actionType.SET_CURRENT_SONG,
+          currentSong: allSongs[Math.floor(Math.random() * allSongs.length)],
+        });
+    }
     const index = currentPlaylist.findIndex(
       (song) => song.id === currentSong?._id
     );
@@ -31,7 +46,13 @@ function MusicPlayer() {
   };
 
   const previousTrack = () => {
-    if (!currentPlaylist) return;
+    if (!currentPlaylist) {
+      if (!loading)
+        dispatch({
+          type: actionType.SET_CURRENT_SONG,
+          currentSong: allSongs[Math.floor(Math.random() * allSongs.length)],
+        });
+    }
     let index = currentPlaylist.findIndex(
       (song) => song.id === currentSong?._id
     );
@@ -62,13 +83,13 @@ function MusicPlayer() {
           alt=""
           className="w-16 h-16 object-cover rounded-sm"
         />
-        <div className="flex items-start flex-col">
+        <div className="flex items-start flex-col w-44">
           <p className="text-xs text-headingColor font-semibold">{`${
             currentSong?.name.length > 30
               ? currentSong?.name.slice(0, 30)
               : currentSong?.name
           }`}</p>
-          <p className="text-textColor">
+          <p className="text-textColor text-xs">
             {currentSong?.artist
               .map((item) => {
                 //console.log(item.name)
@@ -76,18 +97,17 @@ function MusicPlayer() {
               })
               .join(", ")}
             <span className="text-xs text-textColor font-semibold">
-              (
-              {currentSong.album?.name.length > 10
-                ? `${currentSong.album?.name.slice(0, 10)}...`
-                : currentSong.album?.name}
-              )
+              {currentSong.album
+                ? currentSong.album?.name.length > 10
+                  ? `(${currentSong.album?.name.slice(0, 10)}...)`
+                  : `(${currentSong.album?.name})`
+                : ""}
             </span>
           </p>
           <motion.i whileTap={{ scale: 0.8 }} onClick={togglePlaylist}>
             <RiPlayListFill className="text-textColor hover:text-headingColor text-sm cursor-pointer" />
           </motion.i>
         </div>
-
         <div className="flex-1">
           <AudioPlayer
             src={currentSong?.songURL}
@@ -121,9 +141,7 @@ function MusicPlayer() {
             <IoArrowRedo className="text-textColor hover:text-headingColor text-2xl cursor-pointer" />
           </motion.i>
         </div>
-
         {isPlaylist && <PlaylistCard />}
-
         {miniPlayer && (
           <motion.div
             initial={{ opacity: 0, scale: 0.6 }}
@@ -182,15 +200,15 @@ export const PlaylistCard = () => {
                   : song.name}{" "}
                 {/* <span className="text-base">{song.album}</span> */}
               </p>
-              <p className="text-textColor">
+              <p className="text-textColor text-xs">
                 {song.artist
                   .map((item) => {
                     //console.log(item.name)
                     return item.name;
                   })
-                  .join(", ")}{" "}
+                  .join(", ")}
                 <span className="text-sm text-textColor font-semibold">
-                  ({song.album?.name})
+                  {song.album ? `(${song.album.name})` : ""}
                 </span>
               </p>
             </div>

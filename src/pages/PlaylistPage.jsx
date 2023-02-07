@@ -7,20 +7,20 @@ import {
   getAllSongs,
   getMyPlaylists,
   getPlaylist,
+  deletePlaylist,
 } from "../api";
 import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
-import SongRow from "./SongRow";
+import SongRow from "../components/SongRow/SongRow";
 import { FiSearch } from "react-icons/fi";
 import { useNavigate, useParams } from "react-router-dom";
-import { PlayListCover } from "./LikedSongList";
-import SongRowSearch from "./SongRowSearch";
-import DotFlashing from "./DotFlashing";
+import { PlayListCover } from "../components/LikedSongList";
+import SongRowSearch from "../components/SongRow/SongRowSearch";
+import { DotFlashing } from "../components";
 import Icon from "../assets/img/Icon";
 import { valueDropDown2 } from "../utils/styles";
-import DropDown from "./DropDown";
-import { deletePlaylist } from "../api";
-import ConfirmBox from "./ConfirmBox";
+import DropDown from "../components/DropDown";
+import ConfirmBox from "../components/ConfirmBox";
 export function PlayPlaylist({ playlist }) {
   const [{ isSongPlaying, player, isSongPausing, currentSong }, dispatch] =
     useStateValue();
@@ -55,18 +55,20 @@ export function PlayPlaylist({ playlist }) {
     <div>
       {playlist.songs?.length === 0 ? (
         ""
-      ) : isSongPausing ? (
-        <AiFillPlayCircle
-          onClick={() => play(playlist)}
-          size={60}
-          className="fill-green-500 mr-5 hover:fill-green-400 hover:scale-105 hover:cursor-pointer"
-        ></AiFillPlayCircle>
-      ) : (
+      ) : !isSongPausing &&
+        playlist.songs.filter((song) => song._id === currentSong?._id)
+          .length !== 0 ? (
         <AiFillPauseCircle
           onClick={() => pause()}
           size={60}
           className="fill-green-500 mr-5 hover:fill-green-400 hover:scale-105 hover:cursor-pointer"
         ></AiFillPauseCircle>
+      ) : (
+        <AiFillPlayCircle
+          onClick={() => play(playlist)}
+          size={60}
+          className="fill-green-500 mr-5 hover:fill-green-400 hover:scale-105 hover:cursor-pointer"
+        ></AiFillPlayCircle>
       )}
     </div>
   );
@@ -107,6 +109,7 @@ function Search({ query, handleInputOnchange, songs, addToPlaylist }) {
           <div>
             {songs.map((s, index) => (
               <SongRowSearch
+                id={index}
                 song={s}
                 key={index}
                 addClicked={() => addToPlaylist(s)}

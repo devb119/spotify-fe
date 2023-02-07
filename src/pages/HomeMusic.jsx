@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
-import { getAllSongs, getHomeSections, getMyPlaylists } from "../api";
+import { getHomeSections, getMyPlaylists } from "../api";
 // import { actionType } from "../context/reducer";
 // import { useStateValue } from "../context/StateProvider";
-import DotFlashing from "./DotFlashing";
-import MusicCard from "./MusicCard";
-import MusicCard2 from "./MusicCard2";
-import ArtistsCard from "./ArtistsCard";
-import { useNavigate, useParams } from "react-router-dom";
+import { MusicCard2, DotFlashing, MusicCard } from "../components";
+import ArtistsCard from "../components/ArtistsCard";
+import { useNavigate } from "react-router-dom";
 import { useMemo } from "react";
 import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";

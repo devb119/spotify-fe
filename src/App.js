@@ -1,28 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate, Outlet } from "react-router-dom";
-import { Home, Login, Dashboard, HomeMusic, MusicPlayer } from "./components";
+import { Home, Dashboard, HomeMusic, MusicPlayer } from "./components";
+
 import { app } from "./config/firebase.config";
 import { getAuth } from "firebase/auth";
 import { AnimatePresence, motion } from "framer-motion";
 import { validateUser } from "./api";
 import { useStateValue } from "./context/StateProvider";
 import { actionType } from "./context/reducer";
-import NotFound from "./components/NotFound";
-import PlaylistPage from "./components/PlaylistPage";
-import SongPage from "./components/SongPage";
-import CreatePlaylist from "./components/CreatePlaylist";
-import SectionGenre from "./components/SectionGenre";
-import SongSection from "./components/SongSection";
-import ArtistPage from "./components/ArtistPage";
-import AlbumPage from "./components/AlbumPage";
-import InstallApp from "./components/InstallApp";
-const LazySearch = React.lazy(() => import("./components/Search"));
+import Login from "./pages/Login";
+import NotFound from "./pages/NotFound";
+import PlaylistPage from "./pages/PlaylistPage";
+import SongPage from "./pages/SongPage";
+import CreatePlaylist from "./pages/CreatePlaylist";
+import SectionGenre from "./components/SectionGenre/SectionGenre";
+import SongSection from "./pages/SongSection";
+import ArtistPage from "./pages/ArtistPage";
+import AlbumPage from "./pages/AlbumPage";
+import InstallApp from "./pages/InstallApp";
+const LazySearch = React.lazy(() => import("./pages/Search"));
 // const LazyLibrary = React.lazy(() => import("./components/DashboardAlbums"));
 // const LazyHome = React.lazy(() => import("./components/DashboardHome"));
 const LazyCollectionPlaylist = React.lazy(() =>
-  import("./components/CollectionPlaylist")
+  import("./pages/CollectionPlaylist")
 );
-const LazyLikedSongs = React.lazy(() => import("./components/LikedSongs"));
+const LazyLikedSongs = React.lazy(() => import("./pages/LikedSongs"));
 const App = () => {
   // eslint-disable-next-line no-unused-vars
   const [auth, setAuth] = useState(
@@ -63,7 +65,7 @@ const App = () => {
               __v: 0,
             },
             token:
-              "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVhNTA5ZjAxOWY3MGQ3NzlkODBmMTUyZDFhNWQzMzgxMWFiN2NlZjciLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoixJDhu6ljIEFuaCBOZ3V54buFbiIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BTG01d3UydlNaU2NONXg5aHE1WExoRGN2TE03S0YtSFg0TGlCaHBxYVgxRHJRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3Nwb3RpZnktYXBwLWIzOGU0IiwiYXVkIjoic3BvdGlmeS1hcHAtYjM4ZTQiLCJhdXRoX3RpbWUiOjE2NzI5OTU2NTAsInVzZXJfaWQiOiJ5VU1vY0lYRXNqUkZwYWxwZmx6YUxwTmdIZDczIiwic3ViIjoieVVNb2NJWEVzalJGcGFscGZsemFMcE5nSGQ3MyIsImlhdCI6MTY3NTYwNzIyMSwiZXhwIjoxNjc1NjEwODIxLCJlbWFpbCI6ImR1Y2FuaDExMDkyMDAxQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7Imdvb2dsZS5jb20iOlsiMTA2NDUzNzM1Mjc5NTAxNzMwMjM1Il0sImVtYWlsIjpbImR1Y2FuaDExMDkyMDAxQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.V5Xp_Az7gt8Y2zo_M-J8VvKxeQpGDCZj6DXJa18zC1emeHYFeIfA-8stP2zPA-eUgjkzcoXGGVb6aUE2wjTgHy20ZQ1ZseP0I5BdJiiLUN8eumwTMI4CuH9Es_3hK4yuL2_Ftth8_j1O5BEQtKXR0mRAmo9ZLo4yu6OsKyk6pEktkZh7xG0spgSZk8u0gvG6Xul8ETMY8YmbzX4yBjOHSiu6jKm1DOEITXj7qwJPTmX9URTQsLBPe5A9ThaM73Vz5UUdMeExQUMTQ3Fpf8jXw1K2fH0YOleTYlAEK3mpWNNyZILlseMAi1xMK1EOqpoObYfc1TWdXKS0djMgLnFwnw",
+              "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVhNTA5ZjAxOWY3MGQ3NzlkODBmMTUyZDFhNWQzMzgxMWFiN2NlZjciLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoixJDhu6ljIEFuaCBOZ3V54buFbiIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BTG01d3UydlNaU2NONXg5aHE1WExoRGN2TE03S0YtSFg0TGlCaHBxYVgxRHJRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3Nwb3RpZnktYXBwLWIzOGU0IiwiYXVkIjoic3BvdGlmeS1hcHAtYjM4ZTQiLCJhdXRoX3RpbWUiOjE2NzI5OTU2NTAsInVzZXJfaWQiOiJ5VU1vY0lYRXNqUkZwYWxwZmx6YUxwTmdIZDczIiwic3ViIjoieVVNb2NJWEVzalJGcGFscGZsemFMcE5nSGQ3MyIsImlhdCI6MTY3NTc4NTA2NCwiZXhwIjoxNjc1Nzg4NjY0LCJlbWFpbCI6ImR1Y2FuaDExMDkyMDAxQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7Imdvb2dsZS5jb20iOlsiMTA2NDUzNzM1Mjc5NTAxNzMwMjM1Il0sImVtYWlsIjpbImR1Y2FuaDExMDkyMDAxQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.Bdv3zX69D2Hovgfnv4VRfbAKiH44G9_nIQXemJZgwa8-FolTsyE4sYA06CG6DXqcflBA6d7YyksnG8kCqjyY8m7op2v6Cw9f5zsvnVcgoOHru7WpfcBMv6lRBYb49AHyz05Rkc_2gYpbJHU-i717LVpH7JzkAFfjNS-F_1e0pOnsoWIrVwk816vdGHZKKRJ0VZ0T0FwahX-1XDNdiscMHGUum4TX2nDV96_4Cw_SolVeQ1RNw8QoAiGyPsce8eoS8Hmb_xa7f0GiLgwDPnM79ANpsKWSNX-3GcJDin0NzHCGeSw9Y99mjNZjhYRhRPCKFedjvVN542MdLzPSJ2GRNg",
           },
         });
         setAuth(true);

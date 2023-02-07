@@ -1,9 +1,9 @@
-import LikedSongList from "./LikedSongList";
+import LikedSongList from "../components/LikedSongList";
 import React, { useEffect, useState } from "react";
 import { getLikedSongs } from "../api";
 import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
-import DotFlashing from "./DotFlashing";
+import DotFlashing from "../components/DotFlashing";
 import Icon from "../assets/img/Icon";
 function LikedSongs() {
   const [{ user, likedSongs }, dispatch] = useStateValue();

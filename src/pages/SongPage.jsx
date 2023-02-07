@@ -1,4 +1,4 @@
-import { PlayListCover } from "./LikedSongList";
+import { PlayListCover } from "../components/LikedSongList";
 import { Link, useParams } from "react-router-dom";
 import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai";
 import { actionType } from "../context/reducer";
@@ -11,9 +11,9 @@ import {
   getLikedSongs,
   getSong,
 } from "../api";
-import PopularSuggestion from "./PopularSuggestion";
+import PopularSuggestion from "../components/PopularSuggestion/PopularSuggestion";
 import { useEffect, useState } from "react";
-import DotFlashing from "./DotFlashing";
+import { DotFlashing } from "../components";
 
 function SongPage() {
   const id = useParams().id;

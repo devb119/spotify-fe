@@ -2,23 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { BsFillPlayFill } from "react-icons/bs";
 import { BiPause } from "react-icons/bi";
-import { actionType } from "../context/reducer";
-import { useStateValue } from "../context/StateProvider";
-import Equalizer from "./Equalizer";
-
-function SongRowSearch({ song, addClicked }) {
+import { actionType } from "../../context/reducer";
+import { useStateValue } from "../../context/StateProvider";
+import SongRowPlayButton from "./SongRowPlayButton";
+function SongRowSearch({ id, song, addClicked }) {
   const [isHovered, setIsHovered] = React.useState(false);
   const [{ isSongPlaying, currentSong }, dispatch] = useStateValue();
-
-  const play = () => {
-    if (!isSongPlaying) {
-      dispatch({ type: actionType.SET_IS_SONG_PLAYING, isSongPlaying: true });
-    }
-    if (currentSong?._id !== song._id) {
-      dispatch({ type: actionType.SET_CURRENT_SONG, currentSong: song });
-    }
-  };
-  const pause = () => {};
   return (
     <div
       className="py-2 hover:bg-neutral-800 text-textColor font-medium grid grid-cols-12 text-xs gap-1 items-center rounded"
@@ -30,26 +19,11 @@ function SongRowSearch({ song, addClicked }) {
       }}
     >
       <div>
-        <div className="text-center items-center grid justify-center">
-          {currentSong?._id !== song._id ? (
-            <div>
-              {isHovered && (
-                <BsFillPlayFill
-                  className="text-2xl "
-                  onClick={play}
-                ></BsFillPlayFill>
-              )}
-            </div>
-          ) : (
-            <div>
-              {isHovered ? (
-                <BiPause className="text-3xl " onClick={pause}></BiPause>
-              ) : (
-                <Equalizer></Equalizer>
-              )}
-            </div>
-          )}
-        </div>
+        <SongRowPlayButton
+          id={id}
+          song={song}
+          isHovered={isHovered}
+        ></SongRowPlayButton>
       </div>
       <div className="col-span-4 text-left ">
         <div className="flex items-center">

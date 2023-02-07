@@ -106,7 +106,7 @@ function Header() {
         />
         <div className="flex ">
           <div className="text-white flex flex-row text-xs font-semibold hover:text-headingColor">
-            <p className="text-end">{user?.data.name}</p>
+            <p className="text-end mt-1">{user?.data.name}</p>
 
             {!isMenuOpen ? (
               <MdArrowDropDown className="text-2xl"></MdArrowDropDown>
@@ -126,10 +126,7 @@ function Header() {
               animate={{ opacity: 1, y: -20, zIndex: 10 }}
               exit={{ opacity: 0, y: 50, zIndex: 10 }}
             >
-              <div
-                className="absolute top-11 text-xs font-semibold right-0 w-225 gap-1 bg-card 
-        shadow-lg rounded-sm backdrop-blur-sm flex flex-col p-1"
-              >
+              <div className="absolute top-9 text-xs font-semibold right-0 w-44 gap-1 bg-card shadow-lg rounded-sm backdrop-blur-sm flex flex-col p-1">
                 <NavLink to="/userProfile">
                   <p className=" text-textColor hover:bg-neutral-700 p-2 hover:text-headingColor rounded-sm duration-150 transition-all ease-in-out">
                     Profile
@@ -150,9 +147,7 @@ function Header() {
                     </NavLink>
                   </>
                 )}
-
                 <hr className="border-t-1 border-neutral-700 "></hr>
-
                 <p
                   className=" text-textColor hover:bg-neutral-700 p-2 hover:text-headingColor rounded-sm duration-150 transition-all ease-in-out"
                   onClick={logOut}

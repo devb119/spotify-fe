@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Icon from "../assets/img/Icon.jsx";
+import Icon from "../assets/img/Icon";
 function NotFound() {
   return (
     <div className="text-white w-full h-screen flex flex-col items-center justify-center">

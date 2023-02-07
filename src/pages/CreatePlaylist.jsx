@@ -1,5 +1,5 @@
 import React from "react";
-import DropDown from "./DropDown";
+import DropDown from "../components/DropDown";
 import { BsMusicNoteBeamed } from "react-icons/bs";
 import { BiPencil } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
