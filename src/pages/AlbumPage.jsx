@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { getAlbum } from "../api";
 import { DotFlashing } from "../components";
-import { PlayListCover } from "../components/LikedSongList";
+import { PlayListCover } from "../components/PlayListCover";
 import { useParams } from "react-router-dom";
 import { PlayPlaylist } from "./PlaylistPage";
 import { HiOutlineClock } from "react-icons/hi";

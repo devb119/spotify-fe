@@ -14,7 +14,7 @@ import { useStateValue } from "../context/StateProvider";
 import SongRow from "../components/SongRow/SongRow";
 import { FiSearch } from "react-icons/fi";
 import { useNavigate, useParams } from "react-router-dom";
-import { PlayListCover } from "../components/LikedSongList";
+import { PlayListCover } from "../components/PlayListCover";
 import SongRowSearch from "../components/SongRow/SongRowSearch";
 import { DotFlashing } from "../components";
 import Icon from "../assets/img/Icon";

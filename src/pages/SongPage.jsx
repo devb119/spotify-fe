@@ -1,4 +1,4 @@
-import { PlayListCover } from "../components/LikedSongList";
+import { PlayListCover } from "../components/PlayListCover";
 import { Link, useParams } from "react-router-dom";
 import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai";
 import { actionType } from "../context/reducer";
