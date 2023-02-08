@@ -1,11 +1,8 @@
 import React from "react";
 import { HiOutlineClock } from "react-icons/hi";
-import { BsDot } from "react-icons/bs";
+
 import SongRow from "./SongRow/SongRow";
-import { Link } from "react-router-dom";
-import { useStateValue } from "../context/StateProvider";
-import { FastAverageColor } from "fast-average-color";
-import Icon from "../assets/img/Icon";
+
 import { PlayPlaylist } from "../pages/PlaylistPage";
 import { PlayListCover } from "./PlayListCover";
 function LikedSongList({ playlist, setPlaylist }) {

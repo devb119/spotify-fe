@@ -4,7 +4,6 @@ import Icon from "../assets/img/Icon";
 import { useNavigate } from "react-router-dom";
 function ArtistsCard({ artist }) {
   const [showPlay, setShowPlay] = useState(false);
-
   const showIcon = () => setShowPlay(true);
   const hideIcon = () => setShowPlay(false);
   const navigate = useNavigate();

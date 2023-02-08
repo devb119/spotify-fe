@@ -1,10 +1,12 @@
 import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useStateValue } from "../context/StateProvider";
 import { FastAverageColor } from "fast-average-color";
 import Icon from "../assets/img/Icon";
 import { actionType } from "../context/reducer";
 import { BsDot } from "react-icons/bs";
+import { HoverEditButton, PlaylistModal } from "../pages/CreatePlaylist";
 const fac = new FastAverageColor();
 
 export function useAverageColor(dom) {
@@ -25,10 +27,20 @@ export function PlayListCover({
   album = null,
   imageType = "playlist",
 }) {
+  const [isHover, setIsHover] = useState(false);
+  const [playlistImg, setPlaylistImg] = useState(playlist.imageURL);
   const [loading, setLoading] = React.useState(true);
   const [gradient, setGradient] = React.useState();
+  const [modal, setModal] = useState(false);
   const [{ user, currentColor }, dispatch] = useStateValue();
-
+  const [hoverIconModal, setHoverIconModal] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const toggleDropDown = () => {
+    setIsActive(!isActive);
+  };
+  const toggleModal = () => {
+    setModal(!modal);
+  };
   React.useEffect(() => {
     setLoading(true);
     fac
@@ -74,19 +86,36 @@ export function PlayListCover({
           }
           className={"p-6 px-8 pt-20"}
         >
-          <div className="flex items-center text-white  ">
+          <div className="flex items-center  text-white  ">
             {imageType === "playlist" && (
-              <img
-                src={
-                  playlist
-                    ? playlist.imageURL
-                    : song
-                    ? song.imageURL
-                    : album.imageURL
-                }
-                className="w-60 h-60 drop-shadow-large shadow-black "
-                alt="cover"
-              />
+              <div
+                className="w-60 h-60 drop-shadow-large shadow-black flex justify-center items-center "
+                onMouseEnter={() => {
+                  if (playlist) setIsHover(true);
+                }}
+                onMouseLeave={() => {
+                  if (playlist) setIsHover(false);
+                }}
+                onClick={() => {
+                  setModal(true);
+                }}
+              >
+                {!isHover ? (
+                  <img
+                    className="w-60 h-60"
+                    src={
+                      playlist
+                        ? playlist.imageURL
+                        : song
+                        ? song.imageURL
+                        : album.imageURL
+                    }
+                    alt="cover"
+                  />
+                ) : (
+                  <HoverEditButton></HoverEditButton>
+                )}
+              </div>
             )}
             {imageType === "likedSongs" && (
               <img
@@ -181,6 +210,17 @@ export function PlayListCover({
               </div>
             </div>
           </div>
+          {modal && (
+            <PlaylistModal
+              title={playlist.name}
+              isActive={isActive}
+              playlistImg={playlistImg}
+              setPlaylistImg={setPlaylistImg}
+              toggleModal={toggleModal}
+              hoverIconModal={hoverIconModal}
+              toggleDropDown={toggleDropDown}
+            ></PlaylistModal>
+          )}
         </div>
       )}
     </div>
