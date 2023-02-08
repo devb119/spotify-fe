@@ -36,7 +36,7 @@ function LikedSongList({ playlist, setPlaylist }) {
                   <div className="text-center">#</div>
                   <div className="col-span-4 text-left">TITLE</div>
                   <div className="col-span-3 text-left">ALBUM</div>
-                  <div className="col-span-2 text-left">DATE ADDED</div>
+                  {/* <div className="col-span-2 text-left">DATE ADDED</div> */}
                   <div className="col-span-1 text-right "></div>
                   <div className="col-span-1 text-right grid justify-center ">
                     <HiOutlineClock className="text-xl "></HiOutlineClock>
