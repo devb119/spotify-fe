@@ -6,11 +6,11 @@ import { AiOutlineClose } from "react-icons/ai";
 import { useState } from "react";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../config/firebase.config";
-import { createPlaylist, getMyPlaylists } from "../api";
+import { createPlaylist, getMyPlaylists, updatePlaylist } from "../api";
 import { valueDropDown1 } from "../utils/styles";
 import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 export function HoverEditButton() {
   return (
     <div className="flex-col justify-center ">
@@ -23,17 +23,22 @@ export function HoverEditButton() {
 }
 export function PlaylistModal({
   title,
+  description,
   isActive,
   playlistImg,
   setPlaylistImg,
   toggleModal,
   toggleDropDown,
+  setPlaylistName,
+  closeModal,
 }) {
   const [{ user }, dispatch] = useStateValue();
   const navigate = useNavigate();
   const [hoverIconModal, setHoverIconModal] = useState(false);
   const [progress, setProgress] = useState(0);
   const [isUploading, setIsUploading] = useState(false);
+  const { pathname } = useLocation();
+
   const handleUploadFile = (e) => {
     const uploadedImage = e.target.files[0];
     setIsUploading(true);
@@ -65,13 +70,25 @@ export function PlaylistModal({
     e.preventDefault();
     const name = e.target.form[0].value;
     const description = e.target.form[1].value;
-    const newPlaylist = await createPlaylist(
-      name,
-      description,
-      [],
-      playlistImg,
-      user.token
-    );
+    let newPlaylist;
+    if (title) {
+      const playlistId = pathname.split("/")[2];
+      newPlaylist = await updatePlaylist(
+        playlistId,
+        { name, description, playlistImg },
+        user.token
+      );
+      closeModal();
+      setPlaylistName(name);
+    } else {
+      newPlaylist = await createPlaylist(
+        name,
+        description,
+        [],
+        playlistImg,
+        user.token
+      );
+    }
     getMyPlaylists(user.token)
       .then((data) => {
         dispatch({
@@ -159,7 +176,7 @@ export function PlaylistModal({
               className="block w-[280px] p-[8px] pl-4 text-sm text-[#c1bcbc] font-semibold border-none rounded-sm border-1 bg-[#3e3d3d]"
               placeholder="My Playlist #1"
               required
-              value={title}
+              defaultValue={title}
             />
             <div className="mb-3 w-[280px] pt-2">
               <textarea
@@ -179,6 +196,7 @@ export function PlaylistModal({
                 name="description"
                 rows="6"
                 placeholder="Add an optional description"
+                defaultValue={description}
               ></textarea>
             </div>
           </div>
