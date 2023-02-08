@@ -118,7 +118,7 @@ function SongRow({
         {type == 1 && (
           <>
             <div className="col-span-3 text-left">{song.album?.name}</div>
-            {/* <div className="col-span-2 text-left">{song.updatedAt}</div>{" "} */}
+            <div className="col-span-2 text-left"></div>
           </>
         )}
         {type == 2 && (
@@ -126,9 +126,10 @@ function SongRow({
             <div className="col-span-3 text-left">
               {song.countListen.toLocaleString()}
             </div>
+            <div className="col-span-2 text-left"></div>
           </>
         )}
-        {type == 3 && <div className="col-span-3 text-left"></div>}
+        {type == 3 && <div className="col-span-5 text-left"></div>}
 
         <div></div>
         <div className="col-span-1 text-center flex items-center">

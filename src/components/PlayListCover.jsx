@@ -6,7 +6,8 @@ import { FastAverageColor } from "fast-average-color";
 import Icon from "../assets/img/Icon";
 import { actionType } from "../context/reducer";
 import { BsDot } from "react-icons/bs";
-import { HoverEditButton, PlaylistModal } from "../pages/CreatePlaylist";
+import { PlaylistModal } from "../pages/CreatePlaylistPage/PlaylistModal";
+import { HoverEditButton } from "../pages/CreatePlaylistPage/CreatePlaylist";
 const fac = new FastAverageColor();
 
 export function useAverageColor(dom) {
