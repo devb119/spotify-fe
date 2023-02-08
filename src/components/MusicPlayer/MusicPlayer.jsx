@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { actionType } from "../../context/reducer";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
-import { IoMusicalNote, IoArrowRedo } from "react-icons/io5";
+import { IoArrowRedo } from "react-icons/io5";
 import { getAllSongs } from "../../api";
 import { PlaylistCard } from "./PlaylistCard";
 function MusicPlayer() {

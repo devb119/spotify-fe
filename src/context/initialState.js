@@ -10,5 +10,13 @@ export const initialState = {
   query: "",
   searchType: "song",
   playlists: null,
-  currentColor: { hex: "#50d71e" },
+  currentColor: {
+    hex: "#afcec9",
+    hexa: "#afcec9ff",
+    isDark: false,
+    isLight: true,
+    rgb: "rgb(175,206,201)",
+    rgba: "rgba(175,206,201,1)",
+    value: [175, 206, 201, 255],
+  },
 };

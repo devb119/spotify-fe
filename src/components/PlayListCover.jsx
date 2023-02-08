@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useStateValue } from "../context/StateProvider";
 import { FastAverageColor } from "fast-average-color";
 import Icon from "../assets/img/Icon";
+import { actionType } from "../context/reducer";
 import { BsDot } from "react-icons/bs";
 const fac = new FastAverageColor();
 
@@ -26,7 +27,7 @@ export function PlayListCover({
 }) {
   const [loading, setLoading] = React.useState(true);
   const [gradient, setGradient] = React.useState();
-  const [{ user }] = useStateValue();
+  const [{ user, currentColor }, dispatch] = useStateValue();
 
   React.useEffect(() => {
     setLoading(true);
@@ -39,6 +40,7 @@ export function PlayListCover({
       )
       .then((color) => {
         console.log(color);
+        dispatch({ type: actionType.SET_CURRENT_COLOR, currentColor: color });
         setGradient(
           `${color.hex}` +
             "," +

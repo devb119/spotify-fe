@@ -126,7 +126,7 @@ function PlaylistPage() {
   const [songs, setSongs] = React.useState([]);
   const [playlist, setPlaylist] = React.useState({});
   const [loading, setLoading] = React.useState(true);
-  const [{ user, query }, dispatch] = useStateValue();
+  const [{ user, query, currentColor }, dispatch] = useStateValue();
   const [isActive, setIsActive] = React.useState(false);
   const [selectedRow, setSelectedRow] = React.useState(false);
   const navigate = useNavigate();
@@ -206,7 +206,24 @@ function PlaylistPage() {
       ) : (
         <>
           <PlayListCover playlist={playlist} type="PLAYLIST"></PlayListCover>
-          <div className="p-8">
+          <div
+            className="p-8"
+            style={{
+              background:
+                `linear-gradient(to bottom, ` +
+                `rgba(${currentColor.value[0] - 10},${
+                  currentColor.value[1] - 80
+                },${currentColor.value[2] - 10},${
+                  currentColor.value[3] - 10
+                }))` +
+                "," +
+                `rgba(${currentColor.value[0] - 30},${
+                  currentColor.value[1] - 80
+                },${currentColor.value[2] - 30},${
+                  currentColor.value[3] - 30
+                }))`,
+            }}
+          >
             <div>
               <div className="flex mb-12 items-center">
                 <PlayPlaylist playlist={playlist}></PlayPlaylist>
