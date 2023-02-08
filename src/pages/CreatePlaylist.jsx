@@ -13,11 +13,13 @@ import { useStateValue } from "../context/StateProvider";
 import { useNavigate } from "react-router-dom";
 export function HoverEditButton() {
   return (
-    <div className="flex-col justify-center ">
-      <div className="flex justify-center">
-        <BiPencil className="h-[50px] w-[50px] text-white" />
+    <div className="h-60 w-60 flex justify-center items-center bg-[#0000006f] ">
+      <div className="flex-col  ">
+        <div className="flex justify-center items-center">
+          <BiPencil className="h-[50px] w-[50px] text-white" />
+        </div>
+        <div className="justify-center flex font-semibold">Choose photo</div>
       </div>
-      <div className="justify-center flex font-semibold">Choose photo</div>
     </div>
   );
 }
@@ -98,7 +100,7 @@ export function PlaylistModal({
         </div>
         <div className="flex justify-between">
           <div
-            className="relative w-[180px] h-[180px] shadow-large shardow-black bg-[#333333] rounded-sm flex justify-center cursor-pointer"
+            className="relative w-44 h-44 shadow-large shardow-black bg-[#333333] rounded-sm flex justify-center cursor-pointer"
             onMouseEnter={() => {
               setHoverIconModal(true);
             }}
@@ -119,21 +121,22 @@ export function PlaylistModal({
               </div>
             )}
             <div className="flex items-center">
-              {!hoverIconModal ? (
-                playlistImg !== "" ? (
-                  <img
-                    src={playlistImg}
-                    className="w-40 h-40"
-                    alt="user's playlist"
-                  />
-                ) : (
-                  <BsMusicNoteBeamed className="h-[76px] w-[102px] text-[#787676]" />
-                )
+              {playlistImg !== "" ? (
+                <img
+                  src={playlistImg}
+                  className="w-44 h-44"
+                  alt="user's playlist"
+                />
               ) : (
-                <label className="justify-center flex font-semibold text-white cursor-pointer">
-                  <div className="h-[76px] w-[150px] flex-col justify-center">
-                    <div className="flex justify-center">
-                      <BiPencil className="h-[50px] w-[50px] text-white" />
+                <div className="w-44 h-44 flex items-center justify-center">
+                  <BsMusicNoteBeamed className="h-[76px] w-[102px] text-[#787676]" />
+                </div>
+              )}
+              {hoverIconModal && (
+                <div className="justify-center absolute flex items-center w-44 h-44 font-semibold text-white cursor-pointer  bg-[#0000006f] ">
+                  <div className=" flex-col">
+                    <div className="flex justify-center items-center">
+                      <BiPencil className="h-[40px] w-[40px] text-white" />
                     </div>
                     <input
                       type="file"
@@ -146,7 +149,7 @@ export function PlaylistModal({
                       Choose an image
                     </p>
                   </div>
-                </label>
+                </div>
               )}
             </div>
           </div>

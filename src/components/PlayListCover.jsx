@@ -66,7 +66,7 @@ export function PlayListCover({
   }, [song?.imageURL, album?.imageURL, playlist?.imageURL, song?.imageURL]);
   console.log(album);
   return (
-    <div>
+    <div className="min-w-[#344px]">
       {loading ? (
         ""
       ) : (
@@ -86,10 +86,14 @@ export function PlayListCover({
           }
           className={"p-6 px-8 pt-20"}
         >
-          <div className="flex items-center  text-white  ">
+          <div className="flex items-center text-white">
             {imageType === "playlist" && (
               <div
-                className="w-60 h-60 drop-shadow-large shadow-black flex justify-center items-center "
+                className={
+                  isHover
+                    ? "w-60 h-60 drop-shadow-large shadow-black bg-transparent flex justify-center items-center "
+                    : "w-60 h-60 drop-shadow-large shadow-black flex justify-center items-center "
+                }
                 onMouseEnter={() => {
                   if (playlist) setIsHover(true);
                 }}
@@ -100,20 +104,21 @@ export function PlayListCover({
                   setModal(true);
                 }}
               >
-                {!isHover ? (
-                  <img
-                    className="w-60 h-60"
-                    src={
-                      playlist
-                        ? playlist.imageURL
-                        : song
-                        ? song.imageURL
-                        : album.imageURL
-                    }
-                    alt="cover"
-                  />
-                ) : (
-                  <HoverEditButton></HoverEditButton>
+                <img
+                  className="w-60 h-60 relative"
+                  src={
+                    playlist
+                      ? playlist.imageURL
+                      : song
+                      ? song.imageURL
+                      : album.imageURL
+                  }
+                  alt="cover"
+                />
+                {isHover && (
+                  <div className="absolute">
+                    <HoverEditButton></HoverEditButton>
+                  </div>
                 )}
               </div>
             )}
