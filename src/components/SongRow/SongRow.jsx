@@ -118,7 +118,7 @@ function SongRow({
         {type == 1 && (
           <>
             <div className="col-span-3 text-left">{song.album?.name}</div>
-            <div className="col-span-2 text-left">{song.updatedAt}</div>{" "}
+            {/* <div className="col-span-2 text-left">{song.updatedAt}</div>{" "} */}
           </>
         )}
         {type == 2 && (

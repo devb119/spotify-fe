@@ -14,7 +14,6 @@ export function useAverageColor(dom) {
     fac
       .getColorAsync(dom)
       .then((color) => {
-        console.log(color);
         return color;
       })
       .catch((error) => console.log(error));
@@ -35,6 +34,7 @@ export function PlayListCover({
   const [{ user, currentColor }, dispatch] = useStateValue();
   const [hoverIconModal, setHoverIconModal] = useState(false);
   const [isActive, setIsActive] = useState(false);
+  const [playlistName, setPlaylistName] = useState(playlist?.name);
   const toggleDropDown = () => {
     setIsActive(!isActive);
   };
@@ -51,7 +51,6 @@ export function PlayListCover({
         }
       )
       .then((color) => {
-        console.log(color);
         dispatch({ type: actionType.SET_CURRENT_COLOR, currentColor: color });
         setGradient(
           `${color.hex}` +
@@ -64,7 +63,7 @@ export function PlayListCover({
       .catch((error) => console.log(error))
       .finally(() => setLoading(false));
   }, [song?.imageURL, album?.imageURL, playlist?.imageURL, song?.imageURL]);
-  console.log(album);
+
   return (
     <div className="min-w-[#344px]">
       {loading ? (
@@ -141,7 +140,7 @@ export function PlayListCover({
                     : "text-4xl font-bold mb-5 mt-2"
                 }
               >
-                {playlist ? playlist.name : song ? song.name : album.name}
+                {playlist ? playlistName : song ? song.name : album.name}
               </div>
               <div className="text-xs font-bold">
                 {playlist ? (
@@ -217,13 +216,16 @@ export function PlayListCover({
           </div>
           {modal && (
             <PlaylistModal
-              title={playlist.name}
+              title={playlistName}
+              description={playlist.description}
               isActive={isActive}
               playlistImg={playlistImg}
               setPlaylistImg={setPlaylistImg}
               toggleModal={toggleModal}
               hoverIconModal={hoverIconModal}
               toggleDropDown={toggleDropDown}
+              setPlaylistName={setPlaylistName}
+              closeModal={() => setModal(false)}
             ></PlaylistModal>
           )}
         </div>

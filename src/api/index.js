@@ -210,6 +210,21 @@ export const createPlaylist = async (
   }
 };
 
+export const updatePlaylist = async (playlistId, data, token) => {
+  try {
+    const res = await axios.patch(
+      `${BASE_URL}/playlists/me/${playlistId}`,
+      data,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const deletePlaylist = async (playlistId, token) => {
   try {
     const res = await axios.delete(`${BASE_URL}/playlists/me/${playlistId}`, {
