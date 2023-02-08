@@ -32,9 +32,7 @@ function ArtistPage() {
             <div>
               <div className="text-sm font-semibold">ARTIST</div>
               <div className="text-7xl font-bold mt-1">{artist.name}</div>
-              {/* <div className=" font-semibold mt-10">
-                677,949,049 monthly listeners
-              </div> */}
+              <div className=" font-semibold mt-10"></div>
             </div>
           </div>
           <div>

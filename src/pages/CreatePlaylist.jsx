@@ -103,7 +103,7 @@ export function PlaylistModal({
       );
   };
   return (
-    <form className="modal z-50">
+    <form className="modal z-30">
       <div className="overlay" onClick={toggleModal}></div>
       <div className="modal-content bg-[#282828] w-[524px]">
         <div className="flex pb-5">
@@ -126,7 +126,7 @@ export function PlaylistModal({
             }}
           >
             {hoverIconModal && (
-              <div className="absolute right-[5%] top-[4%]">
+              <div className=" z-50 absolute right-[5%] top-[4%]">
                 <div className="h-8 w-8 bg-[#212121] rounded-full flex justify-center relative cursor-pointer">
                   <DropDown
                     setIsActive={toggleDropDown}
@@ -150,8 +150,8 @@ export function PlaylistModal({
                 </div>
               )}
               {hoverIconModal && (
-                <div className="justify-center absolute flex items-center w-44 h-44 font-semibold text-white cursor-pointer  bg-[#0000006f] ">
-                  <div className=" flex-col">
+                <label className="justify-center z-50 absolute flex items-center w-44 h-44 font-semibold text-white cursor-pointer  bg-[#0000006f] ">
+                  <div className="flex-col">
                     <div className="flex justify-center items-center">
                       <BiPencil className="h-[40px] w-[40px] text-white" />
                     </div>
@@ -166,7 +166,7 @@ export function PlaylistModal({
                       Choose an image
                     </p>
                   </div>
-                </div>
+                </label>
               )}
             </div>
           </div>
@@ -183,18 +183,7 @@ export function PlaylistModal({
             />
             <div className="mb-3 w-[280px] pt-2">
               <textarea
-                className="form-control block w-full
-                              p-[8px]
-                              pl-4
-                              font-medium
-                              text-[#c1bcbc]
-                              bg-[#3e3d3d]
-                              rounded
-                              transition
-                              ease-in-out
-                              m-0
-                              text-sm
-                            "
+                className="form-control block w-full p-[8px] pl-4 font-medium bg-[#3e3d3d] rounded transition ease-in-out m-0 text-sm "
                 id="input"
                 name="description"
                 rows="6"
