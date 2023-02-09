@@ -27,6 +27,7 @@ export function PlaylistModal({
   const navigate = useNavigate();
   const [hoverIconModal, setHoverIconModal] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [newPlaylistImg, setNewPlaylistImg] = useState(playlistImg);
   const [isUploading, setIsUploading] = useState(false);
   const { pathname } = useLocation();
 
@@ -50,7 +51,7 @@ export function PlaylistModal({
       () => {
         getDownloadURL(uploadTask.snapshot.ref)
           .then(async (downloadURL) => {
-            setPlaylistImg(downloadURL);
+            setNewPlaylistImg(downloadURL);
           })
           .finally(() => setIsUploading(false));
       }
@@ -66,17 +67,18 @@ export function PlaylistModal({
       const playlistId = pathname.split("/")[2];
       newPlaylist = await updatePlaylist(
         playlistId,
-        { name, description, playlistImg },
+        { name, description, imageURL: newPlaylistImg },
         user.token
       );
       closeModal();
       setPlaylistName(name);
+      setPlaylistImg(newPlaylistImg);
     } else {
       newPlaylist = await createPlaylist(
         name,
         description,
         [],
-        playlistImg,
+        newPlaylistImg,
         user.token
       );
     }
@@ -127,9 +129,9 @@ export function PlaylistModal({
               </div>
             )}
             <div className="flex items-center">
-              {playlistImg !== "" ? (
+              {newPlaylistImg !== "" ? (
                 <img
-                  src={playlistImg}
+                  src={newPlaylistImg}
                   className="w-44 h-44"
                   alt="user's playlist"
                 />

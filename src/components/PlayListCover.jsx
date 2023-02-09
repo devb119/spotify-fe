@@ -66,7 +66,7 @@ export function PlayListCover({
   }, [song?.imageURL, album?.imageURL, playlist?.imageURL, song?.imageURL]);
 
   return (
-    <div className="min-w-[#344px]">
+    <div style={{ minHeight: "344px" }}>
       {loading ? (
         ""
       ) : (
@@ -108,7 +108,7 @@ export function PlayListCover({
                   className="w-60 h-60 relative"
                   src={
                     playlist
-                      ? playlist.imageURL
+                      ? playlistImg
                       : song
                       ? song.imageURL
                       : album.imageURL
