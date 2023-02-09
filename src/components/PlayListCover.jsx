@@ -36,6 +36,7 @@ export function PlayListCover({
   const [hoverIconModal, setHoverIconModal] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [playlistName, setPlaylistName] = useState(playlist?.name);
+
   const toggleDropDown = () => {
     setIsActive(!isActive);
   };
@@ -150,6 +151,7 @@ export function PlayListCover({
                       className="w-6 h-6 mr-1 rounded-full"
                       src={user.data.imageURL}
                       alt="creator"
+                      referrerPolicy="no-referrer"
                     />
                     <Link className="hover:underline">
                       {playlist.creator.name}

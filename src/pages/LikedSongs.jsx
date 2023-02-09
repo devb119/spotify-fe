@@ -7,7 +7,6 @@ import DotFlashing from "../components/DotFlashing";
 import Icon from "../assets/img/Icon";
 function LikedSongs() {
   const [{ user, likedSongs }, dispatch] = useStateValue();
-  console.log(user);
   const [isLoading, setIsLoading] = useState(true);
   const [playlist, setPlaylist] = React.useState({
     imageURL: Icon.like,
@@ -32,7 +31,6 @@ function LikedSongs() {
             ...playlist,
             songs: data.data.likedSongs,
           });
-          console.log(data.data.likedSongs);
         })
         .finally(() => setIsLoading(false));
     }

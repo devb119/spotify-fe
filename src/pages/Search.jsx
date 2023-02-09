@@ -68,7 +68,6 @@ function Search() {
     setIsLoading(true);
     getAllCategories()
       .then((res) => {
-        console.log(res);
         setAllCategories(res.data);
       })
       .finally(() => setIsLoading(false));
@@ -85,9 +84,6 @@ function Search() {
       getAllArtists(query).then((data) => setArtists(data.data));
     }
   }, [query]);
-  // console.log(searchType);
-  console.log(albums);
-  console.log(artists);
   return (
     <div className="p-8 pt-28 mb-12 h-full">
       {query === "" ? (

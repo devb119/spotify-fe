@@ -10,7 +10,6 @@ function PopularSuggestion({ artist }) {
     setIsLoading(true);
     getArtist(artist[0]._id)
       .then((data) => {
-        console.log(data);
         setArtistFromAPI(data.data);
       })
       .catch((error) => {

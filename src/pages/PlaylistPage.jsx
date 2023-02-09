@@ -150,7 +150,6 @@ function PlaylistPage() {
     else {
       addSongToPlaylist(id, song._id, user.token)
         .then((data) => {
-          console.log(data);
           setPlaylist({ ...data.data });
         })
         .catch((error) => {
@@ -246,7 +245,7 @@ function PlaylistPage() {
                       <div className="text-center">#</div>
                       <div className="col-span-4 text-left">TITLE</div>
                       <div className="col-span-3 text-left">ALBUM</div>
-                      {/* <div className="col-span-2 text-left">DATE ADDED</div> */}
+                      <div className="col-span-2 text-left"></div>
                       <div className="col-span-1 text-right "></div>
                       <div className="col-span-1 text-right grid justify-center ">
                         <HiOutlineClock className="text-xl "></HiOutlineClock>

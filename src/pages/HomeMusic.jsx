@@ -63,7 +63,6 @@ function HomeMusic() {
   useEffect(() => {
     setIsLoading(true);
     getHomeSections().then((res) => {
-      console.log(res.data);
       setSections(res.data);
     });
   }, []);

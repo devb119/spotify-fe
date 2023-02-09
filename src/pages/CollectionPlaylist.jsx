@@ -53,10 +53,6 @@ function CollectionPlaylist() {
         .finally(() => setIsLoading(false));
     }
   }, [dispatch, token, likedSongs?.length]);
-  console.log(playlists);
-  console.log(likedSongs);
-  // console.log(user);
-  // console.log(user.data.name)
 
   const showIcon = () => setShowPlay(true);
   const hideIcon = () => setShowPlay(false);

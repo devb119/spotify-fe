@@ -4,7 +4,6 @@ import { useStateValue } from "../../context/StateProvider";
 import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai";
 
 export function PlayButton({ song = null, playlist = null }) {
-  console.log(playlist);
   const [{ isSongPlaying, isSongPausing, player, currentSong }, dispatch] =
     useStateValue();
   const addToContext = () => {

@@ -7,14 +7,12 @@ import Section from "./Section";
 
 function SectionGenre() {
   const params = useParams();
-  console.log(params.id);
   const [sections, setSections] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   useEffect(() => {
     setLoading(true);
     getSectionsByCategories(params.id)
       .then((data) => {
-        console.log(data.data);
         setSections(data.data);
       })
       .finally(() => setLoading(false));

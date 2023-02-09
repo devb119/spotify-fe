@@ -282,7 +282,6 @@ export const addSongToPlaylist = async (playlistId, songId, token) => {
     const res = await axios.post(url, null, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    console.log(res);
     return res.data;
   } catch (error) {
     console.log(error);

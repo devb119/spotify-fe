@@ -5,16 +5,13 @@ import { getSongsBySections } from "../../api";
 import MusicCard from "../MusicCard/MusicCard";
 import DotFlashing from "../DotFlashing";
 function Section({ section }) {
-  console.log(section);
   const [songs, setSongs] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(true);
   const navigate = useNavigate();
   useEffect(() => {
     setIsLoading(true);
-    console.log(section._id);
     getSongsBySections(section._id)
       .then((data) => {
-        console.log(data);
         setSongs(data.data);
       })
       .finally(() => setIsLoading(false));

@@ -9,10 +9,8 @@ function SongSection() {
   const [isLoading, setIsLoading] = React.useState(true);
   React.useEffect(() => {
     setIsLoading(true);
-    console.log(id);
     getSongsBySections(id)
       .then((data) => {
-        console.log(data);
         setSongs(data.data);
       })
       .finally(() => setIsLoading(false));

@@ -16,7 +16,6 @@ function AlbumPage() {
     getAlbum(id)
       .then((data) => {
         setAlbum(data.data);
-        console.log(data);
       })
       .finally(() => {
         setLoading(false);
